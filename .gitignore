@@ -1,0 +1,14 @@
+# Operating system and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# Python local server artifacts
+__pycache__/
+*.py[cod]

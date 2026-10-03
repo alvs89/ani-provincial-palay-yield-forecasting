@@ -1,0 +1,45 @@
+/* Sidebar matched to the supplied ANI reference. */
+.sidebar{width:280px;height:100vh;height:100dvh;padding:0;background:#12372a;border:0;box-shadow:none;display:flex;flex-direction:column;overflow-x:hidden;overflow-y:auto;transition:width .24s ease,transform .24s ease}
+.brand{padding:24px 24px 22px;gap:12px;min-height:110px;flex-shrink:0;position:relative}
+.brandmark{width:52px;height:64px;flex-shrink:0;object-fit:contain}
+.brand-copy{white-space:nowrap;overflow:hidden}
+.brand b{display:block;color:#fff;font-size:32px;font-weight:700;line-height:1}
+.brand small{color:#c9c2a8;font-size:10px;font-weight:400;line-height:1.4;margin-top:5px}
+.sidebar nav{padding:0 8px;gap:8px;flex-shrink:0}
+.sidebar nav button{position:relative;min-height:56px;padding:14px 24px;gap:16px;font-size:15px;font-weight:500;line-height:20px;border-radius:10px;color:#fff;white-space:nowrap;transition:background-color .16s ease}
+.sidebar nav button svg{width:20px;height:20px;flex-shrink:0;color:#dde7df}
+.sidebar nav button:hover{background:#ffffff0b}
+.sidebar nav button.active{background:#2e5a4b}
+.sidebar nav button.active:before{content:'';position:absolute;left:-8px;top:11px;bottom:11px;width:4px;background:#e9c46a;border-radius:0 3px 3px 0}
+.sidebar nav button:focus-visible,.sidebar-toggle:focus-visible,.sidebar-close:focus-visible{outline:2px solid #e9c46a;outline-offset:-3px}
+.rice-illustration{position:relative;flex:1;min-height:120px;overflow:hidden;pointer-events:none}
+.rice-illustration img{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:100%;object-fit:contain;object-position:left bottom}
+.sidebar-footer{padding:10px 26px;flex-shrink:0;border-top:1px solid #c9c2a810}
+.sidebar-toggle{border:0;background:transparent;color:#c9c2a8;font-size:12px;display:flex;align-items:center;gap:10px;min-height:36px;padding:0;cursor:pointer}
+.collapse-symbol{font-size:22px;font-weight:300;line-height:1}
+.sidebar-toggle:hover{color:#fff}
+.sidebar-close,.sidebar-overlay{display:none}
+.content{margin-left:280px;width:calc(100% - 280px);transition:margin-left .24s ease,width .24s ease}
+main:focus{outline:none}
+@media(min-width:761px){
+ .sidebar-collapsed .sidebar{width:76px}
+ .sidebar-collapsed .brand{padding-left:12px;padding-right:12px;gap:0}
+ .sidebar-collapsed .brand-copy,.sidebar-collapsed .nav-label,.sidebar-collapsed .collapse-label{display:none}
+ .sidebar-collapsed .sidebar nav button{padding-left:0;padding-right:0;justify-content:center;gap:0}
+ .sidebar-collapsed .rice-illustration img{opacity:0}
+ .sidebar-collapsed .content{margin-left:76px;width:calc(100% - 76px)}
+}
+@media(max-width:760px){
+ .sidebar{width:280px;max-width:calc(100vw - 32px);z-index:40;visibility:hidden;transform:translateX(-100%);transition:transform .24s ease,visibility .24s ease}
+ .sidebar-open .sidebar{visibility:visible;transform:translateX(0)}
+ .sidebar-close{display:block;position:absolute;right:6px;top:6px;width:36px;height:36px;border:0;background:transparent;color:#c9c2a8;font-size:26px;cursor:pointer}
+ .sidebar-overlay{display:block;position:fixed;inset:0;z-index:30;background:#071f1777;opacity:0;visibility:hidden;transition:opacity .24s ease,visibility .24s ease}
+ .sidebar-open .sidebar-overlay{opacity:1;visibility:visible}
+ .sidebar-open body{overflow:hidden}
+ .sidebar-footer{display:none}
+ .content{margin-left:0;width:100%}
+ .menuBtn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;flex-shrink:0;border:1px solid #cbd9d1;border-radius:8px;background:transparent;color:#12372a;cursor:pointer}
+}
+@media(max-height:600px){.sidebar{overflow-y:auto}.brand{padding-top:14px;padding-bottom:14px;min-height:92px}.sidebar nav{gap:4px}.sidebar nav button{min-height:44px;padding-top:10px;padding-bottom:10px}}
+@media(prefers-reduced-motion:reduce){.sidebar,.sidebar-overlay,.content,.sidebar nav button{transition:none}}
+@media print{.sidebar-overlay{display:none!important}.content,.sidebar-collapsed .content{margin:0;width:100%}}
