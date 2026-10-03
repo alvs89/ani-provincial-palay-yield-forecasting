@@ -22,3 +22,5 @@
 .primaryBtn:disabled{opacity:.55;cursor:not-allowed}.formRow select:disabled{background:#f1f4f2;color:#77837d;cursor:not-allowed}.inlineError{margin:10px 0;padding:10px 12px;border:1px solid #edb6b6;border-radius:8px;background:#fff2f2;color:#9c2525;font-size:13px}
 
 .pagination{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:14px}.pagination .muted{margin:0}.paginationControls{display:flex;align-items:center;gap:8px}.paginationControls span{font-size:12px;color:#66756e;white-space:nowrap}.paginationControls button{padding:7px 10px;font-size:13px;border-radius:6px;min-height:36px}.paginationControls button:disabled{opacity:.5;cursor:not-allowed}@media(max-width:600px){.pagination{align-items:flex-start;flex-direction:column}.paginationControls{width:100%;justify-content:space-between}}
+
+.forecastDataNotice{display:block;margin:10px 0;padding:10px 12px;line-height:1.45;white-space:normal}
