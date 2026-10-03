@@ -12,3 +12,6 @@ Thumbs.db
 # Python local server artifacts
 __pycache__/
 *.py[cod]
+
+.venv/
+app.synthetic.backup.js

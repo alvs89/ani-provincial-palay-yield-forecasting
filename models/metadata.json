@@ -1,0 +1,62 @@
+{
+  "model_name": "ANI XGBoost Regression",
+  "model_version": "ANI-XGB-v0.1-centroid-weather",
+  "status": "integration prototype",
+  "trained_through_year": 2025,
+  "training_rows": 12592,
+  "weather_spatial_method": "nearest NASA POWER grid point to province representative centroid (preliminary integration dataset)",
+  "important_note": "Preferred final study method remains province-area weather aggregation if verified boundaries and implementation are completed.",
+  "features": [
+    "Province",
+    "Ecosystem",
+    "Target_Quarter",
+    "Yield_Lag1_mt_per_ha",
+    "Yield_Lag4_mt_per_ha",
+    "Yield_Rolling4_Mean_mt_per_ha",
+    "Area_Lag4_ha",
+    "Production_Lag4_mt",
+    "Rainfall_Lag1_mm",
+    "T2M_Lag1_C",
+    "RH2M_Lag1_pct",
+    "WS2M_Lag1_m_s",
+    "Rainfall_Lag4_mm",
+    "T2M_Lag4_C",
+    "RH2M_Lag4_pct",
+    "WS2M_Lag4_m_s"
+  ],
+  "target": "Target_Yield_mt_per_ha",
+  "eligibility_rule": {
+    "minimum_prior_quarters": 40,
+    "minimum_same_quarter_observations": 8,
+    "all_required_features": true
+  },
+  "xgboost_parameters": {
+    "n_estimators": 500,
+    "learning_rate": 0.03,
+    "max_depth": 4,
+    "min_child_weight": 3,
+    "subsample": 0.9,
+    "colsample_bytree": 0.9,
+    "reg_lambda": 3,
+    "objective": "reg:squarederror",
+    "random_state": 42,
+    "tree_method": "hist",
+    "n_jobs": 4
+  },
+  "evaluation": {
+    "evaluation_period": "2025 holdout",
+    "eligible_rows": 511,
+    "baseline": {
+      "name": "Previous-year same-quarter yield",
+      "mae": 0.25762203469931594,
+      "rmse": 0.3841974103449371,
+      "r2": 0.7821362463345312
+    },
+    "xgboost": {
+      "mae": 0.22272922239732884,
+      "rmse": 0.30749212667570025,
+      "r2": 0.8604454129714133
+    },
+    "mae_improvement_pct": 13.544187841972565
+  }
+}

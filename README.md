@@ -1,79 +1,132 @@
 # ANI: Provincial Palay Yield Forecasting System
 
-An academic browser-based prototype for exploring provincial palay yield forecasting in the Philippines. ANI presents synthetic agricultural and agroclimatic records, computes a transparent baseline estimate, and demonstrates how a forecasting workflow and its outputs may be reviewed.
+ANI is an academic prototype for provincial palay yield forecasting in the Philippines. The repository combines a browser interface, processed agricultural and weather datasets, a reproducible XGBoost training workflow, and a FastAPI prediction service.
 
-> **Research prototype notice:** The bundled records and forecast outputs are synthetic. This project does not use official Philippine Statistics Authority (PSA) or Philippine Atmospheric, Geophysical and Astronomical Services Administration (PAGASA) data, a trained machine-learning model, or a live data feed. Results are for software demonstration and academic discussion only; they must not inform operational agricultural decisions.
+> **Research prototype:** Forecasts are analytical estimates, not official PSA crop statistics or guaranteed agricultural outcomes. The supplied weather features use a preliminary nearest NASA POWER grid point for each province representative centroid. This spatial method requires further validation before the model can be treated as a final research model.
 
-## Project objectives
+## Features
 
-- Demonstrate a user-facing workflow for provincial and ecosystem-level palay yield estimates.
-- Present historical agricultural and agroclimatic variables through interactive filters and charts.
-- Explain the relationship between temporal agricultural data, environmental indicators, and forecasting outputs.
-- Provide a reproducible interface prototype that can support future research with validated data and models.
+- Forecast palay yield by province, ecosystem, year, and quarter.
+- Build lagged agricultural and weather features and enforce input eligibility before prediction.
+- Serve forecasts and historical records through FastAPI.
+- Explore the processed historical data in the browser UI.
+- Save forecast runs to browser history, with view and delete actions.
+- Review XGBoost and seasonal baseline metrics from the bundled 2025 chronological holdout.
+- Retrain the pipeline from the forecast-ready dataset.
 
-## Current implementation
+## Architecture
 
-ANI is a static, client-side web application built with HTML, CSS, and vanilla JavaScript. It has no package-installation step and can run directly in a modern browser.
+```text
+Browser UI (HTML, CSS, JavaScript)
+        │ HTTP / JSON
+        ▼
+FastAPI service (backend/main.py)
+        ├── Eligibility checks and lag feature construction (ml/features.py)
+        ├── Processed agriculture and weather data (data/processed/)
+        └── Trained scikit-learn / XGBoost pipeline (models/)
+```
 
-- Dashboard with summary indicators, charts, and recent forecast records.
-- Forecast input for province, ecosystem, target year, and quarter.
-- Browser-side synthetic baseline calculation with a staged progress display.
-- Forecast result with historical comparisons and derived rainfall and temperature summaries.
-- Forecast history saved in browser `localStorage` and synchronized across open tabs.
-- Historical synthetic data explorer with province, ecosystem, year, and text filters.
-- Model and data page with holdout metrics calculated for a seasonal-naive baseline on synthetic records.
-- Print-friendly forecast result.
+## Requirements
 
-## Run locally
+- Python 3.10 or later recommended.
+- Dependencies pinned in `requirements.txt`.
+- Windows users can run `setup_ani.bat` to create `.venv`, install dependencies, patch the frontend, and retrain the model. The setup script will overwrite the bundled model and metadata when it retrains.
 
-No dependencies are required. From this directory, start a local static server:
+Manual setup from the repository root:
 
-```bash
+```powershell
+python -m venv .venv
+.venv\Scripts\activate
+python -m pip install -r requirements.txt
+```
+
+Start the API:
+
+```powershell
+uvicorn backend.main:app --reload
+```
+
+In a second terminal, serve the frontend:
+
+```powershell
 python -m http.server 8080
 ```
 
-Open <http://localhost:8080> in a browser. The application can also be opened directly from `index.html`, though a local server is recommended.
+Open <http://localhost:8080>. API health is at <http://127.0.0.1:8000/health>, and interactive API documentation is at <http://127.0.0.1:8000/docs>.
 
-## Forecasting method
+For the one-click Windows launcher, use `run_ani.bat` after setup.
 
-The current browser-side demonstration computes a weighted baseline using same-quarter historical yield, recent yield, and a previous comparable observation for the selected province and ecosystem. The displayed environmental summaries are calculated from the corresponding synthetic records. The model page computes MAE, RMSE, and R² for a previous-year, same-quarter seasonal-naive baseline on the synthetic 2025–2026 holdout records.
+## API
 
-These calculations demonstrate application behavior and evaluation concepts. They are not a trained XGBoost, Random Forest, or regression model. Metrics computed on generated synthetic values do not establish predictive validity or agricultural usefulness.
+| Method | Endpoint | Purpose |
+| --- | --- | --- |
+| `GET` | `/health` | API and model version status |
+| `GET` | `/meta` | Model metadata, geographic coverage, data cutoff, and suggested next target |
+| `GET` | `/model-info` | Bundled model and evaluation metadata |
+| `GET` | `/historical?province=...&ecosystem=...` | Historical records for one selection |
+| `GET` | `/historical/all` | Records used by the frontend explorer |
+| `POST` | `/predict` | Eligibility-checked yield estimate |
 
-## Data and limitations
+Example request:
 
-- The application generates its demonstration dataset in `app.js` at runtime; no source CSV is included.
-- Geographic coverage, agricultural measurements, and weather indicators are illustrative synthetic values.
-- Forecasts and holdout metrics are calculated in the browser and are not independently validated.
-- Forecast history is local to the current browser profile and is not backed up to a server or shared between users.
-- No authentication, server-side persistence, official data integration, or production model is included.
-
-Before research or operational use, replace the generated records with documented, licensed, quality-controlled data; implement time-aware training and validation; report uncertainty and limitations; and obtain appropriate domain review.
-
-## Repository layout
-
-```text
-ani-standalone/
-├── app.js                         # Application logic and synthetic demonstration data
-├── index.html                     # Application entry point
-├── styles.css                     # Main application styles
-├── sidebar.css                    # Responsive navigation styles
-├── sidebar.js                     # Navigation behavior
-├── palay field background.jpg     # Dashboard field image
-├── sidebar-rice.svg               # Sidebar rice artwork
-└── favicon.*                      # Application icons
+```json
+{
+  "province": "Nueva Ecija",
+  "ecosystem": "Irrigated",
+  "target_year": 2026,
+  "target_quarter": 1
+}
 ```
 
-## Suggested academic repository metadata
+The API returns an eligibility explanation without a prediction when required agricultural lags, weather lags, or minimum history are unavailable. The current data cutoff is 2025 Q4, so the next target period may be 2026 Q1 for eligible province and ecosystem combinations. Later 2026 quarters require the intervening actual records.
 
-- **Repository name:** `ani-provincial-palay-yield-forecasting`
-- **Description:** `Academic browser prototype for provincial palay yield forecasting using synthetic agricultural and agroclimatic data.`
-- **Topics:** `agriculture`, `rice-yield`, `forecasting`, `philippines`, `academic-prototype`, `data-visualization`
+## Data and predictors
 
-## Citation
+`data/processed/` contains three processed datasets:
 
-If this project is used in academic work, cite the project repository and identify the version or commit used. Replace this section with the formal author list, institution, publication year, and a persistent DOI if the project is published or archived. Do not cite the prototype as evidence that its simulated forecasts are accurate.
+- `forecast_ready.csv`: feature and target rows for chronological training and evaluation.
+- `palay_history.csv`: provincial quarterly production, harvested area, and yield history.
+- `province_quarter_weather.csv`: quarterly weather summaries.
 
-## License
+The pipeline uses 16 predictors: province, ecosystem, target quarter; lagged yields and rolling yield; lagged area and production; and lagged rainfall, temperature, relative humidity, and wind speed. Target-quarter yield, production, harvested area, and complete target-quarter weather are excluded from predictors.
 
-No license is currently specified. A license should only be added after the project authors choose the terms under which the source code may be reused. Third-party images and assets may have separate terms.
+The bundle documentation describes the agricultural history as PSA-derived and the weather input as NASA POWER. Before academic publication or redistribution, add complete dataset citations, extraction dates, licenses, geographic processing details, and a data dictionary. The included weather mapping is preliminary centroid-nearest-grid extraction rather than province-area spatial aggregation.
+
+## Model and evaluation
+
+The bundled model is `ANI-XGB-v0.1-centroid-weather`, an integration prototype trained on the supplied forecast-ready records through 2025. Its documented chronological evaluation uses 511 eligible 2025 holdout cases:
+
+| Model | MAE (t/ha) | RMSE (t/ha) | R² |
+| --- | ---: | ---: | ---: |
+| Previous-year same-quarter baseline | 0.2576 | 0.3842 | 0.7821 |
+| XGBoost pipeline | 0.2227 | 0.3075 | 0.8604 |
+
+These metrics describe the supplied evaluation run and dataset only. They do not establish performance on future periods, other data sources, or operational conditions. The weather spatial method and source data should be reviewed and the model re-evaluated before making final thesis claims.
+
+To reproduce training and update the pipeline and metadata:
+
+```powershell
+python -m ml.train_model
+```
+
+## Forecast history
+
+Forecast records are saved in the browser's `localStorage`; they are not stored by FastAPI or shared between users. The prediction itself uses the local API and bundled model, while the history remains browser-local.
+
+## Repository structure
+
+```text
+backend/                 FastAPI service
+data/processed/          Processed agricultural and weather datasets
+ml/                      Feature construction and model training
+models/                  Model pipeline and metadata
+tools/                   Frontend integration utility
+app.js                   Browser application logic
+index.html               Application entry point
+styles.css               Main styles
+sidebar.css, sidebar.js  Navigation styles and behavior
+```
+
+## Academic citation and licensing
+
+Add the authors, institution, project date, and a persistent archive identifier here before formal academic release. Cite the underlying agricultural and weather sources independently of this software. No software license is currently declared; choose a license only after confirming author rights and the redistribution terms of included data and image assets.
