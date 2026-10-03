@@ -99,7 +99,7 @@ The bundled model is `ANI-XGB-v0.1-centroid-weather`, an integration prototype t
 | Model | MAE (t/ha) | RMSE (t/ha) | R² |
 | --- | ---: | ---: | ---: |
 | Previous-year same-quarter baseline | 0.2576 | 0.3842 | 0.7821 |
-| XGBoost pipeline | 0.2227 | 0.3075 | 0.8604 |
+| XGBoost pipeline | 0.2232 | 0.3077 | 0.8603 |
 
 These metrics describe the supplied evaluation run and dataset only. They do not establish performance on future periods, other data sources, or operational conditions. The weather spatial method and source data should be reviewed and the model re-evaluated before making final thesis claims.
 

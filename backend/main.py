@@ -184,6 +184,47 @@ def meta() -> dict[str, Any]:
     }
 
 
+@app.get("/forecast-availability")
+def forecast_availability(
+    province: str = Query(...),
+    ecosystem: str = Query(...),
+) -> dict[str, Any]:
+    """List future periods whose required lagged inputs currently exist."""
+    if province not in province_region:
+        raise HTTPException(status_code=404, detail="Province not found in ANI data.")
+
+    try:
+        eco = normalize_ecosystem(ecosystem)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+    latest_year, latest_quarter = _latest_period()
+    first_idx = _period_key(latest_year, latest_quarter) + 1
+    available = []
+    # Look up to four years ahead. A period is offered only when the same
+    # feature builder used by /predict confirms all required lags are present.
+    for period_idx in range(first_idx, first_idx + 16):
+        year, quarter = period_idx // 4, period_idx % 4 + 1
+        result = builder.build(province, eco, year, quarter)
+        if result.eligible:
+            available.append({
+                "year": year,
+                "quarter": quarter,
+                "priorQuarters": result.prior_total,
+                "sameQuarterObservations": result.prior_same_quarter,
+            })
+
+    return {
+        "province": province,
+        "ecosystem": eco.replace(" Palay", ""),
+        "latestAgriculturalPeriod": {
+            "year": latest_year,
+            "quarter": latest_quarter,
+        },
+        "availableTargets": available,
+    }
+
+
 @app.post("/predict")
 def predict(request: ForecastRequest) -> dict[str, Any]:
     if request.province not in province_region:

@@ -87,12 +87,12 @@ text = text.replace(old, new, 1)
 replacements = {
     "Using synthetic demonstration dataset and mock forecasting engine.":
         "Using processed PSA agricultural data, NASA POWER weather data, and a trained XGBoost model.",
-    "Synthetic demonstration dataset â€” not official PSA/PAGASA records.":
+    "Synthetic demonstration dataset — not official PSA/PAGASA records.":
         "Processed ANI historical dataset derived from PSA agricultural records and NASA POWER weather data.",
     "Demo data only": "Processed data",
     "This is a live interface simulation over synthetic sample records. It is not a live PSA/PAGASA feed or a trained XGBoost model.":
         "ANI is using the locally deployed trained XGBoost model and processed historical dataset. Results are analytical estimates and are not official PSA forecasts.",
-    "ANI computes a weighted baseline from the selected province and ecosystemâ€™s synthetic historical yields. Rainfall and temperature summaries are derived from the same sample records. This is a browser-side demonstration, not a trained model or a live agricultural data feed.":
+    "ANI computes a weighted baseline from the selected province and ecosystem’s synthetic historical yields. Rainfall and temperature summaries are derived from the same sample records. This is a browser-side demonstration, not a trained model or a live agricultural data feed.":
         "ANI sends the selected province, ecosystem, and target period to the local FastAPI backend. The backend constructs the finalized lagged agricultural and agroclimatic features, checks forecast eligibility, applies the trained XGBoost pipeline, and returns the predicted yield together with historical seasonal context.",
     "Demo forecasts are synthetic and should not be interpreted as official PSA statistics, PAGASA products, or guaranteed agricultural outcomes.":
         "ANI forecasts are machine-learning-based analytical estimates and should not be interpreted as official PSA statistics or guaranteed agricultural outcomes.",
@@ -115,8 +115,8 @@ for old_text,new_text in replacements.items():
 # 6) Current real historical coverage is 2000-2025.
 text=text.replace("'12','Philippine provinces in demo dataset'",
                   "Object.keys(provinceRegion).length,'Philippine provinces represented'")
-text=text.replace("'2018 â€“ 2026','Historical demonstration period'",
-                  "'2000 â€“ 2025','Processed historical data period'")
+text=text.replace("'2018 – 2026','Historical demonstration period'",
+                  "'2000 – 2025','Processed historical data period'")
 text=text.replace("r.year===2026", "r.year===2025")
 
 # 7) Use the actual years loaded from the backend in Historical Data filters.
@@ -141,13 +141,13 @@ text=text.replace("'Historical Range'", "'Typical Historical Range'")
 # 10) Replace XGBoost n/a metrics with model metadata loaded from FastAPI.
 selected_card = (
     '<div class="selected"><b>XGBoost Regressor</b><span>Primary candidate</span>'
-    '<small>MAE n/a</small><small>RMSE n/a</small><small>RÂ² n/a</small></div>'
+    '<small>MAE n/a</small><small>RMSE n/a</small><small>R² n/a</small></div>'
 )
 selected_replacement = (
     '<div class="selected"><b>XGBoost Regressor</b><span>Selected model</span>'
     '<small>MAE ${apiMeta?.model?.evaluation?.xgboost?.mae?.toFixed(3)??"n/a"} MT/ha</small>'
     '<small>RMSE ${apiMeta?.model?.evaluation?.xgboost?.rmse?.toFixed(3)??"n/a"} MT/ha</small>'
-    '<small>RÂ² ${apiMeta?.model?.evaluation?.xgboost?.r2?.toFixed(3)??"n/a"}</small></div>'
+    '<small>R² ${apiMeta?.model?.evaluation?.xgboost?.r2?.toFixed(3)??"n/a"}</small></div>'
 )
 text=text.replace(selected_card, selected_replacement)
 
