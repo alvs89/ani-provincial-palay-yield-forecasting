@@ -30,6 +30,18 @@ TARGET_COLUMN = "Target_Yield_mt_per_ha"
 MIN_PRIOR_QUARTERS = 40
 MIN_SAME_QUARTER_OBSERVATIONS = 8
 
+PROVINCE_ALIASES = {
+    "Cotabato": "Cotabato (North Cotabato)",
+    "Davao de Oro": "Davao de Oro (Compostela Valley)",
+    "Tawi-Tawi": "Tawi-tawi",
+}
+
+
+def normalize_province_name(value: str) -> str:
+    """Trim a province identifier and map known aliases to ANI's canonical name."""
+    name = value.strip()
+    return PROVINCE_ALIASES.get(name, name)
+
 
 def normalize_ecosystem(value: str) -> str:
     value = value.strip().lower()
@@ -100,6 +112,7 @@ class AniFeatureBuilder:
         target_year: int,
         target_quarter: int,
     ) -> FeatureBuildResult:
+        province = normalize_province_name(province)
         ecosystem = normalize_ecosystem(ecosystem)
         target_key = period_key(target_year, target_quarter)
 
@@ -203,6 +216,7 @@ class AniFeatureBuilder:
         target_year: int,
         target_quarter: int,
     ) -> dict[str, Any]:
+        province = normalize_province_name(province)
         ecosystem = normalize_ecosystem(ecosystem)
         target_key = period_key(target_year, target_quarter)
 

@@ -16,6 +16,7 @@ from ml.features import (
     MODEL_FEATURES,
     historical_status,
     normalize_ecosystem,
+    normalize_province_name,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -218,6 +219,7 @@ def forecast_availability(
     ecosystem: str = Query(...),
 ) -> dict[str, Any]:
     """List future periods whose required lagged inputs currently exist."""
+    province = normalize_province_name(province)
     if province not in province_region:
         raise HTTPException(status_code=404, detail="Province not found in ANI data.")
 
@@ -255,7 +257,8 @@ def forecast_availability(
 
 @app.post("/predict")
 def predict(request: ForecastRequest) -> dict[str, Any]:
-    if request.province not in province_region:
+    province = normalize_province_name(request.province)
+    if province not in province_region:
         raise HTTPException(status_code=404, detail="Province not found in ANI data.")
 
     try:
@@ -264,7 +267,7 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
 
     result = builder.build(
-        request.province,
+        province,
         ecosystem,
         request.target_year,
         request.target_quarter,
@@ -278,7 +281,7 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
                 "lagged inputs are not yet available."
             ),
             "reason": result.reason,
-            "province": request.province,
+            "province": province,
             "ecosystem": ecosystem.replace(" Palay", ""),
             "targetYear": request.target_year,
             "targetQuarter": request.target_quarter,
@@ -290,7 +293,7 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
     predicted = float(pipeline.predict(feature_frame)[0])
 
     context = builder.historical_context(
-        request.province,
+        province,
         ecosystem,
         request.target_year,
         request.target_quarter,
@@ -302,7 +305,7 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         * 100.0
     )
     extra = _extra_context(
-        request.province,
+        province,
         ecosystem,
         request.target_year,
         request.target_quarter,
@@ -318,8 +321,8 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
     return {
         "eligible": True,
         "forecastId": forecast_id,
-        "province": request.province,
-        "region": province_region[request.province],
+        "province": province,
+        "region": province_region[province],
         "ecosystem": ecosystem.replace(" Palay", ""),
         "targetYear": request.target_year,
         "targetQuarter": request.target_quarter,
@@ -361,6 +364,7 @@ def historical(
     province: str = Query(...),
     ecosystem: str = Query(...),
 ) -> dict[str, Any]:
+    province = normalize_province_name(province)
     if province not in province_region:
         raise HTTPException(status_code=404, detail="Province not found.")
 

@@ -50,7 +50,11 @@ async function loadEnvironmentalDecisionSupport() {
   if (state.page === 'result') render();
 }
 
-function environmentalDecisionSupport() {
+function normalizeEnvironmentalContext(value) {
+  return String(value ?? '').trim().toLowerCase();
+}
+
+function environmentalDecisionSupport(forecast) {
   if (!environmentalSupport) {
     return `<section class="environmentPanel" aria-labelledby="environmentSupportTitle">
       <h2 id="environmentSupportTitle">Environmental Decision Support</h2>
@@ -66,6 +70,28 @@ function environmentalDecisionSupport() {
 
   const report = environmentalSupport;
   const context = report.context || {};
+  const forecastProvince = normalizeEnvironmentalContext(forecast?.province);
+  const forecastEcosystem = normalizeEnvironmentalContext(forecast?.ecosystem);
+  const environmentalProvince = normalizeEnvironmentalContext(context.location);
+  const environmentalEcosystem = normalizeEnvironmentalContext(context.ecosystem);
+  const contextMatches = forecastProvince === environmentalProvince
+    && forecastEcosystem === environmentalEcosystem;
+
+  if (!contextMatches) {
+    return `<section class="environmentPanel" aria-labelledby="environmentSupportTitle">
+      <div class="environmentHeader"><div>
+        <span class="eyebrow">SEPARATE ENVIRONMENTAL ANALYSIS</span>
+        <h2 id="environmentSupportTitle">Environmental Decision Support</h2>
+      </div></div>
+      <p class="environmentUnavailable">Environmental outlook unavailable for this forecast selection.</p>
+      <div class="environmentDecisions">
+        <article class="environmentDecisionCard"><span>Current environmental decision-support pilot covers</span><strong>${environmentalEscape(context.location || 'Unavailable')} · ${environmentalEscape(context.ecosystem || 'Unavailable')}</strong></article>
+        <article class="environmentDecisionCard"><span>Current yield forecast</span><strong>${environmentalEscape(forecast?.province || 'Unavailable')} · ${environmentalEscape(forecast?.ecosystem || 'Unavailable')}</strong></article>
+      </div>
+      <p class="environmentSeparation">The environmental analysis is kept separate because it does not match the selected province and ecosystem.</p>
+    </section>`;
+  }
+
   const window = context.forecast_window || {};
   const water = report.water_balance || {};
   const scenario = report.crop_water_reference_scenario || {};
