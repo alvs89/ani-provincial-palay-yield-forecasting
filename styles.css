@@ -64,3 +64,5 @@
 @media(max-width:560px){.environmentPanel{padding:15px}.environmentMetrics,.environmentScenarioMetrics,.environmentDecisions{grid-template-columns:1fr}.environmentMetric strong{font-size:18px}}
 
 :where(button,select,input,a,[role="button"]):focus-visible{outline:3px solid #146fc0;outline-offset:2px;box-shadow:0 0 0 2px #fff}.primaryBtn:disabled,.secondaryBtn:disabled,button:disabled{opacity:.55;cursor:not-allowed}.chartSvg .estimateConnector{fill:none;stroke:#b27b00;stroke-width:2;stroke-dasharray:7 5}.chartSvg .estimateStem{stroke:#c18a13;stroke-width:1.5;stroke-dasharray:3 4}.chartSvg .estimateMarker{fill:#f5bd35;stroke:#794d00;stroke-width:3}.chartSvg text{font-size:11px;fill:#53645c}.horizontalBars text{font-size:12px}.serviceError{max-width:760px;margin:12vh auto;padding:28px;background:#fff;border:1px solid #dce5df;border-radius:12px;box-shadow:0 8px 30px #173a2a12}.serviceError h1{color:#173a2a}.serviceError p{color:#53655b;line-height:1.6}
+
+.resultStats .historicalRangeValue{white-space:nowrap}.resultChartSvg .resultAxisTick{font-size:13px}.resultChartSvg .resultAxisTitle{font-size:14px;font-weight:600}

@@ -232,6 +232,8 @@ def _extra_context(
         ),
         "lagged_production_trend": float(prod_trend),
         "lagged_area_trend": float(area_trend),
+        "previous_quarter_rainfall_mm": round(float(feature_row["Rainfall_Lag1_mm"]), 1),
+        "previous_quarter_mean_temperature_c": round(float(feature_row["T2M_Lag1_C"]), 1),
         "rainfall_indicator": (
             f'{feature_row["Rainfall_Lag1_mm"]:.1f} mm previous-quarter rainfall'
         ),
@@ -467,6 +469,8 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         "recentYieldAverage": round(extra["recent_yield_average"], 3),
         "laggedProductionTrend": round(extra["lagged_production_trend"], 1),
         "laggedAreaTrend": round(extra["lagged_area_trend"], 1),
+        "previousQuarterRainfallMm": extra["previous_quarter_rainfall_mm"],
+        "previousQuarterMeanTemperatureC": extra["previous_quarter_mean_temperature_c"],
         "rainfallIndicator": extra["rainfall_indicator"],
         "temperatureIndicator": extra["temperature_indicator"],
         "percentDifferenceFromAverage": round(diff_pct, 1),
