@@ -5,6 +5,7 @@ from pathlib import Path
 
 import joblib
 import pandas as pd
+import sklearn
 from sklearn.compose import ColumnTransformer
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.pipeline import Pipeline
@@ -132,6 +133,7 @@ def main() -> None:
     metadata = {
         "model_name": "ANI XGBoost Regression",
         "model_version": MODEL_VERSION,
+        "scikit_learn_version": sklearn.__version__,
         "status": "integration prototype",
         "trained_through_year": int(df["Target_Year"].max()),
         "training_rows": int(len(df)),

@@ -86,8 +86,8 @@ function environmentalDecisionSupport(forecast) {
       </div></div>
       <p class="environmentUnavailable">Environmental outlook unavailable for this forecast selection.</p>
       <div class="environmentDecisions">
-        <article class="environmentDecisionCard"><span>Current environmental decision-support pilot covers</span><strong>${environmentalEscape(context.location || 'Unavailable')} · ${environmentalEscape(context.ecosystem || 'Unavailable')}</strong></article>
-        <article class="environmentDecisionCard"><span>Current yield forecast</span><strong>${environmentalEscape(forecast?.province || 'Unavailable')} · ${environmentalEscape(forecast?.ecosystem || 'Unavailable')}</strong></article>
+        <article class="environmentDecisionCard"><span>Environmental pilot coverage</span><strong>${environmentalEscape(context.location || 'Unavailable')} · ${environmentalEscape(context.ecosystem || 'Unavailable')}</strong></article>
+        <article class="environmentDecisionCard"><span>Selected model context</span><strong>${environmentalEscape(forecast?.province || 'Unavailable')} · ${environmentalEscape(forecast?.ecosystem || 'Unavailable')}</strong></article>
       </div>
       <p class="environmentSeparation">Environmental outlook unavailable for this forecast selection. Environmental Decision Support is a separate short-term analysis. Its values are not inputs to the currently trained XGBoost yield model.</p>
     </section>`;

@@ -315,7 +315,7 @@ def forecast_availability(
     province: str = Query(...),
     ecosystem: str = Query(...),
 ) -> dict[str, Any]:
-    """List future periods whose required lagged inputs currently exist."""
+    """List model-eligible target periods whose required lagged inputs currently exist."""
     province = normalize_province_name(province)
     if province not in province_region:
         raise HTTPException(status_code=404, detail="Province not found in ANI data.")
