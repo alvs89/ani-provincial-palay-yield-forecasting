@@ -53,8 +53,8 @@ app = FastAPI(
     title="ANI Provincial Palay Yield Forecasting API",
     version=metadata.get("model_version", "0.1"),
     description=(
-        "Backend API for the ANI academic machine-learning prototype. "
-        "Forecasts are analytical estimates and are not official PSA crop forecasts."
+        "Backend API for the ANI Provincial Palay Yield Forecasting System. "
+        "Model results are analytical estimates and are not official PSA crop statistics."
     ),
 )
 
@@ -329,11 +329,21 @@ def forecast_availability(
     first_idx = _period_key(latest_year, latest_quarter) + 1
     reference_date = philippine_reference_date()
     available = []
+    nearest_assessment = None
     # Look up to four years ahead. A period is offered only when the same
     # feature builder used by /predict confirms all required lags are present.
     for period_idx in range(first_idx, first_idx + 16):
         year, quarter = period_idx // 4, period_idx % 4 + 1
         result = builder.build(province, eco, year, quarter)
+        if nearest_assessment is None:
+            nearest_assessment = {
+                "year": year,
+                "quarter": quarter,
+                "eligible": result.eligible,
+                "reason": result.reason,
+                "priorQuarters": result.prior_total,
+                "sameQuarterObservations": result.prior_same_quarter,
+            }
         if result.eligible:
             temporal = classify_target_period(year, quarter, reference_date)
             available.append({
@@ -357,6 +367,7 @@ def forecast_availability(
         "referenceDate": reference_date.isoformat(),
         "referenceTimezone": PHILIPPINE_TIMEZONE_NAME,
         "availableTargets": available,
+        "nearestTargetAssessment": nearest_assessment,
     }
 
 
@@ -388,7 +399,7 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         return {
             "eligible": False,
             "message": (
-                "Forecast unavailable — insufficient historical data or required "
+                "Yield estimate unavailable — historical data or required "
                 "lagged inputs are not yet available."
             ),
             "reason": result.reason,

@@ -134,16 +134,15 @@ def main() -> None:
         "model_name": "ANI XGBoost Regression",
         "model_version": MODEL_VERSION,
         "scikit_learn_version": sklearn.__version__,
-        "status": "integration prototype",
+        "status": "active",
         "trained_through_year": int(df["Target_Year"].max()),
         "training_rows": int(len(df)),
         "weather_spatial_method": (
-            "nearest NASA POWER grid point to province representative centroid "
-            "(preliminary integration dataset)"
+            "nearest NASA POWER grid point to province representative centroid"
         ),
         "important_note": (
-            "Preferred final study method remains province-area weather aggregation "
-            "if verified boundaries and implementation are completed."
+            "Weather inputs are centroid-based provincial approximations and are not "
+            "province-area-weighted averages."
         ),
         "features": MODEL_FEATURES,
         "target": TARGET_COLUMN,

@@ -1,20 +1,19 @@
 @echo off
-python -m venv .venv
-call .venv\Scripts\activate
-python -m pip install --upgrade pip
-pip install -r requirements.txt
-echo.
-echo Patching current frontend...
-findstr /b /c:"const API_BASE=" app.js >nul
-if not errorlevel 1 (
-    echo Frontend already uses the ANI API; skipping the one-time patch.
-) else (
-    python tools\patch_frontend.py
+setlocal
+if not exist .venv\Scripts\python.exe (
+    echo Creating ANI environment...
+    python -m venv .venv
     if errorlevel 1 exit /b 1
 )
-echo.
-echo Reproducing ANI model training...
-python -m ml.train_model
+call .venv\Scripts\activate.bat
+if errorlevel 1 exit /b 1
+echo Installing ANI requirements...
+python -m pip install -r requirements.txt
+if errorlevel 1 exit /b 1
+echo Verifying ANI installation...
+python verify_installation.py
 if errorlevel 1 exit /b 1
 echo.
-echo Setup complete. Run run_ani.bat
+echo ANI setup complete. Run run_ani.bat to start the application.
+echo Model retraining is an explicit action: python -m ml.train_model
+endlocal

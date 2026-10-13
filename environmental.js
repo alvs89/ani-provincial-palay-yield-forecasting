@@ -65,7 +65,7 @@ function environmentalDecisionSupport(forecast) {
     return `<section class="environmentPanel" aria-labelledby="environmentSupportTitle">
       <h2 id="environmentSupportTitle">Environmental Decision Support</h2>
       <p class="environmentUnavailable">Environmental decision-support data are not currently available.</p>
-      <p class="environmentSeparation">Environmental Decision Support is a separate short-term analysis. Its values are not inputs to the currently trained XGBoost yield model.</p>
+      <p class="environmentSeparation">Environmental Decision Support is a separate short-term analysis and does not alter the XGBoost yield estimate.</p>
     </section>`;
   }
 
@@ -86,10 +86,10 @@ function environmentalDecisionSupport(forecast) {
       </div></div>
       <p class="environmentUnavailable">Environmental outlook unavailable for this forecast selection.</p>
       <div class="environmentDecisions">
-        <article class="environmentDecisionCard"><span>Environmental pilot coverage</span><strong>${environmentalEscape(context.location || 'Unavailable')} · ${environmentalEscape(context.ecosystem || 'Unavailable')}</strong></article>
+        <article class="environmentDecisionCard"><span>Environmental Outlook Coverage</span><strong>${environmentalEscape(context.location || 'Unavailable')} · ${environmentalEscape(context.ecosystem || 'Unavailable')}</strong></article>
         <article class="environmentDecisionCard"><span>Selected model context</span><strong>${environmentalEscape(forecast?.province || 'Unavailable')} · ${environmentalEscape(forecast?.ecosystem || 'Unavailable')}</strong></article>
       </div>
-      <p class="environmentSeparation">Environmental outlook unavailable for this forecast selection. Environmental Decision Support is a separate short-term analysis. Its values are not inputs to the currently trained XGBoost yield model.</p>
+      <p class="environmentSeparation">Environmental Decision Support is a separate short-term analysis and does not alter the XGBoost yield estimate.</p>
     </section>`;
   }
 
@@ -99,14 +99,14 @@ function environmentalDecisionSupport(forecast) {
   const isDecisionCurrent = report.currentForDecisionSupport === true
     && ['UPCOMING', 'CURRENT'].includes(freshnessStatus);
   const coveredPeriod = environmentalEscape(environmentalWindow(window));
-  const architectureText = 'Environmental Decision Support is a separate short-term analysis. Its values are not inputs to the currently trained XGBoost yield model.';
+  const architectureText = 'Environmental Decision Support is a separate short-term analysis and does not alter the XGBoost yield estimate.';
   if (!isDecisionCurrent) {
     const statusMessage = freshnessStatus === 'EXPIRED'
       ? 'Environmental outlook expired.'
-      : 'Environmental outlook freshness could not be verified.';
+      : 'Environmental outlook currency could not be verified.';
     const explanation = freshnessStatus === 'EXPIRED'
-      ? 'The stored environmental outlook is outside its forecast window. Regenerate the environmental pipeline to obtain a current outlook.'
-      : 'This stored outlook cannot be presented as current decision support until its forecast window is verified.';
+      ? `The stored outlook covers ${coveredPeriod}. A current environmental outlook is required before this information can be used for planning.`
+      : 'The stored outlook cannot be presented as current decision-support information.';
     return `<section class="environmentPanel" aria-labelledby="environmentSupportTitle">
       <div class="environmentHeader"><div><span class="eyebrow">SEPARATE ENVIRONMENTAL ANALYSIS</span><h2 id="environmentSupportTitle">Environmental Decision Support</h2></div></div>
       <div class="environmentUnavailable"><strong>${statusMessage}</strong><p>Covered period: ${coveredPeriod}</p><p>${explanation}</p></div>
@@ -125,11 +125,11 @@ function environmentalDecisionSupport(forecast) {
   const rainfallRatio = Number(water.rainfall_to_et0_ratio);
   const rainfallPercent = Number.isFinite(rainfallRatio) ? `${(rainfallRatio * 100).toFixed(1)}%` : 'Unavailable';
   const siteVerified = String(site.verification || '').toLowerCase() === 'verified';
-  const soilSeries = site.soil_context?.soil_series;
+  const soilSeries = siteVerified ? site.soil_context?.soil_series : null;
   const siteText = siteVerified
     ? `Verified site context${soilSeries ? `: ${environmentalEscape(soilSeries)}` : ''}`
-    : `Test scenario${soilSeries ? `: ${environmentalEscape(soilSeries)}` : ''}`;
-  const siteStatus = siteVerified ? 'Verified' : 'TEST / UNVERIFIED';
+    : 'Field-specific soil and establishment information has not been verified for this assessment.';
+  const siteStatus = siteVerified ? 'Verified' : 'Field Context Not Verified';
   const recommendation = decision.planting_recommendation_status === 'WITHHELD'
     ? 'Not issued'
     : decision.planting_recommendation_status === 'ISSUED' ? 'Issued' : 'Status unavailable';
@@ -158,9 +158,9 @@ function environmentalDecisionSupport(forecast) {
     ...(decision.remaining_validation_blocks || []).map(item => validationLabels[item] || String(item).replaceAll('_', ' '))
   ];
   const blockers = [...new Set(evidenceItems)];
-  const conclusion = decision.conclusion || 'Stage 9 did not provide an interpretation for this outlook.';
+  const conclusion = decision.conclusion || 'No environmental interpretation is available for this outlook.';
   const cautionText = waterAvailability === 'Caution'
-    ? 'Forecast rainfall is substantially below reference atmospheric and crop-water demand for the assessed period.'
+    ? 'Forecast rainfall is below the reference atmospheric and crop-water demand indicators for the assessed period.'
     : 'This environmental assessment is contextual and does not issue a planting recommendation.';
   const withheldText = 'ANI does not issue a planting recommendation because effective rainfall, verified field soil conditions, antecedent root-zone water storage, and locally validated decision thresholds are not yet available.';
 
@@ -169,13 +169,13 @@ function environmentalDecisionSupport(forecast) {
       <div>
         <span class="eyebrow">SEPARATE ENVIRONMENTAL ANALYSIS</span>
         <h2 id="environmentSupportTitle">Environmental Decision Support</h2>
-        <p>Short-term environmental context for agricultural planning. ${architectureText}</p>
+        <p>Short-term environmental context for agricultural planning.</p>
       </div>
       <div class="environmentWindow"><span>${freshnessStatus === 'UPCOMING' ? 'Upcoming Environmental Outlook' : 'Current Environmental Outlook'}</span><strong>${coveredPeriod}</strong><small>${environmentalEscape(context.location || '')} · ${environmentalEscape(context.ecosystem || '')}</small></div>
     </div>
-    ${forecast?.yieldUnavailable ? '<div class="infoBox"><strong>Yield estimate:</strong> Unavailable - historical/model input requirements are not satisfied. <strong>Environmental outlook:</strong> Available - separate short-term environmental pilot.</div>' : ''}
+    ${forecast?.yieldUnavailable ? '<div class="infoBox"><strong>Yield estimate:</strong> Unavailable - historical/model input requirements are not satisfied. <strong>Environmental outlook:</strong> Available for this selection as a separate short-term environmental outlook.</div>' : ''}
     <p class="environmentSeparation">${architectureText}</p>
-    <div class="environmentStatus"><div><span>Water Availability</span><strong>${environmentalEscape(waterAvailability)}</strong></div><p>${environmentalEscape(cautionText)}</p><small>Atmospheric Water Balance: ${environmentalEscape(atmosphericStatus)}</small></div>
+    <div class="environmentStatus"><div><span>Water-Balance Signal</span><strong>${environmentalEscape(waterAvailability)}</strong></div><p>${environmentalEscape(cautionText)}</p><small>Atmospheric Water Balance: ${environmentalEscape(atmosphericStatus)}</small></div>
     <div class="environmentMetrics">
       <div class="environmentMetric"><span>Forecast Rainfall</span><strong>${rainfall} mm</strong></div>
       <div class="environmentMetric"><span>FAO-56 Reference ET₀</span><strong>${et0} mm</strong></div>
@@ -184,19 +184,19 @@ function environmentalDecisionSupport(forecast) {
     </div>
     <div class="environmentScenario">
       <h3>Reference Crop-Water Scenario</h3>
-      <p>${environmentalEscape(scenario.scenario_label || 'FAO reference sensitivity scenario; not locally validated')}</p>
+      <p>Reference sensitivity scenario; not a locally calibrated decision threshold.</p>
       <div class="environmentMetrics environmentScenarioMetrics">
         <div class="environmentMetric"><span>Reference Kc</span><strong>${kc}</strong></div>
         <div class="environmentMetric"><span>Reference ETc Scenario</span><strong>${etc} mm</strong></div>
         <div class="environmentMetric"><span>Best-Case Rainfall − ETc</span><strong>${rainfallMinusEtc}</strong></div>
       </div>
-      <p class="environmentFootnote">This coefficient is used for sensitivity analysis and is not a locally validated Nueva Ecija rainfed planting threshold.</p>
+      <p class="environmentFootnote">This reference coefficient supports sensitivity analysis and is not a locally calibrated planting threshold.</p>
     </div>
     <div class="environmentDecisions">
-      <article class="environmentDecisionCard"><span>Site Context</span><strong class="${siteVerified ? 'environmentVerified' : 'environmentUnverified'}">${environmentalEscape(siteStatus)}</strong><p>${siteText}</p>${siteVerified ? '' : '<small>Site details are test inputs, not verified field information.</small>'}</article>
+      <article class="environmentDecisionCard"><span>Site Context</span><strong class="${siteVerified ? 'environmentVerified' : 'environmentUnverified'}">${environmentalEscape(siteStatus)}</strong><p>${siteText}</p>${siteVerified ? '' : '<small>Field-specific site information has not been verified for this assessment.</small>'}</article>
       <article class="environmentDecisionCard"><span>Planting Recommendation</span><strong>${environmentalEscape(recommendation)}</strong><p>${environmentalEscape(withheldText)}</p></article>
     </div>
     <article class="environmentInterpretation"><h3>Why?</h3><p>${environmentalEscape(conclusion)}</p><strong>This supports a cautionary water-availability interpretation, not a planting recommendation.</strong></article>
-    ${blockers.length ? `<details class="environmentEvidence"><summary>Remaining evidence and validation needs</summary><ul>${blockers.map(item => `<li>${environmentalEscape(item)}</li>`).join('')}</ul></details>` : ''}
+    ${blockers.length ? `<details class="environmentEvidence"><summary>Information Required for Planting Guidance</summary><ul>${blockers.map(item => `<li>${environmentalEscape(item)}</li>`).join('')}</ul></details>` : ''}
   </section>`;
 }
