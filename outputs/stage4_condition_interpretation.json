@@ -1,0 +1,87 @@
+{
+  "stage": 4,
+  "name": "ANI Public-Condition Interpretation and Evidence Gate",
+  "generated_at_utc": "2026-10-13T06:05:22.076595+00:00",
+  "scope": "Province/ecosystem-level environmental planning context. Does not alter the trained XGBoost yield prediction.",
+  "location": "Nueva Ecija",
+  "ecosystem": "Rainfed",
+  "water_source": "Rain-dependent",
+  "forecast_window": {
+    "start": "2026-10-14",
+    "end": "2026-10-23"
+  },
+  "stage3_inputs": {
+    "open_meteo_rainfall_mm": 14.1,
+    "rainy_days": 4,
+    "mean_temperature_c": 26.96,
+    "mean_relative_humidity_pct": 84.342,
+    "max_wind_gust_kmh": 27.4,
+    "soil_moisture_0_7cm_m3_m3": 0.248,
+    "chirps3_gefs_rainfall_mm": 12.02,
+    "chirps_issue": "2026-10-12"
+  },
+  "planning_signal": "PROVISIONAL / CAUTION",
+  "planting_recommendation_status": "WITHHELD_PENDING_VALIDATION",
+  "planting_recommendation": null,
+  "summary": "For Nueva Ecija (Rainfed, Rain-dependent), the 2026-10-14 to 2026-10-23 outlook shows 14.1 mm Open-Meteo rainfall, 12.02 mm CHIRPS3-GEFS rainfall, 4 rainy days, 26.96 C mean temperature, 84.34% mean RH, 27.4 km/h maximum gust, and 0.248 m3/m3 surface soil moisture. Rainfall-source agreement is strong (15.9% relative difference). Temperature is broadly compatible with rice development, but the available variables are not sufficient to issue a validated planting-date recommendation.",
+  "signals": [
+    {
+      "factor": "Rainfall forecast source agreement",
+      "status": "strong",
+      "value": "Open-Meteo 14.10 mm vs CHIRPS3-GEFS 12.02 mm (15.9% relative difference)",
+      "interpretation": "The two independent rainfall totals are reasonably close.",
+      "basis": "ANI Stage 4 source-consistency rule; not an agronomic suitability threshold."
+    },
+    {
+      "factor": "Mean temperature",
+      "status": "favorable_context",
+      "value": "26.96 C",
+      "interpretation": "Mean temperature is close to the broad optimum region used in rice crop-development literature.",
+      "basis": "Broad rice development context from IRRI/ORYZA literature (cardinal temperatures approximately 8 C base, 30 C optimum, 42 C maximum)."
+    },
+    {
+      "factor": "Forecast rainfall",
+      "status": "context_only",
+      "value": "14.10 mm Open-Meteo; 12.02 mm CHIRPS3-GEFS over the forecast window",
+      "interpretation": "Rainfall is recorded as a planning signal, but ANI does not convert this total into a rainfed planting recommendation without effective-rainfall and crop-water-balance calibration.",
+      "basis": "FAO crop-water guidance requires crop stage, evapotranspiration, effective rainfall, and water-balance context rather than a rainfall-total-only rule."
+    },
+    {
+      "factor": "Rainy days",
+      "status": "context_only",
+      "value": "4 day(s)",
+      "interpretation": "Rainfall frequency is retained for interpretation. No favorable/unfavorable threshold is applied until a local Nueva Ecija planting rule is validated.",
+      "basis": "No validated ANI rainfed planting threshold has been established yet."
+    },
+    {
+      "factor": "Surface soil moisture",
+      "status": "requires_soil_calibration",
+      "value": "0.248 m3/m3",
+      "interpretation": "Volumetric soil moisture cannot be labeled adequate or inadequate without soil texture and locally relevant field-capacity / wilting-point information.",
+      "basis": "Soil-moisture thresholds are soil-specific; a universal cutoff would be misleading."
+    },
+    {
+      "factor": "Relative humidity",
+      "status": "context_only",
+      "value": "84.34%",
+      "interpretation": "Humidity is preserved as environmental context. ANI does not infer disease risk from RH alone.",
+      "basis": "Disease-pressure assessment would require crop stage, duration/leaf wetness, pathogen context, and validation."
+    },
+    {
+      "factor": "Maximum wind gust",
+      "status": "context_only",
+      "value": "27.4 km/h",
+      "interpretation": "Wind is retained as context. No lodging or damage threshold is applied without crop-stage and variety information.",
+      "basis": "Wind vulnerability is stage- and variety-dependent."
+    }
+  ],
+  "required_before_validated_planting_recommendation": [
+    "Locally validated rainfed planting decision thresholds for Nueva Ecija",
+    "Crop establishment method and intended planting/transplanting stage",
+    "Reference evapotranspiration (ETo) or a defensible water-balance estimate",
+    "Effective rainfall rather than rainfall total alone",
+    "Soil texture plus field capacity / wilting point or equivalent local soil-water calibration",
+    "Validation of the rule against historical planting outcomes or expert agronomic review"
+  ],
+  "integration_note": "Keep this Stage 4 report separate from the XGBoost feature vector. The current ANI model was trained on lagged quarterly agricultural/weather features, not on these forward 10-day conditions."
+}

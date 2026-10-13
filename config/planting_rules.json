@@ -1,0 +1,44 @@
+{
+  "ruleset_name": "ANI Nueva Ecija Rainfed Planting Window Rules",
+  "ruleset_version": "0.1-provisional",
+  "validation_status": "UNVALIDATED",
+  "validated_for_location": "Nueva Ecija",
+  "validated_for_ecosystem": "Rainfed",
+  "validated_for_establishment_method": null,
+  "effective_rainfall_rule": {
+    "minimum_mm": null,
+    "note": "Do not substitute forecast rainfall total. Calibrate from effective rainfall/crop-water balance."
+  },
+  "soil_water_rule": {
+    "minimum": null,
+    "maximum": null,
+    "unit": "m3/m3",
+    "note": "Must be soil-series/local-field specific; do not use a universal volumetric-water cutoff."
+  },
+  "temperature_rule": {
+    "minimum_c": null,
+    "maximum_c": null,
+    "note": "Use expert-reviewed planting/establishment thresholds, not merely broad physiological cardinal temperatures."
+  },
+  "wind_rule": {
+    "maximum_gust_kmh": null,
+    "note": "Calibrate to establishment method, crop stage, and local expert guidance."
+  },
+  "references": [
+    {
+      "organization": "FAO",
+      "use": "Crop-water balance/effective rainfall methodology",
+      "url": "https://www.fao.org/4/S2022E/s2022e08.htm"
+    },
+    {
+      "organization": "DA-PhilRice",
+      "use": "Nueva Ecija soil-series properties and rice management constraints",
+      "url": "https://dbmp.philrice.gov.ph/soils/province/Nueva-Ecija/property"
+    },
+    {
+      "organization": "DA-PhilRice",
+      "use": "Direct-seeded rice establishment differs with soil-moisture condition",
+      "url": "https://www.philrice.gov.ph/rice-breeding-operations-manual/"
+    }
+  ]
+}
