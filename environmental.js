@@ -196,7 +196,7 @@ function environmentalDecisionSupport(forecast) {
       <article class="environmentDecisionCard"><span>Site Context</span><strong class="${siteVerified ? 'environmentVerified' : 'environmentUnverified'}">${environmentalEscape(siteStatus)}</strong><p>${siteText}</p>${siteVerified ? '' : '<small>Field-specific site information has not been verified for this assessment.</small>'}</article>
       <article class="environmentDecisionCard"><span>Planting Recommendation</span><strong>${environmentalEscape(recommendation)}</strong><p>${environmentalEscape(withheldText)}</p></article>
     </div>
-    <article class="environmentInterpretation"><h3>Why?</h3><p>${environmentalEscape(conclusion)}</p><strong>This supports a cautionary water-availability interpretation, not a planting recommendation.</strong></article>
+    <article class="environmentInterpretation"><h3>Why?</h3><p>${environmentalEscape(conclusion)}</p><strong>This supports a cautionary water-balance interpretation, not a planting recommendation.</strong></article>
     ${blockers.length ? `<details class="environmentEvidence"><summary>Information Required for Planting Guidance</summary><ul>${blockers.map(item => `<li>${environmentalEscape(item)}</li>`).join('')}</ul></details>` : ''}
   </section>`;
 }
