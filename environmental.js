@@ -84,12 +84,8 @@ function environmentalDecisionSupport(forecast) {
         <span class="eyebrow">SEPARATE ENVIRONMENTAL ANALYSIS</span>
         <h2 id="environmentSupportTitle">Environmental Decision Support</h2>
       </div></div>
-      <p class="environmentUnavailable">Environmental outlook unavailable for this forecast selection.</p>
-      <div class="environmentDecisions">
-        <article class="environmentDecisionCard"><span>Environmental Outlook Coverage</span><strong>${environmentalEscape(context.location || 'Unavailable')} · ${environmentalEscape(context.ecosystem || 'Unavailable')}</strong></article>
-        <article class="environmentDecisionCard"><span>Selected model context</span><strong>${environmentalEscape(forecast?.province || 'Unavailable')} · ${environmentalEscape(forecast?.ecosystem || 'Unavailable')}</strong></article>
-      </div>
-      <p class="environmentSeparation">Environmental Decision Support is a separate short-term analysis and does not alter the XGBoost yield estimate.</p>
+      <p class="environmentUnavailable">Environmental outlook is not currently available for ${environmentalEscape(forecast?.province || 'Unavailable')} · ${environmentalEscape(forecast?.ecosystem || 'Unavailable')}.</p>
+      <p class="environmentSeparation">Environmental Decision Support is a separate short-term analysis and does not affect the ANI yield estimate.</p>
     </section>`;
   }
 
