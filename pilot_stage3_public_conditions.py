@@ -8,8 +8,9 @@ import pandas as pd
 import requests
 import rasterio
 
+ROOT=Path(__file__).resolve().parent
 PROVINCE='Nueva Ecija'; LAT=15.5833; LON=121.0000; TZ='Asia/Manila'
-OUT=Path('data/pilot'); OUT.mkdir(parents=True, exist_ok=True)
+OUT=ROOT/'data'/'pilot'; OUT.mkdir(parents=True, exist_ok=True)
 CACHE=OUT/'cache'; CACHE.mkdir(parents=True, exist_ok=True)
 STAGE1=OUT/'nueva_ecija_pilot_conditions.json'
 OM='https://api.open-meteo.com/v1/forecast'

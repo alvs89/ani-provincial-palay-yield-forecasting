@@ -1,0 +1,57 @@
+{
+  "name": "Nueva Ecija PhilRice Rainfed Rice Soil Context",
+  "version": "0.1",
+  "validation_scope": "Context only; not a planting-date rule",
+  "source": "PhilRice Soil Information System",
+  "source_url": "https://dbmp.philrice.gov.ph/soils/province/Nueva-Ecija/suitability/rice",
+  "source_note": "Suitability codes are transcribed from the PhilRice Nueva Ecija provincial rainfed-rice suitability table. Limitation letters follow the PhilRice legend.",
+  "limitation_legend": {
+    "c": "climate",
+    "t": "topography / slope",
+    "s": "texture / coarse fragments / soil depth",
+    "f": "soil fertility",
+    "w": "drainage / flooding"
+  },
+  "soil_series": {
+    "Annam": {
+      "rainfed_rice_suitability": "S2cts",
+      "source_note": "PhilRice Nueva Ecija rice suitability table"
+    },
+    "Bantog": {
+      "rainfed_rice_suitability": "S2c",
+      "source_note": "PhilRice Nueva Ecija rice suitability table"
+    },
+    "Maligaya": {
+      "rainfed_rice_suitability": "S2cf",
+      "source_note": "PhilRice Nueva Ecija rice suitability table"
+    },
+    "Prensa": {
+      "rainfed_rice_suitability": "S2csf",
+      "source_note": "PhilRice Nueva Ecija rice suitability table"
+    },
+    "Quingua": {
+      "rainfed_rice_suitability": "S2cf",
+      "source_note": "PhilRice Nueva Ecija rice suitability table"
+    },
+    "San Fabian": {
+      "rainfed_rice_suitability": "S3w",
+      "source_note": "PhilRice Nueva Ecija rice suitability table"
+    },
+    "San Manuel": {
+      "rainfed_rice_suitability": "S3sf",
+      "source_note": "PhilRice Nueva Ecija rice suitability table"
+    },
+    "Sibul": {
+      "rainfed_rice_suitability": "N2t",
+      "source_note": "PhilRice Nueva Ecija rice suitability table"
+    },
+    "Umingan": {
+      "rainfed_rice_suitability": "S2sf",
+      "source_note": "PhilRice Nueva Ecija rice suitability table"
+    },
+    "Zaragosa": {
+      "rainfed_rice_suitability": "S3f",
+      "source_note": "PhilRice Nueva Ecija rice suitability table"
+    }
+  }
+}

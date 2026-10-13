@@ -7,6 +7,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+ROOT = Path(__file__).resolve().parent
+
 
 @dataclass
 class Signal:
@@ -240,7 +242,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--chirps-issue", required=True)
     p.add_argument(
         "--output",
-        default="outputs/stage4_condition_interpretation.json",
+        default=str(ROOT / "outputs" / "stage4_condition_interpretation.json"),
         help="Output JSON path.",
     )
     return p.parse_args()

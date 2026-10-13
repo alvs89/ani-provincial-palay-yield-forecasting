@@ -26,6 +26,7 @@ HISTORY_PATH = DATA_DIR / "palay_history.csv"
 WEATHER_PATH = DATA_DIR / "province_quarter_weather.csv"
 MODEL_PATH = MODEL_DIR / "ani_xgboost_pipeline.joblib"
 METADATA_PATH = MODEL_DIR / "metadata.json"
+ENVIRONMENTAL_DECISION_SUPPORT_PATH = ROOT / "outputs" / "environmental_decision_support.json"
 
 if not MODEL_PATH.exists():
     raise RuntimeError(
@@ -161,6 +162,33 @@ def health() -> dict[str, Any]:
         "model_version": metadata.get("model_version"),
         "training_rows": metadata.get("training_rows"),
     }
+
+
+@app.get("/environmental-decision-support")
+def environmental_decision_support() -> dict[str, Any]:
+    """Return the latest Stage 9 report without recomputing or affecting yield forecasts."""
+    if not ENVIRONMENTAL_DECISION_SUPPORT_PATH.is_file():
+        return {
+            "available": False,
+            "message": "Environmental decision-support output has not been generated yet.",
+        }
+
+    try:
+        report = json.loads(
+            ENVIRONMENTAL_DECISION_SUPPORT_PATH.read_text(encoding="utf-8")
+        )
+    except (OSError, json.JSONDecodeError):
+        return {
+            "available": False,
+            "message": "Environmental decision-support output could not be read.",
+        }
+
+    if not isinstance(report, dict):
+        return {
+            "available": False,
+            "message": "Environmental decision-support output is not a JSON object.",
+        }
+    return {**report, "available": True}
 
 
 @app.get("/meta")

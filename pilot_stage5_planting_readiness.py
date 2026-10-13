@@ -6,6 +6,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+ROOT = Path(__file__).resolve().parent
+
 
 REQUIRED_VALIDATION_FIELDS = [
     "validation_status",
@@ -243,12 +245,12 @@ def parse_args() -> argparse.Namespace:
     )
     p.add_argument(
         "--stage4",
-        default="outputs/stage4_condition_interpretation.json",
+        default=str(ROOT / "outputs" / "stage4_condition_interpretation.json"),
         help="Stage 4 JSON file.",
     )
     p.add_argument(
         "--rules",
-        default="config/planting_rules.json",
+        default=str(ROOT / "config" / "planting_rules.json"),
         help="Planting-rule configuration file.",
     )
     p.add_argument(
@@ -269,7 +271,7 @@ def parse_args() -> argparse.Namespace:
     )
     p.add_argument(
         "--output",
-        default="outputs/stage5_planting_readiness.json",
+        default=str(ROOT / "outputs" / "stage5_planting_readiness.json"),
     )
     return p.parse_args()
 

@@ -15,3 +15,14 @@ __pycache__/
 
 .venv/
 app.synthetic.backup.js
+
+# Generated Stage 5 runtime report; keep the Stage 4 reference report tracked.
+outputs/stage5_planting_readiness.json
+
+# Generated Stage 6-9 runtime artifacts; keep the committed Stage 4 reference report.
+outputs/stage6_water_balance.json
+outputs/stage7_site_context.json
+outputs/stage8_rainfall_sufficiency_bound.json
+outputs/stage8_fao_initial_kc_scenario.json
+outputs/environmental_decision_support.json
+data/pilot/nueva_ecija_stage6_openmeteo_raw.json
