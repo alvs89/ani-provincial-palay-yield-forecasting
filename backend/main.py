@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 import joblib
 import pandas as pd
@@ -70,6 +71,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+PHILIPPINE_TIMEZONE_NAME = "Asia/Manila"
+PHILIPPINE_TIMEZONE = ZoneInfo(PHILIPPINE_TIMEZONE_NAME)
+TEMPORAL_RESULT_TYPES = {
+    "PROSPECTIVE_FORECAST": "Prospective Forecast",
+    "CURRENT_QUARTER_ESTIMATE": "Current-Quarter Estimate",
+    "RETROSPECTIVE_ESTIMATE": "Retrospective Estimate",
+}
+
 
 class ForecastRequest(BaseModel):
     province: str
@@ -94,6 +103,82 @@ def _latest_period() -> tuple[int, int]:
 def _next_period(year: int, quarter: int) -> tuple[int, int]:
     idx = _period_key(year, quarter) + 1
     return int(idx // 4), int(idx % 4 + 1)
+
+
+def philippine_reference_date(reference_date: date | None = None) -> date:
+    """Return an explicit reference date or today's date in Asia/Manila."""
+    return reference_date or datetime.now(PHILIPPINE_TIMEZONE).date()
+
+
+def classify_target_period(
+    target_year: int,
+    target_quarter: int,
+    reference_date: date | None = None,
+) -> dict[str, str]:
+    """Classify a target quarter temporally without evaluating model eligibility."""
+    quarter_bounds = {
+        1: (1, 3, 31),
+        2: (4, 6, 30),
+        3: (7, 9, 30),
+        4: (10, 12, 31),
+    }
+    if target_quarter not in quarter_bounds:
+        raise ValueError("Quarter must be 1, 2, 3, or 4.")
+
+    start_month, end_month, end_day = quarter_bounds[target_quarter]
+    period_start = date(target_year, start_month, 1)
+    period_end = date(target_year, end_month, end_day)
+    today = philippine_reference_date(reference_date)
+
+    if today < period_start:
+        temporal_status = "PROSPECTIVE_FORECAST"
+    elif today <= period_end:
+        temporal_status = "CURRENT_QUARTER_ESTIMATE"
+    else:
+        temporal_status = "RETROSPECTIVE_ESTIMATE"
+
+    return {
+        "temporalStatus": temporal_status,
+        "resultType": TEMPORAL_RESULT_TYPES[temporal_status],
+        "targetPeriodStart": period_start.isoformat(),
+        "targetPeriodEnd": period_end.isoformat(),
+        "referenceDate": today.isoformat(),
+        "referenceTimezone": PHILIPPINE_TIMEZONE_NAME,
+    }
+
+
+def classify_environmental_freshness(
+    report: dict[str, Any],
+    reference_date: date | None = None,
+) -> dict[str, Any]:
+    """Classify the stored Stage 9 window without recomputing its calculations."""
+    today = philippine_reference_date(reference_date)
+    window = (report.get("context") or {}).get("forecast_window") or {}
+    raw_start = window.get("start")
+    raw_end = window.get("end")
+    status = "UNKNOWN"
+    try:
+        window_start = date.fromisoformat(raw_start)
+        window_end = date.fromisoformat(raw_end)
+        if window_start > window_end:
+            raise ValueError("Forecast window starts after it ends.")
+        if today < window_start:
+            status = "UPCOMING"
+        elif today <= window_end:
+            status = "CURRENT"
+        else:
+            status = "EXPIRED"
+    except (TypeError, ValueError):
+        window_start = None
+        window_end = None
+
+    return {
+        "status": status,
+        "referenceDate": today.isoformat(),
+        "referenceTimezone": PHILIPPINE_TIMEZONE_NAME,
+        "windowStart": window_start.isoformat() if window_start else None,
+        "windowEnd": window_end.isoformat() if window_end else None,
+    }
 
 
 def _extra_context(
@@ -172,6 +257,8 @@ def environmental_decision_support() -> dict[str, Any]:
         return {
             "available": False,
             "message": "Environmental decision-support output has not been generated yet.",
+            "freshness": classify_environmental_freshness({}),
+            "currentForDecisionSupport": False,
         }
 
     try:
@@ -182,14 +269,24 @@ def environmental_decision_support() -> dict[str, Any]:
         return {
             "available": False,
             "message": "Environmental decision-support output could not be read.",
+            "freshness": classify_environmental_freshness({}),
+            "currentForDecisionSupport": False,
         }
 
     if not isinstance(report, dict):
         return {
             "available": False,
             "message": "Environmental decision-support output is not a JSON object.",
+            "freshness": classify_environmental_freshness({}),
+            "currentForDecisionSupport": False,
         }
-    return {**report, "available": True}
+    freshness = classify_environmental_freshness(report)
+    return {
+        **report,
+        "available": True,
+        "freshness": freshness,
+        "currentForDecisionSupport": freshness["status"] in {"UPCOMING", "CURRENT"},
+    }
 
 
 @app.get("/meta")
@@ -230,6 +327,7 @@ def forecast_availability(
 
     latest_year, latest_quarter = _latest_period()
     first_idx = _period_key(latest_year, latest_quarter) + 1
+    reference_date = philippine_reference_date()
     available = []
     # Look up to four years ahead. A period is offered only when the same
     # feature builder used by /predict confirms all required lags are present.
@@ -237,11 +335,16 @@ def forecast_availability(
         year, quarter = period_idx // 4, period_idx % 4 + 1
         result = builder.build(province, eco, year, quarter)
         if result.eligible:
+            temporal = classify_target_period(year, quarter, reference_date)
             available.append({
                 "year": year,
                 "quarter": quarter,
                 "priorQuarters": result.prior_total,
                 "sameQuarterObservations": result.prior_same_quarter,
+                "temporalStatus": temporal["temporalStatus"],
+                "resultType": temporal["resultType"],
+                "targetPeriodStart": temporal["targetPeriodStart"],
+                "targetPeriodEnd": temporal["targetPeriodEnd"],
             })
 
     return {
@@ -251,6 +354,8 @@ def forecast_availability(
             "year": latest_year,
             "quarter": latest_quarter,
         },
+        "referenceDate": reference_date.isoformat(),
+        "referenceTimezone": PHILIPPINE_TIMEZONE_NAME,
         "availableTargets": available,
     }
 
@@ -272,6 +377,12 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         request.target_year,
         request.target_quarter,
     )
+    generated_at_dt = datetime.now(timezone.utc)
+    temporal = classify_target_period(
+        request.target_year,
+        request.target_quarter,
+        generated_at_dt.astimezone(PHILIPPINE_TIMEZONE).date(),
+    )
 
     if not result.eligible or result.row is None:
         return {
@@ -287,6 +398,7 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
             "targetQuarter": request.target_quarter,
             "priorQuarters": result.prior_total,
             "sameQuarterObservations": result.prior_same_quarter,
+            **temporal,
         }
 
     feature_frame = pd.DataFrame([result.row], columns=MODEL_FEATURES)
@@ -312,10 +424,10 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         result.row,
     )
 
-    generated_at = datetime.now(timezone.utc).isoformat()
+    generated_at = generated_at_dt.isoformat()
     forecast_id = (
         f"ANI-FC-{request.target_year}-Q{request.target_quarter}-"
-        f"{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')}"
+        f"{generated_at_dt.strftime('%Y%m%d%H%M%S')}"
     )
 
     return {
@@ -326,6 +438,7 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         "ecosystem": ecosystem.replace(" Palay", ""),
         "targetYear": request.target_year,
         "targetQuarter": request.target_quarter,
+        **temporal,
         "predictedYield": round(predicted, 3),
         "unit": "t/ha",
         "historicalMedian": round(context["historical_median"], 3),

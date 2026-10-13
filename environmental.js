@@ -47,7 +47,7 @@ async function loadEnvironmentalDecisionSupport() {
   } catch {
     environmentalSupport = { available: false };
   }
-  if (state.page === 'result') render();
+  if (state.page === 'result' || state.page === 'forecast') render();
 }
 
 function normalizeEnvironmentalContext(value) {
@@ -65,6 +65,7 @@ function environmentalDecisionSupport(forecast) {
     return `<section class="environmentPanel" aria-labelledby="environmentSupportTitle">
       <h2 id="environmentSupportTitle">Environmental Decision Support</h2>
       <p class="environmentUnavailable">Environmental decision-support data are not currently available.</p>
+      <p class="environmentSeparation">Environmental Decision Support is a separate short-term analysis. Its values are not inputs to the currently trained XGBoost yield model.</p>
     </section>`;
   }
 
@@ -88,11 +89,30 @@ function environmentalDecisionSupport(forecast) {
         <article class="environmentDecisionCard"><span>Current environmental decision-support pilot covers</span><strong>${environmentalEscape(context.location || 'Unavailable')} · ${environmentalEscape(context.ecosystem || 'Unavailable')}</strong></article>
         <article class="environmentDecisionCard"><span>Current yield forecast</span><strong>${environmentalEscape(forecast?.province || 'Unavailable')} · ${environmentalEscape(forecast?.ecosystem || 'Unavailable')}</strong></article>
       </div>
-      <p class="environmentSeparation">The environmental analysis is kept separate because it does not match the selected province and ecosystem.</p>
+      <p class="environmentSeparation">Environmental outlook unavailable for this forecast selection. Environmental Decision Support is a separate short-term analysis. Its values are not inputs to the currently trained XGBoost yield model.</p>
     </section>`;
   }
 
   const window = context.forecast_window || {};
+  const freshness = report.freshness || {};
+  const freshnessStatus = String(freshness.status || 'UNKNOWN').toUpperCase();
+  const isDecisionCurrent = report.currentForDecisionSupport === true
+    && ['UPCOMING', 'CURRENT'].includes(freshnessStatus);
+  const coveredPeriod = environmentalEscape(environmentalWindow(window));
+  const architectureText = 'Environmental Decision Support is a separate short-term analysis. Its values are not inputs to the currently trained XGBoost yield model.';
+  if (!isDecisionCurrent) {
+    const statusMessage = freshnessStatus === 'EXPIRED'
+      ? 'Environmental outlook expired.'
+      : 'Environmental outlook freshness could not be verified.';
+    const explanation = freshnessStatus === 'EXPIRED'
+      ? 'The stored environmental outlook is outside its forecast window. Regenerate the environmental pipeline to obtain a current outlook.'
+      : 'This stored outlook cannot be presented as current decision support until its forecast window is verified.';
+    return `<section class="environmentPanel" aria-labelledby="environmentSupportTitle">
+      <div class="environmentHeader"><div><span class="eyebrow">SEPARATE ENVIRONMENTAL ANALYSIS</span><h2 id="environmentSupportTitle">Environmental Decision Support</h2></div></div>
+      <div class="environmentUnavailable"><strong>${statusMessage}</strong><p>Covered period: ${coveredPeriod}</p><p>${explanation}</p></div>
+      <p class="environmentSeparation">${architectureText}</p>
+    </section>`;
+  }
   const water = report.water_balance || {};
   const scenario = report.crop_water_reference_scenario || {};
   const site = report.site_context || {};
@@ -149,11 +169,12 @@ function environmentalDecisionSupport(forecast) {
       <div>
         <span class="eyebrow">SEPARATE ENVIRONMENTAL ANALYSIS</span>
         <h2 id="environmentSupportTitle">Environmental Decision Support</h2>
-        <p>Short-term environmental context for agricultural planning. This analysis is separate from the trained yield-forecasting model.</p>
+        <p>Short-term environmental context for agricultural planning. ${architectureText}</p>
       </div>
-      <div class="environmentWindow"><span>Current Environmental Outlook</span><strong>${environmentalEscape(environmentalWindow(window))}</strong><small>${environmentalEscape(context.location || '')} · ${environmentalEscape(context.ecosystem || '')}</small></div>
+      <div class="environmentWindow"><span>${freshnessStatus === 'UPCOMING' ? 'Upcoming Environmental Outlook' : 'Current Environmental Outlook'}</span><strong>${coveredPeriod}</strong><small>${environmentalEscape(context.location || '')} · ${environmentalEscape(context.ecosystem || '')}</small></div>
     </div>
-    <p class="environmentSeparation">This ${environmentalEscape(environmentalWindow(window))} outlook is independent of the selected quarterly yield target and is not weather used by the XGBoost forecast.</p>
+    ${forecast?.yieldUnavailable ? '<div class="infoBox"><strong>Yield estimate:</strong> Unavailable - historical/model input requirements are not satisfied. <strong>Environmental outlook:</strong> Available - separate short-term environmental pilot.</div>' : ''}
+    <p class="environmentSeparation">${architectureText}</p>
     <div class="environmentStatus"><div><span>Water Availability</span><strong>${environmentalEscape(waterAvailability)}</strong></div><p>${environmentalEscape(cautionText)}</p><small>Atmospheric Water Balance: ${environmentalEscape(atmosphericStatus)}</small></div>
     <div class="environmentMetrics">
       <div class="environmentMetric"><span>Forecast Rainfall</span><strong>${rainfall} mm</strong></div>
