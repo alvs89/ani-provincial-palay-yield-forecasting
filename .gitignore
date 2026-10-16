@@ -9,6 +9,15 @@ Thumbs.db
 *.tmp
 *.bak
 
+# Rebuildable geospatial extraction caches
+data/cache/
+
+# Rebuildable satellite evaluation detail artifacts
+outputs/satellite_*_probe.csv
+outputs/satellite_2026_2026.csv
+outputs/satellite_evaluation/paired_2025_predictions.csv
+outputs/satellite_evaluation/province_comparison.csv
+
 # Python local server artifacts
 __pycache__/
 *.py[cod]

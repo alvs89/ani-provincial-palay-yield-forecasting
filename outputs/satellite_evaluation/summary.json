@@ -1,0 +1,185 @@
+{
+  "satellite_dataset": {
+    "source_product": "MODIS/Terra MOD13A1 Collection 6.1",
+    "vegetation_indices": [
+      "NDVI",
+      "EVI"
+    ],
+    "native_spatial_resolution_m": 500,
+    "temporal_resolution": "16-day composite",
+    "rows": 8692,
+    "provinces": 82,
+    "coverage_start": {
+      "year": 2000,
+      "quarter": 1
+    },
+    "coverage_end": {
+      "year": 2026,
+      "quarter": 3
+    },
+    "missing_full_quarters_within_coverage": [
+      {
+        "year": 2025,
+        "quarter": 3
+      }
+    ],
+    "spatial_alignment_note": "Pre-2024 satellite values for Maguindanao del Sur are withheld during model evaluation because ANI's older agricultural records represent the former undivided Maguindanao province while the current DENR boundary is post-split."
+  },
+  "selection_protocol": {
+    "development_training_through": 2023,
+    "feature_selection_validation_year": 2024,
+    "final_holdout_year": 2025,
+    "primary_selection_metric": "MAE",
+    "note": "Satellite feature composition is selected on 2024 only. The 2025 chronological holdout is evaluated after selection."
+  },
+  "validation_2024": {
+    "eligible_rows": 509,
+    "current_feature_model": {
+      "mae": 0.23869769267793742,
+      "rmse": 0.3404993800521911,
+      "r2": 0.8385948750931529
+    },
+    "candidates": {
+      "ndvi_lag1_lag4": {
+        "features": [
+          "Cropland_NDVI_Lag1",
+          "Cropland_NDVI_Lag4"
+        ],
+        "metrics": {
+          "mae": 0.23977532007976432,
+          "rmse": 0.34000765933184773,
+          "r2": 0.8390607140455106
+        },
+        "mae_change_vs_current": 0.0010776274018269028,
+        "complete_case": {
+          "rows": 501,
+          "coverage_pct": 98.42829076620825,
+          "metrics": {
+            "mae": 0.23842867712811922,
+            "rmse": 0.33781286791042614,
+            "r2": 0.8408552859200766
+          }
+        }
+      },
+      "evi_lag1_lag4": {
+        "features": [
+          "Cropland_EVI_Lag1",
+          "Cropland_EVI_Lag4"
+        ],
+        "metrics": {
+          "mae": 0.24002777775626943,
+          "rmse": 0.3401761222328965,
+          "r2": 0.838901194017664
+        },
+        "mae_change_vs_current": 0.0013300850783320162,
+        "complete_case": {
+          "rows": 501,
+          "coverage_pct": 98.42829076620825,
+          "metrics": {
+            "mae": 0.2387554119828515,
+            "rmse": 0.3380747930043495,
+            "r2": 0.8406084027601806
+          }
+        }
+      },
+      "ndvi_evi_lag1": {
+        "features": [
+          "Cropland_NDVI_Lag1",
+          "Cropland_EVI_Lag1"
+        ],
+        "metrics": {
+          "mae": 0.2392713527511934,
+          "rmse": 0.34002897771572804,
+          "r2": 0.8390405317175806
+        },
+        "mae_change_vs_current": 0.0005736600732559882,
+        "complete_case": {
+          "rows": 507,
+          "coverage_pct": 99.60707269155206,
+          "metrics": {
+            "mae": 0.23940614294859308,
+            "rmse": 0.34045535264765797,
+            "r2": 0.8388686921993507
+          }
+        }
+      },
+      "ndvi_evi_lag1_lag4": {
+        "features": [
+          "Cropland_NDVI_Lag1",
+          "Cropland_EVI_Lag1",
+          "Cropland_NDVI_Lag4",
+          "Cropland_EVI_Lag4"
+        ],
+        "metrics": {
+          "mae": 0.23894196255093594,
+          "rmse": 0.3400600760950409,
+          "r2": 0.8390110883005375
+        },
+        "mae_change_vs_current": 0.000244269872998526,
+        "complete_case": {
+          "rows": 501,
+          "coverage_pct": 98.42829076620825,
+          "metrics": {
+            "mae": 0.23792216965735116,
+            "rmse": 0.33832756511512346,
+            "r2": 0.8403699655075424
+          }
+        }
+      }
+    },
+    "selected_candidate": "ndvi_evi_lag1_lag4",
+    "selected_features": [
+      "Cropland_NDVI_Lag1",
+      "Cropland_EVI_Lag1",
+      "Cropland_NDVI_Lag4",
+      "Cropland_EVI_Lag4"
+    ],
+    "selected_candidate_improves_mae": false
+  },
+  "holdout_2025": {
+    "eligible_rows": 511,
+    "current_feature_model": {
+      "mae": 0.22322921736778986,
+      "rmse": 0.3077063812294472,
+      "r2": 0.8602508673547016
+    },
+    "satellite_augmented_model": {
+      "mae": 0.22495718193715053,
+      "rmse": 0.30731342383020605,
+      "r2": 0.8606075735790818
+    },
+    "delta_satellite_minus_current": {
+      "mae_change": 0.0017279645693606682,
+      "mae_change_pct": 0.7740763461593353,
+      "rmse_change": -0.00039295739924116724,
+      "r2_change": 0.00035670622438022104
+    },
+    "selected_feature_complete_case": {
+      "rows": 382,
+      "coverage_pct": 74.75538160469667,
+      "metrics": {
+        "mae": 0.22440569209631947,
+        "rmse": 0.30387181184460804,
+        "r2": 0.8685755926114883
+      }
+    },
+    "provinces_satellite_better": 33,
+    "provinces_compared": 77
+  },
+  "selected_candidate": "ndvi_evi_lag1_lag4",
+  "selected_features": [
+    "Cropland_NDVI_Lag1",
+    "Cropland_EVI_Lag1",
+    "Cropland_NDVI_Lag4",
+    "Cropland_EVI_Lag4"
+  ],
+  "acceptance_rule": {
+    "validation_mae_must_improve": true,
+    "holdout_mae_must_improve": true,
+    "holdout_rmse_must_not_worsen": true,
+    "holdout_r2_must_not_worsen": true,
+    "minimum_holdout_complete_case_coverage_pct": 90.0
+  },
+  "promote_to_deployment": false,
+  "deployment_decision": "retain_current_deployed_feature_set"
+}

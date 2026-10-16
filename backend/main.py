@@ -26,10 +26,14 @@ MODEL_DIR = ROOT / "models"
 
 HISTORY_PATH = DATA_DIR / "palay_history.csv"
 WEATHER_PATH = DATA_DIR / "province_quarter_weather.csv"
+SATELLITE_PATH = DATA_DIR / "province_quarter_satellite.csv"
 AGRICULTURAL_SOURCE_PATH = DATA_DIR / "psa_2026_q1_q2_source_records.csv"
 MODEL_PATH = MODEL_DIR / "ani_xgboost_pipeline.joblib"
 METADATA_PATH = MODEL_DIR / "metadata.json"
 ENVIRONMENTAL_DECISION_SUPPORT_PATH = ROOT / "outputs" / "environmental_decision_support.json"
+SATELLITE_EVALUATION_PATH = (
+    ROOT / "outputs" / "satellite_evaluation" / "summary.json"
+)
 
 if not MODEL_PATH.exists():
     raise RuntimeError(
@@ -38,6 +42,16 @@ if not MODEL_PATH.exists():
 
 history_df = pd.read_csv(HISTORY_PATH)
 weather_df = pd.read_csv(WEATHER_PATH)
+satellite_df = (
+    pd.read_csv(SATELLITE_PATH)
+    if SATELLITE_PATH.is_file()
+    else pd.DataFrame()
+)
+satellite_evaluation = (
+    json.loads(SATELLITE_EVALUATION_PATH.read_text(encoding="utf-8"))
+    if SATELLITE_EVALUATION_PATH.is_file()
+    else None
+)
 agricultural_source_df = (
     pd.read_csv(AGRICULTURAL_SOURCE_PATH)
     if AGRICULTURAL_SOURCE_PATH.is_file()
@@ -123,6 +137,17 @@ def _latest_weather_period() -> tuple[int, int]:
     idx = (
         weather_df["Year"].astype(int) * 4
         + weather_df["Quarter"].astype(int)
+        - 1
+    ).max()
+    return int(idx // 4), int(idx % 4 + 1)
+
+
+def _latest_satellite_period() -> tuple[int, int] | None:
+    if satellite_df.empty:
+        return None
+    idx = (
+        satellite_df["Year"].astype(int) * 4
+        + satellite_df["Quarter"].astype(int)
         - 1
     ).max()
     return int(idx // 4), int(idx % 4 + 1)
@@ -374,6 +399,7 @@ def environmental_decision_support() -> dict[str, Any]:
 def meta() -> dict[str, Any]:
     latest_year, latest_quarter = _latest_period()
     weather_year, weather_quarter = _latest_weather_period()
+    satellite_period = _latest_satellite_period()
     next_year, next_quarter = _next_period(latest_year, latest_quarter)
 
     return {
@@ -389,6 +415,15 @@ def meta() -> dict[str, Any]:
             "year": weather_year,
             "quarter": weather_quarter,
         },
+        "latest_satellite_period": (
+            {
+                "year": satellite_period[0],
+                "quarter": satellite_period[1],
+            }
+            if satellite_period
+            else None
+        ),
+        "satellite_vegetation": satellite_evaluation,
         "suggested_next_target": {
             "year": next_year,
             "quarter": next_quarter,
@@ -573,6 +608,87 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
     }
 
 
+def _merge_historical_context(records: pd.DataFrame) -> pd.DataFrame:
+    weather = weather_df.rename(columns={"Quarter": "Weather_Quarter"})
+    merged = records.merge(
+        weather,
+        left_on=["Province", "Year", "Quarter_Number"],
+        right_on=["Province", "Year", "Weather_Quarter"],
+        how="left",
+    )
+
+    if not satellite_df.empty:
+        satellite = satellite_df.rename(
+            columns={"Quarter": "Satellite_Quarter"}
+        )
+        merged = merged.merge(
+            satellite[
+                [
+                    "Province",
+                    "Year",
+                    "Satellite_Quarter",
+                    "Cropland_NDVI_Mean",
+                    "Cropland_EVI_Mean",
+                    "Valid_Pixel_Observations",
+                ]
+            ],
+            left_on=["Province", "Year", "Quarter_Number"],
+            right_on=["Province", "Year", "Satellite_Quarter"],
+            how="left",
+        )
+    else:
+        merged["Cropland_NDVI_Mean"] = pd.NA
+        merged["Cropland_EVI_Mean"] = pd.NA
+        merged["Valid_Pixel_Observations"] = pd.NA
+
+    return merged
+
+
+def _historical_output_row(row: Any, region: str) -> dict[str, Any]:
+    return {
+        "id": (
+            f"{row.Province}-{row.Ecosystem}-"
+            f"{int(row.Year)}-Q{int(row.Quarter_Number)}"
+        ),
+        "province": row.Province,
+        "region": region,
+        "year": int(row.Year),
+        "quarter": int(row.Quarter_Number),
+        "ecosystem": str(row.Ecosystem).replace(" Palay", ""),
+        "productionVolume": float(row.Production_mt),
+        "areaHarvested": float(row.Area_Harvested_ha),
+        "yield": float(row.Yield_mt_per_ha),
+        "rainfall": (
+            None if pd.isna(row.Rainfall_Sum_mm)
+            else float(row.Rainfall_Sum_mm)
+        ),
+        "avgTemperature": (
+            None if pd.isna(row.T2M_Mean_C)
+            else float(row.T2M_Mean_C)
+        ),
+        "relativeHumidity": (
+            None if pd.isna(row.RH2M_Mean_pct)
+            else float(row.RH2M_Mean_pct)
+        ),
+        "windSpeed": (
+            None if pd.isna(row.WS2M_Mean_m_s)
+            else float(row.WS2M_Mean_m_s)
+        ),
+        "croplandNdvi": (
+            None if pd.isna(row.Cropland_NDVI_Mean)
+            else float(row.Cropland_NDVI_Mean)
+        ),
+        "croplandEvi": (
+            None if pd.isna(row.Cropland_EVI_Mean)
+            else float(row.Cropland_EVI_Mean)
+        ),
+        "satelliteValidPixelObservations": (
+            None if pd.isna(row.Valid_Pixel_Observations)
+            else int(row.Valid_Pixel_Observations)
+        ),
+    }
+
+
 @app.get("/historical")
 def historical(
     province: str = Query(...),
@@ -591,95 +707,25 @@ def historical(
         (history_df["Province"] == province)
         & (history_df["Ecosystem"] == eco)
     ].copy()
-
-    weather = weather_df[weather_df["Province"] == province].copy()
-
-    merged = records.merge(
-        weather,
-        left_on=["Province", "Year", "Quarter_Number"],
-        right_on=["Province", "Year", "Quarter"],
-        how="left",
-    ).sort_values(["Year", "Quarter_Number"])
-
-    output = []
-    for row in merged.itertuples(index=False):
-        output.append(
-            {
-                "id": f"{province}-{eco}-{int(row.Year)}-Q{int(row.Quarter_Number)}",
-                "province": province,
-                "region": province_region[province],
-                "year": int(row.Year),
-                "quarter": int(row.Quarter_Number),
-                "ecosystem": eco.replace(" Palay", ""),
-                "productionVolume": float(row.Production_mt),
-                "areaHarvested": float(row.Area_Harvested_ha),
-                "yield": float(row.Yield_mt_per_ha),
-                "rainfall": (
-                    None if pd.isna(row.Rainfall_Sum_mm)
-                    else float(row.Rainfall_Sum_mm)
-                ),
-                "avgTemperature": (
-                    None if pd.isna(row.T2M_Mean_C)
-                    else float(row.T2M_Mean_C)
-                ),
-                "relativeHumidity": (
-                    None if pd.isna(row.RH2M_Mean_pct)
-                    else float(row.RH2M_Mean_pct)
-                ),
-                "windSpeed": (
-                    None if pd.isna(row.WS2M_Mean_m_s)
-                    else float(row.WS2M_Mean_m_s)
-                ),
-            }
-        )
-
+    merged = _merge_historical_context(records).sort_values(
+        ["Year", "Quarter_Number"]
+    )
+    output = [
+        _historical_output_row(row, province_region[province])
+        for row in merged.itertuples(index=False)
+    ]
     return {"records": output}
 
 
 @app.get("/historical/all")
 def historical_all() -> dict[str, Any]:
-    merged = history_df.merge(
-        weather_df,
-        left_on=["Province", "Year", "Quarter_Number"],
-        right_on=["Province", "Year", "Quarter"],
-        how="left",
-    ).sort_values(["Province", "Ecosystem", "Year", "Quarter_Number"])
-
-    records = []
-    for row in merged.itertuples(index=False):
-        records.append(
-            {
-                "id": (
-                    f"{row.Province}-{row.Ecosystem}-"
-                    f"{int(row.Year)}-Q{int(row.Quarter_Number)}"
-                ),
-                "province": row.Province,
-                "region": row.Region_Context,
-                "year": int(row.Year),
-                "quarter": int(row.Quarter_Number),
-                "ecosystem": str(row.Ecosystem).replace(" Palay", ""),
-                "productionVolume": float(row.Production_mt),
-                "areaHarvested": float(row.Area_Harvested_ha),
-                "yield": float(row.Yield_mt_per_ha),
-                "rainfall": (
-                    None if pd.isna(row.Rainfall_Sum_mm)
-                    else float(row.Rainfall_Sum_mm)
-                ),
-                "avgTemperature": (
-                    None if pd.isna(row.T2M_Mean_C)
-                    else float(row.T2M_Mean_C)
-                ),
-                "relativeHumidity": (
-                    None if pd.isna(row.RH2M_Mean_pct)
-                    else float(row.RH2M_Mean_pct)
-                ),
-                "windSpeed": (
-                    None if pd.isna(row.WS2M_Mean_m_s)
-                    else float(row.WS2M_Mean_m_s)
-                ),
-            }
-        )
-
+    merged = _merge_historical_context(history_df).sort_values(
+        ["Province", "Ecosystem", "Year", "Quarter_Number"]
+    )
+    records = [
+        _historical_output_row(row, row.Region_Context)
+        for row in merged.itertuples(index=False)
+    ]
     return {
         "records": records,
         "province_regions": province_region,
