@@ -45,5 +45,77 @@
     },
     "reason_for_cutoff": "Q2 2026 agricultural source observations are preliminary and are retained as operational history rather than deployment fitting targets.",
     "model_version": "ANI-XGB-2026Q1-centroid-weather"
+  },
+  "satellite_vegetation_data": {
+    "source": "NASA MODIS/Terra Vegetation Indices",
+    "product": "MOD13A1 Collection 6.1",
+    "access_platform": "Microsoft Planetary Computer STAC and Cloud Optimized GeoTIFF assets",
+    "retrieval_date": "2026-10-16",
+    "variables": [
+      "NDVI",
+      "EVI"
+    ],
+    "native_spatial_resolution_m": 500,
+    "temporal_resolution": "16-day composite",
+    "quality_filter": "Use MOD13A1 pixel-reliability values 0-1 and valid NDVI/EVI ranges; exclude 16-day composites that cross quarter boundaries.",
+    "cropland_mask": {
+      "source": "ESA Climate Change Initiative Land Cover",
+      "spatial_resolution_m": 300,
+      "classes": {
+        "10": "Cropland, rainfed",
+        "11": "Cropland, rainfed, herbaceous cover",
+        "12": "Cropland, rainfed, tree or shrub cover",
+        "20": "Cropland, irrigated or post-flooding",
+        "30": "Mosaic cropland (>50%) / natural vegetation (<50%)"
+      },
+      "temporal_policy": "Use the preceding year's land-cover map where available; use 2020, the latest Planetary Computer ESA CCI annual map, for 2021 onward."
+    },
+    "spatial_aggregation": "Mean of valid cropland-masked MODIS pixels within the frozen current DENR provincial boundary.",
+    "boundary_reference": "data/reference/ph_provincial_boundaries_denr_simplified.geojson",
+    "coverage": {
+      "start": {
+        "year": 2000,
+        "quarter": 1
+      },
+      "end": {
+        "year": 2026,
+        "quarter": 3
+      },
+      "rows": 8692,
+      "provinces": 82,
+      "known_full_quarter_gap": [
+        {
+          "year": 2025,
+          "quarter": 3
+        }
+      ],
+      "gap_policy": "No synthetic or interpolated vegetation value is created. XGBoost candidate evaluation uses native missing-value handling.",
+      "gap_note": "The Planetary Computer MOD13A1 Collection 6.1 query used by this pipeline returned no usable Terra Q3 2025 composites over the Philippines."
+    },
+    "historical_boundary_alignment": "Pre-2024 values for Maguindanao del Sur are withheld during model evaluation because older ANI agricultural records represent the former undivided Maguindanao province and do not spatially match the current post-split DENR polygon.",
+    "deployment_use": "Evaluated auxiliary dataset; not an input to the active deployed XGBoost model because the pre-specified promotion criteria were not met.",
+    "candidate_evaluation": {
+      "development_training_through": 2023,
+      "feature_selection_validation_year": 2024,
+      "final_holdout_year": 2025,
+      "selected_candidate": [
+        "Cropland_NDVI_Lag1",
+        "Cropland_EVI_Lag1",
+        "Cropland_NDVI_Lag4",
+        "Cropland_EVI_Lag4"
+      ],
+      "validation_current_mae": 0.23869769267793742,
+      "validation_satellite_mae": 0.23894196255093594,
+      "holdout_current_mae": 0.22322921736778986,
+      "holdout_satellite_mae": 0.22495718193715053,
+      "holdout_current_rmse": 0.3077063812294472,
+      "holdout_satellite_rmse": 0.30731342383020605,
+      "holdout_current_r2": 0.8602508673547016,
+      "holdout_satellite_r2": 0.8606075735790818,
+      "holdout_complete_case_coverage_pct": 74.75538160469667,
+      "decision": "Retain the current deployed agricultural-plus-weather feature set."
+    },
+    "sha256": "265c6cd79f1088f00c6270a6a1084f5069d89024fc4a1612ba93f7c82e792a8e",
+    "boundary_sha256": "807d986e51702962bfed5d7670437de6d9a5511f72426063053e373ea2bfc8a0"
   }
 }

@@ -87,6 +87,70 @@ print(
     "and source-status records are internally consistent."
 )
 
+satellite = pd.read_csv(
+    ROOT / "data" / "processed" / "province_quarter_satellite.csv"
+)
+assert len(satellite) == 8692
+assert satellite["Province"].nunique() == 82
+assert satellite.duplicated(["Province", "Year", "Quarter"]).sum() == 0
+assert satellite["Cropland_NDVI_Mean"].between(-1.0, 1.0).all()
+assert satellite["Cropland_EVI_Mean"].between(-1.0, 1.0).all()
+satellite_period_keys = set(
+    (
+        satellite["Year"].astype(int) * 4
+        + satellite["Quarter"].astype(int)
+        - 1
+    ).tolist()
+)
+satellite_min = min(satellite_period_keys)
+satellite_max = max(satellite_period_keys)
+assert (satellite_min // 4, satellite_min % 4 + 1) == (2000, 1)
+assert (satellite_max // 4, satellite_max % 4 + 1) == (2026, 3)
+satellite_missing_periods = {
+    (period_key // 4, period_key % 4 + 1)
+    for period_key in range(satellite_min, satellite_max + 1)
+    if period_key not in satellite_period_keys
+}
+assert satellite_missing_periods == {(2025, 3)}
+
+satellite_summary = __import__("json").loads(
+    (
+        ROOT
+        / "outputs"
+        / "satellite_evaluation"
+        / "summary.json"
+    ).read_text(encoding="utf-8")
+)
+assert satellite_summary["promote_to_deployment"] is False
+assert (
+    satellite_summary["deployment_decision"]
+    == "retain_current_deployed_feature_set"
+)
+assert math.isclose(
+    satellite_summary["holdout_2025"]["satellite_augmented_model"]["mae"],
+    0.22495718193715053,
+)
+assert math.isclose(
+    satellite_summary["holdout_2025"]["selected_feature_complete_case"][
+        "coverage_pct"
+    ],
+    74.75538160469667,
+)
+assert not any(
+    str(feature).startswith("Cropland_")
+    for feature in model_meta.get("features", [])
+)
+assert (
+    provenance["satellite_vegetation_data"]["deployment_use"]
+    .startswith("Evaluated auxiliary dataset")
+)
+print(
+    "PASS Satellite vegetation: 82-province MODIS NDVI/EVI coverage is "
+    "internally consistent, the Q3 2025 source gap is explicit, and "
+    "satellite predictors remain outside the active model because the "
+    "promotion criteria were not met."
+)
+
 research = pd.read_csv(
     ROOT / "data" / "processed" / "forecast_ready_research_2001_2025.csv"
 )
