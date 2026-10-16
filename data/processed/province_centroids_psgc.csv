@@ -1,0 +1,83 @@
+Province,Latitude,Longitude,Coordinate_Source
+Abra,17.578121,120.803199,child_area_weighted_centroid
+Agusan del Norte,9.072133,125.522395,child_area_weighted_centroid
+Agusan del Sur,8.421401,125.729015,child_area_weighted_centroid
+Aklan,11.609532,122.248059,child_area_weighted_centroid
+Albay,13.209668,123.615739,child_area_weighted_centroid
+Antique,11.126288,122.068083,child_area_weighted_centroid
+Apayao,18.105488,121.187563,child_area_weighted_centroid
+Aurora,15.922707,121.699847,child_area_weighted_centroid
+Basilan,6.565435,122.029096,child_area_weighted_centroid
+Bataan,14.66041,120.454415,child_area_weighted_centroid
+Batanes,20.552162,121.888002,child_area_weighted_centroid
+Batangas,13.891818,121.031451,child_area_weighted_centroid
+Benguet,16.545486,120.701055,child_area_weighted_centroid
+Biliran,11.596696,124.473256,child_area_weighted_centroid
+Bohol,9.853804,124.197553,child_area_weighted_centroid
+Bukidnon,8.01854,125.006949,child_area_weighted_centroid
+Bulacan,14.978688,121.057836,child_area_weighted_centroid
+Cagayan,18.093278,121.76074,child_area_weighted_centroid
+Camarines Norte,14.143134,122.727661,child_area_weighted_centroid
+Camarines Sur,13.705255,123.262336,child_area_weighted_centroid
+Camiguin,9.171987,124.717747,child_area_weighted_centroid
+Capiz,11.369865,122.632904,child_area_weighted_centroid
+Catanduanes,13.783156,124.236448,child_area_weighted_centroid
+Cavite,14.254732,120.86847,child_area_weighted_centroid
+Cebu,10.353874,123.742713,child_area_weighted_centroid
+Cotabato (North Cotabato),7.209991,124.867332,child_area_weighted_centroid
+Davao Occidental,6.097965,125.54057,child_area_weighted_centroid
+Davao Oriental,7.251011,126.298164,child_area_weighted_centroid
+Davao de Oro (Compostela Valley),7.573118,126.022949,child_area_weighted_centroid
+Davao del Norte,7.585181,125.642247,child_area_weighted_centroid
+Davao del Sur,6.713291,125.255652,child_area_weighted_centroid
+Dinagat Islands,10.170899,125.602437,child_area_weighted_centroid
+Eastern Samar,11.646915,125.381263,child_area_weighted_centroid
+Guimaras,10.568766,122.61408,child_area_weighted_centroid
+Ifugao,16.848396,121.207174,child_area_weighted_centroid
+Ilocos Norte,18.204654,120.730253,child_area_weighted_centroid
+Ilocos Sur,17.24703,120.547087,child_area_weighted_centroid
+Iloilo,11.012157,122.606616,child_area_weighted_centroid
+Isabela,16.986911,121.961202,child_area_weighted_centroid
+Kalinga,17.430898,121.279474,child_area_weighted_centroid
+La Union,16.580352,120.424518,child_area_weighted_centroid
+Laguna,14.23767,121.360491,child_area_weighted_centroid
+Lanao del Norte,7.974764,123.95288,child_area_weighted_centroid
+Lanao del Sur,7.789228,124.34456,child_area_weighted_centroid
+Leyte,10.968554,124.752083,child_area_weighted_centroid
+Maguindanao del Norte,7.178263,124.237571,child_area_weighted_centroid
+Maguindanao del Sur,6.88872,124.57461,child_area_weighted_centroid
+Marinduque,13.391267,121.971921,child_area_weighted_centroid
+Masbate,12.29426,123.552538,child_area_weighted_centroid
+Misamis Occidental,8.32726,123.690967,child_area_weighted_centroid
+Misamis Oriental,8.678292,124.82484,child_area_weighted_centroid
+Mountain Province,17.10125,121.129204,child_area_weighted_centroid
+Negros Occidental,10.30318,122.986685,child_area_weighted_centroid
+Negros Oriental,9.606563,123.033454,child_area_weighted_centroid
+Northern Samar,12.41107,124.791738,child_area_weighted_centroid
+Nueva Ecija,15.617572,121.02059,child_area_weighted_centroid
+Nueva Vizcaya,16.3052,121.171813,child_area_weighted_centroid
+Occidental Mindoro,12.971404,120.892966,child_area_weighted_centroid
+Oriental Mindoro,12.923174,121.299296,child_area_weighted_centroid
+Palawan,9.98578,118.73455,child_area_weighted_centroid
+Pampanga,15.051978,120.653156,child_area_weighted_centroid
+Pangasinan,15.999397,120.31266,child_area_weighted_centroid
+Quezon,14.167753,121.966136,child_area_weighted_centroid
+Quirino,16.294404,121.5955,child_area_weighted_centroid
+Rizal,14.617328,121.262537,child_area_weighted_centroid
+Romblon,12.435564,122.234537,child_area_weighted_centroid
+Samar,11.846163,124.940475,child_area_weighted_centroid
+Sarangani,6.059589,125.158327,child_area_weighted_centroid
+Siquijor,9.185199,123.588667,child_area_weighted_centroid
+Sorsogon,12.85425,123.928586,child_area_weighted_centroid
+South Cotabato,6.306775,124.813002,child_area_weighted_centroid
+Southern Leyte,10.291159,125.051949,child_area_weighted_centroid
+Sultan Kudarat,6.534934,124.431255,child_area_weighted_centroid
+Sulu,5.954663,121.056167,child_area_weighted_centroid
+Surigao del Norte,9.670654,125.737504,child_area_weighted_centroid
+Surigao del Sur,8.7759,126.113138,child_area_weighted_centroid
+Tarlac,15.478243,120.476199,child_area_weighted_centroid
+Tawi-tawi,5.238896,119.900726,child_area_weighted_centroid
+Zambales,15.304493,120.137358,child_area_weighted_centroid
+Zamboanga Sibugay,7.69468,122.725437,child_area_weighted_centroid
+Zamboanga del Norte,8.048888,122.806957,child_area_weighted_centroid
+Zamboanga del Sur,7.881254,123.322396,child_area_weighted_centroid

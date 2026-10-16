@@ -21,11 +21,16 @@ from ml.features import (
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT / "data" / "processed" / "forecast_ready.csv"
+RESEARCH_DATA_PATH = (
+    ROOT / "data" / "processed" / "forecast_ready_research_2001_2025.csv"
+)
 MODEL_DIR = ROOT / "models"
 MODEL_PATH = MODEL_DIR / "ani_xgboost_pipeline.joblib"
 METADATA_PATH = MODEL_DIR / "metadata.json"
 
-MODEL_VERSION = "ANI-XGB-v0.1-centroid-weather"
+MODEL_VERSION = "ANI-XGB-2026Q1-centroid-weather"
+DEPLOYMENT_TRAIN_THROUGH_YEAR = 2026
+DEPLOYMENT_TRAIN_THROUGH_QUARTER = 1
 
 XGB_PARAMS = {
     "n_estimators": 500,
@@ -98,6 +103,7 @@ def evaluate_holdout(df: pd.DataFrame) -> dict:
 
     return {
         "evaluation_period": "2025 holdout",
+        "evaluation_training_through_year": 2024,
         "eligible_rows": int(len(test)),
         "baseline": {
             "name": "Previous-year same-quarter yield",
@@ -116,18 +122,51 @@ def evaluate_holdout(df: pd.DataFrame) -> dict:
     }
 
 
+def deployment_training_rows(df: pd.DataFrame) -> pd.DataFrame:
+    through_cutoff = (
+        (df["Target_Year"] < DEPLOYMENT_TRAIN_THROUGH_YEAR)
+        | (
+            (df["Target_Year"] == DEPLOYMENT_TRAIN_THROUGH_YEAR)
+            & (df["Target_Quarter"] <= DEPLOYMENT_TRAIN_THROUGH_QUARTER)
+        )
+    )
+    return df[through_cutoff].copy()
+
+
 def main() -> None:
     MODEL_DIR.mkdir(parents=True, exist_ok=True)
 
-    df = pd.read_csv(DATA_PATH)
-    metrics = evaluate_holdout(df)
+    deployment_df = pd.read_csv(DATA_PATH)
+    research_df = pd.read_csv(RESEARCH_DATA_PATH)
 
-    # Deployment model:
-    # After evaluation is fixed, fit the selected pipeline on all available
-    # forecast-ready records through 2025 so it can be used for later periods
-    # whose required lagged inputs become available.
+    if int(research_df["Target_Year"].max()) != 2025:
+        raise RuntimeError(
+            "The fixed research/evaluation dataset must end in 2025."
+        )
+
+    metrics = evaluate_holdout(research_df)
+    train_df = deployment_training_rows(deployment_df)
+
+    if train_df.empty:
+        raise RuntimeError("No deployment training rows are available.")
+    latest_train = train_df.sort_values(
+        ["Target_Year", "Target_Quarter"]
+    ).iloc[-1]
+    if (
+        int(latest_train["Target_Year"]) != DEPLOYMENT_TRAIN_THROUGH_YEAR
+        or int(latest_train["Target_Quarter"])
+        != DEPLOYMENT_TRAIN_THROUGH_QUARTER
+    ):
+        raise RuntimeError(
+            "Deployment training data do not reach the configured cutoff."
+        )
+
+    latest_integrated = deployment_df.sort_values(
+        ["Target_Year", "Target_Quarter"]
+    ).iloc[-1]
+
     final_pipeline = build_pipeline()
-    final_pipeline.fit(df[MODEL_FEATURES], df[TARGET_COLUMN])
+    final_pipeline.fit(train_df[MODEL_FEATURES], train_df[TARGET_COLUMN])
     joblib.dump(final_pipeline, MODEL_PATH)
 
     metadata = {
@@ -135,14 +174,21 @@ def main() -> None:
         "model_version": MODEL_VERSION,
         "scikit_learn_version": sklearn.__version__,
         "status": "active",
-        "trained_through_year": int(df["Target_Year"].max()),
-        "training_rows": int(len(df)),
+        "trained_through_year": DEPLOYMENT_TRAIN_THROUGH_YEAR,
+        "trained_through_quarter": DEPLOYMENT_TRAIN_THROUGH_QUARTER,
+        "training_rows": int(len(train_df)),
+        "integrated_forecast_ready_rows": int(len(deployment_df)),
+        "integrated_data_through_year": int(latest_integrated["Target_Year"]),
+        "integrated_data_through_quarter": int(
+            latest_integrated["Target_Quarter"]
+        ),
         "weather_spatial_method": (
             "nearest NASA POWER grid point to province representative centroid"
         ),
         "important_note": (
             "Weather inputs are centroid-based provincial approximations and are not "
-            "province-area-weighted averages."
+            "province-area-weighted averages. The integrated 2026 Q1-Q2 weather "
+            "summaries use NASA POWER daily data aggregated to quarters."
         ),
         "features": MODEL_FEATURES,
         "target": TARGET_COLUMN,
@@ -162,6 +208,18 @@ def main() -> None:
 
     print(f"Saved model: {MODEL_PATH}")
     print(f"Saved metadata: {METADATA_PATH}")
+    print(
+        "Deployment training cutoff: "
+        f"Q{DEPLOYMENT_TRAIN_THROUGH_QUARTER} "
+        f"{DEPLOYMENT_TRAIN_THROUGH_YEAR} "
+        f"({len(train_df)} rows)"
+    )
+    print(
+        "Integrated forecast-ready coverage: "
+        f"Q{int(latest_integrated['Target_Quarter'])} "
+        f"{int(latest_integrated['Target_Year'])} "
+        f"({len(deployment_df)} rows)"
+    )
     print(json.dumps(metrics, indent=2))
 
 

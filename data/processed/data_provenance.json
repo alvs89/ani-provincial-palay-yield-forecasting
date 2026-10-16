@@ -1,0 +1,49 @@
+{
+  "agricultural_data": {
+    "source": "Philippine Statistics Authority (PSA) OpenSTAT",
+    "production_matrix": "2E4EVCP0",
+    "area_harvested_matrix": "2E4EAHC0",
+    "source_version_date": "2026-07-29",
+    "integrated_through": {
+      "year": 2026,
+      "quarter": 2
+    },
+    "source_status_by_2026_quarter": {
+      "Q1": "Published",
+      "Q2": "Preliminary"
+    },
+    "modeling_scope": "Provincial irrigated and rainfed palay records with usable production and harvested-area values.",
+    "scope_note": "ANI models canonical province-level records. Selected-city series are outside the provincial modeling unit. PSA notes that BARMM aggregate totals from Q1 2023 can include Eight Cluster Areas that are not separately assignable to a province; therefore sums of ANI provincial rows are not intended to reproduce PSA national or regional aggregate totals exactly.",
+    "yield_derivation": "Production_mt / Area_Harvested_ha"
+  },
+  "agroclimatic_data": {
+    "source": "NASA POWER",
+    "variables": [
+      "PRECTOTCORR",
+      "T2M",
+      "RH2M",
+      "WS2M"
+    ],
+    "integrated_through": {
+      "year": 2026,
+      "quarter": 2
+    },
+    "spatial_method": "Nearest NASA POWER grid point to a representative provincial centroid.",
+    "temporal_method_2026": "Daily values aggregated to quarterly summaries; rainfall is summed and temperature, relative humidity, and wind speed are averaged.",
+    "scope_note": "Weather values are provincial-scale centroid approximations and are not province-area-weighted averages."
+  },
+  "model_evaluation": {
+    "fixed_research_dataset": "forecast_ready_research_2001_2025.csv",
+    "evaluation_training_through": 2024,
+    "chronological_holdout": 2025,
+    "eligible_holdout_rows": 511
+  },
+  "deployment_model": {
+    "training_through": {
+      "year": 2026,
+      "quarter": 1
+    },
+    "reason_for_cutoff": "Q2 2026 agricultural source observations are preliminary and are retained as operational history rather than deployment fitting targets.",
+    "model_version": "ANI-XGB-2026Q1-centroid-weather"
+  }
+}

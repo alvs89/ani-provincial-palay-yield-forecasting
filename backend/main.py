@@ -26,6 +26,7 @@ MODEL_DIR = ROOT / "models"
 
 HISTORY_PATH = DATA_DIR / "palay_history.csv"
 WEATHER_PATH = DATA_DIR / "province_quarter_weather.csv"
+AGRICULTURAL_SOURCE_PATH = DATA_DIR / "psa_2026_q1_q2_source_records.csv"
 MODEL_PATH = MODEL_DIR / "ani_xgboost_pipeline.joblib"
 METADATA_PATH = MODEL_DIR / "metadata.json"
 ENVIRONMENTAL_DECISION_SUPPORT_PATH = ROOT / "outputs" / "environmental_decision_support.json"
@@ -37,16 +38,34 @@ if not MODEL_PATH.exists():
 
 history_df = pd.read_csv(HISTORY_PATH)
 weather_df = pd.read_csv(WEATHER_PATH)
+agricultural_source_df = (
+    pd.read_csv(AGRICULTURAL_SOURCE_PATH)
+    if AGRICULTURAL_SOURCE_PATH.is_file()
+    else pd.DataFrame()
+)
 pipeline = joblib.load(MODEL_PATH)
 metadata = json.loads(METADATA_PATH.read_text(encoding="utf-8"))
 builder = AniFeatureBuilder(history_df, weather_df)
 
-# Stable province -> region mapping from the processed agricultural dataset.
+# Province -> region mapping follows the most recent integrated agricultural record
+# so administrative changes are reflected in the current interface.
 province_region = (
-    history_df[["Province", "Region_Context"]]
-    .drop_duplicates(subset=["Province"])
+    history_df.sort_values(["Year", "Quarter_Number"])
+    [["Province", "Region_Context"]]
+    .drop_duplicates(subset=["Province"], keep="last")
     .set_index("Province")["Region_Context"]
     .to_dict()
+)
+
+# Current PSA administrative context that may not appear in usable yield rows
+# when the latest province-quarter has no reportable harvested-area observation.
+province_region.update(
+    {
+        "Negros Occidental": "NEGROS ISLAND REGION",
+        "Negros Oriental": "NEGROS ISLAND REGION",
+        "Siquijor": "NEGROS ISLAND REGION",
+        "Sulu": "REGION IX (ZAMBOANGA PENINSULA)",
+    }
 )
 
 app = FastAPI(
@@ -98,6 +117,56 @@ def _latest_period() -> tuple[int, int]:
         - 1
     ).max()
     return int(idx // 4), int(idx % 4 + 1)
+
+
+def _latest_weather_period() -> tuple[int, int]:
+    idx = (
+        weather_df["Year"].astype(int) * 4
+        + weather_df["Quarter"].astype(int)
+        - 1
+    ).max()
+    return int(idx // 4), int(idx % 4 + 1)
+
+
+def _agricultural_source_status(
+    province: str,
+    ecosystem: str,
+    year: int,
+    quarter: int,
+) -> str | None:
+    if agricultural_source_df.empty:
+        return None
+    eco = normalize_ecosystem(ecosystem)
+    rows = agricultural_source_df[
+        (agricultural_source_df["Province"] == normalize_province_name(province))
+        & (agricultural_source_df["Ecosystem"] == eco)
+        & (agricultural_source_df["Year"].astype(int) == int(year))
+        & (
+            agricultural_source_df["Quarter_Number"].astype(int)
+            == int(quarter)
+        )
+    ]["PSA_Data_Status"].dropna()
+    statuses = sorted(
+        {str(value).strip() for value in rows if str(value).strip()}
+    )
+    return ", ".join(statuses) if statuses else None
+
+
+def _latest_agricultural_status() -> str | None:
+    if agricultural_source_df.empty:
+        return None
+    year, quarter = _latest_period()
+    rows = agricultural_source_df[
+        (agricultural_source_df["Year"].astype(int) == year)
+        & (
+            agricultural_source_df["Quarter_Number"].astype(int)
+            == quarter
+        )
+    ]["PSA_Data_Status"].dropna()
+    statuses = sorted(
+        {str(value).strip() for value in rows if str(value).strip()}
+    )
+    return ", ".join(statuses) if statuses else None
 
 
 def _next_period(year: int, quarter: int) -> tuple[int, int]:
@@ -205,6 +274,15 @@ def _extra_context(
         prior["Quarter_Number"].astype(int) == int(target_quarter)
     ].sort_values("Year")
 
+    lag1_idx = target_idx - 1
+    lag1_year, lag1_quarter = lag1_idx // 4, lag1_idx % 4 + 1
+    lag1_status = _agricultural_source_status(
+        province,
+        eco,
+        lag1_year,
+        lag1_quarter,
+    )
+
     lag8 = same_q[same_q["Year"].astype(int) == target_year - 2]
     lag4 = same_q[same_q["Year"].astype(int) == target_year - 1]
 
@@ -234,6 +312,7 @@ def _extra_context(
         "lagged_area_trend": float(area_trend),
         "previous_quarter_rainfall_mm": round(float(feature_row["Rainfall_Lag1_mm"]), 1),
         "previous_quarter_mean_temperature_c": round(float(feature_row["T2M_Lag1_C"]), 1),
+        "previous_quarter_agricultural_status": lag1_status,
         "rainfall_indicator": (
             f'{feature_row["Rainfall_Lag1_mm"]:.1f} mm previous-quarter rainfall'
         ),
@@ -294,6 +373,7 @@ def environmental_decision_support() -> dict[str, Any]:
 @app.get("/meta")
 def meta() -> dict[str, Any]:
     latest_year, latest_quarter = _latest_period()
+    weather_year, weather_quarter = _latest_weather_period()
     next_year, next_quarter = _next_period(latest_year, latest_quarter)
 
     return {
@@ -303,6 +383,11 @@ def meta() -> dict[str, Any]:
         "latest_agricultural_period": {
             "year": latest_year,
             "quarter": latest_quarter,
+            "status": _latest_agricultural_status(),
+        },
+        "latest_weather_period": {
+            "year": weather_year,
+            "quarter": weather_quarter,
         },
         "suggested_next_target": {
             "year": next_year,
@@ -471,6 +556,7 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         "laggedAreaTrend": round(extra["lagged_area_trend"], 1),
         "previousQuarterRainfallMm": extra["previous_quarter_rainfall_mm"],
         "previousQuarterMeanTemperatureC": extra["previous_quarter_mean_temperature_c"],
+        "previousQuarterAgriculturalStatus": extra["previous_quarter_agricultural_status"],
         "rainfallIndicator": extra["rainfall_indicator"],
         "temperatureIndicator": extra["temperature_indicator"],
         "percentDifferenceFromAverage": round(diff_pct, 1),
