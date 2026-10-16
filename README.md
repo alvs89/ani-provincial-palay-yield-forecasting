@@ -45,6 +45,8 @@ The satellite series covers **Q1 2000 through Q3 2026** for 82 provinces. The Mi
 
 Satellite predictors are governed by the same chronological-validation principle as the active model. Candidate lagged NDVI/EVI features are selected using 2024 development validation and then checked on the fixed 2025 holdout. Under the predefined acceptance rule, the satellite candidate did **not** qualify for deployment: the current feature model produced 2025 MAE **0.2232 MT/ha**, while the selected satellite-augmented candidate produced **0.2250 MT/ha**. The satellite candidate slightly improved RMSE and R², but it worsened the primary MAE metric and had only **74.8% complete-case satellite coverage** on the holdout. The active deployed model therefore retains the agricultural-plus-weather predictor set rather than forcing a weaker or incompletely observed satellite feature set into production.
 
+For generated estimates, ANI presents a separate **Satellite Vegetation Context** when the immediately preceding quarter has a usable MODIS observation. The context reports pre-target cropland NDVI/EVI and compares them with earlier observations from the same seasonal quarter. The seasonal status is based on the previous-quarter NDVI relative to its historical 25th–75th percentile range. Satellite availability never determines yield-model eligibility and the context does not alter the XGBoost estimate. If the required pre-target satellite period is unavailable, ANI withholds only the satellite context rather than interpolating a value or withholding an otherwise valid yield estimate.
+
 The extraction and evaluation workflows are reproducible through `python -m tools.build_satellite_vegetation` and `python -m tools.evaluate_satellite_features`.
 
 ## Predictor set

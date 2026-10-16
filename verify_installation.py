@@ -170,6 +170,27 @@ assert 0 <= q2_2026_satellite["croplandEvi"] <= 1
 assert q2_2026_satellite["satelliteValidPixelObservations"] > 0
 assert q3_2025_satellite["croplandNdvi"] is None
 assert q3_2025_satellite["croplandEvi"] is None
+
+maguindanao_history = client.get(
+    "/historical",
+    params={"province": "Maguindanao del Sur", "ecosystem": "Irrigated"},
+)
+assert maguindanao_history.status_code == 200, maguindanao_history.text
+maguindanao_rows = maguindanao_history.json()["records"]
+pre_split_row = next(
+    row
+    for row in maguindanao_rows
+    if row["year"] == 2023 and row["quarter"] == 2
+)
+post_split_row = next(
+    row
+    for row in maguindanao_rows
+    if row["year"] == 2024 and row["quarter"] == 2
+)
+assert pre_split_row["croplandNdvi"] is None
+assert pre_split_row["croplandEvi"] is None
+assert post_split_row["croplandNdvi"] is not None
+assert post_split_row["croplandEvi"] is not None
 print(
     "PASS Satellite vegetation: 82-province MODIS NDVI/EVI coverage is "
     "internally consistent, the Q3 2025 access-platform gap is explicit, "
@@ -228,6 +249,41 @@ for field in (
 assert prediction_payload["referenceTimezone"] == "Asia/Manila"
 assert date.fromisoformat(prediction_payload["referenceDate"])
 
+satellite_context = prediction_payload["satelliteVegetationContext"]
+assert satellite_context["available"] is True
+assert satellite_context["comparisonAvailable"] is True
+assert satellite_context["referencePeriod"] == "Q2 2026"
+assert satellite_context["affectsYieldEstimate"] is False
+assert 0 <= satellite_context["croplandNdvi"] <= 1
+assert 0 <= satellite_context["croplandEvi"] <= 1
+assert satellite_context["historicalSameQuarterObservations"] >= 5
+assert satellite_context["vegetationStatus"] in {
+    "Below Typical Seasonal Vegetation",
+    "Within Typical Seasonal Vegetation",
+    "Above Typical Seasonal Vegetation",
+}
+
+missing_satellite_context = client.post(
+    "/predict",
+    json={
+        "province": "Abra",
+        "ecosystem": "Irrigated",
+        "target_year": 2025,
+        "target_quarter": 4,
+    },
+)
+assert missing_satellite_context.status_code == 200
+missing_satellite_payload = missing_satellite_context.json()
+assert missing_satellite_payload["eligible"] is True
+assert (
+    missing_satellite_payload["satelliteVegetationContext"]["available"]
+    is False
+)
+assert (
+    missing_satellite_payload["satelliteVegetationContext"]["referencePeriod"]
+    == "Q3 2025"
+)
+
 unsupported = client.post(
     "/predict",
     json={
@@ -246,7 +302,8 @@ assert (
 ), unsupported_payload
 print(
     "PASS Model prediction: Q3 2026 is numeric and eligible where required "
-    "inputs exist; Q4 is withheld because Q3 agricultural Lag 1 is unavailable."
+    "inputs exist; pre-target satellite context is non-blocking and "
+    "leakage-safe; Q4 is withheld because Q3 agricultural Lag 1 is unavailable."
 )
 
 # Deterministic Manila quarterly temporal classification

@@ -94,7 +94,7 @@
       "gap_note": "The Planetary Computer MODIS mirror used by this pipeline returned no Terra Q3 2025 items over the Philippines. NASA Earthdata CMR lists the corresponding MOD13A1 source granules; ANI therefore treats this as an access-platform mirror gap and leaves the quarter missing rather than silently mixing access sources or synthesizing values.",
       "mirror_gap_reference": "https://github.com/microsoft/PlanetaryComputer/issues/453"
     },
-    "historical_boundary_alignment": "Pre-2024 values for Maguindanao del Sur are withheld during model evaluation because older ANI agricultural records represent the former undivided Maguindanao province and do not spatially match the current post-split DENR polygon.",
+    "historical_boundary_alignment": "Pre-2024 current-boundary satellite values for Maguindanao del Sur are not joined to older agricultural records and are withheld during candidate model evaluation because those agricultural records represent the former undivided Maguindanao province. Standalone satellite seasonal context remains a current-boundary vegetation comparison independent of historical agricultural geography.",
     "deployment_use": "Evaluated satellite vegetation dataset; not an input to the active deployed XGBoost model because the pre-specified promotion criteria were not met.",
     "candidate_evaluation": {
       "development_training_through": 2023,
@@ -118,6 +118,18 @@
       "decision": "Retain the current deployed agricultural-plus-weather feature set."
     },
     "sha256": "265c6cd79f1088f00c6270a6a1084f5069d89024fc4a1612ba93f7c82e792a8e",
-    "boundary_sha256": "807d986e51702962bfed5d7670437de6d9a5511f72426063053e373ea2bfc8a0"
+    "boundary_sha256": "807d986e51702962bfed5d7670437de6d9a5511f72426063053e373ea2bfc8a0",
+    "system_context_use": {
+      "reference_period": "Immediately preceding target quarter only.",
+      "displayed_indicators": [
+        "Cropland NDVI",
+        "Cropland EVI"
+      ],
+      "seasonal_comparison": "Compare the pre-target observation with earlier satellite observations from the same province and same calendar quarter.",
+      "seasonal_status_rule": "Classify NDVI as below typical, within typical, or above typical relative to the historical 25th-75th percentile range.",
+      "minimum_same_quarter_observations": 5,
+      "model_relationship": "Supporting context only; it does not alter XGBoost inference or yield-model eligibility.",
+      "missing_data_policy": "Withhold satellite context when the required pre-target observation is unavailable; do not interpolate, synthesize, or block an otherwise valid yield estimate."
+    }
   }
 }

@@ -111,6 +111,8 @@ TEMPORAL_RESULT_TYPES = {
     "CURRENT_QUARTER_ESTIMATE": "Current-Quarter Estimate",
     "RETROSPECTIVE_ESTIMATE": "Retrospective Estimate",
 }
+MIN_SATELLITE_SEASONAL_OBSERVATIONS = 5
+SATELLITE_CONTEXT_SOURCE = "NASA MODIS/Terra MOD13A1 Collection 6.1"
 
 
 class ForecastRequest(BaseModel):
@@ -151,6 +153,140 @@ def _latest_satellite_period() -> tuple[int, int] | None:
         - 1
     ).max()
     return int(idx // 4), int(idx % 4 + 1)
+
+
+def _satellite_vegetation_context(
+    province: str,
+    target_year: int,
+    target_quarter: int,
+) -> dict[str, Any]:
+    """Summarize pre-target satellite vegetation without affecting inference."""
+    reference_idx = _period_key(target_year, target_quarter) - 1
+    reference_year = int(reference_idx // 4)
+    reference_quarter = int(reference_idx % 4 + 1)
+
+    base = {
+        "available": False,
+        "comparisonAvailable": False,
+        "referenceYear": reference_year,
+        "referenceQuarter": reference_quarter,
+        "referencePeriod": f"Q{reference_quarter} {reference_year}",
+        "source": SATELLITE_CONTEXT_SOURCE,
+        "spatialScope": "Province-level cropland summary",
+        "affectsYieldEstimate": False,
+    }
+
+    if satellite_df.empty:
+        return {
+            **base,
+            "reason": "Satellite vegetation data are unavailable.",
+        }
+
+    normalized = normalize_province_name(province)
+    reference = satellite_df[
+        (satellite_df["Province"] == normalized)
+        & (satellite_df["Year"].astype(int) == reference_year)
+        & (satellite_df["Quarter"].astype(int) == reference_quarter)
+    ]
+    if reference.empty:
+        return {
+            **base,
+            "reason": (
+                "Satellite vegetation context is unavailable for the required "
+                f"pre-target period (Q{reference_quarter} {reference_year})."
+            ),
+        }
+
+    row = reference.iloc[0]
+    ndvi = float(row["Cropland_NDVI_Mean"])
+    evi = float(row["Cropland_EVI_Mean"])
+    if not (pd.notna(ndvi) and pd.notna(evi)):
+        return {
+            **base,
+            "reason": (
+                "Satellite vegetation values are incomplete for the required "
+                f"pre-target period (Q{reference_quarter} {reference_year})."
+            ),
+        }
+
+    current_key = reference_year * 4 + reference_quarter - 1
+    historical = satellite_df[
+        (satellite_df["Province"] == normalized)
+        & (satellite_df["Quarter"].astype(int) == reference_quarter)
+        & (
+            satellite_df["Year"].astype(int) * 4
+            + satellite_df["Quarter"].astype(int)
+            - 1
+            < current_key
+        )
+    ][["Cropland_NDVI_Mean", "Cropland_EVI_Mean"]].dropna()
+
+    result: dict[str, Any] = {
+        **base,
+        "available": True,
+        "croplandNdvi": round(ndvi, 4),
+        "croplandEvi": round(evi, 4),
+        "validPixelObservations": (
+            int(row["Valid_Pixel_Observations"])
+            if pd.notna(row.get("Valid_Pixel_Observations"))
+            else None
+        ),
+        "historicalSameQuarterObservations": int(len(historical)),
+    }
+
+    if len(historical) < MIN_SATELLITE_SEASONAL_OBSERVATIONS:
+        return {
+            **result,
+            "reason": (
+                "The satellite observation is available, but there are not "
+                "enough earlier same-quarter observations for a seasonal comparison."
+            ),
+        }
+
+    ndvi_series = historical["Cropland_NDVI_Mean"].astype(float)
+    evi_series = historical["Cropland_EVI_Mean"].astype(float)
+    ndvi_median = float(ndvi_series.median())
+    ndvi_q25 = float(ndvi_series.quantile(0.25))
+    ndvi_q75 = float(ndvi_series.quantile(0.75))
+    evi_median = float(evi_series.median())
+
+    if ndvi < ndvi_q25:
+        vegetation_status = "Below Typical Seasonal Vegetation"
+    elif ndvi > ndvi_q75:
+        vegetation_status = "Above Typical Seasonal Vegetation"
+    else:
+        vegetation_status = "Within Typical Seasonal Vegetation"
+
+    def percent_difference(value: float, baseline: float) -> float | None:
+        if baseline == 0:
+            return None
+        return (value - baseline) / baseline * 100.0
+
+    ndvi_difference = percent_difference(ndvi, ndvi_median)
+    evi_difference = percent_difference(evi, evi_median)
+
+    return {
+        **result,
+        "comparisonAvailable": True,
+        "vegetationStatus": vegetation_status,
+        "ndviHistoricalMedian": round(ndvi_median, 4),
+        "ndviQ25": round(ndvi_q25, 4),
+        "ndviQ75": round(ndvi_q75, 4),
+        "eviHistoricalMedian": round(evi_median, 4),
+        "ndviPercentDifferenceFromMedian": (
+            round(ndvi_difference, 1)
+            if ndvi_difference is not None
+            else None
+        ),
+        "eviPercentDifferenceFromMedian": (
+            round(evi_difference, 1)
+            if evi_difference is not None
+            else None
+        ),
+        "comparisonBasis": (
+            f"Earlier Q{reference_quarter} province-level cropland observations"
+        ),
+    }
 
 
 def _agricultural_source_status(
@@ -594,6 +730,11 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         "previousQuarterAgriculturalStatus": extra["previous_quarter_agricultural_status"],
         "rainfallIndicator": extra["rainfall_indicator"],
         "temperatureIndicator": extra["temperature_indicator"],
+        "satelliteVegetationContext": _satellite_vegetation_context(
+            province,
+            request.target_year,
+            request.target_quarter,
+        ),
         "percentDifferenceFromAverage": round(diff_pct, 1),
         "dataPointsUsed": result.prior_total,
         "sameQuarterObservations": result.prior_same_quarter,
@@ -636,6 +777,18 @@ def _merge_historical_context(records: pd.DataFrame) -> pd.DataFrame:
             right_on=["Province", "Year", "Satellite_Quarter"],
             how="left",
         )
+        historical_boundary_mismatch = (
+            (merged["Province"] == "Maguindanao del Sur")
+            & (merged["Year"].astype(int) < 2024)
+        )
+        merged.loc[
+            historical_boundary_mismatch,
+            [
+                "Cropland_NDVI_Mean",
+                "Cropland_EVI_Mean",
+                "Valid_Pixel_Observations",
+            ],
+        ] = pd.NA
     else:
         merged["Cropland_NDVI_Mean"] = pd.NA
         merged["Cropland_EVI_Mean"] = pd.NA
