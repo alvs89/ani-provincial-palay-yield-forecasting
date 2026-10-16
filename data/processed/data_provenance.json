@@ -49,6 +49,7 @@
   "satellite_vegetation_data": {
     "source": "NASA MODIS/Terra Vegetation Indices",
     "product": "MOD13A1 Collection 6.1",
+    "source_doi": "10.5067/MODIS/MOD13A1.061",
     "access_platform": "Microsoft Planetary Computer STAC and Cloud Optimized GeoTIFF assets",
     "retrieval_date": "2026-10-16",
     "variables": [
@@ -90,10 +91,11 @@
         }
       ],
       "gap_policy": "No synthetic or interpolated vegetation value is created. XGBoost candidate evaluation uses native missing-value handling.",
-      "gap_note": "The Planetary Computer MOD13A1 Collection 6.1 query used by this pipeline returned no usable Terra Q3 2025 composites over the Philippines."
+      "gap_note": "The Planetary Computer MODIS mirror used by this pipeline returned no Terra Q3 2025 items over the Philippines. NASA Earthdata CMR lists the corresponding MOD13A1 source granules; ANI therefore treats this as an access-platform mirror gap and leaves the quarter missing rather than silently mixing access sources or synthesizing values.",
+      "mirror_gap_reference": "https://github.com/microsoft/PlanetaryComputer/issues/453"
     },
     "historical_boundary_alignment": "Pre-2024 values for Maguindanao del Sur are withheld during model evaluation because older ANI agricultural records represent the former undivided Maguindanao province and do not spatially match the current post-split DENR polygon.",
-    "deployment_use": "Evaluated auxiliary dataset; not an input to the active deployed XGBoost model because the pre-specified promotion criteria were not met.",
+    "deployment_use": "Evaluated satellite vegetation dataset; not an input to the active deployed XGBoost model because the pre-specified promotion criteria were not met.",
     "candidate_evaluation": {
       "development_training_through": 2023,
       "feature_selection_validation_year": 2024,

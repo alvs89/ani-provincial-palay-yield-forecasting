@@ -112,6 +112,11 @@ satellite_missing_periods = {
     if period_key not in satellite_period_keys
 }
 assert satellite_missing_periods == {(2025, 3)}
+assert meta["latest_satellite_period"] == {"year": 2026, "quarter": 3}
+assert (
+    meta["satellite_vegetation"]["deployment_decision"]
+    == "retain_current_deployed_feature_set"
+)
 
 satellite_summary = __import__("json").loads(
     (
@@ -142,13 +147,34 @@ assert not any(
 )
 assert (
     provenance["satellite_vegetation_data"]["deployment_use"]
-    .startswith("Evaluated auxiliary dataset")
+    .startswith("Evaluated satellite vegetation dataset")
 )
+historical_satellite = client.get(
+    "/historical",
+    params={"province": "Abra", "ecosystem": "Irrigated"},
+)
+assert historical_satellite.status_code == 200, historical_satellite.text
+historical_satellite_rows = historical_satellite.json()["records"]
+q2_2026_satellite = next(
+    row
+    for row in historical_satellite_rows
+    if row["year"] == 2026 and row["quarter"] == 2
+)
+q3_2025_satellite = next(
+    row
+    for row in historical_satellite_rows
+    if row["year"] == 2025 and row["quarter"] == 3
+)
+assert 0 <= q2_2026_satellite["croplandNdvi"] <= 1
+assert 0 <= q2_2026_satellite["croplandEvi"] <= 1
+assert q2_2026_satellite["satelliteValidPixelObservations"] > 0
+assert q3_2025_satellite["croplandNdvi"] is None
+assert q3_2025_satellite["croplandEvi"] is None
 print(
     "PASS Satellite vegetation: 82-province MODIS NDVI/EVI coverage is "
-    "internally consistent, the Q3 2025 source gap is explicit, and "
-    "satellite predictors remain outside the active model because the "
-    "promotion criteria were not met."
+    "internally consistent, the Q3 2025 access-platform gap is explicit, "
+    "historical endpoints expose satellite context, and satellite predictors "
+    "remain outside the active model because the promotion criteria were not met."
 )
 
 research = pd.read_csv(

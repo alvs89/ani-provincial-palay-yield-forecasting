@@ -10,7 +10,7 @@ All model outputs are analytical estimates. They are not official PSA crop stati
 
 - Browser interface for estimates, historical records, model information, and Result History.
 - FastAPI service for model metadata, historical records, estimate availability, and XGBoost inference.
-- Processed agricultural, weather, and auxiliary satellite vegetation datasets in `data/processed/`.
+- Processed agricultural, weather, and satellite vegetation datasets in `data/processed/`.
 - Bundled scikit-learn/XGBoost pipeline in `models/`.
 - Separate Environmental Decision Support output. Its values are not inputs to the XGBoost yield model and do not replace a yield estimate.
 
@@ -41,7 +41,7 @@ ANI reports the integrated data cutoff at runtime through `GET /meta`. This desc
 
 ANI maintains a province-quarter satellite vegetation dataset derived from **NASA MODIS/Terra MOD13A1 Collection 6.1**. The product provides 16-day NDVI and EVI composites at 500 m resolution. ANI aggregates quality-screened observations within DENR provincial boundaries after applying an ESA Climate Change Initiative cropland mask. Cropland classes 10, 11, 12, 20, and 30 are included; the preceding year's land-cover map is used where available, and the 2020 map is retained for 2021 onward because it is the latest annual ESA CCI map available through the selected source.
 
-The satellite series covers **Q1 2000 through Q3 2026** for 82 provinces. The public MOD13A1 Collection 6.1 query used by the extraction pipeline contains no usable Terra Q3 2025 composites over the Philippines, so ANI leaves that quarter missing rather than synthesizing or interpolating vegetation values. Pre-2024 satellite values for Maguindanao del Sur are also withheld during model evaluation because older agricultural records represent the former undivided Maguindanao province while the current DENR polygon represents the post-split province.
+The satellite series covers **Q1 2000 through Q3 2026** for 82 provinces. The Microsoft Planetary Computer MODIS mirror used by the extraction pipeline contains no Terra Q3 2025 items over the Philippines. NASA Earthdata CMR lists the corresponding MOD13A1 source granules, so ANI treats this as an access-platform mirror gap rather than an absence of satellite observation. The quarter is left missing rather than silently mixing access sources or synthesizing vegetation values. Pre-2024 satellite values for Maguindanao del Sur are also withheld during model evaluation because older agricultural records represent the former undivided Maguindanao province while the current DENR polygon represents the post-split province.
 
 Satellite predictors are governed by the same chronological-validation principle as the active model. Candidate lagged NDVI/EVI features are selected using 2024 development validation and then checked on the fixed 2025 holdout. Under the predefined acceptance rule, the satellite candidate did **not** qualify for deployment: the current feature model produced 2025 MAE **0.2232 MT/ha**, while the selected satellite-augmented candidate produced **0.2250 MT/ha**. The satellite candidate slightly improved RMSE and R², but it worsened the primary MAE metric and had only **74.8% complete-case satellite coverage** on the holdout. The active deployed model therefore retains the agricultural-plus-weather predictor set rather than forcing a weaker or incompletely observed satellite feature set into production.
 
