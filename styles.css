@@ -294,3 +294,30 @@
 @media(max-width:760px){
   .resultGrid .summary strong.nowrapMetric{font-size:15px}
 }
+
+/* Align result-context label/value rows and preserve compact units/timestamps. */
+.resultGrid .summary>div{
+  align-items:center;
+  column-gap:14px;
+}
+.resultGrid .summary>div>span{
+  flex:1 1 47%;
+  min-width:0;
+  line-height:1.3;
+}
+.resultGrid .summary>div>strong{
+  flex:0 1 53%;
+  min-width:0;
+  line-height:1.25;
+}
+.resultGrid .summary strong.nowrapMetric{
+  white-space:nowrap;
+  overflow-wrap:normal;
+  word-break:normal;
+}
+@media(max-width:1200px) and (min-width:1051px){
+  .resultGrid{grid-template-columns:1.8fr 1fr}
+  .resultGrid .summary>div>span{flex-basis:44%}
+  .resultGrid .summary>div>strong{flex-basis:56%}
+  .resultGrid .summary strong.nowrapMetric{font-size:14px}
+}
