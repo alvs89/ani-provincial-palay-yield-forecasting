@@ -250,3 +250,8 @@
   top:100%;
   bottom:auto;
 }
+
+/* Let the Estimate Settings card size to its content instead of stretching
+   to match the taller context column. */
+.forecastGrid{align-items:start}
+.forecastGrid>.card{align-self:start}
