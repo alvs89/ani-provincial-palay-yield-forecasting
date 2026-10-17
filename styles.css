@@ -126,3 +126,18 @@
 .equalHeightCards{align-items:stretch}
 .equalHeightCards>.card{height:100%;margin-bottom:0}
 @media(max-width:1050px){.equalHeightCards>.card{height:auto}}
+
+/* Accessible contextual help for technical agricultural/model terms */
+.infoLabelText{display:inline-flex;align-items:center;gap:5px;min-width:0}
+.infoTip{position:relative;display:inline-flex;align-items:center;flex:0 0 auto}
+.infoTipTrigger{width:17px;height:17px;border-radius:50%;border:1px solid #8aa399;background:transparent;color:#557269;padding:0;display:inline-flex;align-items:center;justify-content:center;font:700 11px/1 system-ui,sans-serif;cursor:help}
+.infoTipTrigger:hover,.infoTipTrigger:focus-visible{border-color:#2e8a60;color:#176b48;background:#edf8f1;outline:2px solid rgba(46,138,96,.18);outline-offset:1px}
+.infoTipPopup{position:absolute;z-index:40;left:50%;bottom:calc(100% + 8px);transform:translateX(-50%);width:max-content;max-width:290px;min-width:210px;padding:9px 11px;border-radius:8px;border:1px solid #a9c2b6;background:#12382a;color:#f5fbf7;font-size:12px;font-weight:500;line-height:1.4;text-align:left;box-shadow:0 8px 24px rgba(0,0,0,.22);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .12s ease,visibility .12s ease}
+.infoTipPopup:after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#12382a}
+.infoTip:hover .infoTipPopup,.infoTip:focus-within .infoTipPopup{opacity:1;visibility:visible}
+@media(prefers-color-scheme:dark){.infoTipTrigger{border-color:#72877d;color:#9cafA5}.infoTipTrigger:hover,.infoTipTrigger:focus-visible{background:#102c22;color:#d7eee2}}
+@media(max-width:760px){.infoTipPopup{left:auto;right:-8px;transform:none;max-width:min(270px,78vw);min-width:190px}.infoTipPopup:after{left:auto;right:10px;transform:none}}
+
+.summary .infoTipPopup{color:#f5fbf7}
+
+.infoTip.isOpen .infoTipPopup{opacity:1;visibility:visible}
