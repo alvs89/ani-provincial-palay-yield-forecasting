@@ -122,3 +122,7 @@
 
 .currentPlanningNotice{border-color:#b9d9c6;background:#f0f8f3;color:#24533d;margin:0 0 14px}
 .currentPlanningNotice strong{color:#173f2d}
+
+.equalHeightCards{align-items:stretch}
+.equalHeightCards>.card{height:100%;margin-bottom:0}
+@media(max-width:1050px){.equalHeightCards>.card{height:auto}}
