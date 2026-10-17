@@ -114,3 +114,8 @@
   .resultTechnicalDetails>summary{display:none}
   .resultTechnicalBody{padding:0}
 }
+
+/* Adaptive farmer-context cards: one card fills the row, two or more share space. */
+.contextGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,430px),1fr));gap:14px;align-items:start}
+.contextGrid>.card{margin-bottom:0;width:100%}
+@media(max-width:760px){.contextGrid{grid-template-columns:1fr}}
