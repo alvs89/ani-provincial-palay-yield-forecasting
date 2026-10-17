@@ -141,3 +141,8 @@
 .summary .infoTipPopup{color:#f5fbf7}
 
 .infoTip.isOpen .infoTipPopup{opacity:1;visibility:visible}
+
+/* Keep the help icon attached to the final word of wrapped metric labels. */
+.infoLabelText{display:inline;min-width:0}
+.infoLabelTail{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.infoTipTrigger{width:14px;height:14px;font-size:9px;border-width:1px;vertical-align:middle}

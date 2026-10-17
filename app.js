@@ -98,7 +98,7 @@ const INFO_TIPS={
   'Drought Outlook':'PAGASA’s published month-by-month drought outlook for the upcoming period.'
 };
 let infoTipCounter=0;
-function infoLabel(label){const tip=INFO_TIPS[label];if(!tip)return label;const id=`ani-tip-${++infoTipCounter}`;return `<span class="infoLabelText">${label}<span class="infoTip"><button type="button" class="infoTipTrigger" aria-label="Explain ${label}" aria-describedby="${id}" aria-expanded="false">i</button><span id="${id}" class="infoTipPopup" role="tooltip">${tip}</span></span></span>`}
+function infoLabel(label){const tip=INFO_TIPS[label];if(!tip)return label;const id=`ani-tip-${++infoTipCounter}`,parts=String(label).trim().split(/\s+/),last=parts.pop()||'',prefix=parts.join(' ');return `<span class="infoLabelText">${prefix?`${prefix} `:''}<span class="infoLabelTail">${last}<span class="infoTip"><button type="button" class="infoTipTrigger" aria-label="Explain ${label}" aria-describedby="${id}" aria-expanded="false">i</button><span id="${id}" class="infoTipPopup" role="tooltip">${tip}</span></span></span></span>`}
 const card=(x,c='')=>`<section class="card ${c}">${x}</section>`, title=(i,t,s='')=>`<div class="sectionTitle">${icon(i)}<div><h2>${t}</h2>${s?`<p>${s}</p>`:''}</div></div>`,stat=(i,l,v,s,t='green')=>card(`${icon(i)}<div><span>${infoLabel(l)}</span><strong>${v}</strong><small>${s}</small></div>`,`stat ${t}`),summary=rows=>`<div class="summary">${rows.map(([a,b])=>`<div><span>${infoLabel(a)}</span><strong>${b}</strong></div>`).join('')}</div>`;
 function historicalYieldChart(rows){
   const sorted=[...rows].filter(r=>r.yield!=null&&Number.isFinite(Number(r.yield))).sort((a,b)=>a.year-b.year||a.quarter-b.quarter).slice(-20);
