@@ -146,3 +146,107 @@
 .infoLabelText{display:inline;min-width:0}
 .infoLabelTail{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
 .infoTipTrigger{width:14px;height:14px;font-size:9px;border-width:1px;vertical-align:middle}
+
+/* Tooltip rendering fix: multiline definitions stay inside one bubble. */
+.infoTipPopup{
+  display:block;
+  top:calc(100% + 7px);
+  bottom:auto;
+  left:50%;
+  transform:translateX(-50%);
+  width:280px;
+  max-width:min(280px,calc(100vw - 32px));
+  min-width:0;
+  white-space:normal;
+  overflow-wrap:break-word;
+  pointer-events:auto;
+}
+.infoTipPopup:after{
+  top:auto;
+  bottom:100%;
+  border:6px solid transparent;
+  border-bottom-color:#12382a;
+  border-top-color:transparent;
+}
+@media(max-width:760px){
+  .infoTipPopup{
+    top:calc(100% + 7px);
+    bottom:auto;
+    left:auto;
+    right:-8px;
+    transform:none;
+    width:min(260px,calc(100vw - 36px));
+    max-width:min(260px,calc(100vw - 36px));
+    min-width:0;
+  }
+  .infoTipPopup:after{
+    top:auto;
+    bottom:100%;
+    left:auto;
+    right:8px;
+    transform:none;
+    border:6px solid transparent;
+    border-bottom-color:#12382a;
+  }
+}
+
+/* Viewport-safe tooltip placement; JS sets exact coordinates beside each trigger. */
+.infoTipPopup{
+  position:fixed;
+  top:var(--tip-top,0);
+  left:var(--tip-left,0);
+  right:auto;
+  bottom:auto;
+  transform:none;
+  width:min(280px,calc(100vw - 24px));
+  max-width:min(280px,calc(100vw - 24px));
+}
+.infoTipPopup:after{
+  top:-12px;
+  bottom:auto;
+  left:var(--tip-arrow-x,50%);
+  right:auto;
+  transform:translateX(-50%);
+  border:6px solid transparent;
+  border-bottom-color:#12382a;
+}
+.infoTipPopup:before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:-9px;
+  height:9px;
+}
+@media(max-width:760px){
+  .infoTipPopup{
+    position:fixed;
+    top:var(--tip-top,0);
+    left:var(--tip-left,0);
+    right:auto;
+    bottom:auto;
+    transform:none;
+    width:min(260px,calc(100vw - 24px));
+    max-width:min(260px,calc(100vw - 24px));
+  }
+  .infoTipPopup:after{
+    top:-12px;
+    bottom:auto;
+    left:var(--tip-arrow-x,50%);
+    right:auto;
+    transform:translateX(-50%);
+    border:6px solid transparent;
+    border-bottom-color:#12382a;
+  }
+}
+
+.infoTipPopup.tipAbove:after{
+  top:100%;
+  bottom:auto;
+  border:6px solid transparent;
+  border-top-color:#12382a;
+}
+.infoTipPopup.tipAbove:before{
+  top:100%;
+  bottom:auto;
+}
