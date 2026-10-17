@@ -362,3 +362,11 @@
     font-size:14px;
   }
 }
+
+/* Match the Historical vs Model Result and Model Result Context card heights. */
+.resultGrid{align-items:stretch}
+.resultGrid>.card{height:100%;margin-bottom:0}
+@media(max-width:1050px){
+  .resultGrid{align-items:start}
+  .resultGrid>.card{height:auto}
+}
