@@ -321,3 +321,44 @@
   .resultGrid .summary>div>strong{flex-basis:56%}
   .resultGrid .summary strong.nowrapMetric{font-size:14px}
 }
+
+/* Result-context rows: reserve natural width for compact values, let labels wrap. */
+.resultGrid .summary>div{
+  display:grid;
+  grid-template-columns:minmax(0,44%) minmax(0,56%);
+  align-items:center;
+  column-gap:14px;
+}
+.resultGrid .summary>div:has(>strong.nowrapMetric){
+  grid-template-columns:minmax(0,1fr) max-content;
+}
+.resultGrid .summary>div>span{
+  min-width:0;
+}
+.resultGrid .summary>div>strong{
+  min-width:0;
+  max-width:100%;
+  text-align:right;
+}
+.resultGrid .summary strong.nowrapMetric{
+  white-space:nowrap;
+  overflow-wrap:normal;
+  word-break:normal;
+  font-size:clamp(13px,.95vw,16px);
+}
+@media(max-width:1050px){
+  .resultGrid .summary>div{
+    grid-template-columns:minmax(0,46%) minmax(0,54%);
+  }
+  .resultGrid .summary>div:has(>strong.nowrapMetric){
+    grid-template-columns:minmax(0,1fr) max-content;
+  }
+  .resultGrid .summary strong.nowrapMetric{
+    font-size:15px;
+  }
+}
+@media(max-width:520px){
+  .resultGrid .summary strong.nowrapMetric{
+    font-size:14px;
+  }
+}
