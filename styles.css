@@ -281,3 +281,16 @@
   .resultChartSvg .resultAxisTitle,
   .resultChartSvg .resultXAxisTitle{font-size:13px}
 }
+
+/* Keep compact numeric values and their units on the same line. */
+.summary strong.nowrapMetric{
+  white-space:nowrap;
+  overflow-wrap:normal;
+  word-break:normal;
+}
+.resultGrid .summary strong.nowrapMetric{
+  font-size:clamp(14px,1.05vw,17px);
+}
+@media(max-width:760px){
+  .resultGrid .summary strong.nowrapMetric{font-size:15px}
+}
