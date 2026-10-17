@@ -55,18 +55,8 @@ function normalizeEnvironmentalContext(value) {
 }
 
 function environmentalDecisionSupport(forecast) {
-  if (!environmentalSupport) {
-    return `<section class="environmentPanel" aria-labelledby="environmentSupportTitle">
-      <h2 id="environmentSupportTitle">Environmental Decision Support</h2>
-      <p class="environmentUnavailable">Loading the separate environmental outlook…</p>
-    </section>`;
-  }
-  if (!environmentalSupport.available) {
-    return `<section class="environmentPanel" aria-labelledby="environmentSupportTitle">
-      <h2 id="environmentSupportTitle">Environmental Decision Support</h2>
-      <p class="environmentUnavailable">Environmental decision-support data are not currently available.</p>
-      <p class="environmentSeparation">Environmental Decision Support is a separate short-term analysis and does not alter the XGBoost yield estimate.</p>
-    </section>`;
+  if (!environmentalSupport || !environmentalSupport.available) {
+    return '';
   }
 
   const report = environmentalSupport;
@@ -79,14 +69,7 @@ function environmentalDecisionSupport(forecast) {
     && forecastEcosystem === environmentalEcosystem;
 
   if (!contextMatches) {
-    return `<section class="environmentPanel" aria-labelledby="environmentSupportTitle">
-      <div class="environmentHeader"><div>
-        <span class="eyebrow">SEPARATE ENVIRONMENTAL ANALYSIS</span>
-        <h2 id="environmentSupportTitle">Environmental Decision Support</h2>
-      </div></div>
-      <p class="environmentUnavailable">Environmental outlook is not currently available for ${environmentalEscape(forecast?.province || 'Unavailable')} · ${environmentalEscape(forecast?.ecosystem || 'Unavailable')}.</p>
-      <p class="environmentSeparation">Environmental Decision Support is a separate short-term analysis and does not affect the ANI yield estimate.</p>
-    </section>`;
+    return '';
   }
 
   const window = context.forecast_window || {};
@@ -95,19 +78,9 @@ function environmentalDecisionSupport(forecast) {
   const isDecisionCurrent = report.currentForDecisionSupport === true
     && ['UPCOMING', 'CURRENT'].includes(freshnessStatus);
   const coveredPeriod = environmentalEscape(environmentalWindow(window));
-  const architectureText = 'Environmental Decision Support is a separate short-term analysis and does not alter the XGBoost yield estimate.';
+  const architectureText = 'This supplementary water-balance analysis is separate from PAGASA weather and climate information and does not alter the XGBoost yield estimate.';
   if (!isDecisionCurrent) {
-    const statusMessage = freshnessStatus === 'EXPIRED'
-      ? 'Environmental outlook expired.'
-      : 'Environmental outlook currency could not be verified.';
-    const explanation = freshnessStatus === 'EXPIRED'
-      ? `The stored outlook covers ${coveredPeriod}. A current environmental outlook is required before this information can be used for planning.`
-      : 'The stored outlook cannot be presented as current decision-support information.';
-    return `<section class="environmentPanel" aria-labelledby="environmentSupportTitle">
-      <div class="environmentHeader"><div><span class="eyebrow">SEPARATE ENVIRONMENTAL ANALYSIS</span><h2 id="environmentSupportTitle">Environmental Decision Support</h2></div></div>
-      <div class="environmentUnavailable"><strong>${statusMessage}</strong><p>Covered period: ${coveredPeriod}</p><p>${explanation}</p></div>
-      <p class="environmentSeparation">${architectureText}</p>
-    </section>`;
+    return '';
   }
   const water = report.water_balance || {};
   const scenario = report.crop_water_reference_scenario || {};
@@ -163,9 +136,9 @@ function environmentalDecisionSupport(forecast) {
   return `<section class="environmentPanel" aria-labelledby="environmentSupportTitle">
     <div class="environmentHeader">
       <div>
-        <span class="eyebrow">SEPARATE ENVIRONMENTAL ANALYSIS</span>
-        <h2 id="environmentSupportTitle">Environmental Decision Support</h2>
-        <p>Short-term environmental context for agricultural planning.</p>
+        <span class="eyebrow">SUPPLEMENTARY TECHNICAL ANALYSIS</span>
+        <h2 id="environmentSupportTitle">Additional Water-Balance Analysis</h2>
+        <p>Short-term technical water-balance context shown only when a current matching outlook is available.</p>
       </div>
       <div class="environmentWindow"><span>${freshnessStatus === 'UPCOMING' ? 'Upcoming Environmental Outlook' : 'Current Environmental Outlook'}</span><strong>${coveredPeriod}</strong><small>${environmentalEscape(context.location || '')} · ${environmentalEscape(context.ecosystem || '')}</small></div>
     </div>
