@@ -263,3 +263,21 @@
 .resultChartSvg .resultAxisTitle{font-size:13px;font-weight:700}
 @media(max-width:1050px){.chart.large{height:440px}}
 @media(max-width:760px){.chart.large{height:340px}.resultChartSvg .resultAxisTick{font-size:11px}}
+
+/* Improve chart axis readability for mixed technical/non-technical audiences. */
+.chart.large{height:530px}
+.resultChartSvg .resultAxisTick{font-size:14px}
+.resultChartSvg .resultAxisTitle,
+.resultChartSvg .resultXAxisTitle{font-size:15px;font-weight:700;fill:#42584e}
+@media(max-width:1050px){
+  .chart.large{height:470px}
+  .resultChartSvg .resultAxisTick{font-size:13px}
+  .resultChartSvg .resultAxisTitle,
+  .resultChartSvg .resultXAxisTitle{font-size:14px}
+}
+@media(max-width:760px){
+  .chart.large{height:360px}
+  .resultChartSvg .resultAxisTick{font-size:12px}
+  .resultChartSvg .resultAxisTitle,
+  .resultChartSvg .resultXAxisTitle{font-size:13px}
+}
