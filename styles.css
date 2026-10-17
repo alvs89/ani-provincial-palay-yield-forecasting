@@ -370,3 +370,11 @@
   .resultGrid{align-items:start}
   .resultGrid>.card{height:auto}
 }
+
+/* Add breathing room before the Result Interpretation card. */
+.resultGrid + .card{
+  margin-top:22px;
+}
+@media(max-width:760px){
+  .resultGrid + .card{margin-top:18px}
+}
