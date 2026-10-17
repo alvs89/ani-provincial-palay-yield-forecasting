@@ -255,3 +255,11 @@
    to match the taller context column. */
 .forecastGrid{align-items:start}
 .forecastGrid>.card{align-self:start}
+
+/* Larger, denser historical-vs-model chart without stretching the card. */
+.resultGrid{align-items:start}
+.chart.large{height:500px}
+.resultChartSvg .resultAxisTick{font-size:12px}
+.resultChartSvg .resultAxisTitle{font-size:13px;font-weight:700}
+@media(max-width:1050px){.chart.large{height:440px}}
+@media(max-width:760px){.chart.large{height:340px}.resultChartSvg .resultAxisTick{font-size:11px}}
