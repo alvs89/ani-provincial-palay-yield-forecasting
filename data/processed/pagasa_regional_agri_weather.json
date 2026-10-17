@@ -1,0 +1,348 @@
+{
+  "source": "DOST-PAGASA 10-Day Regional Agri-Weather Information",
+  "retrievedAtUtc": "2026-10-17T13:43:43.359035+00:00",
+  "sourceUrl": "https://www.pagasa.dost.gov.ph/ten-day-regional-agri-weather",
+  "dekadNumber": 29,
+  "forecastPeriod": "11 - 20 October 2026",
+  "regions": [
+    {
+      "regionLabel": "Region 1 Ilocos Region",
+      "forecastRainfallMm": "10 – 100",
+      "relativeHumidityPct": "50 – 98",
+      "rainyDaysGt1Mm": "2 – 5",
+      "temperatureC": "22 – 35",
+      "riceStages": [
+        "Reproductive Stage",
+        "Ripening/Maturing Stage"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Weed Management",
+        "Pest and Diseases Managment",
+        "Water Management"
+      ]
+    },
+    {
+      "regionLabel": "Region 2 Cagayan Valley",
+      "forecastRainfallMm": "10 – 75",
+      "relativeHumidityPct": "60 – 99",
+      "rainyDaysGt1Mm": "2 – 5",
+      "temperatureC": "20 – 35",
+      "riceStages": [
+        "Ripening/Maturing Stage",
+        "Harvesting Stage"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Water Management",
+        "Postharvest",
+        "Cleaning and Maintenance"
+      ]
+    },
+    {
+      "regionLabel": "CAR (Cordillera Administrative Region)",
+      "forecastRainfallMm": "30 – 120",
+      "relativeHumidityPct": "50 – 98",
+      "rainyDaysGt1Mm": "2 – 7",
+      "temperatureC": "15 – 33",
+      "riceStages": [
+        "Reproductive Stage",
+        "Ripening/Maturing Stage"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Weed Management",
+        "Pest and Diseases Managment",
+        "Water Management",
+        "Postharvest",
+        "Cleaning and Maintenance"
+      ]
+    },
+    {
+      "regionLabel": "Region 3 Central Luzon",
+      "forecastRainfallMm": "25 – 150",
+      "relativeHumidityPct": "50 – 98",
+      "rainyDaysGt1Mm": "4 – 8",
+      "temperatureC": "22 – 34",
+      "riceStages": [
+        "Reproductive Stage",
+        "Ripening/Maturing Stage",
+        "Harvesting Stage"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Weed Management",
+        "Pest and Diseases Managment",
+        "Postharvest",
+        "Cleaning and Maintenance"
+      ]
+    },
+    {
+      "regionLabel": "NCR (National Capital Region)",
+      "forecastRainfallMm": "10 – 50",
+      "relativeHumidityPct": "60 – 99",
+      "rainyDaysGt1Mm": "3 – 6",
+      "temperatureC": "12 – 34",
+      "riceStages": [
+        "N/A"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Weed Management",
+        "Pest and Diseases Managment",
+        "Water Management",
+        "Postharvest",
+        "Cleaning and Maintenance"
+      ]
+    },
+    {
+      "regionLabel": "Region 4A CALABARZON",
+      "forecastRainfallMm": "10– 150",
+      "relativeHumidityPct": "60 – 100",
+      "rainyDaysGt1Mm": "6 – 9",
+      "temperatureC": "Upland: 20 – 32; Lowland: 22 – 34",
+      "riceStages": [
+        "Land and Seedbed Preparation",
+        "Planting and Transplanting",
+        "Reproductive Stage",
+        "Ripening/Maturing Stage",
+        "Harvesting Stage"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Weed Management",
+        "Pest and Diseases Managment",
+        "Water Management",
+        "Postharvest",
+        "Cleaning and Maintenance"
+      ]
+    },
+    {
+      "regionLabel": "Region 4B MIMAROPA",
+      "forecastRainfallMm": "30 – 150",
+      "relativeHumidityPct": "45 – 97",
+      "rainyDaysGt1Mm": "2 – 6",
+      "temperatureC": "23 – 34",
+      "riceStages": [
+        "Land and Seedbed Preparation",
+        "Planting and Transplanting",
+        "Vegetative Stage",
+        "Harvesting Stage"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Weed Management",
+        "Pest and Diseases Managment",
+        "Water Management",
+        "Postharvest",
+        "Cleaning and Maintenance"
+      ]
+    },
+    {
+      "regionLabel": "Region 5 Bicol Region",
+      "forecastRainfallMm": "30 – 100",
+      "relativeHumidityPct": "45 – 99",
+      "rainyDaysGt1Mm": "2 – 5",
+      "temperatureC": "22 – 35",
+      "riceStages": [
+        "Land and Seedbed Preparation",
+        "Planting and Transplanting",
+        "Vegetative Stage",
+        "Reproductive Stage",
+        "Ripening/Maturing Stage",
+        "Harvesting Stage"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Weed Management",
+        "Pest and Diseases Managment",
+        "Water Management",
+        "Postharvest",
+        "Cleaning and Maintenance"
+      ]
+    },
+    {
+      "regionLabel": "Region 6 Western Visayas",
+      "forecastRainfallMm": "30 – 100",
+      "relativeHumidityPct": "55 – 97",
+      "rainyDaysGt1Mm": "2 – 6",
+      "temperatureC": "23 – 33",
+      "riceStages": [
+        "Land and Seedbed Preparation",
+        "Planting and Transplanting",
+        "Vegetative Stage",
+        "Reproductive Stage",
+        "Ripening/Maturing Stage",
+        "Harvesting Stage"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Weed Management",
+        "Pest and Diseases Managment",
+        "Water Management",
+        "Postharvest",
+        "Cleaning and Maintenance"
+      ]
+    },
+    {
+      "regionLabel": "Region 7 Central Visayas",
+      "forecastRainfallMm": "30 – 120",
+      "relativeHumidityPct": "50 – 97",
+      "rainyDaysGt1Mm": "2 – 6",
+      "temperatureC": "22 – 34",
+      "riceStages": [
+        "Planting and Transplanting",
+        "Vegetative Stage",
+        "Reproductive Stage",
+        "Harvesting Stage"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Weed Management",
+        "Pest and Diseases Managment",
+        "Water Management",
+        "Postharvest",
+        "Cleaning and Maintenance"
+      ]
+    },
+    {
+      "regionLabel": "Region 8 Eastern Visayas",
+      "forecastRainfallMm": "50 – 170",
+      "relativeHumidityPct": "50 – 99",
+      "rainyDaysGt1Mm": "2 – 7",
+      "temperatureC": "23 – 35",
+      "riceStages": [
+        "Land and Seedbed Preparation",
+        "Planting and Transplanting",
+        "Reproductive Stage",
+        "Harvesting Stage"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Weed Management",
+        "Pest and Diseases Managment",
+        "Water Management",
+        "Postharvest",
+        "Cleaning and Maintenance"
+      ]
+    },
+    {
+      "regionLabel": "Region 9 Zamboanga Peninsula",
+      "forecastRainfallMm": "50 – 110",
+      "relativeHumidityPct": "55 – 98",
+      "rainyDaysGt1Mm": "3 – 6",
+      "temperatureC": "21 – 34",
+      "riceStages": [
+        "Land and Seedbed Preparation",
+        "Planting and Transplanting",
+        "Vegetative Stage"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Weed Management",
+        "Pest and Diseases Managment",
+        "Water Management",
+        "Postharvest",
+        "Cleaning and Maintenance"
+      ]
+    },
+    {
+      "regionLabel": "Region 10 Northern Mindanao",
+      "forecastRainfallMm": "10 – 150",
+      "relativeHumidityPct": "40 – 98",
+      "rainyDaysGt1Mm": "3 – 7",
+      "temperatureC": "Upland: 18 – 31 Lowland: 23 – 35",
+      "riceStages": [
+        "Vegetative Stage",
+        "Reproductive Stage"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Weed Management",
+        "Pest and Diseases Managment",
+        "Water Management",
+        "Postharvest",
+        "Cleaning and Maintenance"
+      ]
+    },
+    {
+      "regionLabel": "Region 11 Davao Region",
+      "forecastRainfallMm": "50 – 180",
+      "relativeHumidityPct": "51 – 99",
+      "rainyDaysGt1Mm": "3 – 7",
+      "temperatureC": "22 – 35",
+      "riceStages": [
+        "Ripening/Maturing Stage",
+        "Harvesting Stage"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Weed Management",
+        "Pest and Diseases Managment",
+        "Water Management",
+        "Postharvest",
+        "Cleaning and Maintenance"
+      ]
+    },
+    {
+      "regionLabel": "Region 12 SOCCSKSARGEN",
+      "forecastRainfallMm": "10 – 65",
+      "relativeHumidityPct": "50 – 98",
+      "rainyDaysGt1Mm": "2 – 5",
+      "temperatureC": "21 – 34",
+      "riceStages": [
+        "Land and Seedbed Preparation",
+        "Ripening/Maturing Stage",
+        "Harvesting Stage"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Weed Management",
+        "Pest and Diseases Managment",
+        "Water Management",
+        "Postharvest",
+        "Cleaning and Maintenance"
+      ]
+    },
+    {
+      "regionLabel": "Region 13 CARAGA",
+      "forecastRainfallMm": "10 – 100",
+      "relativeHumidityPct": "55 – 98",
+      "rainyDaysGt1Mm": "2 – 6",
+      "temperatureC": "22 – 34",
+      "riceStages": [
+        "Reproductive Stage",
+        "Ripening/Maturing Stage"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Weed Management",
+        "Pest and Diseases Managment",
+        "Water Management",
+        "Postharvest",
+        "Cleaning and Maintenance"
+      ]
+    },
+    {
+      "regionLabel": "BARMM (Bangsamoro Autonomous Region in Muslim Mindanao)",
+      "forecastRainfallMm": "20 – 180",
+      "relativeHumidityPct": "55 – 98",
+      "rainyDaysGt1Mm": "2 – 6",
+      "temperatureC": "Upland: 20 – 32 Lowland: 23 – 34",
+      "riceStages": [
+        "Land and Seedbed Preparation",
+        "Ripening/Maturing Stage",
+        "Harvesting Stage"
+      ],
+      "farmOperations": [
+        "Fertilizer Application",
+        "Weed Management",
+        "Pest and Diseases Managment",
+        "Water Management",
+        "Postharvest",
+        "Cleaning and Maintenance"
+      ]
+    }
+  ],
+  "note": "Official PAGASA regional agri-weather context. It is separate from ANI's XGBoost yield estimate and is not used as a model predictor."
+}

@@ -131,5 +131,72 @@
       "model_relationship": "Supporting context only; it does not alter XGBoost inference or yield-model eligibility.",
       "missing_data_policy": "Withhold satellite context when the required pre-target observation is unavailable; do not interpolate, synthesize, or block an otherwise valid yield estimate."
     }
+  },
+  "palay_market_context": {
+    "source": "Philippine Statistics Authority (PSA) OpenSTAT Farm Price Survey for Palay",
+    "matrix": "0032M4AFN01",
+    "source_url": "https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__2M__NFG/0032M4AFN01.px/",
+    "retrieved_at_utc": "2026-10-17T13:43:43.374907+00:00",
+    "frequency": "Monthly",
+    "geographic_scope": "Provincial records available in the PSA matrix and aligned to ANI canonical province names.",
+    "commodity_preference": "Palay [Paddy] Other Variety, dry (conv. to 14% mc)",
+    "integrated_through": {
+      "year": 2026,
+      "month": 9,
+      "month_name": "September"
+    },
+    "rows": 12478,
+    "displayed_context": [
+      "latest available farmgate price (PHP/kg)",
+      "month-over-month change",
+      "year-over-year change",
+      "trailing 12-month minimum and maximum"
+    ],
+    "model_relationship": "Market context only; it is not an input to the active XGBoost model and does not alter yield-model eligibility or inference.",
+    "availability_policy": "Display the latest available provincial record and its explicit reference period; do not fabricate a value for months or provinces without a reported observation."
+  },
+  "official_agri_weather_context": {
+    "source": "DOST-PAGASA 10-Day Regional Agri-Weather Information",
+    "source_url": "https://www.pagasa.dost.gov.ph/ten-day-regional-agri-weather",
+    "retrieved_at_utc": "2026-10-17T13:43:43.359035+00:00",
+    "integrated_forecast_period": "11 - 20 October 2026",
+    "dekad_number": 29,
+    "regional_records": 17,
+    "displayed_context": [
+      "forecast rainfall range",
+      "relative humidity range",
+      "number of rainy days (>1 mm)",
+      "temperature range",
+      "rice stages",
+      "farm operations"
+    ],
+    "scope_note": "Regional official agri-weather context. It is not a field-level forecast and does not replace official PAGASA warnings or advisories.",
+    "model_relationship": "Context only; it is not an input to the active XGBoost model and does not alter yield-model eligibility or inference.",
+    "refresh_method": "python -m tools.update_farmer_context"
+  },
+  "farmer_interpretation_layers": {
+    "historical_yield_benchmarks": {
+      "basis": "Pre-target PSA agricultural history for the selected ecosystem and calendar quarter.",
+      "outputs": [
+        "province same-quarter median",
+        "recent five-year same-quarter median",
+        "province historical upper quartile",
+        "regional same-quarter median",
+        "historical percentile"
+      ],
+      "interpretation": "Historical reference benchmarks only; not a universal or agronomic optimum."
+    },
+    "associated_pre_target_signals": {
+      "basis": "Pre-target agricultural, NASA POWER seasonal history, and available MODIS vegetation context.",
+      "outputs": [
+        "same-quarter production change",
+        "same-quarter harvested-area change",
+        "rainfall difference from seasonal median",
+        "temperature difference from seasonal median",
+        "NDVI difference from seasonal median"
+      ],
+      "interpretation": "Associated conditions only; the system does not infer that an individual signal caused a yield change."
+    },
+    "xgboost_relationship": "These interpretation layers do not modify the trained feature vector, model artifact, fixed 2025 evaluation, or prediction output."
   }
 }

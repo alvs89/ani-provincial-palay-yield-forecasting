@@ -87,6 +87,77 @@ print(
     "and source-status records are internally consistent."
 )
 
+# Farmer-facing contextual datasets remain separate from the model feature set.
+market = pd.read_csv(
+    ROOT / "data" / "processed" / "palay_farmgate_prices.csv"
+)
+required_market_columns = {
+    "Province",
+    "Commodity",
+    "Year",
+    "Month",
+    "Month_Number",
+    "Price_PHP_per_kg",
+    "Source",
+    "Source_URL",
+}
+assert required_market_columns.issubset(market.columns)
+assert len(market) > 10000
+assert market.duplicated(
+    ["Province", "Commodity", "Year", "Month_Number"]
+).sum() == 0
+assert (market["Price_PHP_per_kg"] > 0).all()
+latest_market = market.sort_values(["Year", "Month_Number"]).iloc[-1]
+latest_market_period = {
+    "year": int(latest_market["Year"]),
+    "month": int(latest_market["Month_Number"]),
+}
+assert meta["latest_market_period"] == latest_market_period
+assert provenance["palay_market_context"]["rows"] == len(market)
+assert provenance["palay_market_context"]["integrated_through"]["year"] == (
+    latest_market_period["year"]
+)
+assert provenance["palay_market_context"]["integrated_through"]["month"] == (
+    latest_market_period["month"]
+)
+
+pagasa_context = __import__("json").loads(
+    (
+        ROOT
+        / "data"
+        / "processed"
+        / "pagasa_regional_agri_weather.json"
+    ).read_text(encoding="utf-8")
+)
+assert pagasa_context["source"] == (
+    "DOST-PAGASA 10-Day Regional Agri-Weather Information"
+)
+assert isinstance(pagasa_context.get("forecastPeriod"), str)
+assert pagasa_context["forecastPeriod"]
+assert isinstance(pagasa_context.get("dekadNumber"), int)
+assert 1 <= pagasa_context["dekadNumber"] <= 36
+assert len(pagasa_context["regions"]) >= 16
+assert all(
+    row.get("forecastRainfallMm")
+    and row.get("temperatureC")
+    and row.get("relativeHumidityPct")
+    for row in pagasa_context["regions"]
+)
+assert meta["official_agri_weather"]["forecastPeriod"] == (
+    pagasa_context["forecastPeriod"]
+)
+assert provenance["palay_market_context"]["model_relationship"].startswith(
+    "Market context only"
+)
+assert provenance["official_agri_weather_context"]["model_relationship"].startswith(
+    "Context only"
+)
+print(
+    "PASS Farmer context data: PSA provincial farmgate prices and official "
+    "PAGASA regional agri-weather records are integrated as contextual data "
+    "without entering the active model feature set."
+)
+
 satellite = pd.read_csv(
     ROOT / "data" / "processed" / "province_quarter_satellite.csv"
 )
@@ -262,6 +333,74 @@ assert satellite_context["vegetationStatus"] in {
     "Within Typical Seasonal Vegetation",
     "Above Typical Seasonal Vegetation",
 }
+
+benchmark_context = prediction_payload["historicalBenchmarkContext"]
+assert benchmark_context["affectsYieldEstimate"] is False
+assert benchmark_context["benchmarkType"] == (
+    "Historical benchmark, not an agronomic optimum"
+)
+assert benchmark_context["provinceSameQuarterObservations"] >= 8
+assert benchmark_context["provinceSameQuarterMedian"] > 0
+assert benchmark_context["regionalSameQuarterMedian"] > 0
+assert 0 <= benchmark_context["historicalPercentile"] <= 100
+
+signals_context = prediction_payload["associatedSignalsContext"]
+assert signals_context["affectsYieldEstimate"] is False
+assert signals_context["referencePeriod"] == "Q2 2026"
+assert signals_context["rainfall"]["seasonalMedianMm"] > 0
+assert signals_context["interpretationGuardrail"].startswith(
+    "These are associated pre-target conditions"
+)
+
+market_context = prediction_payload["marketContext"]
+assert market_context["affectsYieldEstimate"] is False
+assert market_context["available"] is True
+abra_market = market[
+    (market["Province"] == "Abra")
+    & (
+        market["Commodity"]
+        == "Palay [Paddy] Other Variety, dry (conv. to 14% mc)"
+    )
+].sort_values(["Year", "Month_Number"])
+if abra_market.empty:
+    abra_market = market[market["Province"] == "Abra"].sort_values(
+        ["Year", "Month_Number"]
+    )
+assert not abra_market.empty
+abra_latest = abra_market.iloc[-1]
+assert market_context["period"] == (
+    f"{abra_latest['Month']} {int(abra_latest['Year'])}"
+)
+assert market_context["pricePhpPerKg"] > 0
+
+official_weather_context = prediction_payload["officialAgriWeatherContext"]
+assert official_weather_context["affectsYieldEstimate"] is False
+assert official_weather_context["available"] is True
+assert official_weather_context["forecastPeriod"] == (
+    pagasa_context["forecastPeriod"]
+)
+assert official_weather_context["regionLabel"] == (
+    "CAR (Cordillera Administrative Region)"
+)
+assert official_weather_context["forecastRainfallMm"]
+assert official_weather_context["riceStages"]
+
+farmer_context = client.get(
+    "/farmer-context",
+    params={"province": "Nueva Ecija"},
+)
+assert farmer_context.status_code == 200, farmer_context.text
+farmer_payload = farmer_context.json()
+assert farmer_payload["marketContext"]["available"] is True
+assert farmer_payload["officialAgriWeatherContext"]["available"] is True
+assert farmer_payload["officialAgriWeatherContext"]["regionLabel"] == (
+    "Region 3 Central Luzon"
+)
+print(
+    "PASS Farmer result context: historical benchmarks, associated signals, "
+    "PSA market context, and official PAGASA agri-weather context are available "
+    "without changing XGBoost inference."
+)
 
 missing_satellite_context = client.post(
     "/predict",

@@ -27,6 +27,8 @@ MODEL_DIR = ROOT / "models"
 HISTORY_PATH = DATA_DIR / "palay_history.csv"
 WEATHER_PATH = DATA_DIR / "province_quarter_weather.csv"
 SATELLITE_PATH = DATA_DIR / "province_quarter_satellite.csv"
+MARKET_PATH = DATA_DIR / "palay_farmgate_prices.csv"
+PAGASA_AGRI_WEATHER_PATH = DATA_DIR / "pagasa_regional_agri_weather.json"
 AGRICULTURAL_SOURCE_PATH = DATA_DIR / "psa_2026_q1_q2_source_records.csv"
 MODEL_PATH = MODEL_DIR / "ani_xgboost_pipeline.joblib"
 METADATA_PATH = MODEL_DIR / "metadata.json"
@@ -46,6 +48,16 @@ satellite_df = (
     pd.read_csv(SATELLITE_PATH)
     if SATELLITE_PATH.is_file()
     else pd.DataFrame()
+)
+market_df = (
+    pd.read_csv(MARKET_PATH)
+    if MARKET_PATH.is_file()
+    else pd.DataFrame()
+)
+pagasa_agri_weather = (
+    json.loads(PAGASA_AGRI_WEATHER_PATH.read_text(encoding="utf-8"))
+    if PAGASA_AGRI_WEATHER_PATH.is_file()
+    else None
 )
 satellite_evaluation = (
     json.loads(SATELLITE_EVALUATION_PATH.read_text(encoding="utf-8"))
@@ -153,6 +165,381 @@ def _latest_satellite_period() -> tuple[int, int] | None:
         - 1
     ).max()
     return int(idx // 4), int(idx % 4 + 1)
+
+
+
+def _latest_market_period() -> tuple[int, int] | None:
+    if market_df.empty:
+        return None
+    ordered = market_df.sort_values(["Year", "Month_Number"])
+    row = ordered.iloc[-1]
+    return int(row["Year"]), int(row["Month_Number"])
+
+
+def _historical_benchmark_context(
+    province: str,
+    ecosystem: str,
+    target_year: int,
+    target_quarter: int,
+    predicted_yield: float,
+) -> dict[str, Any]:
+    eco = normalize_ecosystem(ecosystem)
+    target_idx = _period_key(target_year, target_quarter)
+    province_prior = history_df[
+        (history_df["Province"] == province)
+        & (history_df["Ecosystem"] == eco)
+        & (history_df["Quarter_Number"].astype(int) == int(target_quarter))
+        & (
+            history_df["Year"].astype(int) * 4
+            + history_df["Quarter_Number"].astype(int)
+            - 1
+            < target_idx
+        )
+    ].copy()
+    values = province_prior["Yield_mt_per_ha"].astype(float)
+
+    current_region = province_region.get(province)
+    region_provinces = [
+        p for p, r in province_region.items() if r == current_region
+    ]
+    region_prior = history_df[
+        history_df["Province"].isin(region_provinces)
+        & (history_df["Ecosystem"] == eco)
+        & (history_df["Quarter_Number"].astype(int) == int(target_quarter))
+        & (
+            history_df["Year"].astype(int) * 4
+            + history_df["Quarter_Number"].astype(int)
+            - 1
+            < target_idx
+        )
+    ]["Yield_mt_per_ha"].astype(float)
+
+    recent = province_prior[
+        province_prior["Year"].astype(int) >= int(target_year) - 5
+    ]["Yield_mt_per_ha"].astype(float)
+
+    province_median = float(values.median()) if not values.empty else None
+    upper_quartile = float(values.quantile(0.75)) if not values.empty else None
+    regional_median = (
+        float(region_prior.median()) if not region_prior.empty else None
+    )
+    recent_median = float(recent.median()) if not recent.empty else None
+    percentile = (
+        float((values <= predicted_yield).mean() * 100.0)
+        if not values.empty
+        else None
+    )
+    regional_diff = (
+        (predicted_yield - regional_median) / regional_median * 100.0
+        if regional_median not in {None, 0}
+        else None
+    )
+
+    return {
+        "provinceSameQuarterMedian": (
+            round(province_median, 3) if province_median is not None else None
+        ),
+        "provinceRecentFiveYearSameQuarterMedian": (
+            round(recent_median, 3) if recent_median is not None else None
+        ),
+        "provinceUpperQuartileBenchmark": (
+            round(upper_quartile, 3) if upper_quartile is not None else None
+        ),
+        "regionalSameQuarterMedian": (
+            round(regional_median, 3) if regional_median is not None else None
+        ),
+        "differenceFromRegionalMedianPct": (
+            round(regional_diff, 1) if regional_diff is not None else None
+        ),
+        "historicalPercentile": (
+            round(percentile, 1) if percentile is not None else None
+        ),
+        "provinceSameQuarterObservations": int(len(values)),
+        "regionalSameQuarterObservations": int(len(region_prior)),
+        "region": current_region,
+        "benchmarkType": "Historical benchmark, not an agronomic optimum",
+        "source": "Processed PSA OpenSTAT palay production and harvested-area history",
+        "affectsYieldEstimate": False,
+    }
+
+
+def _associated_signals_context(
+    province: str,
+    target_year: int,
+    target_quarter: int,
+    feature_row: dict[str, Any],
+    extra: dict[str, Any],
+    satellite: dict[str, Any],
+) -> dict[str, Any]:
+    target_idx = _period_key(target_year, target_quarter)
+    reference_idx = target_idx - 1
+    reference_year = int(reference_idx // 4)
+    reference_quarter = int(reference_idx % 4 + 1)
+    historical_weather = weather_df[
+        (weather_df["Province"] == province)
+        & (weather_df["Quarter"].astype(int) == reference_quarter)
+        & (
+            weather_df["Year"].astype(int) * 4
+            + weather_df["Quarter"].astype(int)
+            - 1
+            < reference_idx
+        )
+    ]
+
+    def median(column: str) -> float | None:
+        x = pd.to_numeric(historical_weather[column], errors="coerce").dropna()
+        return float(x.median()) if not x.empty else None
+
+    def pct(value: float, baseline: float | None) -> float | None:
+        if baseline in {None, 0}:
+            return None
+        return (float(value) - float(baseline)) / float(baseline) * 100.0
+
+    rainfall = float(feature_row["Rainfall_Lag1_mm"])
+    temperature = float(feature_row["T2M_Lag1_C"])
+    rh = float(feature_row["RH2M_Lag1_pct"])
+    wind = float(feature_row["WS2M_Lag1_m_s"])
+    rainfall_median = median("Rainfall_Sum_mm")
+    temp_median = median("T2M_Mean_C")
+    rh_median = median("RH2M_Mean_pct")
+    wind_median = median("WS2M_Mean_m_s")
+
+    return {
+        "referencePeriod": f"Q{reference_quarter} {reference_year}",
+        "sameQuarterProductionChangePct": round(
+            float(extra["lagged_production_trend"]), 1
+        ),
+        "sameQuarterHarvestedAreaChangePct": round(
+            float(extra["lagged_area_trend"]), 1
+        ),
+        "rainfall": {
+            "valueMm": round(rainfall, 1),
+            "seasonalMedianMm": (
+                round(rainfall_median, 1) if rainfall_median is not None else None
+            ),
+            "differenceFromSeasonalMedianPct": (
+                round(pct(rainfall, rainfall_median), 1)
+                if pct(rainfall, rainfall_median) is not None
+                else None
+            ),
+        },
+        "temperature": {
+            "valueC": round(temperature, 1),
+            "seasonalMedianC": (
+                round(temp_median, 1) if temp_median is not None else None
+            ),
+            "differenceFromSeasonalMedianC": (
+                round(temperature - temp_median, 1)
+                if temp_median is not None
+                else None
+            ),
+        },
+        "relativeHumidity": {
+            "valuePct": round(rh, 1),
+            "seasonalMedianPct": round(rh_median, 1) if rh_median is not None else None,
+        },
+        "windSpeed": {
+            "valueMS": round(wind, 1),
+            "seasonalMedianMS": (
+                round(wind_median, 1) if wind_median is not None else None
+            ),
+        },
+        "satelliteNdviDifferenceFromSeasonalMedianPct": (
+            satellite.get("ndviPercentDifferenceFromMedian")
+            if satellite.get("comparisonAvailable")
+            else None
+        ),
+        "interpretationGuardrail": (
+            "These are associated pre-target conditions and historical changes. "
+            "They do not establish that any one factor caused the yield outcome."
+        ),
+        "affectsYieldEstimate": False,
+    }
+
+
+def _market_context(province: str) -> dict[str, Any]:
+    base = {
+        "available": False,
+        "source": "PSA OpenSTAT Farm Price Survey for Palay",
+        "sourceUrl": (
+            "https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/"
+            "DB__2M__NFG/0032M4AFN01.px/"
+        ),
+        "affectsYieldEstimate": False,
+    }
+    if market_df.empty:
+        return {**base, "reason": "Farmgate-price data are unavailable."}
+
+    rows = market_df[market_df["Province"] == province].copy()
+    if rows.empty:
+        return {
+            **base,
+            "reason": "No provincial palay farmgate-price record is available.",
+        }
+
+    preferred = "Palay [Paddy] Other Variety, dry (conv. to 14% mc)"
+    selected = rows[rows["Commodity"] == preferred].copy()
+    if selected.empty:
+        selected = rows.copy()
+
+    selected = selected.sort_values(["Year", "Month_Number"])
+    latest = selected.iloc[-1]
+    latest_key = int(latest["Year"]) * 12 + int(latest["Month_Number"])
+    integrated_period = _latest_market_period()
+    integrated_key = (
+        integrated_period[0] * 12 + integrated_period[1]
+        if integrated_period
+        else latest_key
+    )
+    months_behind = max(0, integrated_key - latest_key)
+    previous = selected[
+        selected["Year"].astype(int) * 12
+        + selected["Month_Number"].astype(int)
+        == latest_key - 1
+    ]
+    year_ago = selected[
+        selected["Year"].astype(int) * 12
+        + selected["Month_Number"].astype(int)
+        == latest_key - 12
+    ]
+    trailing = selected[
+        (selected["Year"].astype(int) * 12 + selected["Month_Number"].astype(int))
+        >= latest_key - 11
+    ]
+
+    price = float(latest["Price_PHP_per_kg"])
+
+    def change(frame: pd.DataFrame) -> float | None:
+        if frame.empty:
+            return None
+        old = float(frame.iloc[-1]["Price_PHP_per_kg"])
+        if old == 0:
+            return None
+        return (price - old) / old * 100.0
+
+    return {
+        **base,
+        "available": True,
+        "commodity": str(latest["Commodity"]),
+        "period": f"{latest['Month']} {int(latest['Year'])}",
+        "latestIntegratedPeriod": (
+            f"{pd.Timestamp(year=integrated_period[0], month=integrated_period[1], day=1).strftime('%B')} "
+            f"{integrated_period[0]}"
+            if integrated_period
+            else None
+        ),
+        "monthsBehindLatestIntegratedPeriod": int(months_behind),
+        "dataFreshness": (
+            "Latest Integrated Period"
+            if months_behind == 0
+            else "Earlier Available Provincial Record"
+        ),
+        "pricePhpPerKg": round(price, 2),
+        "monthOverMonthChangePct": (
+            round(change(previous), 1) if change(previous) is not None else None
+        ),
+        "yearOverYearChangePct": (
+            round(change(year_ago), 1) if change(year_ago) is not None else None
+        ),
+        "trailing12MonthMinPhpPerKg": (
+            round(float(trailing["Price_PHP_per_kg"].min()), 2)
+            if not trailing.empty
+            else None
+        ),
+        "trailing12MonthMaxPhpPerKg": (
+            round(float(trailing["Price_PHP_per_kg"].max()), 2)
+            if not trailing.empty
+            else None
+        ),
+        "definition": (
+            "Farmgate price is the price received by farmers at the first point "
+            "of sale, net of marketing costs paid by the farmer."
+        ),
+        "note": "Latest PSA OpenSTAT values may be preliminary or revised.",
+    }
+
+
+def _pagasa_region_label(province: str, region: str) -> str | None:
+    if region == "NEGROS ISLAND REGION":
+        if province == "Negros Occidental":
+            return "Region 6 Western Visayas"
+        if province in {"Negros Oriental", "Siquijor"}:
+            return "Region 7 Central Visayas"
+    mapping = {
+        "CORDILLERA ADMINISTRATIVE REGION (CAR)": "CAR (Cordillera Administrative Region)",
+        "REGION I (ILOCOS REGION)": "Region 1 Ilocos Region",
+        "REGION II (CAGAYAN VALLEY)": "Region 2 Cagayan Valley",
+        "REGION III (CENTRAL LUZON)": "Region 3 Central Luzon",
+        "REGION IV-A (CALABARZON)": "Region 4A CALABARZON",
+        "MIMAROPA REGION": "Region 4B MIMAROPA",
+        "REGION V (BICOL REGION)": "Region 5 Bicol Region",
+        "REGION VI (WESTERN VISAYAS)": "Region 6 Western Visayas",
+        "REGION VII (CENTRAL VISAYAS)": "Region 7 Central Visayas",
+        "REGION VIII (EASTERN VISAYAS)": "Region 8 Eastern Visayas",
+        "REGION IX (ZAMBOANGA PENINSULA)": "Region 9 Zamboanga Peninsula",
+        "REGION X (NORTHERN MINDANAO)": "Region 10 Northern Mindanao",
+        "REGION XI (DAVAO REGION)": "Region 11 Davao Region",
+        "REGION XII (SOCCSKSARGEN)": "Region 12 SOCCSKSARGEN",
+        "REGION XIII (CARAGA)": "Region 13 CARAGA",
+        "BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)": (
+            "BARMM (Bangsamoro Autonomous Region in Muslim Mindanao)"
+        ),
+        "BANGSAMORO AUTONOMOUS REGION IN MUSLIM MINDANAO (BARMM)d/": (
+            "BARMM (Bangsamoro Autonomous Region in Muslim Mindanao)"
+        ),
+    }
+    return mapping.get(region)
+
+
+def _official_agri_weather_context(province: str) -> dict[str, Any]:
+    base = {
+        "available": False,
+        "source": "DOST-PAGASA 10-Day Regional Agri-Weather Information",
+        "sourceUrl": "https://www.pagasa.dost.gov.ph/ten-day-regional-agri-weather",
+        "affectsYieldEstimate": False,
+    }
+    if not isinstance(pagasa_agri_weather, dict):
+        return {**base, "reason": "Official agri-weather context is unavailable."}
+
+    region = province_region.get(province)
+    label = _pagasa_region_label(province, region)
+    if not label:
+        return {
+            **base,
+            "reason": "No matching PAGASA regional agri-weather grouping is available.",
+        }
+
+    record = next(
+        (
+            x
+            for x in pagasa_agri_weather.get("regions", [])
+            if x.get("regionLabel") == label
+        ),
+        None,
+    )
+    if not record:
+        return {
+            **base,
+            "reason": "The current PAGASA regional agri-weather record is unavailable.",
+        }
+
+    return {
+        **base,
+        "available": True,
+        "forecastPeriod": pagasa_agri_weather.get("forecastPeriod"),
+        "dekadNumber": pagasa_agri_weather.get("dekadNumber"),
+        "regionLabel": label,
+        "forecastRainfallMm": record.get("forecastRainfallMm"),
+        "relativeHumidityPct": record.get("relativeHumidityPct"),
+        "rainyDaysGt1Mm": record.get("rainyDaysGt1Mm"),
+        "temperatureC": record.get("temperatureC"),
+        "riceStages": record.get("riceStages") or [],
+        "farmOperations": record.get("farmOperations") or [],
+        "scope": (
+            "Official regional 10-day agri-weather context; it does not alter "
+            "the ANI XGBoost yield estimate."
+        ),
+    }
 
 
 def _satellite_vegetation_context(
@@ -536,6 +923,7 @@ def meta() -> dict[str, Any]:
     latest_year, latest_quarter = _latest_period()
     weather_year, weather_quarter = _latest_weather_period()
     satellite_period = _latest_satellite_period()
+    market_period = _latest_market_period()
     next_year, next_quarter = _next_period(latest_year, latest_quarter)
 
     return {
@@ -560,11 +948,38 @@ def meta() -> dict[str, Any]:
             else None
         ),
         "satellite_vegetation": satellite_evaluation,
+        "latest_market_period": (
+            {"year": market_period[0], "month": market_period[1]}
+            if market_period
+            else None
+        ),
+        "official_agri_weather": (
+            {
+                "source": pagasa_agri_weather.get("source"),
+                "forecastPeriod": pagasa_agri_weather.get("forecastPeriod"),
+                "dekadNumber": pagasa_agri_weather.get("dekadNumber"),
+            }
+            if isinstance(pagasa_agri_weather, dict)
+            else None
+        ),
         "suggested_next_target": {
             "year": next_year,
             "quarter": next_quarter,
         },
         "province_regions": province_region,
+    }
+
+
+@app.get("/farmer-context")
+def farmer_context(province: str = Query(...)) -> dict[str, Any]:
+    province = normalize_province_name(province)
+    if province not in province_region:
+        raise HTTPException(status_code=404, detail="Province not found in ANI data.")
+    return {
+        "province": province,
+        "region": province_region[province],
+        "marketContext": _market_context(province),
+        "officialAgriWeatherContext": _official_agri_weather_context(province),
     }
 
 
@@ -692,6 +1107,26 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         request.target_quarter,
         result.row,
     )
+    satellite_context = _satellite_vegetation_context(
+        province,
+        request.target_year,
+        request.target_quarter,
+    )
+    benchmark_context = _historical_benchmark_context(
+        province,
+        ecosystem,
+        request.target_year,
+        request.target_quarter,
+        predicted,
+    )
+    associated_signals = _associated_signals_context(
+        province,
+        request.target_year,
+        request.target_quarter,
+        result.row,
+        extra,
+        satellite_context,
+    )
 
     generated_at = generated_at_dt.isoformat()
     forecast_id = (
@@ -730,11 +1165,11 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         "previousQuarterAgriculturalStatus": extra["previous_quarter_agricultural_status"],
         "rainfallIndicator": extra["rainfall_indicator"],
         "temperatureIndicator": extra["temperature_indicator"],
-        "satelliteVegetationContext": _satellite_vegetation_context(
-            province,
-            request.target_year,
-            request.target_quarter,
-        ),
+        "satelliteVegetationContext": satellite_context,
+        "historicalBenchmarkContext": benchmark_context,
+        "associatedSignalsContext": associated_signals,
+        "marketContext": _market_context(province),
+        "officialAgriWeatherContext": _official_agri_weather_context(province),
         "percentDifferenceFromAverage": round(diff_pct, 1),
         "dataPointsUsed": result.prior_total,
         "sameQuarterObservations": result.prior_same_quarter,

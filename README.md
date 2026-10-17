@@ -12,7 +12,8 @@ All model outputs are analytical estimates. They are not official PSA crop stati
 - FastAPI service for model metadata, historical records, estimate availability, and XGBoost inference.
 - Processed agricultural, weather, and satellite vegetation datasets in `data/processed/`.
 - Bundled scikit-learn/XGBoost pipeline in `models/`.
-- Separate Environmental Decision Support output. Its values are not inputs to the XGBoost yield model and do not replace a yield estimate.
+- Historical yield benchmarks, associated pre-target signals, satellite vegetation, provincial palay farmgate-price context, and official PAGASA regional agri-weather context presented alongside model results.
+- Separate Environmental Decision Support output. Contextual layers are not inputs to the XGBoost yield model and do not replace a yield estimate.
 
 ## Data sources and integrated coverage
 
@@ -31,7 +32,9 @@ The principal processed datasets are:
 - `psa_2026_q1_q2_source_records.csv`: source-traceable Q1-Q2 2026 agricultural records.
 - `province_centroids_psgc.csv`: representative provincial coordinates used for the weather extraction method.
 - `province_quarter_satellite.csv`: quarterly cropland-masked MODIS NDVI/EVI summaries used for controlled satellite-feature evaluation.
-- `data_provenance.json`: source matrices, coverage, data-status, agricultural/weather/satellite methods, and evaluation/deployment provenance.
+- `palay_farmgate_prices.csv`: monthly provincial PSA OpenSTAT palay farmgate-price records retained as market context, not model predictors.
+- `pagasa_regional_agri_weather.json`: integrated DOST-PAGASA 10-Day Regional Agri-Weather information used as official latest-published-period context, not model predictors.
+- `data_provenance.json`: source matrices, coverage, data-status, agricultural/weather/satellite/context methods, and evaluation/deployment provenance.
 
 ANI's modeling unit is the province. Selected-city OpenSTAT series are outside that unit, and PSA notes that BARMM aggregate totals can include Eight Cluster Areas that are not separately assignable to a province. Accordingly, sums of ANI province-level rows are not intended to reproduce PSA national or regional aggregate totals exactly.
 
@@ -48,6 +51,26 @@ Satellite predictors are governed by the same chronological-validation principle
 For generated estimates, ANI presents a separate **Satellite Vegetation Context** when the immediately preceding quarter has a usable MODIS observation. The context reports pre-target cropland NDVI/EVI and compares them with earlier observations from the same seasonal quarter. The seasonal status is based on the previous-quarter NDVI relative to its historical 25th–75th percentile range. Satellite availability never determines yield-model eligibility and the context does not alter the XGBoost estimate. If the required pre-target satellite period is unavailable, ANI withholds only the satellite context rather than interpolating a value or withholding an otherwise valid yield estimate.
 
 The extraction and evaluation workflows are reproducible through `python -m tools.build_satellite_vegetation` and `python -m tools.evaluate_satellite_features`.
+
+## Farmer-facing contextual layers
+
+ANI supplements the model estimate with independent information that improves interpretation without changing XGBoost inference.
+
+**Historical Yield Benchmarks** compare the estimate with pre-target PSA history for the same province, ecosystem, and calendar quarter. ANI reports the province same-quarter median, recent five-year same-quarter median, historical upper quartile, regional same-quarter median, and historical percentile. These values are historical reference benchmarks and are not presented as a universal or agronomic optimal yield.
+
+**Associated Pre-Target Signals** summarize agricultural and environmental changes observed before the target quarter, including same-quarter production and harvested-area changes, rainfall relative to its historical seasonal median, temperature relative to its historical seasonal median, and the available satellite NDVI seasonal comparison. These signals describe coincident conditions; they do not establish that any one factor caused a yield change.
+
+**Provincial Palay Market Context** uses the PSA OpenSTAT Farm Price Survey for Palay. ANI stores monthly provincial farmgate prices for dry palay and reports the latest available price, month-over-month change, year-over-year change, and trailing 12-month range when sufficient records exist. Farmgate prices are market information and do not alter the yield estimate.
+
+**Official PAGASA Agri-Weather Context** uses DOST-PAGASA's 10-Day Regional Agri-Weather Information. ANI records the published forecast period, regional rainfall range, number of rainy days, temperature range, relative humidity, reported rice stages, and farm operations. This information supports current farm planning but remains separate from the historical lagged weather variables used by XGBoost.
+
+The bundled contextual files can be refreshed from their public sources with:
+
+```powershell
+.venv\Scripts\python.exe -m tools.update_farmer_context
+```
+
+The application includes the integrated copies so normal installation and offline demonstration do not depend on a successful live web request. Source periods remain visible in the interface so users can judge freshness.
 
 ## Predictor set
 
@@ -117,11 +140,11 @@ The serialized model artifact is created with scikit-learn **1.7.2**. Install th
 
 Historical records retain their associated regional context. For current province selection and display, ANI uses the latest integrated context together with current PSA administrative notes. This allows the interface to reflect the Negros Island Region for Negros Occidental, Negros Oriental, and Siquijor, and the 2026 realignment of Sulu to Region IX, while preserving historical observations.
 
-## Environmental Decision Support
+## Environmental and farmer decision context
 
-Environmental Decision Support is a separate short-term contextual analysis and does not alter the XGBoost yield estimate. Its availability is matched to province and ecosystem and checked against the stored report's forecast window.
+ANI keeps prediction and supporting context distinct. The deployed XGBoost model is limited to its validated agricultural and lagged agroclimatic predictor set. Historical benchmarks, associated pre-target signals, satellite vegetation, PSA farmgate prices, and PAGASA agri-weather information are displayed as independent contextual layers.
 
-Environmental summaries do not replace the model result or constitute a planting recommendation. Field-specific interpretation requires verified site context and locally validated agronomic decision thresholds.
+Environmental Decision Support remains a separate short-term analysis. Its availability is matched to province and ecosystem and checked against the stored report's forecast window. Environmental summaries do not replace the model result or constitute a planting recommendation. Field-specific interpretation requires verified site context and locally validated agronomic decision thresholds.
 
 ## Installation and use
 
@@ -165,7 +188,7 @@ Run the deterministic integration checks with:
 .venv\Scripts\python.exe verify_installation.py
 ```
 
-The verification suite checks the agricultural, weather, and satellite data integrity; fixed 2025 evaluation metrics; deployment training cutoff; satellite deployment decision; Q3/Q4 eligibility behavior; province normalization; current region mapping; temporal classification; and environmental freshness rules.
+The verification suite checks agricultural, weather, satellite, market, and official agri-weather data integrity; fixed 2025 evaluation metrics; deployment training cutoff; satellite deployment decision; contextual-layer separation from XGBoost; Q3/Q4 eligibility behavior; province normalization; current region mapping; temporal classification; and environmental freshness rules.
 
 An authorized developer can explicitly rebuild the deployment artifact with:
 
@@ -183,12 +206,12 @@ Results saved in Result History are stored on the current device in browser stor
 
 ```text
 backend/                 FastAPI service
-data/processed/          Agricultural, weather, satellite, provenance, and model-ready datasets
+data/processed/          Agricultural, weather, satellite, market, agri-weather, provenance, and model-ready datasets
 data/reference/          Frozen geospatial references used by satellite aggregation
 ml/                      Feature construction and model training
 models/                  Serialized model and metadata
 outputs/                 Environmental and satellite-evaluation outputs
-tools/                   Reproducible satellite extraction and evaluation utilities
+tools/                   Reproducible satellite extraction/evaluation and public contextual-data refresh utilities
 app.js                   Browser application logic
 environmental.js         Environmental decision-support presentation
 index.html               Application entry point
