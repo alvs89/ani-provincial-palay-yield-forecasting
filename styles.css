@@ -119,3 +119,6 @@
 .contextGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,430px),1fr));gap:14px;align-items:start}
 .contextGrid>.card{margin-bottom:0;width:100%}
 @media(max-width:760px){.contextGrid{grid-template-columns:1fr}}
+
+.currentPlanningNotice{border-color:#b9d9c6;background:#f0f8f3;color:#24533d;margin:0 0 14px}
+.currentPlanningNotice strong{color:#173f2d}
