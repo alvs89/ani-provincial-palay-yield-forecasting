@@ -29,6 +29,7 @@ WEATHER_PATH = DATA_DIR / "province_quarter_weather.csv"
 SATELLITE_PATH = DATA_DIR / "province_quarter_satellite.csv"
 MARKET_PATH = DATA_DIR / "palay_farmgate_prices.csv"
 PAGASA_AGRI_WEATHER_PATH = DATA_DIR / "pagasa_regional_agri_weather.json"
+PAGASA_CLIMATE_RISK_PATH = DATA_DIR / "pagasa_climate_risk.json"
 AGRICULTURAL_SOURCE_PATH = DATA_DIR / "psa_2026_q1_q2_source_records.csv"
 MODEL_PATH = MODEL_DIR / "ani_xgboost_pipeline.joblib"
 METADATA_PATH = MODEL_DIR / "metadata.json"
@@ -57,6 +58,11 @@ market_df = (
 pagasa_agri_weather = (
     json.loads(PAGASA_AGRI_WEATHER_PATH.read_text(encoding="utf-8"))
     if PAGASA_AGRI_WEATHER_PATH.is_file()
+    else None
+)
+pagasa_climate_risk = (
+    json.loads(PAGASA_CLIMATE_RISK_PATH.read_text(encoding="utf-8"))
+    if PAGASA_CLIMATE_RISK_PATH.is_file()
     else None
 )
 satellite_evaluation = (
@@ -542,6 +548,54 @@ def _official_agri_weather_context(province: str) -> dict[str, Any]:
     }
 
 
+def _official_climate_risk_context(province: str) -> dict[str, Any]:
+    base = {
+        "available": False,
+        "source": "DOST-PAGASA",
+        "ensoSourceUrl": (
+            "https://www.pagasa.dost.gov.ph/climate/el-nino-la-nina/advisories"
+        ),
+        "droughtSourceUrl": "https://droughtcaster.pagasa.dost.gov.ph/",
+        "definitionsUrl": "https://www.pagasa.dost.gov.ph/climate/climate-advisories",
+        "affectsYieldEstimate": False,
+    }
+    if not isinstance(pagasa_climate_risk, dict):
+        return {**base, "reason": "Official PAGASA climate-risk context is unavailable."}
+
+    enso = pagasa_climate_risk.get("enso") or {}
+    drought_root = pagasa_climate_risk.get("drought") or {}
+    record = (drought_root.get("provinces") or {}).get(province)
+    if not enso.get("available") and not record:
+        return {
+            **base,
+            "reason": (
+                "No current PAGASA ENSO or provincial drought context is "
+                "available for this selection."
+            ),
+        }
+
+    return {
+        **base,
+        "available": True,
+        "retrievedAtUtc": pagasa_climate_risk.get("retrievedAtUtc"),
+        "ensoAdvisory": enso if enso.get("available") else None,
+        "droughtAssessment": (
+            record.get("latestAssessment") if isinstance(record, dict) else None
+        ),
+        "droughtOutlook": (
+            record.get("outlook") or [] if isinstance(record, dict) else []
+        ),
+        "droughtIssuedAt": (
+            record.get("issuedAt") if isinstance(record, dict) else None
+        ),
+        "classificationNote": drought_root.get("classificationNote"),
+        "scope": (
+            "Official PAGASA climate-risk context. Drought categories and ENSO "
+            "advisories are displayed as published and are not calculated by ANI."
+        ),
+    }
+
+
 def _satellite_vegetation_context(
     province: str,
     target_year: int,
@@ -962,6 +1016,18 @@ def meta() -> dict[str, Any]:
             if isinstance(pagasa_agri_weather, dict)
             else None
         ),
+        "official_climate_risk": (
+            {
+                "source": pagasa_climate_risk.get("source"),
+                "retrievedAtUtc": pagasa_climate_risk.get("retrievedAtUtc"),
+                "enso": pagasa_climate_risk.get("enso"),
+                "droughtProvincesLoaded": (
+                    pagasa_climate_risk.get("drought", {}).get("loadedProvinces")
+                ),
+            }
+            if isinstance(pagasa_climate_risk, dict)
+            else None
+        ),
         "suggested_next_target": {
             "year": next_year,
             "quarter": next_quarter,
@@ -980,6 +1046,7 @@ def farmer_context(province: str = Query(...)) -> dict[str, Any]:
         "region": province_region[province],
         "marketContext": _market_context(province),
         "officialAgriWeatherContext": _official_agri_weather_context(province),
+        "officialClimateRiskContext": _official_climate_risk_context(province),
     }
 
 
@@ -1170,6 +1237,7 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         "associatedSignalsContext": associated_signals,
         "marketContext": _market_context(province),
         "officialAgriWeatherContext": _official_agri_weather_context(province),
+        "officialClimateRiskContext": _official_climate_risk_context(province),
         "percentDifferenceFromAverage": round(diff_pct, 1),
         "dataPointsUsed": result.prior_total,
         "sameQuarterObservations": result.prior_same_quarter,

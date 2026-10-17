@@ -152,10 +152,29 @@ assert provenance["palay_market_context"]["model_relationship"].startswith(
 assert provenance["official_agri_weather_context"]["model_relationship"].startswith(
     "Context only"
 )
+climate_context = __import__("json").loads(
+    (
+        ROOT
+        / "data"
+        / "processed"
+        / "pagasa_climate_risk.json"
+    ).read_text(encoding="utf-8")
+)
+assert climate_context["source"] == "DOST-PAGASA"
+assert climate_context["enso"]["available"] is True
+assert climate_context["enso"]["issuedDate"]
+assert climate_context["drought"]["loadedProvinces"] >= 75
+assert "Nueva Ecija" in climate_context["drought"]["provinces"]
+assert meta["official_climate_risk"]["droughtProvincesLoaded"] == (
+    climate_context["drought"]["loadedProvinces"]
+)
+assert provenance["official_climate_risk_context"]["model_relationship"].startswith(
+    "Context only"
+)
 print(
     "PASS Farmer context data: PSA provincial farmgate prices and official "
-    "PAGASA regional agri-weather records are integrated as contextual data "
-    "without entering the active model feature set."
+    "PAGASA agri-weather and climate-risk records are integrated as contextual "
+    "data without entering the active model feature set."
 )
 
 satellite = pd.read_csv(
@@ -385,6 +404,12 @@ assert official_weather_context["regionLabel"] == (
 assert official_weather_context["forecastRainfallMm"]
 assert official_weather_context["riceStages"]
 
+official_climate_context = prediction_payload["officialClimateRiskContext"]
+assert official_climate_context["affectsYieldEstimate"] is False
+assert official_climate_context["available"] is True
+assert official_climate_context["ensoAdvisory"]["available"] is True
+assert official_climate_context["ensoAdvisory"]["issuedDate"]
+
 farmer_context = client.get(
     "/farmer-context",
     params={"province": "Nueva Ecija"},
@@ -396,10 +421,15 @@ assert farmer_payload["officialAgriWeatherContext"]["available"] is True
 assert farmer_payload["officialAgriWeatherContext"]["regionLabel"] == (
     "Region 3 Central Luzon"
 )
+assert farmer_payload["officialClimateRiskContext"]["available"] is True
+assert farmer_payload["officialClimateRiskContext"]["droughtAssessment"]["status"] in {
+    "Not affected", "Dry condition", "Dry spell", "Drought"
+}
+assert farmer_payload["officialClimateRiskContext"]["droughtOutlook"]
 print(
     "PASS Farmer result context: historical benchmarks, associated signals, "
-    "PSA market context, and official PAGASA agri-weather context are available "
-    "without changing XGBoost inference."
+    "PSA market context, and official PAGASA agri-weather and climate-risk "
+    "context are available without changing XGBoost inference."
 )
 
 missing_satellite_context = client.post(

@@ -136,7 +136,7 @@
     "source": "Philippine Statistics Authority (PSA) OpenSTAT Farm Price Survey for Palay",
     "matrix": "0032M4AFN01",
     "source_url": "https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__2M__NFG/0032M4AFN01.px/",
-    "retrieved_at_utc": "2026-10-17T13:43:43.374907+00:00",
+    "retrieved_at_utc": "2026-10-17T14:05:25.068939+00:00",
     "frequency": "Monthly",
     "geographic_scope": "Provincial records available in the PSA matrix and aligned to ANI canonical province names.",
     "commodity_preference": "Palay [Paddy] Other Variety, dry (conv. to 14% mc)",
@@ -158,7 +158,7 @@
   "official_agri_weather_context": {
     "source": "DOST-PAGASA 10-Day Regional Agri-Weather Information",
     "source_url": "https://www.pagasa.dost.gov.ph/ten-day-regional-agri-weather",
-    "retrieved_at_utc": "2026-10-17T13:43:43.359035+00:00",
+    "retrieved_at_utc": "2026-10-17T14:05:23.824899+00:00",
     "integrated_forecast_period": "11 - 20 October 2026",
     "dekad_number": 29,
     "regional_records": 17,
@@ -198,5 +198,29 @@
       "interpretation": "Associated conditions only; the system does not infer that an individual signal caused a yield change."
     },
     "xgboost_relationship": "These interpretation layers do not modify the trained feature vector, model artifact, fixed 2025 evaluation, or prediction output."
+  },
+  "official_climate_risk_context": {
+    "source": "DOST-PAGASA",
+    "retrieved_at_utc": "2026-10-17T14:05:24.998816+00:00",
+    "enso_source_url": "https://www.pagasa.dost.gov.ph/climate/el-nino-la-nina/advisories",
+    "drought_source_url": "https://droughtcaster.pagasa.dost.gov.ph/",
+    "latest_enso_advisory": {
+      "available": true,
+      "phase": "El Nino",
+      "issuedDate": "2026-10-07",
+      "advisoryNumber": 5,
+      "title": "El Nino Advisory No. 5",
+      "sourceUrl": "https://www.pagasa.dost.gov.ph/climate/el-nino-la-nina/advisories",
+      "scope": "National PAGASA ENSO advisory. Local rainfall and agricultural impacts still depend on province-specific conditions and official local advisories."
+    },
+    "drought_provinces_loaded": 81,
+    "displayed_context": [
+      "latest PAGASA ENSO advisory",
+      "latest provincial drought assessment",
+      "published province drought outlook"
+    ],
+    "scope_note": "Official national/provincial climate-risk context. It is not a field-level diagnosis and does not replace PAGASA warnings, advisories, or LGU guidance.",
+    "model_relationship": "Context only; it is not an input to the active XGBoost model and does not alter yield-model eligibility or inference.",
+    "refresh_method": "python -m tools.update_farmer_context"
   }
 }

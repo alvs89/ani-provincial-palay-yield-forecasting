@@ -18,6 +18,7 @@ DATA_DIR = ROOT / "data" / "processed"
 HISTORY_PATH = DATA_DIR / "palay_history.csv"
 PRICE_PATH = DATA_DIR / "palay_farmgate_prices.csv"
 PAGASA_PATH = DATA_DIR / "pagasa_regional_agri_weather.json"
+PAGASA_CLIMATE_PATH = DATA_DIR / "pagasa_climate_risk.json"
 PROVENANCE_PATH = DATA_DIR / "data_provenance.json"
 
 PSA_API = (
@@ -29,6 +30,14 @@ PSA_SOURCE_URL = (
     "DB__2M__NFG/0032M4AFN01.px/"
 )
 PAGASA_URL = "https://www.pagasa.dost.gov.ph/ten-day-regional-agri-weather"
+PAGASA_ENSO_URL = "https://www.pagasa.dost.gov.ph/climate/el-nino-la-nina/advisories"
+PAGASA_DROUGHTCASTER_URL = "https://droughtcaster.pagasa.dost.gov.ph/"
+PAGASA_DROUGHTCASTER_PROXY = "https://droughtcaster.pagasa.dost.gov.ph/proxy.php"
+DROUGHTCASTER_PROVINCE_ALIASES = {
+    "Cotabato (North Cotabato)": "Cotabato",
+    "Davao de Oro (Compostela Valley)": "Davao de Oro",
+    "Tawi-tawi": "Tawi-Tawi",
+}
 
 
 def curl_text(url: str, *, payload: dict | None = None) -> str:
@@ -271,7 +280,140 @@ def update_pagasa_agri_weather() -> dict:
 
 
 
-def update_provenance(prices: pd.DataFrame, pagasa: dict) -> None:
+def _latest_enso_advisory(page: str) -> dict:
+    plain = _strip_html(page)
+    candidates: list[dict] = []
+    patterns = [
+        ("El Nino", r"(20\d{2}-\d{2}-\d{2})\s+El\s+Ni.{0,1}o\s+Advisory\s+(?:No\.?|no\.?)\s*(\d+)"),
+        ("La Nina", r"(20\d{2}-\d{2}-\d{2})\s+La\s+Ni.{0,1}a\s+Advisory\s+(?:No\.?|no\.?)\s*(\d+)"),
+    ]
+    for phase, pattern in patterns:
+        for match in re.finditer(pattern, plain, flags=re.I):
+            candidates.append(
+                {
+                    "phase": phase,
+                    "issuedDate": match.group(1),
+                    "advisoryNumber": int(match.group(2)),
+                    "title": f"{phase} Advisory No. {int(match.group(2))}",
+                }
+            )
+    if not candidates:
+        return {
+            "available": False,
+            "reason": "No current ENSO advisory could be parsed from the PAGASA advisory page.",
+        }
+    latest = max(candidates, key=lambda x: x["issuedDate"])
+    return {
+        "available": True,
+        **latest,
+        "sourceUrl": PAGASA_ENSO_URL,
+        "scope": (
+            "National PAGASA ENSO advisory. Local rainfall and agricultural impacts "
+            "still depend on province-specific conditions and official local advisories."
+        ),
+    }
+
+
+def _drought_map_payload(provinces: list[str]) -> dict:
+    joined = "|".join(provinces)
+    response = requests.get(
+        PAGASA_DROUGHTCASTER_PROXY,
+        params={
+            "endpoint": "drought-map",
+            "cacheOnly": "1",
+            "locations": joined,
+        },
+        headers={"User-Agent": "ANI Provincial Palay Yield Forecasting System"},
+        timeout=60,
+    )
+    response.raise_for_status()
+    payload = response.json()
+    if not isinstance(payload, dict):
+        raise RuntimeError("PAGASA DroughtCaster returned an unexpected response.")
+    return payload
+
+
+def update_pagasa_climate_risk() -> dict:
+    history = pd.read_csv(HISTORY_PATH)
+    provinces = sorted(history["Province"].dropna().astype(str).unique().tolist())
+
+    enso_response = requests.get(
+        PAGASA_ENSO_URL,
+        headers={"User-Agent": "ANI Provincial Palay Yield Forecasting System"},
+        timeout=45,
+    )
+    enso_response.raise_for_status()
+    enso_response.encoding = enso_response.apparent_encoding or "utf-8"
+    enso = _latest_enso_advisory(enso_response.text)
+
+    drought_requests = [
+        DROUGHTCASTER_PROVINCE_ALIASES.get(province, province)
+        for province in provinces
+    ]
+    drought_payload = _drought_map_payload(drought_requests)
+    reverse_aliases = {
+        source_name: ani_name
+        for ani_name, source_name in DROUGHTCASTER_PROVINCE_ALIASES.items()
+    }
+    province_records: dict[str, dict] = {}
+    for item in drought_payload.get("items", []):
+        payload = item.get("payload") or {}
+        source_province = str(
+            payload.get("name") or item.get("location") or ""
+        ).strip()
+        province = reverse_aliases.get(source_province, source_province)
+        if not province:
+            continue
+        series = [
+            x
+            for x in (payload.get("data") or [])
+            if isinstance(x, dict) and x.get("date") and x.get("type") and x.get("status")
+        ]
+        assessments = sorted(
+            (x for x in series if x.get("type") == "assessment"),
+            key=lambda x: x["date"],
+        )
+        outlook = sorted(
+            (x for x in series if x.get("type") == "outlook"),
+            key=lambda x: x["date"],
+        )
+        province_records[province] = {
+            "issuedAt": payload.get("issuedAt"),
+            "islandGroup": payload.get("islandGroup"),
+            "latestAssessment": assessments[-1] if assessments else None,
+            "outlook": outlook,
+        }
+
+    result = {
+        "source": "DOST-PAGASA",
+        "retrievedAtUtc": datetime.now(timezone.utc).isoformat(),
+        "enso": enso,
+        "drought": {
+            "source": "DOST-PAGASA PH Meteorological Drought Monitor",
+            "sourceUrl": PAGASA_DROUGHTCASTER_URL,
+            "definitionsUrl": "https://www.pagasa.dost.gov.ph/climate/climate-advisories",
+            "cacheComplete": bool(drought_payload.get("complete")),
+            "loadedProvinces": int(drought_payload.get("loaded") or len(province_records)),
+            "requestedProvinces": len(provinces),
+            "provinces": province_records,
+            "classificationNote": (
+                "ANI displays PAGASA's published Not affected, Dry condition, Dry spell, "
+                "and Drought classifications. ANI does not calculate its own drought class."
+            ),
+        },
+        "modelRelationship": (
+            "Official climate-risk context only; it is not an input to the active XGBoost "
+            "model and does not alter yield-model eligibility or inference."
+        ),
+    }
+    PAGASA_CLIMATE_PATH.write_text(
+        json.dumps(result, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    return result
+
+
+def update_provenance(prices: pd.DataFrame, pagasa: dict, climate: dict) -> None:
     if not PROVENANCE_PATH.is_file():
         return
 
@@ -339,6 +481,30 @@ def update_provenance(prices: pd.DataFrame, pagasa: dict) -> None:
         ),
         "refresh_method": "python -m tools.update_farmer_context",
     }
+    provenance["official_climate_risk_context"] = {
+        "source": "DOST-PAGASA",
+        "retrieved_at_utc": climate.get("retrievedAtUtc") or retrieval_time,
+        "enso_source_url": PAGASA_ENSO_URL,
+        "drought_source_url": PAGASA_DROUGHTCASTER_URL,
+        "latest_enso_advisory": climate.get("enso"),
+        "drought_provinces_loaded": (
+            climate.get("drought", {}).get("loadedProvinces")
+        ),
+        "displayed_context": [
+            "latest PAGASA ENSO advisory",
+            "latest provincial drought assessment",
+            "published province drought outlook",
+        ],
+        "scope_note": (
+            "Official national/provincial climate-risk context. It is not a field-level "
+            "diagnosis and does not replace PAGASA warnings, advisories, or LGU guidance."
+        ),
+        "model_relationship": (
+            "Context only; it is not an input to the active XGBoost model and does not "
+            "alter yield-model eligibility or inference."
+        ),
+        "refresh_method": "python -m tools.update_farmer_context",
+    }
     provenance["farmer_interpretation_layers"] = {
         "historical_yield_benchmarks": {
             "basis": (
@@ -388,7 +554,8 @@ def main() -> None:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     prices = update_psa_farmgate_prices()
     pagasa = update_pagasa_agri_weather()
-    update_provenance(prices, pagasa)
+    climate = update_pagasa_climate_risk()
+    update_provenance(prices, pagasa, climate)
     latest = prices.sort_values(["Year", "Month_Number"]).iloc[-1]
     print(
         f"Saved {len(prices):,} farmgate-price records through "
@@ -398,6 +565,11 @@ def main() -> None:
         f"Saved {len(pagasa['regions'])} PAGASA regional agri-weather records "
         f"for {pagasa.get('forecastPeriod') or 'the current published period'}: "
         f"{PAGASA_PATH}"
+    )
+    print(
+        "Saved PAGASA climate-risk context for "
+        f"{climate.get('drought', {}).get('loadedProvinces', 0)} provinces: "
+        f"{PAGASA_CLIMATE_PATH}"
     )
 
 

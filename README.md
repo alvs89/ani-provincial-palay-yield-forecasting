@@ -12,7 +12,7 @@ All model outputs are analytical estimates. They are not official PSA crop stati
 - FastAPI service for model metadata, historical records, estimate availability, and XGBoost inference.
 - Processed agricultural, weather, and satellite vegetation datasets in `data/processed/`.
 - Bundled scikit-learn/XGBoost pipeline in `models/`.
-- Historical yield benchmarks, associated pre-target signals, satellite vegetation, provincial palay farmgate-price context, and official PAGASA regional agri-weather context presented alongside model results.
+- Historical yield benchmarks, associated pre-target signals, satellite vegetation, provincial palay farmgate-price context, official PAGASA regional agri-weather context, and official PAGASA climate-risk context presented alongside model results.
 - Separate Environmental Decision Support output. Contextual layers are not inputs to the XGBoost yield model and do not replace a yield estimate.
 
 ## Data sources and integrated coverage
@@ -34,6 +34,7 @@ The principal processed datasets are:
 - `province_quarter_satellite.csv`: quarterly cropland-masked MODIS NDVI/EVI summaries used for controlled satellite-feature evaluation.
 - `palay_farmgate_prices.csv`: monthly provincial PSA OpenSTAT palay farmgate-price records retained as market context, not model predictors.
 - `pagasa_regional_agri_weather.json`: integrated DOST-PAGASA 10-Day Regional Agri-Weather information used as official latest-published-period context, not model predictors.
+- `pagasa_climate_risk.json`: DOST-PAGASA ENSO advisory and provincial meteorological drought assessment/outlook context, stored separately from model inputs.
 - `data_provenance.json`: source matrices, coverage, data-status, agricultural/weather/satellite/context methods, and evaluation/deployment provenance.
 
 ANI's modeling unit is the province. Selected-city OpenSTAT series are outside that unit, and PSA notes that BARMM aggregate totals can include Eight Cluster Areas that are not separately assignable to a province. Accordingly, sums of ANI province-level rows are not intended to reproduce PSA national or regional aggregate totals exactly.
@@ -63,6 +64,8 @@ ANI supplements the model estimate with independent information that improves in
 **Provincial Palay Market Context** uses the PSA OpenSTAT Farm Price Survey for Palay. ANI stores monthly provincial farmgate prices for dry palay and reports the latest available price, month-over-month change, year-over-year change, and trailing 12-month range when sufficient records exist. Farmgate prices are market information and do not alter the yield estimate.
 
 **Official PAGASA Agri-Weather Context** uses DOST-PAGASA's 10-Day Regional Agri-Weather Information. ANI records the published forecast period, regional rainfall range, number of rainy days, temperature range, relative humidity, reported rice stages, and farm operations. This information supports current farm planning but remains separate from the historical lagged weather variables used by XGBoost.
+
+**Official PAGASA Climate Risk Context** displays the latest published ENSO advisory together with PAGASA's provincial meteorological drought assessment and outlook. ANI shows PAGASA's own classifications—Not affected, Dry condition, Dry spell, and Drought—without calculating a replacement drought category. These climate-risk records are decision context only and do not alter the XGBoost yield estimate.
 
 The bundled contextual files can be refreshed from their public sources with:
 
@@ -142,7 +145,7 @@ Historical records retain their associated regional context. For current provinc
 
 ## Environmental and farmer decision context
 
-ANI keeps prediction and supporting context distinct. The deployed XGBoost model is limited to its validated agricultural and lagged agroclimatic predictor set. Historical benchmarks, associated pre-target signals, satellite vegetation, PSA farmgate prices, and PAGASA agri-weather information are displayed as independent contextual layers.
+ANI keeps prediction and supporting context distinct. The deployed XGBoost model is limited to its validated agricultural and lagged agroclimatic predictor set. Historical benchmarks, associated pre-target signals, satellite vegetation, PSA farmgate prices, PAGASA agri-weather information, and PAGASA climate-risk information are displayed as independent contextual layers.
 
 Environmental Decision Support remains a separate short-term analysis. Its availability is matched to province and ecosystem and checked against the stored report's forecast window. Environmental summaries do not replace the model result or constitute a planting recommendation. Field-specific interpretation requires verified site context and locally validated agronomic decision thresholds.
 
@@ -188,7 +191,7 @@ Run the deterministic integration checks with:
 .venv\Scripts\python.exe verify_installation.py
 ```
 
-The verification suite checks agricultural, weather, satellite, market, and official agri-weather data integrity; fixed 2025 evaluation metrics; deployment training cutoff; satellite deployment decision; contextual-layer separation from XGBoost; Q3/Q4 eligibility behavior; province normalization; current region mapping; temporal classification; and environmental freshness rules.
+The verification suite checks agricultural, weather, satellite, market, official agri-weather, and official climate-risk data integrity; fixed 2025 evaluation metrics; deployment training cutoff; satellite deployment decision; contextual-layer separation from XGBoost; Q3/Q4 eligibility behavior; province normalization; current region mapping; temporal classification; and environmental freshness rules.
 
 An authorized developer can explicitly rebuild the deployment artifact with:
 
@@ -206,7 +209,7 @@ Results saved in Result History are stored on the current device in browser stor
 
 ```text
 backend/                 FastAPI service
-data/processed/          Agricultural, weather, satellite, market, agri-weather, provenance, and model-ready datasets
+data/processed/          Agricultural, weather, satellite, market, agri-weather, climate-risk, provenance, and model-ready datasets
 data/reference/          Frozen geospatial references used by satellite aggregation
 ml/                      Feature construction and model training
 models/                  Serialized model and metadata
