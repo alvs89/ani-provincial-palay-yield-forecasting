@@ -660,3 +660,11 @@
     text-align:left;
   }
 }
+
+/* Keep help bubbles balanced and independent of compact metric badge styles. */
+.modelDataPage .infoTipPopup,
+.infoTipPopup{padding:12px 14px;border-radius:10px;font-weight:500;text-align:left;box-sizing:border-box;min-width:0}
+.modelCards .infoTipPopup{white-space:normal;line-height:1.5}
+
+/* Never reveal a fixed tooltip at fallback (0,0) before its trigger is measured. */
+.infoTip .infoTipPopup:not(.isPositioned){opacity:0 !important;visibility:hidden !important;pointer-events:none;transition:none}
