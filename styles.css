@@ -668,3 +668,6 @@
 
 /* Never reveal a fixed tooltip at fallback (0,0) before its trigger is measured. */
 .infoTip .infoTipPopup:not(.isPositioned){opacity:0 !important;visibility:hidden !important;pointer-events:none;transition:none}
+
+/* Feature groups end at their content instead of stretching with Data Sources. */
+.modelDataPage .twoCol>.activeFeatureGroupsCard{height:fit-content;align-self:start}
