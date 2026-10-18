@@ -888,3 +888,70 @@
     max-width:52%;
   }
 }
+
+/* Make PAGASA drought outlook scannable month-by-month instead of one stacked sentence. */
+.droughtOutlookGroup{
+  margin-top:12px;
+  padding-top:4px;
+}
+.droughtOutlookHeading{
+  margin-bottom:9px;
+  font-size:14px;
+  font-weight:700;
+  color:#53655b;
+}
+.droughtOutlookGrid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px 12px;
+}
+.droughtMonth{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  min-width:0;
+  padding:10px 12px;
+  border:1px solid #dfe8e2;
+  border-radius:9px;
+  background:#fbfdfc;
+}
+.droughtMonth span{
+  color:#5f7067;
+  font-size:13px;
+  line-height:1.25;
+}
+.droughtStatus{
+  flex:0 0 auto;
+  padding:4px 8px;
+  border-radius:999px;
+  font-size:12px;
+  line-height:1.2;
+  white-space:nowrap;
+}
+.droughtStatus.dry-condition{
+  background:#fff4cc;
+  color:#7a5a00;
+}
+.droughtStatus.dry-spell{
+  background:#ffe5c7;
+  color:#8b4c00;
+}
+.droughtStatus.drought{
+  background:#ffe0e0;
+  color:#8a2222;
+}
+.droughtStatus.not-affected{
+  background:#e8f5ec;
+  color:#276840;
+}
+.droughtDefinitions{
+  margin-top:12px;
+}
+.compactEmpty{
+  padding:16px;
+  grid-column:1/-1;
+}
+@media(max-width:760px){
+  .droughtOutlookGrid{grid-template-columns:1fr}
+}
