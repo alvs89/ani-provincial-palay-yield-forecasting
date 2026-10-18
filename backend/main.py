@@ -128,6 +128,7 @@ TEMPORAL_RESULT_TYPES = {
     "PROSPECTIVE_FORECAST": "Prospective Forecast",
     "CURRENT_QUARTER_ESTIMATE": "Current-Quarter Estimate",
     "RETROSPECTIVE_ESTIMATE": "Retrospective Estimate",
+    "POST_PERIOD_ESTIMATE_PENDING_OFFICIAL": "Post-Period Model Estimate — Official Outcome Pending",
 }
 MIN_SATELLITE_SEASONAL_OBSERVATIONS = 5
 SATELLITE_CONTEXT_SOURCE = "NASA MODIS/Terra MOD13A1 Collection 6.1"
@@ -1178,6 +1179,58 @@ def classify_target_period(
     }
 
 
+def _target_outcome_available(
+    province: str,
+    ecosystem: str,
+    target_year: int,
+    target_quarter: int,
+) -> bool:
+    """Return whether ANI already contains the official target-quarter agricultural outcome."""
+    rows = history_df[
+        (history_df["Province"] == province)
+        & (history_df["Ecosystem"] == ecosystem)
+        & (history_df["Year"].astype(int) == int(target_year))
+        & (history_df["Quarter_Number"].astype(int) == int(target_quarter))
+    ]
+    return not rows.empty
+
+
+def classify_target_with_outcome_status(
+    province: str,
+    ecosystem: str,
+    target_year: int,
+    target_quarter: int,
+    reference_date: date | None = None,
+) -> dict[str, Any]:
+    """Add official-outcome availability to the temporal classification."""
+    temporal = classify_target_period(
+        target_year,
+        target_quarter,
+        reference_date,
+    )
+    outcome_available = _target_outcome_available(
+        province,
+        ecosystem,
+        target_year,
+        target_quarter,
+    )
+    if (
+        temporal["temporalStatus"] == "RETROSPECTIVE_ESTIMATE"
+        and not outcome_available
+    ):
+        temporal["temporalStatus"] = "POST_PERIOD_ESTIMATE_PENDING_OFFICIAL"
+        temporal["resultType"] = TEMPORAL_RESULT_TYPES[
+            "POST_PERIOD_ESTIMATE_PENDING_OFFICIAL"
+        ]
+    temporal["officialOutcomeAvailable"] = outcome_available
+    temporal["officialOutcomeStatus"] = (
+        "Official target-quarter outcome available in ANI"
+        if outcome_available
+        else "Official target-quarter outcome not yet integrated in ANI"
+    )
+    return temporal
+
+
 def classify_environmental_freshness(
     report: dict[str, Any],
     reference_date: date | None = None,
@@ -1445,7 +1498,13 @@ def forecast_availability(
                 "sameQuarterObservations": result.prior_same_quarter,
             }
         if result.eligible:
-            temporal = classify_target_period(year, quarter, reference_date)
+            temporal = classify_target_with_outcome_status(
+                province,
+                eco,
+                year,
+                quarter,
+                reference_date,
+            )
             available.append({
                 "year": year,
                 "quarter": quarter,
@@ -1455,6 +1514,8 @@ def forecast_availability(
                 "resultType": temporal["resultType"],
                 "targetPeriodStart": temporal["targetPeriodStart"],
                 "targetPeriodEnd": temporal["targetPeriodEnd"],
+                "officialOutcomeAvailable": temporal["officialOutcomeAvailable"],
+                "officialOutcomeStatus": temporal["officialOutcomeStatus"],
             })
 
     return {
@@ -1489,7 +1550,9 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         request.target_quarter,
     )
     generated_at_dt = datetime.now(timezone.utc)
-    temporal = classify_target_period(
+    temporal = classify_target_with_outcome_status(
+        province,
+        ecosystem,
         request.target_year,
         request.target_quarter,
         generated_at_dt.astimezone(PHILIPPINE_TIMEZONE).date(),

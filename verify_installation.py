@@ -338,6 +338,12 @@ for field in (
     )
 assert prediction_payload["referenceTimezone"] == "Asia/Manila"
 assert date.fromisoformat(prediction_payload["referenceDate"])
+assert prediction_payload["temporalStatus"] == "POST_PERIOD_ESTIMATE_PENDING_OFFICIAL"
+assert prediction_payload["resultType"] == "Post-Period Model Estimate — Official Outcome Pending"
+assert prediction_payload["officialOutcomeAvailable"] is False
+assert prediction_payload["officialOutcomeStatus"] == (
+    "Official target-quarter outcome not yet integrated in ANI"
+)
 
 satellite_context = prediction_payload["satelliteVegetationContext"]
 assert satellite_context["available"] is True
@@ -591,10 +597,17 @@ for province in (
     )
     assert response.status_code == 200, response.text
     targets = response.json()["availableTargets"]
-    assert any(
-        target["year"] == 2026 and target["quarter"] == 3
-        for target in targets
-    ), (province, targets)
+    q3_target = next(
+        (
+            target
+            for target in targets
+            if target["year"] == 2026 and target["quarter"] == 3
+        ),
+        None,
+    )
+    assert q3_target is not None, (province, targets)
+    assert q3_target["temporalStatus"] == "POST_PERIOD_ESTIMATE_PENDING_OFFICIAL"
+    assert q3_target["officialOutcomeAvailable"] is False
 
 tawi = client.get(
     "/forecast-availability",
