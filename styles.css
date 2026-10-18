@@ -956,10 +956,10 @@
   .droughtOutlookGrid{grid-template-columns:1fr}
 }
 
-/* Add breathing room between the current-planning notice and the context cards. */
-.currentPlanningNotice{
+/* Override compact result callouts to separate the planning notice from PAGASA cards. */
+.resultSection .infoBox.currentPlanningNotice{
   margin-bottom:20px;
 }
 @media(max-width:760px){
-  .currentPlanningNotice{margin-bottom:16px}
+  .resultSection .infoBox.currentPlanningNotice{margin-bottom:16px}
 }
