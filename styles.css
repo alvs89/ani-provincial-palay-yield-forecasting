@@ -671,3 +671,106 @@
 
 /* Feature groups end at their content instead of stretching with Data Sources. */
 .modelDataPage .twoCol>.activeFeatureGroupsCard{height:fit-content;align-self:start}
+
+/* Farmer-facing analytical additions */
+.vegetationRelationship{
+  margin-top:18px;
+  padding-top:16px;
+  border-top:1px solid #e0e8e3;
+}
+.vegetationRelationship h3{
+  margin:0 0 5px;
+  font-size:15px;
+  color:#173b2c;
+}
+.vegetationRelationship>p{
+  margin:0 0 10px;
+  font-size:12.5px;
+  color:#607168;
+  line-height:1.5;
+}
+.vegetationRelationship .summary>div{
+  align-items:center;
+}
+.vegetationRelationshipNote{
+  margin-top:16px;
+}
+.guidanceCard{
+  margin-top:16px;
+}
+.guidanceGrid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin:4px 0 14px;
+}
+.guidanceItem{
+  border:1px solid #dce7e0;
+  border-radius:10px;
+  padding:14px;
+  background:#f9fcfa;
+}
+.guidanceItem h3{
+  margin:0 0 7px;
+  font-size:14px;
+  color:#153c2b;
+}
+.guidanceItem p{
+  margin:0 0 9px;
+  font-size:13px;
+  line-height:1.5;
+  color:#4f6259;
+}
+.guidanceItem small{
+  display:block;
+  font-size:11px;
+  line-height:1.4;
+  color:#6d7d75;
+  font-weight:600;
+}
+@media(max-width:760px){
+  .guidanceGrid{grid-template-columns:1fr}
+}
+
+/* Data freshness summary */
+.freshnessGrid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:10px;
+  margin:4px 0 14px;
+}
+.freshnessGrid>div{
+  border:1px solid #dfe8e2;
+  border-radius:9px;
+  padding:13px;
+  background:#fbfdfc;
+  min-height:105px;
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+}
+.freshnessGrid span{
+  font-size:11px;
+  font-weight:800;
+  color:#587067;
+  text-transform:uppercase;
+  letter-spacing:.25px;
+}
+.freshnessGrid strong{
+  font-size:16px;
+  line-height:1.25;
+  color:#132d22;
+}
+.freshnessGrid small{
+  margin-top:auto;
+  font-size:11px;
+  line-height:1.35;
+  color:#687970;
+}
+@media(max-width:1200px){
+  .freshnessGrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:760px){
+  .freshnessGrid{grid-template-columns:1fr}
+  .freshnessGrid>div{min-height:0}
+}

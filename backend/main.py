@@ -251,6 +251,19 @@ def _historical_benchmark_context(
         "provinceUpperQuartileBenchmark": (
             round(upper_quartile, 3) if upper_quartile is not None else None
         ),
+        "attainableHistoricalBenchmark": (
+            round(upper_quartile, 3) if upper_quartile is not None else None
+        ),
+        "gapFromAttainableBenchmarkMtHa": (
+            round(predicted_yield - upper_quartile, 3)
+            if upper_quartile is not None
+            else None
+        ),
+        "gapFromAttainableBenchmarkPct": (
+            round((predicted_yield - upper_quartile) / upper_quartile * 100.0, 1)
+            if upper_quartile not in {None, 0}
+            else None
+        ),
         "regionalSameQuarterMedian": (
             round(regional_median, 3) if regional_median is not None else None
         ),
@@ -361,6 +374,353 @@ def _associated_signals_context(
         ),
         "affectsYieldEstimate": False,
     }
+
+
+
+def _yield_pattern_context(
+    province: str,
+    ecosystem: str,
+    target_year: int,
+    target_quarter: int,
+    predicted_yield: float,
+) -> dict[str, Any]:
+    """Summarize pre-target historical patterns without changing model inference."""
+    eco = normalize_ecosystem(ecosystem)
+    target_idx = _period_key(target_year, target_quarter)
+    prior = history_df[
+        (history_df["Province"] == province)
+        & (history_df["Ecosystem"] == eco)
+        & (
+            history_df["Year"].astype(int) * 4
+            + history_df["Quarter_Number"].astype(int)
+            - 1
+            < target_idx
+        )
+    ].copy()
+    prior["Yield_mt_per_ha"] = pd.to_numeric(
+        prior["Yield_mt_per_ha"], errors="coerce"
+    )
+    prior = prior.dropna(subset=["Yield_mt_per_ha"])
+
+    same_q = prior[
+        prior["Quarter_Number"].astype(int) == int(target_quarter)
+    ].sort_values("Year")
+
+    def trend_pct_per_year(frame: pd.DataFrame) -> float | None:
+        if len(frame) < 6:
+            return None
+        x = frame["Year"].astype(float)
+        y = frame["Yield_mt_per_ha"].astype(float)
+        x_centered = x - x.mean()
+        denom = float((x_centered**2).sum())
+        mean_y = float(y.mean())
+        if denom <= 0 or mean_y == 0:
+            return None
+        slope = float((x_centered * (y - y.mean())).sum() / denom)
+        return slope / mean_y * 100.0
+
+    long_term_trend = trend_pct_per_year(same_q)
+
+    recent_change = None
+    if len(same_q) >= 6:
+        recent3 = float(same_q.tail(3)["Yield_mt_per_ha"].median())
+        previous3 = float(same_q.tail(6).head(3)["Yield_mt_per_ha"].median())
+        if previous3 != 0:
+            recent_change = (recent3 - previous3) / previous3 * 100.0
+
+    seasonal_medians = (
+        prior.groupby("Quarter_Number")["Yield_mt_per_ha"].median().dropna()
+    )
+    seasonal_rank = None
+    target_typical = None
+    if int(target_quarter) in seasonal_medians.index and not seasonal_medians.empty:
+        target_typical = float(seasonal_medians.loc[int(target_quarter)])
+        ordered = seasonal_medians.sort_values(ascending=False)
+        seasonal_rank = int(list(ordered.index).index(int(target_quarter)) + 1)
+
+    percentile = (
+        float((same_q["Yield_mt_per_ha"] <= predicted_yield).mean() * 100.0)
+        if not same_q.empty
+        else None
+    )
+    if percentile is None:
+        anomaly = "Insufficient history"
+    elif percentile <= 10:
+        anomaly = "Unusually Low vs Historical Same-Quarter Values"
+    elif percentile <= 25:
+        anomaly = "Below Typical Same-Quarter Range"
+    elif percentile < 75:
+        anomaly = "Within Typical Same-Quarter Range"
+    elif percentile < 90:
+        anomaly = "Above Typical Same-Quarter Range"
+    else:
+        anomaly = "Unusually High vs Historical Same-Quarter Values"
+
+    if long_term_trend is None:
+        trend_direction = "Insufficient history"
+    elif abs(long_term_trend) < 0.5:
+        trend_direction = "Broadly Stable"
+    elif long_term_trend > 0:
+        trend_direction = "Long-Term Increase"
+    else:
+        trend_direction = "Long-Term Decline"
+
+    return {
+        "available": not same_q.empty,
+        "sameQuarterObservations": int(len(same_q)),
+        "longTermSameQuarterTrendPctPerYear": (
+            round(long_term_trend, 2) if long_term_trend is not None else None
+        ),
+        "longTermTrendDirection": trend_direction,
+        "recentThreeVsPreviousThreePct": (
+            round(recent_change, 1) if recent_change is not None else None
+        ),
+        "historicalPercentile": (
+            round(percentile, 1) if percentile is not None else None
+        ),
+        "anomalyStatus": anomaly,
+        "targetQuarterHistoricalMedian": (
+            round(target_typical, 3) if target_typical is not None else None
+        ),
+        "seasonalQuarterRank": seasonal_rank,
+        "seasonalQuarterCount": int(len(seasonal_medians)),
+        "interpretation": (
+            "Patterns are calculated only from observations available before the "
+            "target period. They describe historical behavior and do not establish "
+            "the causes of a yield change."
+        ),
+        "affectsYieldEstimate": False,
+    }
+
+
+def _vegetation_yield_relationship(
+    province: str,
+    ecosystem: str,
+    target_year: int,
+    target_quarter: int,
+) -> dict[str, Any]:
+    """Exploratory province-level cropland vegetation/yield associations."""
+    base = {
+        "available": False,
+        "source": SATELLITE_CONTEXT_SOURCE,
+        "affectsYieldEstimate": False,
+        "analysisType": "Exploratory association; not causal",
+    }
+    if satellite_df.empty:
+        return {**base, "reason": "Satellite vegetation data are unavailable."}
+
+    eco = normalize_ecosystem(ecosystem)
+    target_idx = _period_key(target_year, target_quarter)
+    yields = history_df[
+        (history_df["Province"] == province)
+        & (history_df["Ecosystem"] == eco)
+        & (
+            history_df["Year"].astype(int) * 4
+            + history_df["Quarter_Number"].astype(int)
+            - 1
+            < target_idx
+        )
+    ][["Year", "Quarter_Number", "Yield_mt_per_ha"]].copy()
+    sats = satellite_df[
+        (satellite_df["Province"] == province)
+        & (
+            satellite_df["Year"].astype(int) * 4
+            + satellite_df["Quarter"].astype(int)
+            - 1
+            < target_idx
+        )
+    ][["Year", "Quarter", "Cropland_NDVI_Mean", "Cropland_EVI_Mean"]].copy()
+
+    merged = yields.merge(
+        sats,
+        left_on=["Year", "Quarter_Number"],
+        right_on=["Year", "Quarter"],
+        how="inner",
+    )
+    for col in ["Yield_mt_per_ha", "Cropland_NDVI_Mean", "Cropland_EVI_Mean"]:
+        merged[col] = pd.to_numeric(merged[col], errors="coerce")
+    merged = merged.dropna(
+        subset=["Yield_mt_per_ha", "Cropland_NDVI_Mean", "Cropland_EVI_Mean"]
+    )
+    if len(merged) < 12:
+        return {
+            **base,
+            "reason": "Fewer than 12 matched historical vegetation-yield observations are available.",
+            "matchedObservations": int(len(merged)),
+        }
+
+    def correlation(x: pd.Series, y: pd.Series) -> float | None:
+        if x.nunique() < 2 or y.nunique() < 2:
+            return None
+        value = x.corr(y)
+        return float(value) if pd.notna(value) else None
+
+    def seasonal_adjusted_corr(column: str) -> float | None:
+        work = merged[["Quarter_Number", "Yield_mt_per_ha", column]].copy()
+        yield_anomaly = work["Yield_mt_per_ha"] - work.groupby(
+            "Quarter_Number"
+        )["Yield_mt_per_ha"].transform("median")
+        veg_anomaly = work[column] - work.groupby(
+            "Quarter_Number"
+        )[column].transform("median")
+        return correlation(yield_anomaly, veg_anomaly)
+
+    def describe(r: float | None) -> str:
+        if r is None:
+            return "Unavailable"
+        a = abs(r)
+        strength = (
+            "Very weak" if a < 0.20 else
+            "Weak" if a < 0.40 else
+            "Moderate" if a < 0.60 else
+            "Strong" if a < 0.80 else
+            "Very strong"
+        )
+        direction = "positive" if r > 0 else "negative" if r < 0 else "neutral"
+        return f"{strength} {direction} association"
+
+    ndvi_raw = correlation(merged["Yield_mt_per_ha"], merged["Cropland_NDVI_Mean"])
+    evi_raw = correlation(merged["Yield_mt_per_ha"], merged["Cropland_EVI_Mean"])
+    ndvi_seasonal = seasonal_adjusted_corr("Cropland_NDVI_Mean")
+    evi_seasonal = seasonal_adjusted_corr("Cropland_EVI_Mean")
+
+    return {
+        **base,
+        "available": True,
+        "matchedObservations": int(len(merged)),
+        "ndviPearson": round(ndvi_raw, 3) if ndvi_raw is not None else None,
+        "eviPearson": round(evi_raw, 3) if evi_raw is not None else None,
+        "ndviSeasonallyAdjustedCorrelation": (
+            round(ndvi_seasonal, 3) if ndvi_seasonal is not None else None
+        ),
+        "eviSeasonallyAdjustedCorrelation": (
+            round(evi_seasonal, 3) if evi_seasonal is not None else None
+        ),
+        "ndviInterpretation": describe(ndvi_seasonal),
+        "eviInterpretation": describe(evi_seasonal),
+        "guardrail": (
+            "MODIS indicators are province-level cropland summaries, not rice-only "
+            "field measurements. Correlation can show association but cannot prove "
+            "that vegetation conditions caused a yield change."
+        ),
+    }
+
+
+def _farmer_guidance_context(
+    associated: dict[str, Any],
+    benchmark: dict[str, Any],
+    agri_weather: dict[str, Any],
+    climate_risk: dict[str, Any],
+) -> dict[str, Any]:
+    """Generate transparent monitoring guidance, not agronomic prescriptions."""
+    items: list[dict[str, str]] = []
+
+    rain_diff = (associated.get("rainfall") or {}).get(
+        "differenceFromSeasonalMedianPct"
+    )
+    temp_diff = (associated.get("temperature") or {}).get(
+        "differenceFromSeasonalMedianC"
+    )
+    ndvi_diff = associated.get("satelliteNdviDifferenceFromSeasonalMedianPct")
+    percentile = benchmark.get("historicalPercentile")
+
+    if rain_diff is not None and float(rain_diff) <= -20:
+        items.append({
+            "title": "Review water availability",
+            "detail": (
+                "Pre-target rainfall was notably below its seasonal median. "
+                "Check current PAGASA rainfall information and local irrigation "
+                "availability before water-sensitive farm operations."
+            ),
+            "basis": "ANI historical rainfall signal + official PAGASA context",
+        })
+    elif rain_diff is not None and float(rain_diff) >= 30:
+        items.append({
+            "title": "Monitor excess-rainfall impacts",
+            "detail": (
+                "Pre-target rainfall was well above its seasonal median. Review "
+                "drainage, field access, and current PAGASA rainfall advisories."
+            ),
+            "basis": "ANI historical rainfall signal + official PAGASA context",
+        })
+
+    if temp_diff is not None and float(temp_diff) >= 1.0:
+        items.append({
+            "title": "Monitor warmer-than-usual conditions",
+            "detail": (
+                "Pre-target temperature was above its seasonal median. Pay extra "
+                "attention to crop stage, water condition, and current PAGASA "
+                "temperature guidance."
+            ),
+            "basis": "ANI temperature signal + official PAGASA context",
+        })
+
+    if ndvi_diff is not None and float(ndvi_diff) <= -7.5:
+        items.append({
+            "title": "Inspect possible vegetation stress",
+            "detail": (
+                "Province-level cropland greenness was below its seasonal median. "
+                "Use field inspection to check whether rice areas show stress, pest, "
+                "water, or management issues; the satellite signal is not a diagnosis."
+            ),
+            "basis": "MODIS cropland vegetation context",
+        })
+
+    if percentile is not None and float(percentile) <= 25:
+        items.append({
+            "title": "Review the low historical position",
+            "detail": (
+                "The estimate is in the lower part of this province's same-quarter "
+                "history. Compare current field conditions with recent better-performing "
+                "same-season years before deciding on interventions."
+            ),
+            "basis": "PSA historical yield benchmark",
+        })
+
+    if agri_weather.get("available") and agri_weather.get("farmOperations"):
+        operations = ", ".join(agri_weather.get("farmOperations", [])[:5])
+        items.append({
+            "title": "Check current PAGASA farm-operation guidance",
+            "detail": f"Current regional PAGASA guidance highlights: {operations}.",
+            "basis": "DOST-PAGASA 10-Day Regional Agri-Weather Information",
+        })
+
+    if climate_risk.get("available"):
+        drought = climate_risk.get("droughtAssessment") or {}
+        status = str(drought.get("status") or "").strip()
+        if status and status.lower() not in {"normal", "no drought", "none", "not affected", "not affected by drought"}:
+            items.append({
+                "title": "Review official climate-risk status",
+                "detail": (
+                    f"PAGASA's latest provincial drought assessment reports: {status}. "
+                    "Use the official drought outlook together with short-term weather "
+                    "information for planning."
+                ),
+                "basis": "DOST-PAGASA climate-risk context",
+            })
+
+    if not items:
+        items.append({
+            "title": "Continue routine monitoring",
+            "detail": (
+                "ANI did not detect a large pre-target deviation among the currently "
+                "integrated signals. Continue checking field conditions and the latest "
+                "official PAGASA advisories."
+            ),
+            "basis": "ANI contextual screening + official PAGASA context",
+        })
+
+    return {
+        "available": True,
+        "items": items[:5],
+        "guardrail": (
+            "These are monitoring and planning prompts, not field-specific agronomic "
+            "prescriptions. Verify conditions locally and follow official/local "
+            "agricultural guidance before acting."
+        ),
+        "affectsYieldEstimate": False,
+    }
+
 
 
 def _market_context(province: str) -> dict[str, Any]:
@@ -1194,6 +1554,27 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         extra,
         satellite_context,
     )
+    yield_patterns = _yield_pattern_context(
+        province,
+        ecosystem,
+        request.target_year,
+        request.target_quarter,
+        predicted,
+    )
+    vegetation_yield_relationship = _vegetation_yield_relationship(
+        province,
+        ecosystem,
+        request.target_year,
+        request.target_quarter,
+    )
+    official_agri_weather = _official_agri_weather_context(province)
+    official_climate_risk = _official_climate_risk_context(province)
+    farmer_guidance = _farmer_guidance_context(
+        associated_signals,
+        benchmark_context,
+        official_agri_weather,
+        official_climate_risk,
+    )
 
     generated_at = generated_at_dt.isoformat()
     forecast_id = (
@@ -1233,11 +1614,14 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         "rainfallIndicator": extra["rainfall_indicator"],
         "temperatureIndicator": extra["temperature_indicator"],
         "satelliteVegetationContext": satellite_context,
+        "vegetationYieldRelationship": vegetation_yield_relationship,
         "historicalBenchmarkContext": benchmark_context,
+        "yieldPatternContext": yield_patterns,
         "associatedSignalsContext": associated_signals,
+        "farmerGuidanceContext": farmer_guidance,
         "marketContext": _market_context(province),
-        "officialAgriWeatherContext": _official_agri_weather_context(province),
-        "officialClimateRiskContext": _official_climate_risk_context(province),
+        "officialAgriWeatherContext": official_agri_weather,
+        "officialClimateRiskContext": official_climate_risk,
         "percentDifferenceFromAverage": round(diff_pct, 1),
         "dataPointsUsed": result.prior_total,
         "sameQuarterObservations": result.prior_same_quarter,

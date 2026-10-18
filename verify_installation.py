@@ -371,6 +371,26 @@ assert signals_context["interpretationGuardrail"].startswith(
     "These are associated pre-target conditions"
 )
 
+yield_patterns = prediction_payload["yieldPatternContext"]
+assert yield_patterns["affectsYieldEstimate"] is False
+assert yield_patterns["available"] is True
+assert yield_patterns["sameQuarterObservations"] >= 8
+assert 0 <= yield_patterns["historicalPercentile"] <= 100
+assert yield_patterns["seasonalQuarterRank"] in {1, 2, 3, 4}
+
+vegetation_relationship = prediction_payload["vegetationYieldRelationship"]
+assert vegetation_relationship["affectsYieldEstimate"] is False
+assert vegetation_relationship["available"] is True
+assert vegetation_relationship["matchedObservations"] >= 12
+assert -1 <= vegetation_relationship["ndviSeasonallyAdjustedCorrelation"] <= 1
+assert -1 <= vegetation_relationship["eviSeasonallyAdjustedCorrelation"] <= 1
+
+guidance_context = prediction_payload["farmerGuidanceContext"]
+assert guidance_context["affectsYieldEstimate"] is False
+assert guidance_context["available"] is True
+assert guidance_context["items"]
+assert all(item.get("title") and item.get("detail") for item in guidance_context["items"])
+
 market_context = prediction_payload["marketContext"]
 assert market_context["affectsYieldEstimate"] is False
 assert market_context["available"] is True
@@ -427,9 +447,10 @@ assert farmer_payload["officialClimateRiskContext"]["droughtAssessment"]["status
 }
 assert farmer_payload["officialClimateRiskContext"]["droughtOutlook"]
 print(
-    "PASS Farmer result context: historical benchmarks, associated signals, "
-    "PSA market context, and official PAGASA agri-weather and climate-risk "
-    "context are available without changing XGBoost inference."
+    "PASS Farmer result context: attainable historical benchmarks, yield patterns, "
+    "vegetation-yield associations, contributing signals, planning guidance, PSA "
+    "market context, and official PAGASA weather/climate context are available "
+    "without changing XGBoost inference."
 )
 
 missing_satellite_context = client.post(
