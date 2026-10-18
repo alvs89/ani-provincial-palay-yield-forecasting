@@ -378,3 +378,209 @@
 @media(max-width:760px){
   .resultGrid + .card{margin-top:18px}
 }
+
+/* Model & Data — HCI/readability polish */
+.modelDataPage{
+  --model-gap:20px;
+}
+.modelDataPage>.card,
+.modelDataPage>.modelGrid,
+.modelDataPage>.twoCol{
+  margin-bottom:var(--model-gap);
+}
+.modelDataPage .card{
+  padding:22px;
+}
+.modelDataPage .sectionTitle{
+  margin-bottom:16px;
+  gap:11px;
+}
+.modelDataPage .sectionTitle h2{
+  font-size:18px;
+  line-height:1.25;
+  color:#10281f;
+}
+.modelDataPage .sectionTitle p{
+  font-size:13px;
+  line-height:1.45;
+  color:#596a62;
+  max-width:760px;
+}
+.modelDataPage .card p,
+.modelDataPage .featureList,
+.modelDataPage .summary{
+  font-size:14px;
+}
+.modelDataPage .card p{
+  line-height:1.6;
+}
+.modelDataPage .infoBox{
+  font-size:13px;
+  line-height:1.5;
+  padding:13px 14px;
+}
+.modelDataPage .modelGrid{
+  grid-template-columns:.9fr 1fr 2.15fr;
+  gap:16px;
+  align-items:stretch;
+}
+.modelDataPage .modelGrid>.card{
+  margin-bottom:0;
+  height:100%;
+}
+.modelDataPage .modelGrid>.stat{
+  min-height:150px;
+  justify-content:center;
+}
+.modelDataPage .modelGrid>.stat strong{
+  font-size:23px;
+  line-height:1.15;
+}
+.modelDataPage .modelCards{
+  gap:12px;
+  height:100%;
+}
+.modelDataPage .modelCards>div{
+  padding:15px;
+  gap:7px;
+  min-height:142px;
+}
+.modelDataPage .modelCards>div>b{
+  font-size:14px;
+}
+.modelDataPage .modelCards>div>span{
+  font-size:11px;
+}
+.modelDataPage .modelCards>div>small{
+  font-size:13px;
+  line-height:1.35;
+}
+.modelDataPage .twoCol{
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  align-items:stretch;
+}
+.modelDataPage .twoCol>.card{
+  margin-bottom:0;
+  height:100%;
+}
+.modelDataPage .timeline{
+  gap:10px;
+}
+.modelDataPage .timeline>div{
+  min-height:86px;
+  justify-content:center;
+  padding:14px;
+}
+.modelDataPage .timeline b{
+  font-size:13px;
+  line-height:1.35;
+}
+.modelDataPage .summary>div{
+  min-height:43px;
+  align-items:center;
+  padding:10px 2px;
+}
+.modelDataPage .summary span{
+  color:#586a61;
+}
+.modelDataPage .summary strong{
+  color:#10281f;
+  font-weight:750;
+}
+.modelDataPage .sourceGrid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+}
+.modelDataPage .sourceGrid>div{
+  min-height:150px;
+  padding:16px;
+  justify-content:flex-start;
+  background:#fbfdfc;
+}
+.modelDataPage .sourceGrid>div p{
+  margin:10px 0 0;
+  font-size:13.5px;
+  line-height:1.55;
+}
+.modelDataPage .sourceHeading{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+}
+.modelDataPage .sourceHeading b{
+  font-size:14px;
+  line-height:1.3;
+}
+.modelDataPage .sourceRole{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  min-height:24px;
+  padding:3px 8px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.25px;
+  text-transform:uppercase;
+  white-space:nowrap;
+}
+.modelDataPage .sourceRole.modelInput{
+  background:#e5f5eb;
+  color:#17633f;
+  border:1px solid #b8dfc8;
+}
+.modelDataPage .sourceRole.supporting{
+  background:#eef5ff;
+  color:#275b88;
+  border:1px solid #cbdff3;
+}
+.modelDataPage .featureList{
+  margin:4px 0 14px;
+  padding-left:22px;
+  line-height:1.65;
+}
+.modelDataPage .featureList li{
+  margin:8px 0;
+}
+.modelDataPage .featureList b{
+  color:#153c2b;
+}
+.modelDataPage .muted{
+  font-size:13px;
+  line-height:1.55;
+  color:#5e6e66;
+}
+.modelDataPage>.infoBox{
+  margin:0 0 var(--model-gap);
+}
+.modelDataPage>.card.leak{
+  border-width:1.5px;
+}
+@media(max-width:1050px){
+  .modelDataPage .modelGrid,
+  .modelDataPage .twoCol{
+    grid-template-columns:1fr;
+  }
+  .modelDataPage .modelGrid>.card,
+  .modelDataPage .twoCol>.card{
+    height:auto;
+  }
+  .modelDataPage .modelGrid>.stat{
+    min-height:120px;
+  }
+}
+@media(max-width:760px){
+  .modelDataPage{--model-gap:16px}
+  .modelDataPage .card{padding:17px}
+  .modelDataPage .sectionTitle h2{font-size:17px}
+  .modelDataPage .sectionTitle p{font-size:12.5px}
+  .modelDataPage .sourceGrid{grid-template-columns:1fr}
+  .modelDataPage .sourceGrid>div{min-height:0}
+  .modelDataPage .sourceHeading{align-items:center}
+  .modelDataPage .sourceRole{font-size:9px}
+}
+
+/* Prevent evaluation metric cards from overflowing their parent. */
+.modelDataPage .modelCards{height:auto;align-self:start}
