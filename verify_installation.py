@@ -356,7 +356,7 @@ assert satellite_context["vegetationStatus"] in {
 benchmark_context = prediction_payload["historicalBenchmarkContext"]
 assert benchmark_context["affectsYieldEstimate"] is False
 assert benchmark_context["benchmarkType"] == (
-    "Historical benchmark, not an agronomic optimum"
+    "Historical high-yield benchmark (75th percentile), not an agronomic optimum"
 )
 assert benchmark_context["provinceSameQuarterObservations"] >= 8
 assert benchmark_context["provinceSameQuarterMedian"] > 0

@@ -774,3 +774,117 @@
   .freshnessGrid{grid-template-columns:1fr}
   .freshnessGrid>div{min-height:0}
 }
+
+/* Result-context organization and whitespace refinement */
+.conditionContextGrid,
+.resultSection .contextGrid{
+  align-items:start;
+}
+.conditionContextGrid>.card,
+.resultSection .contextGrid>.card{
+  height:auto;
+  align-self:start;
+}
+.vegetationRelationshipCard{
+  margin-top:14px;
+}
+.vegetationRelationshipCard .sectionTitle{
+  margin-bottom:10px;
+}
+.vegetationRelationshipCard .relationshipIntro{
+  margin:0 0 10px;
+  max-width:900px;
+}
+.vegetationRelationshipCard .summary{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:28px;
+}
+.vegetationRelationshipCard .summary>div{
+  align-items:center;
+  min-height:48px;
+}
+.vegetationRelationshipCard .summary>div>span{
+  line-height:1.35;
+}
+.vegetationRelationshipCard .summary>div>strong{
+  line-height:1.3;
+}
+.resultSection .card{
+  padding:20px;
+}
+.resultSection .sectionTitle h2{
+  line-height:1.25;
+}
+.resultSection .sectionTitle p{
+  line-height:1.45;
+  max-width:760px;
+}
+.resultSection .summary>div{
+  min-height:46px;
+  align-items:center;
+}
+.resultSection .summary>div>span{
+  line-height:1.35;
+}
+.resultSection .summary>div>strong{
+  line-height:1.3;
+}
+
+/* Keep helper callouts compact and visually secondary. */
+.resultSection .infoBox{
+  line-height:1.45;
+  margin-top:12px;
+  margin-bottom:0;
+}
+.resultSection .card>p:last-child,
+.resultSection .card>.infoBox:last-child{
+  margin-bottom:0;
+}
+
+/* Make long PAGASA values easier to scan without oversized rows. */
+.contextGrid .summary>div{
+  gap:18px;
+}
+.contextGrid .summary>div>span{
+  flex:0 1 46%;
+  min-width:0;
+}
+.contextGrid .summary>div>strong{
+  flex:1 1 54%;
+  max-width:58%;
+  overflow-wrap:break-word;
+}
+
+/* Tooltip triggers remain compact while definitions stay readable. */
+.resultSection .infoTipTrigger{
+  width:18px;
+  height:18px;
+  font-size:11px;
+}
+.resultSection .infoTipPopup{
+  font-size:13px;
+  line-height:1.5;
+  max-width:min(300px,calc(100vw - 24px));
+}
+
+@media(max-width:900px){
+  .vegetationRelationshipCard .summary{
+    grid-template-columns:1fr;
+  }
+  .contextGrid .summary>div>strong{
+    max-width:60%;
+  }
+}
+@media(max-width:600px){
+  .resultSection .card{padding:16px}
+  .contextGrid .summary>div{
+    gap:10px;
+  }
+  .contextGrid .summary>div>span{
+    flex-basis:48%;
+  }
+  .contextGrid .summary>div>strong{
+    max-width:52%;
+  }
+}

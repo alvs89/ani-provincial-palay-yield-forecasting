@@ -276,7 +276,7 @@ def _historical_benchmark_context(
         "provinceSameQuarterObservations": int(len(values)),
         "regionalSameQuarterObservations": int(len(region_prior)),
         "region": current_region,
-        "benchmarkType": "Historical benchmark, not an agronomic optimum",
+        "benchmarkType": "Historical high-yield benchmark (75th percentile), not an agronomic optimum",
         "source": "Processed PSA OpenSTAT palay production and harvested-area history",
         "affectsYieldEstimate": False,
     }
