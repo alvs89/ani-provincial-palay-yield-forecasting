@@ -447,7 +447,7 @@ assert farmer_payload["officialClimateRiskContext"]["droughtAssessment"]["status
 }
 assert farmer_payload["officialClimateRiskContext"]["droughtOutlook"]
 print(
-    "PASS Farmer result context: attainable historical benchmarks, yield patterns, "
+    "PASS Farmer result context: historical high-yield benchmarks, yield patterns, "
     "vegetation-yield associations, contributing signals, planning guidance, PSA "
     "market context, and official PAGASA weather/climate context are available "
     "without changing XGBoost inference."
