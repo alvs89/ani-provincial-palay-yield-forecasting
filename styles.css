@@ -963,3 +963,13 @@
 @media(max-width:760px){
   .resultSection .infoBox.currentPlanningNotice{margin-bottom:16px}
 }
+
+/* Keep result metric labels readable, including labels with contextual help. */
+:is(.resultSection,.resultTechnicalDetails) .summary>div>span,
+:is(.resultSection,.resultTechnicalDetails) .summary .infoLabelText,
+:is(.resultSection,.resultTechnicalDetails) .summary .infoLabelTail{color:#000}
+
+/* Match estimate selection and processing labels to result summary labels. */
+.estimateContextSummary>div>span,
+.estimateContextSummary .infoLabelText,
+.estimateContextSummary .infoLabelTail{color:#000}
