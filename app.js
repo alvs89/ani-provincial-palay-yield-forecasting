@@ -40,6 +40,8 @@ async function forecast(req){
   }
   return payload;
 }
+const MIN_CONTEXT_LOADING_MS=2000;
+const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
 async function nearTermOutlook(req){
   const query=new URLSearchParams({province:req.province});
   const response=await fetch(`${API_BASE}/near-term-outlook?${query}`);
@@ -320,7 +322,7 @@ function bind(){
     const clearNearTerm=()=>{state.nearTermResult=null;state.nearTermError=''};
     document.getElementById('nearTermProvince').onchange=e=>{state.nearTermRequest.province=e.target.value;clearNearTerm();render()};
     document.getElementById('resetNearTerm').onclick=()=>{state.nearTermRequest={province:'Abra'};state.nearTermResult=null;state.nearTermError='';render()};
-    document.getElementById('loadNearTerm').onclick=async()=>{state.nearTermLoading=true;state.nearTermError='';state.nearTermResult=null;state.page='nearterm-processing';render();try{state.nearTermResult=await nearTermOutlook(state.nearTermRequest);state.page='nearterm-result'}catch(err){state.nearTermError=err.message||'Unable to load the near-term palay outlook.';state.page='nearterm'}finally{state.nearTermLoading=false;render()}};
+    document.getElementById('loadNearTerm').onclick=async()=>{state.nearTermLoading=true;state.nearTermError='';state.nearTermResult=null;state.page='nearterm-processing';render();try{const [result]=await Promise.all([nearTermOutlook(state.nearTermRequest),wait(MIN_CONTEXT_LOADING_MS)]);state.nearTermResult=result;state.page='nearterm-result'}catch(err){state.nearTermError=err.message||'Unable to load the near-term palay outlook.';state.page='nearterm'}finally{state.nearTermLoading=false;render()}};
   }
   if(state.page==='nearterm-result'){
     const backNearTerm=document.getElementById('backNearTerm');
@@ -334,7 +336,7 @@ function bind(){
     document.getElementById('projectionQuarter').onchange=e=>{state.projectionRequest.targetQuarter=+e.target.value;clearProjection();render()};
     document.getElementById('projectionScenario').onchange=e=>{state.projectionRequest.scenario=e.target.value;clearProjection();render()};
     document.getElementById('resetProjection').onclick=()=>{state.projectionRequest={province:'Abra',ecosystem:'Irrigated',horizonYears:5,targetQuarter:3,scenario:'ssp245'};state.projectionResult=null;state.projectionError='';render()};
-    document.getElementById('generateProjection').onclick=async()=>{state.projectionLoading=true;state.projectionError='';state.projectionResult=null;state.page='projection-processing';render();try{state.projectionResult=await longTermProjection(state.projectionRequest);state.page='projection-result'}catch(err){state.projectionError=err.message||'Unable to generate the long-term projection.';state.page='projection'}finally{state.projectionLoading=false;render()}};
+    document.getElementById('generateProjection').onclick=async()=>{state.projectionLoading=true;state.projectionError='';state.projectionResult=null;state.page='projection-processing';render();try{const [result]=await Promise.all([longTermProjection(state.projectionRequest),wait(MIN_CONTEXT_LOADING_MS)]);state.projectionResult=result;state.page='projection-result'}catch(err){state.projectionError=err.message||'Unable to generate the long-term projection.';state.page='projection'}finally{state.projectionLoading=false;render()}};
   }
   if(state.page==='projection-result'){
     const backProjection=document.getElementById('backProjection');
