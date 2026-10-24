@@ -204,15 +204,28 @@ function bars(rows,key='yield',cls='bar'){const w=720,h=Math.max(190,rows.length
 function nearTermCropChart(stages,plant){
   const veg=Number(stages?.vegetativePct),rep=Number(stages?.reproductivePct),mat=Number(stages?.maturingPct),prog=Number(plant?.progressPct);
   if(![veg,rep,mat,prog].every(Number.isFinite))return '<div class="empty">No chart data are available for this outlook.</div>';
-  const total=Math.max(veg+rep+mat,1),w=900,h=330,left=82,right=34,plotW=w-left-right,stageY=62,stageH=50,plantY=220,plantH=38;
-  const vw=veg/total*plotW,rw=rep/total*plotW,mw=mat/total*plotW,pw=Math.max(0,Math.min(100,prog))/100*plotW;
-  const ticks=[0,25,50,75,100];
-  const legend=[
-    ['stageVeg','Vegetative',veg],
-    ['stageRep','Reproductive',rep],
-    ['stageMat','Maturing',mat]
-  ];
-  return `<svg class="chartSvg nearTermChartSvg" viewBox="0 0 ${w} ${h}" role="img" aria-label="100 percent crop stage composition and planting completion"><title>Crop Stage & Planting Progress</title><text class="chartSectionLabel" x="${left}" y="34">Crop stage composition</text><rect class="stageTrack" x="${left}" y="${stageY}" width="${plotW}" height="${stageH}" rx="8"/><rect class="stageVeg" x="${left}" y="${stageY}" width="${vw}" height="${stageH}" rx="8"/><rect class="stageRep" x="${left+vw}" y="${stageY}" width="${rw}" height="${stageH}"/><rect class="stageMat" x="${left+vw+rw}" y="${stageY}" width="${mw}" height="${stageH}" rx="8"/>${legend.map((item,i)=>{const x=left+i*(plotW/3);return `<rect class="${item[0]}" x="${x}" y="136" width="12" height="12" rx="2"/><text class="legendLabel" x="${x+20}" y="147">${item[1]}</text><text class="legendValue" x="${x+20}" y="166">${item[2].toFixed(1)}%</text>`}).join('')}<text class="chartSectionLabel" x="${left}" y="204">Planting completion</text><rect class="progressTrack" x="${left}" y="${plantY}" width="${plotW}" height="${plantH}" rx="7"/><rect class="progressFill" x="${left}" y="${plantY}" width="${pw}" height="${plantH}" rx="7"/><text class="progressValue" x="${Math.min(left+pw+10,w-right-4)}" y="${plantY+25}" text-anchor="${prog>88?'end':'start'}">${prog.toFixed(1)}%</text>${ticks.map(t=>{const x=left+t/100*plotW;return `<line class="axisTick" x1="${x}" y1="${plantY+plantH+5}" x2="${x}" y2="${plantY+plantH+10}"/><text class="axisLabel" x="${x}" y="${plantY+plantH+28}" text-anchor="middle">${t}%</text>`}).join('')}</svg>`;
+  const total=Math.max(veg+rep+mat,1),normalized=[
+    {key:'vegetative',label:'Vegetative',value:veg,width:veg/total*100},
+    {key:'reproductive',label:'Reproductive',value:rep,width:rep/total*100},
+    {key:'maturing',label:'Maturing',value:mat,width:mat/total*100}
+  ],completion=Math.max(0,Math.min(100,prog));
+  return `<div class="nearTermViz" role="img" aria-label="Crop stage composition: Vegetative ${veg.toFixed(1)} percent, Reproductive ${rep.toFixed(1)} percent, Maturing ${mat.toFixed(1)} percent. Planting completion ${completion.toFixed(1)} percent.">
+    <div class="nearTermVizBlock">
+      <div class="nearTermVizHeading"><span>Crop stage composition</span><strong>100%</strong></div>
+      <div class="stageCompositionBar">
+        ${normalized.map(x=>`<div class="stageSegment ${x.key}" style="width:${x.width.toFixed(3)}%" title="${x.label}: ${x.value.toFixed(1)}%"></div>`).join('')}
+      </div>
+      <div class="stageLegend">
+        ${normalized.map(x=>`<div class="stageLegendItem"><span class="stageLegendDot ${x.key}" aria-hidden="true"></span><div><span>${x.label}</span><strong>${x.value.toFixed(1)}%</strong></div></div>`).join('')}
+      </div>
+    </div>
+    <div class="nearTermVizDivider"></div>
+    <div class="nearTermVizBlock">
+      <div class="nearTermVizHeading"><span>Planting completion</span><strong>${completion.toFixed(1)}%</strong></div>
+      <div class="plantingProgressTrack" aria-hidden="true"><div class="plantingProgressFill" style="width:${completion.toFixed(1)}%"></div></div>
+      <div class="plantingScale"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></div>
+    </div>
+  </div>`;
 }
 function projectionComparisonChart(f){
   const base=Number(f?.recentHistoricalBaselineMtPerHa),mid=Number(f?.projectedYieldMtPerHa),low=Number(f?.projectedRangeLowMtPerHa),high=Number(f?.projectedRangeHighMtPerHa);
