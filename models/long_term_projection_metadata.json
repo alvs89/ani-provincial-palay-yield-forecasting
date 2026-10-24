@@ -17,6 +17,26 @@
     "rmse": 0.3969717669251465,
     "r2": 0.795460985119921
   },
+  "daily_climate_extremes_experiment": {
+    "status": "Not promoted",
+    "historical_source": "NASA POWER Daily API",
+    "coverage": "82 Philippine provinces, 2001-2025",
+    "features": [
+      "rainy days >=1 mm",
+      "heavy-rain days >=20 mm",
+      "very-heavy-rain days >=50 mm",
+      "maximum consecutive dry days (<1 mm/day)",
+      "hot days >=35 C",
+      "very-hot days >=37 C",
+      "warm nights >=25 C",
+      "quarterly mean daily Tmax",
+      "quarterly mean daily Tmin"
+    ],
+    "xgboost_extremes_mae": 0.42226255233196397,
+    "previous_climate_only_xgboost_mae": 0.4157314120434564,
+    "seasonal_naive_mae": 0.2596593530903199,
+    "decision": "Daily-derived climate extremes did not improve chronological 2021-2025 MAE, so they remain research-only and do not alter the active long-term yield calculation."
+  },
   "deployment_status": "Experimental scenario projection only",
   "validation_interpretation": "The climate-analog method is less accurate than ANI's short-term previous-year seasonal baseline on the 2021-2025 check. It is therefore not presented as a replacement for the validated next-quarter XGBoost forecast. Its purpose is conditional long-term scenario exploration when future lagged agricultural inputs do not exist."
 }
