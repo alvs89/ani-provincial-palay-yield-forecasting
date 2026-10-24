@@ -1,0 +1,80 @@
+{
+  "design": {
+    "train_through": 2020,
+    "test_period": "2021-2025",
+    "features": [
+      "Province",
+      "Ecosystem",
+      "Quarter_Number",
+      "Rainfall_Sum_mm",
+      "T2M_Mean_C",
+      "RH2M_Mean_pct",
+      "WS2M_Mean_m_s",
+      "Year"
+    ],
+    "note": "Research benchmark only; production ANI models unchanged."
+  },
+  "rows": {
+    "train": 11345,
+    "test": 2923
+  },
+  "models": {
+    "SeasonalNaive": {
+      "mae": 0.2596593530903199,
+      "rmse": 0.40212631995789744,
+      "r2": 0.8018667668990596
+    },
+    "Ridge": {
+      "mae": 0.45197161459257074,
+      "rmse": 0.5909818945943557,
+      "r2": 0.5720621707383913
+    },
+    "RandomForest": {
+      "mae": 0.48243419521834063,
+      "rmse": 0.6063318397919565,
+      "r2": 0.5495432733990013
+    },
+    "GradientBoosting": {
+      "mae": 0.49888726214964474,
+      "rmse": 0.6267475855138201,
+      "r2": 0.5186979998086818
+    },
+    "XGBoostClimate": {
+      "mae": 0.4157314120434564,
+      "rmse": 0.5393728960461546,
+      "r2": 0.643540194825251
+    }
+  },
+  "ranking_by_mae": [
+    {
+      "model": "SeasonalNaive",
+      "mae": 0.2596593530903199,
+      "rmse": 0.40212631995789744,
+      "r2": 0.8018667668990596
+    },
+    {
+      "model": "XGBoostClimate",
+      "mae": 0.4157314120434564,
+      "rmse": 0.5393728960461546,
+      "r2": 0.643540194825251
+    },
+    {
+      "model": "Ridge",
+      "mae": 0.45197161459257074,
+      "rmse": 0.5909818945943557,
+      "r2": 0.5720621707383913
+    },
+    {
+      "model": "RandomForest",
+      "mae": 0.48243419521834063,
+      "rmse": 0.6063318397919565,
+      "r2": 0.5495432733990013
+    },
+    {
+      "model": "GradientBoosting",
+      "mae": 0.49888726214964474,
+      "rmse": 0.6267475855138201,
+      "r2": 0.5186979998086818
+    }
+  ]
+}
