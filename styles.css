@@ -1392,3 +1392,123 @@
 @media(prefers-reduced-motion:reduce){
   .stageSegment,.plantingProgressFill{transition:none}
 }
+
+/* Responsive Long-Term projection comparison: no fixed SVG coordinates. */
+.projectionResultChart{
+  height:auto!important;
+  min-height:0!important;
+}
+.projectionViz{
+  display:grid;
+  gap:18px;
+  padding:6px 0 2px;
+}
+.projectionVizLegend{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+}
+.projectionLegendItem{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  column-gap:10px;
+  row-gap:2px;
+  align-items:center;
+  min-width:0;
+  padding:10px 12px;
+  border:1px solid #e1e8e3;
+  border-radius:9px;
+  background:#f9fbfa;
+}
+.projectionLegendItem>span:nth-child(2){
+  color:#53655b;
+  font-size:12px;
+}
+.projectionLegendItem strong{
+  grid-column:2;
+  color:#173a2a;
+  font-size:16px;
+}
+.projectionLegendDot{
+  width:11px;
+  height:11px;
+  border-radius:50%;
+}
+.projectionLegendDot.baseline{background:#d7a33c}
+.projectionLegendDot.projected{background:#19865a}
+.projectionLegendRange{
+  width:22px;
+  height:4px;
+  border-radius:999px;
+  background:#4f91d9;
+}
+.projectionScale{
+  position:relative;
+  height:78px;
+  margin:4px 10px 0;
+}
+.projectionScale::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:39px;
+  height:2px;
+  background:#dfe7e2;
+}
+.projectionRangeBand{
+  position:absolute;
+  top:31px;
+  height:16px;
+  border-radius:999px;
+  background:#dcecff;
+  border:1px solid #8bb6e8;
+}
+.projectionMarker{
+  position:absolute;
+  top:23px;
+  transform:translateX(-50%);
+  width:18px;
+  height:32px;
+  border-radius:999px;
+  border:3px solid #fff;
+  box-shadow:0 0 0 2px currentColor;
+}
+.projectionMarker.baseline{
+  background:#d7a33c;
+  color:#9d7217;
+}
+.projectionMarker.projected{
+  background:#19865a;
+  color:#12633f;
+}
+.projectionMarker span{
+  position:absolute;
+  left:50%;
+  top:-27px;
+  transform:translateX(-50%);
+  white-space:nowrap;
+  color:#40564a;
+  font-size:11px;
+  font-weight:700;
+}
+.projectionTicks{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  margin:0 10px;
+  color:#728078;
+  font-size:11px;
+}
+.projectionAxisLabel{
+  text-align:center;
+  color:#53655b;
+  font-size:12px;
+  font-weight:700;
+}
+@media(max-width:760px){
+  .projectionVizLegend{grid-template-columns:1fr}
+  .projectionScale{margin-top:8px}
+  .projectionMarker span{font-size:10px}
+  .projectionTicks{font-size:10px}
+}
