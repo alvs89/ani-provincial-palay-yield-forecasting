@@ -1007,3 +1007,12 @@
   .estimateModeTabs{width:100%}
   .estimateModeTabs button{flex:1;padding:10px 8px}
 }
+
+/* Three-mode Generate Estimate tabs: wrap cleanly on narrow screens. */
+.estimateModeTabs{flex-wrap:wrap}
+@media(max-width:720px){
+  .estimateModeTabs button{flex:1 1 30%;min-width:150px}
+}
+@media(max-width:520px){
+  .estimateModeTabs button{flex-basis:100%;text-align:left}
+}

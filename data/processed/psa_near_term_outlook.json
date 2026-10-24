@@ -1,0 +1,36 @@
+{
+  "source": "Philippine Statistics Authority — Monthly Palay and Corn Situation Reporting System (MPCSRS)",
+  "sourceUrl": "https://psa.gov.ph/statistics/crops/palay-and-corn-estimates",
+  "surveyInfoUrl": "https://psa.gov.ph/content/psa-clears-2026-monthly-palay-and-corn-situation-reporting-system-mpcsrs-encourages",
+  "releaseDate": "2026-10-13",
+  "asOfDate": "2026-09-01",
+  "referencePeriod": "July–September 2026",
+  "referenceQuarter": 3,
+  "referenceYear": 2026,
+  "scope": "National published summary",
+  "standingCrop": {
+    "estimatedProductionMillionMt": 3.10,
+    "yearOverYearProductionChangePct": -17.2,
+    "estimatedHarvestAreaThousandHa": 753.68,
+    "yearOverYearHarvestAreaChangePct": -17.8,
+    "estimatedYieldMtPerHa": 4.12,
+    "yearOverYearYieldChangePct": 0.7,
+    "harvestedAreaThousandHa": 334.33,
+    "harvestedSharePct": 44.4,
+    "harvestedOutputMillionMt": 1.32
+  },
+  "cropStages": {
+    "vegetativePct": 38.3,
+    "reproductivePct": 40.6,
+    "maturingPct": 21.1
+  },
+  "plantingProgress": {
+    "intendedAreaMillionHa": 1.58,
+    "actuallyPlantedMillionHa": 1.38,
+    "progressPct": 87.5
+  },
+  "nextSurveyMonth": "November 2026",
+  "nextExpectedReleaseDate": "2026-12-15",
+  "provinceStandingCropAvailable": false,
+  "limitation": "The public PSA release used by ANI provides the latest national standing-crop summary. ANI does not infer or fabricate province-level MPCSRS values when a province-specific public table is not integrated."
+}

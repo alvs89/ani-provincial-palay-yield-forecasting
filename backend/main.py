@@ -31,6 +31,7 @@ SATELLITE_PATH = DATA_DIR / "province_quarter_satellite.csv"
 MARKET_PATH = DATA_DIR / "palay_farmgate_prices.csv"
 PAGASA_AGRI_WEATHER_PATH = DATA_DIR / "pagasa_regional_agri_weather.json"
 PAGASA_CLIMATE_RISK_PATH = DATA_DIR / "pagasa_climate_risk.json"
+PSA_NEAR_TERM_OUTLOOK_PATH = DATA_DIR / "psa_near_term_outlook.json"
 ENSO_HISTORY_PATH = DATA_DIR / "enso_history.csv"
 AGRICULTURAL_SOURCE_PATH = DATA_DIR / "psa_2026_q1_q2_source_records.csv"
 MODEL_PATH = MODEL_DIR / "ani_xgboost_pipeline.joblib"
@@ -65,6 +66,11 @@ pagasa_agri_weather = (
 pagasa_climate_risk = (
     json.loads(PAGASA_CLIMATE_RISK_PATH.read_text(encoding="utf-8"))
     if PAGASA_CLIMATE_RISK_PATH.is_file()
+    else None
+)
+psa_near_term_outlook = (
+    json.loads(PSA_NEAR_TERM_OUTLOOK_PATH.read_text(encoding="utf-8"))
+    if PSA_NEAR_TERM_OUTLOOK_PATH.is_file()
     else None
 )
 enso_history_df = (
@@ -1504,6 +1510,18 @@ def meta() -> dict[str, Any]:
             if market_period
             else None
         ),
+        "near_term_outlook": (
+            {
+                "source": psa_near_term_outlook.get("source"),
+                "releaseDate": psa_near_term_outlook.get("releaseDate"),
+                "referencePeriod": psa_near_term_outlook.get("referencePeriod"),
+                "asOfDate": psa_near_term_outlook.get("asOfDate"),
+                "scope": psa_near_term_outlook.get("scope"),
+                "nextExpectedReleaseDate": psa_near_term_outlook.get("nextExpectedReleaseDate"),
+            }
+            if isinstance(psa_near_term_outlook, dict)
+            else None
+        ),
         "official_agri_weather": (
             {
                 "source": pagasa_agri_weather.get("source"),
@@ -1544,6 +1562,34 @@ def farmer_context(province: str = Query(...)) -> dict[str, Any]:
         "marketContext": _market_context(province),
         "officialAgriWeatherContext": _official_agri_weather_context(province),
         "officialClimateRiskContext": _official_climate_risk_context(province),
+    }
+
+
+@app.get("/near-term-outlook")
+def near_term_outlook(province: str = Query(...)) -> dict[str, Any]:
+    province = normalize_province_name(province)
+    if province not in province_region:
+        raise HTTPException(status_code=404, detail="Province not found in ANI data.")
+
+    if not isinstance(psa_near_term_outlook, dict):
+        raise HTTPException(
+            status_code=503,
+            detail="The latest PSA near-term standing-crop context is not integrated.",
+        )
+
+    return {
+        "province": province,
+        "region": province_region[province],
+        "standingCropContext": psa_near_term_outlook,
+        "officialAgriWeatherContext": _official_agri_weather_context(province),
+        "officialClimateRiskContext": _official_climate_risk_context(province),
+        "scopeNote": (
+            "ANI combines the latest published national PSA MPCSRS standing-crop "
+            "summary with current official PAGASA context for the selected province "
+            "or PAGASA region. Province-level MPCSRS values are not inferred when "
+            "they are not present in the integrated public source."
+        ),
+        "affectsQuarterlyXgboost": False,
     }
 
 

@@ -75,6 +75,16 @@ The bundled contextual files can be refreshed from their public sources with:
 
 The application includes the integrated copies so normal installation and offline demonstration do not depend on a successful live web request. Source periods remain visible in the interface so users can judge freshness.
 
+## Near-Term Palay Outlook
+
+ANI includes a separate **Near-Term Palay Outlook** mode that combines the latest published PSA Monthly Palay and Corn Situation Reporting System (MPCSRS) standing-crop release with current official PAGASA planning context for the selected province.
+
+The integrated October 13, 2026 PSA release covers **July–September 2026** standing crops as of **September 1, 2026**. It provides national published estimates for palay production, harvest area, yield, harvested share, crop growth stages, and planting-intention progress. Because ANI does not currently integrate a province-specific public MPCSRS table, the system labels these standing-crop figures as a **national published summary** and does not infer province-level values.
+
+The province selection localizes the accompanying PAGASA 10-Day Regional Agri-Weather and climate-risk context. This outlook is descriptive decision-support context only: it does **not** alter the quarterly XGBoost model, its fixed 2025 holdout evaluation, or the separate long-term CMIP6 projection.
+
+The 2026 MPCSRS survey schedule indicates that the next survey month after September is November, with results targeted for **December 15, 2026**. ANI therefore displays the exact release/reference period instead of presenting unreleased Q4 standing-crop values as current official data.
+
 ## Experimental long-term climate projection
 
 ANI also provides a separate **Long-Term Projection** mode for **3-, 5-, and 10-year** scenario exploration. This module is intentionally separate from the deployed next-quarter XGBoost model because future Lag 1 yield, production, and harvested-area observations do not exist several years in advance.

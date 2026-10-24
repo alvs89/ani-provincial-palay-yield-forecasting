@@ -533,11 +533,30 @@ assert farmer_payload["officialClimateRiskContext"]["droughtAssessment"]["status
     "Not affected", "Dry condition", "Dry spell", "Drought"
 }
 assert farmer_payload["officialClimateRiskContext"]["droughtOutlook"]
+
+near_term_response = client.get(
+    "/near-term-outlook",
+    params={"province": "Nueva Ecija"},
+)
+assert near_term_response.status_code == 200, near_term_response.text
+near_term_payload = near_term_response.json()
+near_term = near_term_payload["standingCropContext"]
+assert near_term["referenceYear"] == 2026
+assert near_term["referenceQuarter"] == 3
+assert near_term["releaseDate"] == "2026-10-13"
+assert near_term["provinceStandingCropAvailable"] is False
+assert math.isclose(near_term["standingCrop"]["estimatedYieldMtPerHa"], 4.12)
+assert math.isclose(near_term["cropStages"]["reproductivePct"], 40.6)
+assert math.isclose(near_term["plantingProgress"]["progressPct"], 87.5)
+assert near_term_payload["officialAgriWeatherContext"]["available"] is True
+assert near_term_payload["affectsQuarterlyXgboost"] is False
+
 print(
     "PASS Farmer result context: historical high-yield benchmarks, yield patterns, "
     "vegetation-yield and ENSO-yield associations, contributing signals, planning "
-    "guidance, PSA market context, and official PAGASA weather/climate context are available "
-    "without changing XGBoost inference."
+    "guidance, PSA market context, official PAGASA weather/climate context, and "
+    "the latest PSA MPCSRS near-term standing-crop summary are available without "
+    "changing XGBoost inference."
 )
 
 missing_satellite_context = client.post(
