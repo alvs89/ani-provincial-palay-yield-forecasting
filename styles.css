@@ -1016,3 +1016,26 @@
 @media(max-width:520px){
   .estimateModeTabs button{flex-basis:100%;text-align:left}
 }
+
+/* Indeterminate progress for external/context requests where exact completion is unknown. */
+.indeterminateProgress{position:relative;overflow:hidden}
+.indeterminateProgress>div{
+  width:34%!important;
+  min-width:120px;
+  animation:ani-indeterminate-progress 1.25s ease-in-out infinite;
+}
+@keyframes ani-indeterminate-progress{
+  0%{transform:translateX(-120%)}
+  50%{transform:translateX(95%)}
+  100%{transform:translateX(260%)}
+}
+.contextLoadingSteps .step.pending{opacity:.62}
+.contextLoadingSteps .step.active .stepDot{animation:ani-loading-pulse 1.2s ease-in-out infinite}
+@keyframes ani-loading-pulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.08)}
+}
+@media (prefers-reduced-motion:reduce){
+  .indeterminateProgress>div,.contextLoadingSteps .step.active .stepDot{animation:none}
+  .indeterminateProgress>div{width:45%!important}
+}
