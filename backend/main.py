@@ -19,6 +19,7 @@ from ml.features import (
     normalize_ecosystem,
     normalize_province_name,
 )
+from ml.long_term_projection import LongTermProjector, SCENARIOS
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = ROOT / "data" / "processed"
@@ -84,6 +85,7 @@ agricultural_source_df = (
 pipeline = joblib.load(MODEL_PATH)
 metadata = json.loads(METADATA_PATH.read_text(encoding="utf-8"))
 builder = AniFeatureBuilder(history_df, weather_df)
+long_term_projector = LongTermProjector(history_df, weather_df)
 
 # Province -> region mapping follows the most recent integrated agricultural record
 # so administrative changes are reflected in the current interface.
@@ -144,6 +146,14 @@ class ForecastRequest(BaseModel):
     ecosystem: str
     target_year: int = Field(ge=2001, le=2100)
     target_quarter: int = Field(ge=1, le=4)
+
+
+class LongTermProjectionRequest(BaseModel):
+    province: str
+    ecosystem: str
+    horizon_years: int = Field(ge=3, le=10)
+    target_quarter: int = Field(ge=1, le=4)
+    scenario: str = "ssp245"
 
 
 def _period_key(year: int, quarter: int) -> int:
@@ -1535,6 +1545,83 @@ def farmer_context(province: str = Query(...)) -> dict[str, Any]:
         "officialAgriWeatherContext": _official_agri_weather_context(province),
         "officialClimateRiskContext": _official_climate_risk_context(province),
     }
+
+
+@app.get("/long-term-projection/meta")
+def long_term_projection_meta() -> dict[str, Any]:
+    reference_year = datetime.now(PHILIPPINE_TIMEZONE).year
+    horizons = [3, 5, 10]
+    return {
+        "status": "Experimental scenario projection only",
+        "referenceYear": reference_year,
+        "horizons": [
+            {"years": years, "targetYear": reference_year + years}
+            for years in horizons
+        ],
+        "scenarios": [
+            {"id": key, "label": label}
+            for key, label in SCENARIOS.items()
+        ],
+        "quarters": [1, 2, 3, 4],
+        "evaluation": long_term_projector.evaluation,
+        "source": "NASA NEX-GDDP-CMIP6",
+        "sourceUrl": "https://www.nccs.nasa.gov/data-collections/nex-gddp-cmip6/",
+        "note": (
+            "Long-term output is a climate-scenario projection using historical "
+            "climate analogs. It is separate from ANI's validated next-quarter XGBoost."
+        ),
+    }
+
+
+@app.post("/long-term-projection")
+def long_term_projection(
+    request: LongTermProjectionRequest,
+) -> dict[str, Any]:
+    province = normalize_province_name(request.province)
+    if province not in province_region:
+        raise HTTPException(status_code=404, detail="Province not found in ANI data.")
+
+    try:
+        ecosystem = normalize_ecosystem(request.ecosystem)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+    if request.horizon_years not in {3, 5, 10}:
+        raise HTTPException(
+            status_code=422,
+            detail="Projection horizon must be 3, 5, or 10 years.",
+        )
+    if request.scenario not in SCENARIOS:
+        raise HTTPException(
+            status_code=422,
+            detail="Unsupported CMIP6 scenario.",
+        )
+
+    reference_year = datetime.now(PHILIPPINE_TIMEZONE).year
+    target_year = reference_year + request.horizon_years
+    try:
+        result = long_term_projector.project(
+            province=province,
+            ecosystem=ecosystem,
+            target_year=target_year,
+            target_quarter=request.target_quarter,
+            scenario=request.scenario,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except Exception as exc:
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "Long-term projection could not retrieve enough CMIP6 climate "
+                f"data at this time: {exc}"
+            ),
+        ) from exc
+
+    result["horizonYears"] = request.horizon_years
+    result["referenceYear"] = reference_year
+    result["region"] = province_region[province]
+    return result
 
 
 @app.get("/forecast-availability")

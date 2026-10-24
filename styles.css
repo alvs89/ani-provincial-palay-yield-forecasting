@@ -973,3 +973,37 @@
 .estimateContextSummary>div>span,
 .estimateContextSummary .infoLabelText,
 .estimateContextSummary .infoLabelTail{color:#000}
+
+
+/* ANI estimate mode switch */
+.estimateModeTabs{
+  display:flex;
+  gap:8px;
+  width:max-content;
+  max-width:100%;
+  margin:0 0 18px;
+  padding:6px;
+  border:1px solid var(--border,#dde5df);
+  border-radius:14px;
+  background:var(--surface,#fff);
+}
+.estimateModeTabs button{
+  border:0;
+  border-radius:10px;
+  padding:10px 16px;
+  background:transparent;
+  color:inherit;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+}
+.estimateModeTabs button.active{
+  background:#eef6ef;
+  box-shadow:inset 0 0 0 1px rgba(31,93,55,.18);
+}
+.projectionResult{margin-top:28px}
+.projectionResult .tableWrap{margin-top:14px}
+@media(max-width:720px){
+  .estimateModeTabs{width:100%}
+  .estimateModeTabs button{flex:1;padding:10px 8px}
+}

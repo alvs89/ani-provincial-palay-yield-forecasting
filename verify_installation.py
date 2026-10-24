@@ -11,6 +11,7 @@ from backend.main import (
     classify_target_period,
 )
 from ml.features import normalize_province_name
+from ml.long_term_projection import LongTermProjector
 
 ROOT = Path(__file__).resolve().parent
 client = TestClient(app)
@@ -319,6 +320,61 @@ assert math.isclose(evaluation["xgboost"]["r2"], 0.8602508673547016)
 print(
     "PASS Evaluation: fixed 2001-2025 research data and 2025 chronological "
     "holdout metrics remain unchanged."
+)
+
+projection_meta_response = client.get("/long-term-projection/meta")
+assert projection_meta_response.status_code == 200, projection_meta_response.text
+projection_meta = projection_meta_response.json()
+assert [row["years"] for row in projection_meta["horizons"]] == [3, 5, 10]
+assert {row["id"] for row in projection_meta["scenarios"]} == {
+    "ssp126", "ssp245", "ssp370", "ssp585"
+}
+projection_eval = projection_meta["evaluation"]
+assert projection_eval["deployment_status"] == "Experimental scenario projection only"
+assert math.isclose(
+    projection_eval["validation"]["mae"], 0.4173924335550577
+)
+assert math.isclose(
+    projection_eval["validation"]["rmse"], 0.5448736838728906
+)
+centroids = pd.read_csv(ROOT / "data" / "reference" / "province_centroids.csv")
+assert len(centroids) == 82
+assert centroids["Province"].nunique() == 82
+assert centroids["Latitude"].between(4, 22).all()
+assert centroids["Longitude"].between(116, 128).all()
+
+class _FakeCmip6Client:
+    def quarterly_climate(
+        self, province, scenario, year, quarter, model
+    ):
+        shifts = {
+            "ACCESS-CM2": (820.0, 27.4, 78.0, 2.0),
+            "GFDL-ESM4": (760.0, 27.8, 76.0, 2.2),
+            "MPI-ESM1-2-HR": (900.0, 27.1, 79.0, 1.8),
+        }
+        rainfall, temperature, humidity, wind = shifts[model]
+        return {
+            "model": model,
+            "rainfallMm": rainfall,
+            "meanTemperatureC": temperature,
+            "relativeHumidityPct": humidity,
+            "windSpeedMS": wind,
+            "gridLatitude": 17.578316,
+            "gridLongitude": 120.80324,
+        }
+
+projection_check = LongTermProjector(
+    history, weather, client=_FakeCmip6Client()
+).project("Abra", "Irrigated", 2031, 3, "ssp245")
+assert projection_check["projectionType"] == "Experimental Long-Term Yield Projection"
+assert projection_check["projectedYieldMtPerHa"] > 0
+assert projection_check["projectedRangeLowMtPerHa"] <= projection_check["projectedYieldMtPerHa"]
+assert projection_check["projectedRangeHighMtPerHa"] >= projection_check["projectedYieldMtPerHa"]
+assert len(projection_check["cmip6ModelsUsed"]) == 3
+assert "validated next-quarter XGBoost" in projection_check["guardrail"]
+print(
+    "PASS Long-term projection: 3/5/10-year CMIP6 scenario metadata, province "
+    "coordinates, validation metadata, and offline climate-analog projection logic match."
 )
 
 # Q3 2026 can use Q2 2026 lagged inputs without including Q2 in model fitting.

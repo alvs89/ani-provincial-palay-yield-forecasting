@@ -136,7 +136,7 @@
     "source": "Philippine Statistics Authority (PSA) OpenSTAT Farm Price Survey for Palay",
     "matrix": "0032M4AFN01",
     "source_url": "https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__2M__NFG/0032M4AFN01.px/",
-    "retrieved_at_utc": "2026-10-24T12:18:09.352153+00:00",
+    "retrieved_at_utc": "2026-10-24T12:50:01.076621+00:00",
     "frequency": "Monthly",
     "geographic_scope": "Provincial records available in the PSA matrix and aligned to ANI canonical province names.",
     "commodity_preference": "Palay [Paddy] Other Variety, dry (conv. to 14% mc)",
@@ -158,7 +158,7 @@
   "official_agri_weather_context": {
     "source": "DOST-PAGASA 10-Day Regional Agri-Weather Information",
     "source_url": "https://www.pagasa.dost.gov.ph/ten-day-regional-agri-weather",
-    "retrieved_at_utc": "2026-10-24T12:18:02.346632+00:00",
+    "retrieved_at_utc": "2026-10-24T12:49:54.927352+00:00",
     "integrated_forecast_period": "21 - 31 October 2026",
     "dekad_number": 30,
     "regional_records": 17,
@@ -203,7 +203,7 @@
   },
   "official_climate_risk_context": {
     "source": "DOST-PAGASA",
-    "retrieved_at_utc": "2026-10-24T12:18:09.336561+00:00",
+    "retrieved_at_utc": "2026-10-24T12:50:01.051604+00:00",
     "enso_source_url": "https://www.pagasa.dost.gov.ph/climate/el-nino-la-nina/advisories",
     "drought_source_url": "https://droughtcaster.pagasa.dost.gov.ph/",
     "latest_enso_advisory": {
@@ -238,5 +238,48 @@
     ],
     "classification_method": "El Nino and La Nina historical episode labels follow NOAA CPC's stated requirement that the +/-0.5 C RONI threshold persist for at least five consecutive overlapping seasons. Representative quarterly values use JFM, AMJ, JAS, and OND.",
     "model_relationship": "Exploratory historical association only; RONI/ENSO is not an input to the active XGBoost model and does not alter prediction eligibility or inference."
+  },
+  "long_term_climate_projection": {
+    "source": "NASA NEX-GDDP-CMIP6",
+    "source_url": "https://www.nccs.nasa.gov/data-collections/nex-gddp-cmip6/",
+    "projection_horizons_years": [
+      3,
+      5,
+      10
+    ],
+    "scenarios": [
+      "SSP1-2.6",
+      "SSP2-4.5",
+      "SSP3-7.0",
+      "SSP5-8.5"
+    ],
+    "climate_models": [
+      "ACCESS-CM2",
+      "GFDL-ESM4",
+      "MPI-ESM1-2-HR"
+    ],
+    "evaluation": {
+      "name": "ANI Experimental Long-Term Climate-Analog Projection",
+      "version": "ANI-LTP-CLIMATE-ANALOG-v1",
+      "method": "Five nearest historical climate analogs within the same province, ecosystem, and calendar quarter. Distances use median-absolute-deviation scaling across rainfall, mean temperature, relative humidity, and wind speed.",
+      "validation": {
+        "period": "2021-2025 chronological check",
+        "training_period": "2001-2020",
+        "eligible_rows": 2845,
+        "mae": 0.4173924335550577,
+        "rmse": 0.5448736838728906,
+        "r2": 0.620074620331879
+      },
+      "seasonal_naive_comparison": {
+        "definition": "previous-year same-quarter yield",
+        "eligible_rows": 2828,
+        "mae": 0.25716696523798743,
+        "rmse": 0.3969717669251465,
+        "r2": 0.795460985119921
+      },
+      "deployment_status": "Experimental scenario projection only",
+      "validation_interpretation": "The climate-analog method is less accurate than ANI's short-term previous-year seasonal baseline on the 2021-2025 check. It is therefore not presented as a replacement for the validated next-quarter XGBoost forecast. Its purpose is conditional long-term scenario exploration when future lagged agricultural inputs do not exist."
+    },
+    "model_relationship": "Experimental scenario projection only; CMIP6 is separate from the deployed next-quarter XGBoost model."
   }
 }

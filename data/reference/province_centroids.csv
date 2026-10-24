@@ -1,0 +1,83 @@
+Province,Latitude,Longitude,Method
+Abra,17.578316,120.80324,DENR provincial boundary geometric centroid
+Agusan del Norte,9.031322,125.535619,DENR provincial boundary geometric centroid
+Agusan del Sur,8.421668,125.728972,DENR provincial boundary geometric centroid
+Aklan,11.609777,122.247894,DENR provincial boundary geometric centroid
+Albay,13.209752,123.615725,DENR provincial boundary geometric centroid
+Antique,11.126681,122.068004,DENR provincial boundary geometric centroid
+Apayao,18.105761,121.187576,DENR provincial boundary geometric centroid
+Aurora,15.923408,121.700468,DENR provincial boundary geometric centroid
+Basilan,6.565674,122.029633,DENR provincial boundary geometric centroid
+Bataan,14.660392,120.454352,DENR provincial boundary geometric centroid
+Batanes,20.552677,121.888018,DENR provincial boundary geometric centroid
+Batangas,13.900303,121.029631,DENR provincial boundary geometric centroid
+Benguet,16.542682,120.698952,DENR provincial boundary geometric centroid
+Biliran,11.596654,124.473334,DENR provincial boundary geometric centroid
+Bohol,9.853715,124.197517,DENR provincial boundary geometric centroid
+Bukidnon,8.01867,125.006933,DENR provincial boundary geometric centroid
+Bulacan,14.978707,121.058707,DENR provincial boundary geometric centroid
+Cagayan,18.094241,121.760672,DENR provincial boundary geometric centroid
+Camarines Norte,14.143172,122.727668,DENR provincial boundary geometric centroid
+Camarines Sur,13.70429,123.263151,DENR provincial boundary geometric centroid
+Camiguin,9.171996,124.717635,DENR provincial boundary geometric centroid
+Capiz,11.369909,122.632937,DENR provincial boundary geometric centroid
+Catanduanes,13.783275,124.23648,DENR provincial boundary geometric centroid
+Cavite,14.255229,120.868413,DENR provincial boundary geometric centroid
+Cebu,10.355333,123.755425,DENR provincial boundary geometric centroid
+Cotabato (North Cotabato),7.202613,124.85048,DENR provincial boundary geometric centroid
+Davao Occidental,6.098074,125.54058,DENR provincial boundary geometric centroid
+Davao Oriental,7.251336,126.298216,DENR provincial boundary geometric centroid
+Davao de Oro (Compostela Valley),7.573205,126.022954,DENR provincial boundary geometric centroid
+Davao del Norte,7.585149,125.642246,DENR provincial boundary geometric centroid
+Davao del Sur,7.016086,125.345356,DENR provincial boundary geometric centroid
+Dinagat Islands,10.171041,125.602534,DENR provincial boundary geometric centroid
+Eastern Samar,11.647866,125.380952,DENR provincial boundary geometric centroid
+Guimaras,10.568975,122.614205,DENR provincial boundary geometric centroid
+Ifugao,16.84853,121.207298,DENR provincial boundary geometric centroid
+Ilocos Norte,18.204881,120.730051,DENR provincial boundary geometric centroid
+Ilocos Sur,17.24726,120.547034,DENR provincial boundary geometric centroid
+Iloilo,11.007496,122.605197,DENR provincial boundary geometric centroid
+Isabela,16.987344,121.961256,DENR provincial boundary geometric centroid
+Kalinga,17.43097,121.279529,DENR provincial boundary geometric centroid
+La Union,16.580551,120.424485,DENR provincial boundary geometric centroid
+Laguna,14.24139,121.366497,DENR provincial boundary geometric centroid
+Lanao del Norte,8.026686,124.037934,DENR provincial boundary geometric centroid
+Lanao del Sur,7.796633,124.336111,DENR provincial boundary geometric centroid
+Leyte,10.974599,124.755843,DENR provincial boundary geometric centroid
+Maguindanao del Norte,7.186713,124.243643,DENR provincial boundary geometric centroid
+Maguindanao del Sur,6.869633,124.531211,DENR provincial boundary geometric centroid
+Marinduque,13.391247,121.971922,DENR provincial boundary geometric centroid
+Masbate,12.29466,123.552304,DENR provincial boundary geometric centroid
+Misamis Occidental,8.323973,123.69028,DENR provincial boundary geometric centroid
+Misamis Oriental,8.632533,124.791469,DENR provincial boundary geometric centroid
+Mountain Province,17.101302,121.129214,DENR provincial boundary geometric centroid
+Negros Occidental,10.310932,122.98704,DENR provincial boundary geometric centroid
+Negros Oriental,9.606852,123.033482,DENR provincial boundary geometric centroid
+Northern Samar,12.411022,124.791816,DENR provincial boundary geometric centroid
+Nueva Ecija,15.619792,121.021721,DENR provincial boundary geometric centroid
+Nueva Vizcaya,16.305486,121.171787,DENR provincial boundary geometric centroid
+Occidental Mindoro,12.972046,120.892537,DENR provincial boundary geometric centroid
+Oriental Mindoro,12.966296,121.263361,DENR provincial boundary geometric centroid
+Palawan,9.978732,118.744488,DENR provincial boundary geometric centroid
+Pampanga,15.058539,120.647249,DENR provincial boundary geometric centroid
+Pangasinan,15.99944,120.312685,DENR provincial boundary geometric centroid
+Quezon,14.166221,121.962071,DENR provincial boundary geometric centroid
+Quirino,16.294528,121.595481,DENR provincial boundary geometric centroid
+Rizal,14.617397,121.262571,DENR provincial boundary geometric centroid
+Romblon,12.435727,122.234499,DENR provincial boundary geometric centroid
+Samar,11.84647,124.940177,DENR provincial boundary geometric centroid
+Sarangani,6.059554,125.158114,DENR provincial boundary geometric centroid
+Siquijor,9.185226,123.588681,DENR provincial boundary geometric centroid
+Sorsogon,12.854363,123.928434,DENR provincial boundary geometric centroid
+South Cotabato,6.284662,124.853102,DENR provincial boundary geometric centroid
+Southern Leyte,10.291183,125.051963,DENR provincial boundary geometric centroid
+Sultan Kudarat,6.534904,124.431264,DENR provincial boundary geometric centroid
+Sulu,5.953589,121.055746,DENR provincial boundary geometric centroid
+Surigao del Norte,9.670508,125.737303,DENR provincial boundary geometric centroid
+Surigao del Sur,8.776551,126.11296,DENR provincial boundary geometric centroid
+Tarlac,15.478364,120.476227,DENR provincial boundary geometric centroid
+Tawi-tawi,5.238944,119.90011,DENR provincial boundary geometric centroid
+Zambales,15.286298,120.14379,DENR provincial boundary geometric centroid
+Zamboanga Sibugay,7.694926,122.725284,DENR provincial boundary geometric centroid
+Zamboanga del Norte,8.049243,122.807249,DENR provincial boundary geometric centroid
+Zamboanga del Sur,7.67929,122.994259,DENR provincial boundary geometric centroid

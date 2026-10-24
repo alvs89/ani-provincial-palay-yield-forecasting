@@ -75,6 +75,32 @@ The bundled contextual files can be refreshed from their public sources with:
 
 The application includes the integrated copies so normal installation and offline demonstration do not depend on a successful live web request. Source periods remain visible in the interface so users can judge freshness.
 
+## Experimental long-term climate projection
+
+ANI also provides a separate **Long-Term Projection** mode for **3-, 5-, and 10-year** scenario exploration. This module is intentionally separate from the deployed next-quarter XGBoost model because future Lag 1 yield, production, and harvested-area observations do not exist several years in advance.
+
+The module retrieves future climate conditions from **NASA NEX-GDDP-CMIP6** for the selected province, quarter, year, and SSP pathway. It currently uses a small multi-model ensemble—ACCESS-CM2, GFDL-ESM4, and MPI-ESM1-2-HR—and the variables precipitation, daily maximum/minimum temperature, relative humidity, and near-surface wind speed. Daily data are aggregated to quarterly rainfall and mean climate summaries.
+
+For each CMIP6 model, ANI finds the **five most climatically similar historical observations** for the same province, ecosystem, and calendar quarter using rainfall, mean temperature, relative humidity, and wind speed. The observed yields from those historical analog years form that climate model's projected yield. The user-facing central value is the median across available climate models, while the displayed range incorporates both climate-model spread and the historical analog-yield spread.
+
+This is an **experimental scenario projection**, not a precise long-range forecast and not an official PSA projection. A chronological 2021–2025 check, trained from 2001–2020 historical analogs, produced:
+
+| Method | MAE (MT/ha) | RMSE (MT/ha) | R² |
+| --- | ---: | ---: | ---: |
+| Climate-analog projection | 0.4174 | 0.5449 | 0.6201 |
+| Previous-year same-quarter baseline | 0.2572 | 0.3970 | 0.7955 |
+
+Because the climate-analog method is weaker than the short-term seasonal baseline, ANI labels it experimental and does not present it as a replacement for the validated quarterly XGBoost model. Its purpose is to explore how historically comparable yield conditions relate to possible future climate scenarios when actual future agricultural lags are unavailable.
+
+The projection workflow is reproducible through:
+
+```powershell
+.venv\Scripts\python.exe -m tools.build_province_centroids
+.venv\Scripts\python.exe -m tools.evaluate_long_term_projection
+```
+
+NEX-GDDP-CMIP6 point/quarter responses are cached locally after retrieval so repeated demonstrations of the same scenario do not require downloading the same data again.
+
 ## Predictor set
 
 The deployed XGBoost pipeline uses:

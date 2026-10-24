@@ -20,6 +20,7 @@ PRICE_PATH = DATA_DIR / "palay_farmgate_prices.csv"
 PAGASA_PATH = DATA_DIR / "pagasa_regional_agri_weather.json"
 PAGASA_CLIMATE_PATH = DATA_DIR / "pagasa_climate_risk.json"
 PROVENANCE_PATH = DATA_DIR / "data_provenance.json"
+LONG_TERM_METADATA_PATH = ROOT / "models" / "long_term_projection_metadata.json"
 
 PSA_API = (
     "https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/2M/NFG/"
@@ -542,6 +543,23 @@ def update_provenance(prices: pd.DataFrame, pagasa: dict, climate: dict) -> None
         "model_relationship": (
             "Exploratory historical association only; RONI/ENSO is not an input to "
             "the active XGBoost model and does not alter prediction eligibility or inference."
+        ),
+    }
+    long_term_meta = (
+        json.loads(LONG_TERM_METADATA_PATH.read_text(encoding="utf-8"))
+        if LONG_TERM_METADATA_PATH.is_file()
+        else None
+    )
+    provenance["long_term_climate_projection"] = {
+        "source": "NASA NEX-GDDP-CMIP6",
+        "source_url": "https://www.nccs.nasa.gov/data-collections/nex-gddp-cmip6/",
+        "projection_horizons_years": [3, 5, 10],
+        "scenarios": ["SSP1-2.6", "SSP2-4.5", "SSP3-7.0", "SSP5-8.5"],
+        "climate_models": ["ACCESS-CM2", "GFDL-ESM4", "MPI-ESM1-2-HR"],
+        "evaluation": long_term_meta,
+        "model_relationship": (
+            "Experimental scenario projection only; CMIP6 is separate from "
+            "the deployed next-quarter XGBoost model."
         ),
     }
     provenance["official_climate_risk_context"] = {

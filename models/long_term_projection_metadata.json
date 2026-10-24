@@ -1,0 +1,22 @@
+{
+  "name": "ANI Experimental Long-Term Climate-Analog Projection",
+  "version": "ANI-LTP-CLIMATE-ANALOG-v1",
+  "method": "Five nearest historical climate analogs within the same province, ecosystem, and calendar quarter. Distances use median-absolute-deviation scaling across rainfall, mean temperature, relative humidity, and wind speed.",
+  "validation": {
+    "period": "2021-2025 chronological check",
+    "training_period": "2001-2020",
+    "eligible_rows": 2845,
+    "mae": 0.4173924335550577,
+    "rmse": 0.5448736838728906,
+    "r2": 0.620074620331879
+  },
+  "seasonal_naive_comparison": {
+    "definition": "previous-year same-quarter yield",
+    "eligible_rows": 2828,
+    "mae": 0.25716696523798743,
+    "rmse": 0.3969717669251465,
+    "r2": 0.795460985119921
+  },
+  "deployment_status": "Experimental scenario projection only",
+  "validation_interpretation": "The climate-analog method is less accurate than ANI's short-term previous-year seasonal baseline on the 2021-2025 check. It is therefore not presented as a replacement for the validated next-quarter XGBoost forecast. Its purpose is conditional long-term scenario exploration when future lagged agricultural inputs do not exist."
+}
