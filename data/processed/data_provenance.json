@@ -136,7 +136,7 @@
     "source": "Philippine Statistics Authority (PSA) OpenSTAT Farm Price Survey for Palay",
     "matrix": "0032M4AFN01",
     "source_url": "https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__2M__NFG/0032M4AFN01.px/",
-    "retrieved_at_utc": "2026-10-17T14:05:25.068939+00:00",
+    "retrieved_at_utc": "2026-10-24T12:18:09.352153+00:00",
     "frequency": "Monthly",
     "geographic_scope": "Provincial records available in the PSA matrix and aligned to ANI canonical province names.",
     "commodity_preference": "Palay [Paddy] Other Variety, dry (conv. to 14% mc)",
@@ -158,7 +158,7 @@
   "official_agri_weather_context": {
     "source": "DOST-PAGASA 10-Day Regional Agri-Weather Information",
     "source_url": "https://www.pagasa.dost.gov.ph/ten-day-regional-agri-weather",
-    "retrieved_at_utc": "2026-10-22T13:16:50.389614+00:00",
+    "retrieved_at_utc": "2026-10-24T12:18:02.346632+00:00",
     "integrated_forecast_period": "21 - 31 October 2026",
     "dekad_number": 30,
     "regional_records": 17,
@@ -167,6 +167,8 @@
       "relative humidity range",
       "number of rainy days (>1 mm)",
       "temperature range",
+      "soil-moisture condition",
+      "national farm-advisory hazard signals",
       "rice stages",
       "farm operations"
     ],
@@ -201,7 +203,7 @@
   },
   "official_climate_risk_context": {
     "source": "DOST-PAGASA",
-    "retrieved_at_utc": "2026-10-17T14:05:24.998816+00:00",
+    "retrieved_at_utc": "2026-10-24T12:18:09.336561+00:00",
     "enso_source_url": "https://www.pagasa.dost.gov.ph/climate/el-nino-la-nina/advisories",
     "drought_source_url": "https://droughtcaster.pagasa.dost.gov.ph/",
     "latest_enso_advisory": {
@@ -222,5 +224,19 @@
     "scope_note": "Official national/provincial climate-risk context. It is not a field-level diagnosis and does not replace PAGASA warnings, advisories, or LGU guidance.",
     "model_relationship": "Context only; it is not an input to the active XGBoost model and does not alter yield-model eligibility or inference.",
     "refresh_method": "python -m tools.update_farmer_context"
+  },
+  "historical_enso_yield_context": {
+    "source": "NOAA Climate Prediction Center Relative Oceanic Nino Index (RONI), ERSSTv6",
+    "source_url": "https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/",
+    "local_dataset": "data/processed/enso_history.csv",
+    "refresh_method": "python tools/build_enso_history.py",
+    "displayed_context": [
+      "representative quarterly RONI value",
+      "warm/cold/neutral RONI signal",
+      "historical El Nino, La Nina, and Neutral episode grouping",
+      "same-quarter median provincial palay yield by historical ENSO episode"
+    ],
+    "classification_method": "El Nino and La Nina historical episode labels follow NOAA CPC's stated requirement that the +/-0.5 C RONI threshold persist for at least five consecutive overlapping seasons. Representative quarterly values use JFM, AMJ, JAS, and OND.",
+    "model_relationship": "Exploratory historical association only; RONI/ENSO is not an input to the active XGBoost model and does not alter prediction eligibility or inference."
   }
 }

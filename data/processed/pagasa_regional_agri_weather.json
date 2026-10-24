@@ -1,9 +1,22 @@
 {
   "source": "DOST-PAGASA 10-Day Regional Agri-Weather Information",
-  "retrievedAtUtc": "2026-10-22T13:16:50.389614+00:00",
+  "retrievedAtUtc": "2026-10-24T12:18:02.346632+00:00",
   "sourceUrl": "https://www.pagasa.dost.gov.ph/ten-day-regional-agri-weather",
   "dekadNumber": 30,
   "forecastPeriod": "21 - 31 October 2026",
+  "soilMoisture": {
+    "period": "October 11 – 20, 2026",
+    "wet": "Nueva Vizcaya, Quirino, most areas in Central Luzon, Cordillera Administrative Region, Quezon City, Rizal, Quezon, Palawan, Romblon, Camarines Norte, Catanduanes, most areas in Western Visayas, Samar, Bukidnon, Davao del Norte, Davao del Sur, and Lanao del Sur",
+    "moist": "Ilocos Region, Batanes, Isabela, Zambales, Nueva Ecija, Cavite, Batangas, Pasay, Occidental Mindoro, Oriental Mindoro, Camarines Sur, Albay, Northern Samar, Surigao del Norte, Surigao del Sur, and Maguindanao",
+    "dry": "Rest of the country"
+  },
+  "nationalForecastSummary": "During the forecast period, the country will be influenced by intertropical convergence zone (ITCZ), northeasterly windflow, easterlies, tropical cyclone (TC), and localized thunderstorms. During the first half of the dekad, rains with gusty winds are expected over Batanes, Ilocos Norte, Apayao, Cagayan, Isabela, and Catanduanes due to TC Rosal. Cloudy skies with scattered rains and thunderstorms are also expected over Eastern Visayas, Ilocos Sur, Quezon, and the rest of the Cordillera Administrative Region, Cagayan Valley, and Bicol Region. TC Rosal may also bring heavy rainfall over Extreme Northern Luzon. Thereafter, Palawan and most areas of the Visayas and Mindanao will experience cloudy skies with scattered rains and thunderstorms due to the ITCZ. The rest of the country will experience partly cloudy to cloudy skies with isolated rainshowers or thunderstorms. Gusty conditions are likely over Extreme Northern Luzon and eastern sections of Luzon and Visayas due to TC Rosal. Winds from the northeast to northwest will prevail over Luzon and Visayas, while winds from the northwest to southwest will affect Mindanao. Afterwards, as the TC exits PAR, winds coming from east to northeast will blow over the rest of the country. At the latter part, winds will likely blow from northeast to east over the whole archipelago. During the close approach of TC Rosal, very rough to very high seas may affect the northern and eastern seaboards of Luzon and Visayas. Afterwards, moderate to rough seas may prevail over the northern and eastern seaboards of Luzon and the eastern seaboards of Visayas and Mindanao. Slight to moderate coastal waters are expected over the rest of Luzon and Visayas, as well as the remaining seaboards of Mindanao. ENSO ALERT SYSTEM STATUS: EL NIÑO ( Updated: 21 October 2026 ) A strong to very strong El Niño is present in the Tropical Pacific. Most climate models predict that the ongoing El Niño will persist until the first quarter of 2027, with its peak expected before the end of 2026. Its associated impacts may continue through the first half of 2027. El Niño increases the likelihood of below-normal rainfall, which may lead to adverse impacts, including dry spells and droughts in some areas of the country. However, above normal rainfall conditions may still occur during the passage of tropical cyclones and other rain-bearing weather systems.",
+  "hazardKeywords": [
+    "tropical cyclone",
+    "heavy rainfall",
+    "gusty winds",
+    "thunderstorms"
+  ],
   "regions": [
     {
       "regionLabel": "Region 1 Ilocos Region",

@@ -30,6 +30,7 @@ SATELLITE_PATH = DATA_DIR / "province_quarter_satellite.csv"
 MARKET_PATH = DATA_DIR / "palay_farmgate_prices.csv"
 PAGASA_AGRI_WEATHER_PATH = DATA_DIR / "pagasa_regional_agri_weather.json"
 PAGASA_CLIMATE_RISK_PATH = DATA_DIR / "pagasa_climate_risk.json"
+ENSO_HISTORY_PATH = DATA_DIR / "enso_history.csv"
 AGRICULTURAL_SOURCE_PATH = DATA_DIR / "psa_2026_q1_q2_source_records.csv"
 MODEL_PATH = MODEL_DIR / "ani_xgboost_pipeline.joblib"
 METADATA_PATH = MODEL_DIR / "metadata.json"
@@ -64,6 +65,11 @@ pagasa_climate_risk = (
     json.loads(PAGASA_CLIMATE_RISK_PATH.read_text(encoding="utf-8"))
     if PAGASA_CLIMATE_RISK_PATH.is_file()
     else None
+)
+enso_history_df = (
+    pd.read_csv(ENSO_HISTORY_PATH)
+    if ENSO_HISTORY_PATH.is_file()
+    else pd.DataFrame()
 )
 satellite_evaluation = (
     json.loads(SATELLITE_EVALUATION_PATH.read_text(encoding="utf-8"))
@@ -857,6 +863,40 @@ def _pagasa_region_label(province: str, region: str) -> str | None:
     return mapping.get(region)
 
 
+def _pagasa_soil_moisture_status(province: str, region_label: str | None) -> dict[str, Any]:
+    if not isinstance(pagasa_agri_weather, dict):
+        return {"status": None, "period": None, "scope": None}
+    root = pagasa_agri_weather.get("soilMoisture") or {}
+    period = root.get("period")
+    province_key = province.lower()
+    region_terms = []
+    if region_label:
+        lower = region_label.lower()
+        region_terms.append(lower)
+        if "cordillera administrative region" in lower:
+            region_terms.append("cordillera administrative region")
+        if lower.startswith("region "):
+            parts = lower.split(" ", 2)
+            if len(parts) == 3:
+                region_terms.append(parts[2].replace("(", "").replace(")", ""))
+
+    categories = [("wet", "Wet"), ("moist", "Moist"), ("dry", "Dry")]
+    for status_key, display in categories:
+        text = str(root.get(status_key) or "").lower()
+        if province_key in text:
+            return {"status": display, "period": period, "scope": "Province listed by PAGASA"}
+
+    for status_key, display in categories:
+        text = str(root.get(status_key) or "").lower()
+        if any(term and term in text for term in region_terms):
+            return {"status": display, "period": period, "scope": "Regional PAGASA listing"}
+
+    dry_text = str(root.get("dry") or "").lower()
+    if "rest of the country" in dry_text:
+        return {"status": "Dry", "period": period, "scope": "PAGASA rest-of-country category"}
+    return {"status": None, "period": period, "scope": None}
+
+
 def _official_agri_weather_context(province: str) -> dict[str, Any]:
     base = {
         "available": False,
@@ -889,6 +929,7 @@ def _official_agri_weather_context(province: str) -> dict[str, Any]:
             "reason": "The current PAGASA regional agri-weather record is unavailable.",
         }
 
+    soil = _pagasa_soil_moisture_status(province, label)
     return {
         **base,
         "available": True,
@@ -901,6 +942,10 @@ def _official_agri_weather_context(province: str) -> dict[str, Any]:
         "temperatureC": record.get("temperatureC"),
         "riceStages": record.get("riceStages") or [],
         "farmOperations": record.get("farmOperations") or [],
+        "soilMoistureStatus": soil.get("status"),
+        "soilMoisturePeriod": soil.get("period"),
+        "soilMoistureScope": soil.get("scope"),
+        "weatherAdvisoryFlags": pagasa_agri_weather.get("hazardKeywords") or [],
         "scope": (
             "Official regional 10-day agri-weather context; it does not alter "
             "the ANI XGBoost yield estimate."
@@ -952,6 +997,88 @@ def _official_climate_risk_context(province: str) -> dict[str, Any]:
         "scope": (
             "Official PAGASA climate-risk context. Drought categories and ENSO "
             "advisories are displayed as published and are not calculated by ANI."
+        ),
+    }
+
+
+def _enso_yield_context(
+    province: str,
+    ecosystem: str,
+    target_year: int,
+    target_quarter: int,
+) -> dict[str, Any]:
+    """Compare same-quarter historical yield across NOAA RONI phase groups."""
+    base = {
+        "available": False,
+        "source": "NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6",
+        "sourceUrl": "https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/",
+        "affectsYieldEstimate": False,
+    }
+    if enso_history_df.empty:
+        return {**base, "reason": "Historical ENSO data are unavailable."}
+
+    eco = normalize_ecosystem(ecosystem)
+    target_idx = _period_key(target_year, target_quarter)
+    prior = history_df[
+        (history_df["Province"] == province)
+        & (history_df["Ecosystem"] == eco)
+        & (history_df["Quarter_Number"].astype(int) == int(target_quarter))
+        & (
+            history_df["Year"].astype(int) * 4
+            + history_df["Quarter_Number"].astype(int) - 1
+            < target_idx
+        )
+    ][["Year", "Quarter_Number", "Yield_mt_per_ha"]].copy()
+    if prior.empty:
+        return {**base, "reason": "No prior same-quarter yield records are available."}
+
+    enso = enso_history_df[["Year", "Quarter", "RONI", "Signal", "Episode", "Season"]].copy()
+    merged = prior.merge(
+        enso,
+        left_on=["Year", "Quarter_Number"],
+        right_on=["Year", "Quarter"],
+        how="inner",
+    ).dropna(subset=["Yield_mt_per_ha", "RONI", "Episode"])
+    if merged.empty:
+        return {**base, "reason": "No matched historical ENSO and yield records are available."}
+
+    groups = {}
+    for phase in ["El Nino", "La Nina", "Neutral"]:
+        subset = merged[merged["Episode"] == phase]["Yield_mt_per_ha"].astype(float)
+        groups[phase] = {
+            "count": int(len(subset)),
+            "medianYieldMtPerHa": round(float(subset.median()), 3) if len(subset) else None,
+        }
+
+    target_match = enso_history_df[
+        (enso_history_df["Year"].astype(int) == int(target_year))
+        & (enso_history_df["Quarter"].astype(int) == int(target_quarter))
+    ]
+    target_signal = None
+    target_episode = None
+    target_roni = None
+    target_season = None
+    if not target_match.empty:
+        row = target_match.iloc[-1]
+        target_signal = str(row["Signal"])
+        target_episode = str(row["Episode"])
+        target_roni = round(float(row["RONI"]), 2)
+        target_season = str(row["Season"])
+
+    return {
+        **base,
+        "available": True,
+        "matchedObservations": int(len(merged)),
+        "quarter": int(target_quarter),
+        "targetSignal": target_signal,
+        "targetEpisode": target_episode,
+        "targetRoni": target_roni,
+        "targetSeason": target_season,
+        "phaseGroups": groups,
+        "interpretation": (
+            "Historical same-quarter yields are grouped by NOAA RONI episodes using the "
+            "five-consecutive-overlapping-season rule described by NOAA CPC. These comparisons "
+            "describe association only and do not show that ENSO caused a yield change."
         ),
     }
 
@@ -1567,6 +1694,12 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         request.target_year,
         request.target_quarter,
     )
+    enso_yield_context = _enso_yield_context(
+        province,
+        ecosystem,
+        request.target_year,
+        request.target_quarter,
+    )
     official_agri_weather = _official_agri_weather_context(province)
     official_climate_risk = _official_climate_risk_context(province)
     farmer_guidance = _farmer_guidance_context(
@@ -1615,6 +1748,7 @@ def predict(request: ForecastRequest) -> dict[str, Any]:
         "temperatureIndicator": extra["temperature_indicator"],
         "satelliteVegetationContext": satellite_context,
         "vegetationYieldRelationship": vegetation_yield_relationship,
+        "ensoYieldContext": enso_yield_context,
         "historicalBenchmarkContext": benchmark_context,
         "yieldPatternContext": yield_patterns,
         "associatedSignalsContext": associated_signals,

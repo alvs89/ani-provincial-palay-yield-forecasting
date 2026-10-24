@@ -143,6 +143,10 @@ assert all(
     and row.get("relativeHumidityPct")
     for row in pagasa_context["regions"]
 )
+assert pagasa_context["soilMoisture"]["wet"]
+assert pagasa_context["soilMoisture"]["moist"]
+assert pagasa_context["soilMoisture"]["dry"]
+assert pagasa_context["hazardKeywords"]
 assert meta["official_agri_weather"]["forecastPeriod"] == (
     pagasa_context["forecastPeriod"]
 )
@@ -170,6 +174,19 @@ assert meta["official_climate_risk"]["droughtProvincesLoaded"] == (
 )
 assert provenance["official_climate_risk_context"]["model_relationship"].startswith(
     "Context only"
+)
+enso_history = pd.read_csv(
+    ROOT / "data" / "processed" / "enso_history.csv"
+)
+assert len(enso_history) >= 300
+assert {"Year", "Quarter", "Season", "RONI", "Signal", "Episode"}.issubset(
+    enso_history.columns
+)
+assert set(enso_history["Signal"].dropna().unique()).issubset(
+    {"Warm", "Cold", "Neutral"}
+)
+assert set(enso_history["Episode"].dropna().unique()).issubset(
+    {"El Nino", "La Nina", "Neutral"}
 )
 print(
     "PASS Farmer context data: PSA provincial farmgate prices and official "
@@ -423,6 +440,19 @@ assert official_weather_context["regionLabel"] == (
 )
 assert official_weather_context["forecastRainfallMm"]
 assert official_weather_context["riceStages"]
+assert official_weather_context["soilMoistureStatus"] == "Wet"
+assert official_weather_context["soilMoisturePeriod"]
+assert official_weather_context["weatherAdvisoryFlags"]
+
+enso_yield_context = prediction_payload["ensoYieldContext"]
+assert enso_yield_context["affectsYieldEstimate"] is False
+assert enso_yield_context["available"] is True
+assert enso_yield_context["matchedObservations"] >= 8
+assert enso_yield_context["targetSignal"] in {"Warm", "Cold", "Neutral"}
+assert enso_yield_context["targetRoni"] is not None
+assert set(enso_yield_context["phaseGroups"]).issuperset(
+    {"El Nino", "La Nina", "Neutral"}
+)
 
 official_climate_context = prediction_payload["officialClimateRiskContext"]
 assert official_climate_context["affectsYieldEstimate"] is False
@@ -441,6 +471,7 @@ assert farmer_payload["officialAgriWeatherContext"]["available"] is True
 assert farmer_payload["officialAgriWeatherContext"]["regionLabel"] == (
     "Region 3 Central Luzon"
 )
+assert farmer_payload["officialAgriWeatherContext"]["soilMoistureStatus"] == "Moist"
 assert farmer_payload["officialClimateRiskContext"]["available"] is True
 assert farmer_payload["officialClimateRiskContext"]["droughtAssessment"]["status"] in {
     "Not affected", "Dry condition", "Dry spell", "Drought"
@@ -448,8 +479,8 @@ assert farmer_payload["officialClimateRiskContext"]["droughtAssessment"]["status
 assert farmer_payload["officialClimateRiskContext"]["droughtOutlook"]
 print(
     "PASS Farmer result context: historical high-yield benchmarks, yield patterns, "
-    "vegetation-yield associations, contributing signals, planning guidance, PSA "
-    "market context, and official PAGASA weather/climate context are available "
+    "vegetation-yield and ENSO-yield associations, contributing signals, planning "
+    "guidance, PSA market context, and official PAGASA weather/climate context are available "
     "without changing XGBoost inference."
 )
 

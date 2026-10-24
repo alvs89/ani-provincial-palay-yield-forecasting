@@ -215,6 +215,7 @@ def update_pagasa_agri_weather() -> dict:
         timeout=45,
     )
     response.raise_for_status()
+    response.encoding = "utf-8"
     page = response.text
 
     plain = _strip_html(page)
@@ -224,6 +225,41 @@ def update_pagasa_agri_weather() -> dict:
         plain,
         flags=re.I,
     )
+
+    soil_moisture = {"period": None, "wet": "", "moist": "", "dry": ""}
+    soil_period_match = re.search(
+        r"ACTUAL SOIL MOISTURE CONDITION\s*\(as of\s*([^)]*)\)",
+        plain,
+        flags=re.I,
+    )
+    section_start = page.find("ACTUAL SOIL MOISTURE CONDITION")
+    section_end = page.find("Farm Advisories", section_start)
+    if section_start >= 0 and section_end > section_start:
+        soil_section = page[section_start:section_end]
+        cells = [
+            _strip_html(cell)
+            for cell in re.findall(r"<td[^>]*>(.*?)</td>", soil_section, flags=re.I | re.S)
+        ]
+        cells = [cell for cell in cells if cell]
+        if len(cells) >= 3:
+            soil_moisture = {
+                "period": soil_period_match.group(1).strip() if soil_period_match else None,
+                "wet": cells[-3],
+                "moist": cells[-2],
+                "dry": cells[-1],
+            }
+
+    forecast_match = re.search(
+        r"Philippine Agri-Weather Forecast\s+(.*?)\s+ACTUAL SOIL MOISTURE CONDITION",
+        plain,
+        flags=re.I | re.S,
+    )
+    national_forecast = forecast_match.group(1).strip() if forecast_match else None
+    hazard_keywords = [
+        keyword
+        for keyword in ["tropical cyclone", "heavy rainfall", "gusty winds", "thunderstorms"]
+        if national_forecast and keyword in national_forecast.lower()
+    ]
 
     regions: list[dict] = []
     blocks = re.findall(
@@ -266,6 +302,9 @@ def update_pagasa_agri_weather() -> dict:
         "sourceUrl": PAGASA_URL,
         "dekadNumber": int(dekad_match.group(1)) if dekad_match else None,
         "forecastPeriod": dekad_match.group(2).title() if dekad_match else None,
+        "soilMoisture": soil_moisture,
+        "nationalForecastSummary": national_forecast,
+        "hazardKeywords": hazard_keywords,
         "regions": regions,
         "note": (
             "Official PAGASA regional agri-weather context. It is separate from "
@@ -468,6 +507,8 @@ def update_provenance(prices: pd.DataFrame, pagasa: dict, climate: dict) -> None
             "relative humidity range",
             "number of rainy days (>1 mm)",
             "temperature range",
+            "soil-moisture condition",
+            "national farm-advisory hazard signals",
             "rice stages",
             "farm operations",
         ],
@@ -480,6 +521,28 @@ def update_provenance(prices: pd.DataFrame, pagasa: dict, climate: dict) -> None
             "does not alter yield-model eligibility or inference."
         ),
         "refresh_method": "python -m tools.update_farmer_context",
+    }
+    provenance["historical_enso_yield_context"] = {
+        "source": "NOAA Climate Prediction Center Relative Oceanic Nino Index (RONI), ERSSTv6",
+        "source_url": "https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/",
+        "local_dataset": "data/processed/enso_history.csv",
+        "refresh_method": "python tools/build_enso_history.py",
+        "displayed_context": [
+            "representative quarterly RONI value",
+            "warm/cold/neutral RONI signal",
+            "historical El Nino, La Nina, and Neutral episode grouping",
+            "same-quarter median provincial palay yield by historical ENSO episode",
+        ],
+        "classification_method": (
+            "El Nino and La Nina historical episode labels follow NOAA CPC's stated "
+            "requirement that the +/-0.5 C RONI threshold persist for at least five "
+            "consecutive overlapping seasons. Representative quarterly values use "
+            "JFM, AMJ, JAS, and OND."
+        ),
+        "model_relationship": (
+            "Exploratory historical association only; RONI/ENSO is not an input to "
+            "the active XGBoost model and does not alter prediction eligibility or inference."
+        ),
     }
     provenance["official_climate_risk_context"] = {
         "source": "DOST-PAGASA",
@@ -551,7 +614,10 @@ def update_provenance(prices: pd.DataFrame, pagasa: dict, climate: dict) -> None
     )
 
 def main() -> None:
+    from tools.build_enso_history import main as update_enso_history
+
     DATA_DIR.mkdir(parents=True, exist_ok=True)
+    update_enso_history()
     prices = update_psa_farmgate_prices()
     pagasa = update_pagasa_agri_weather()
     climate = update_pagasa_climate_risk()

@@ -1,6 +1,6 @@
 {
   "source": "DOST-PAGASA",
-  "retrievedAtUtc": "2026-10-17T14:05:24.998816+00:00",
+  "retrievedAtUtc": "2026-10-24T12:18:09.336561+00:00",
   "enso": {
     "available": true,
     "phase": "El Nino",
@@ -19,3888 +19,3888 @@
     "requestedProvinces": 82,
     "provinces": {
       "Abra": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9608",
-          "date": "2026-09",
+          "id": "10203",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Not affected"
+          "status": "Dry condition"
         },
         "outlook": [
           {
-            "id": "9609",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9610",
+            "id": "10204",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9611",
+            "id": "10205",
             "date": "2026-12",
             "type": "outlook",
-            "status": "Dry spell"
+            "status": "Drought"
           },
           {
-            "id": "9612",
+            "id": "10206",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9613",
+            "id": "10207",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9614",
+            "id": "10208",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10209",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Agusan del Norte": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9615",
-          "date": "2026-09",
+          "id": "10210",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "9616",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry spell"
-          },
-          {
-            "id": "9617",
+            "id": "10211",
             "date": "2026-11",
             "type": "outlook",
             "status": "Not affected"
           },
           {
-            "id": "9618",
+            "id": "10212",
             "date": "2026-12",
             "type": "outlook",
             "status": "Not affected"
           },
           {
-            "id": "9619",
+            "id": "10213",
             "date": "2027-01",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "9620",
+            "id": "10214",
             "date": "2027-02",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9621",
+            "id": "10215",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10216",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Agusan del Sur": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9622",
-          "date": "2026-09",
+          "id": "10217",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9623",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9624",
+            "id": "10218",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9625",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9626",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "9627",
-            "date": "2027-02",
+            "id": "10219",
+            "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9628",
+            "id": "10220",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Dry spell"
+          },
+          {
+            "id": "10221",
+            "date": "2027-02",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10222",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10223",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Aklan": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Visayas",
         "latestAssessment": {
-          "id": "9629",
-          "date": "2026-09",
+          "id": "10224",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Not affected"
+          "status": "Dry condition"
         },
         "outlook": [
           {
-            "id": "9630",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9631",
+            "id": "10225",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9632",
+            "id": "10226",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9633",
+            "id": "10227",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9634",
+            "id": "10228",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9635",
+            "id": "10229",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10230",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Albay": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9636",
-          "date": "2026-09",
+          "id": "10231",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Drought"
         },
         "outlook": [
           {
-            "id": "9637",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Drought"
-          },
-          {
-            "id": "9638",
+            "id": "10232",
             "date": "2026-11",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9639",
+            "id": "10233",
             "date": "2026-12",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9640",
+            "id": "10234",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9641",
+            "id": "10235",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9642",
+            "id": "10236",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10237",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Antique": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Visayas",
         "latestAssessment": {
-          "id": "9643",
-          "date": "2026-09",
+          "id": "10238",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Not affected"
+          "status": "Dry condition"
         },
         "outlook": [
           {
-            "id": "9644",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9645",
+            "id": "10239",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9646",
+            "id": "10240",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9647",
+            "id": "10241",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9648",
+            "id": "10242",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9649",
+            "id": "10243",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10244",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Apayao": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9650",
-          "date": "2026-09",
+          "id": "10245",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9651",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9652",
+            "id": "10246",
             "date": "2026-11",
             "type": "outlook",
-            "status": "Dry condition"
+            "status": "Dry spell"
           },
           {
-            "id": "9653",
+            "id": "10247",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9654",
+            "id": "10248",
             "date": "2027-01",
             "type": "outlook",
-            "status": "Dry spell"
+            "status": "Drought"
           },
           {
-            "id": "9655",
+            "id": "10249",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9656",
+            "id": "10250",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10251",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Aurora": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9657",
-          "date": "2026-09",
+          "id": "10252",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9658",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9659",
+            "id": "10253",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "9660",
+            "id": "10254",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9661",
+            "id": "10255",
             "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9662",
+            "id": "10256",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9663",
+            "id": "10257",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10258",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Basilan": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9664",
-          "date": "2026-09",
+          "id": "10259",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "9665",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9666",
+            "id": "10260",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9667",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9668",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9669",
+            "id": "10261",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10262",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10263",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9670",
+            "id": "10264",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10265",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Bataan": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9671",
-          "date": "2026-09",
+          "id": "10266",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9672",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9673",
+            "id": "10267",
             "date": "2026-11",
             "type": "outlook",
-            "status": "Dry condition"
+            "status": "Dry spell"
           },
           {
-            "id": "9674",
+            "id": "10268",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9675",
+            "id": "10269",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9676",
+            "id": "10270",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9677",
+            "id": "10271",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10272",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Batanes": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9678",
-          "date": "2026-09",
+          "id": "10273",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Not affected"
+          "status": "Dry condition"
         },
         "outlook": [
           {
-            "id": "9679",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9680",
+            "id": "10274",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9681",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9682",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9683",
+            "id": "10275",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Dry spell"
+          },
+          {
+            "id": "10276",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10277",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9684",
+            "id": "10278",
             "date": "2027-03",
             "type": "outlook",
-            "status": "Not affected"
+            "status": "Drought"
+          },
+          {
+            "id": "10279",
+            "date": "2027-04",
+            "type": "outlook",
+            "status": "Drought"
           }
         ]
       },
       "Batangas": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9685",
-          "date": "2026-09",
+          "id": "10280",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9686",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9687",
+            "id": "10281",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9688",
-            "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9689",
+            "id": "10282",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10283",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9690",
+            "id": "10284",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9691",
+            "id": "10285",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10286",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Benguet": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9692",
-          "date": "2026-09",
+          "id": "10287",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9693",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9694",
+            "id": "10288",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9695",
-            "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9696",
+            "id": "10289",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10290",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9697",
+            "id": "10291",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9698",
+            "id": "10292",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10293",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Biliran": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Visayas",
         "latestAssessment": {
-          "id": "9699",
-          "date": "2026-09",
+          "id": "10294",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "9700",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry spell"
-          },
-          {
-            "id": "9701",
+            "id": "10295",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9702",
+            "id": "10296",
             "date": "2026-12",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9703",
+            "id": "10297",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9704",
+            "id": "10298",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9705",
+            "id": "10299",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10300",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Bohol": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Visayas",
         "latestAssessment": {
-          "id": "9706",
-          "date": "2026-09",
+          "id": "10301",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "9707",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9708",
+            "id": "10302",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9709",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9710",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9711",
+            "id": "10303",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10304",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10305",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9712",
+            "id": "10306",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10307",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Bukidnon": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9713",
-          "date": "2026-09",
+          "id": "10308",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9714",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9715",
+            "id": "10309",
             "date": "2026-11",
             "type": "outlook",
             "status": "Not affected"
           },
           {
-            "id": "9716",
+            "id": "10310",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "9717",
+            "id": "10311",
             "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9718",
+            "id": "10312",
             "date": "2027-02",
+            "type": "outlook",
+            "status": "Dry spell"
+          },
+          {
+            "id": "10313",
+            "date": "2027-03",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9719",
-            "date": "2027-03",
+            "id": "10314",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Bulacan": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9720",
-          "date": "2026-09",
+          "id": "10315",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9721",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9722",
+            "id": "10316",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "9723",
+            "id": "10317",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9724",
+            "id": "10318",
             "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9725",
+            "id": "10319",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9726",
+            "id": "10320",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10321",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Cagayan": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9727",
-          "date": "2026-09",
+          "id": "10322",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Not affected"
+          "status": "Dry condition"
         },
         "outlook": [
           {
-            "id": "9728",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9729",
+            "id": "10323",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9730",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9731",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9732",
+            "id": "10324",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10325",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10326",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9733",
+            "id": "10327",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10328",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Camarines Norte": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9734",
-          "date": "2026-09",
+          "id": "10329",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Drought"
         },
         "outlook": [
           {
-            "id": "9735",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Drought"
-          },
-          {
-            "id": "9736",
+            "id": "10330",
             "date": "2026-11",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9737",
+            "id": "10331",
             "date": "2026-12",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9738",
+            "id": "10332",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9739",
+            "id": "10333",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9740",
+            "id": "10334",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10335",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Camarines Sur": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9741",
-          "date": "2026-09",
+          "id": "10336",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Drought"
         },
         "outlook": [
           {
-            "id": "9742",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Drought"
-          },
-          {
-            "id": "9743",
+            "id": "10337",
             "date": "2026-11",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9744",
+            "id": "10338",
             "date": "2026-12",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9745",
+            "id": "10339",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9746",
+            "id": "10340",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9747",
+            "id": "10341",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10342",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Camiguin": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9748",
-          "date": "2026-09",
+          "id": "10343",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "9749",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9750",
+            "id": "10344",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9751",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9752",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9753",
+            "id": "10345",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10346",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10347",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9754",
+            "id": "10348",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10349",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Capiz": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Visayas",
         "latestAssessment": {
-          "id": "9755",
-          "date": "2026-09",
+          "id": "10350",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "9756",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9757",
+            "id": "10351",
             "date": "2026-11",
             "type": "outlook",
-            "status": "Not affected"
+            "status": "Drought"
           },
           {
-            "id": "9758",
+            "id": "10352",
             "date": "2026-12",
             "type": "outlook",
-            "status": "Dry condition"
+            "status": "Drought"
           },
           {
-            "id": "9759",
+            "id": "10353",
             "date": "2027-01",
             "type": "outlook",
-            "status": "Dry spell"
+            "status": "Drought"
           },
           {
-            "id": "9760",
+            "id": "10354",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9761",
+            "id": "10355",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10356",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Catanduanes": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9762",
-          "date": "2026-09",
+          "id": "10357",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Drought"
         },
         "outlook": [
           {
-            "id": "9763",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Drought"
-          },
-          {
-            "id": "9764",
+            "id": "10358",
             "date": "2026-11",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9765",
+            "id": "10359",
             "date": "2026-12",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9766",
+            "id": "10360",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9767",
+            "id": "10361",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9768",
+            "id": "10362",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10363",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Cavite": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9769",
-          "date": "2026-09",
+          "id": "10364",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9770",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9771",
+            "id": "10365",
             "date": "2026-11",
             "type": "outlook",
-            "status": "Dry condition"
+            "status": "Dry spell"
           },
           {
-            "id": "9772",
+            "id": "10366",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9773",
+            "id": "10367",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9774",
+            "id": "10368",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9775",
+            "id": "10369",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10370",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Cebu": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Visayas",
         "latestAssessment": {
-          "id": "9776",
-          "date": "2026-09",
+          "id": "10371",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "9777",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9778",
+            "id": "10372",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9779",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9780",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9781",
+            "id": "10373",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10374",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10375",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9782",
+            "id": "10376",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10377",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Cotabato (North Cotabato)": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9783",
-          "date": "2026-09",
+          "id": "10392",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "9784",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9785",
+            "id": "10393",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9786",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9787",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9788",
+            "id": "10394",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10395",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10396",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9789",
+            "id": "10397",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10398",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Davao Occidental": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9797",
-          "date": "2026-09",
+          "id": "10399",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "9798",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9799",
+            "id": "10400",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9800",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9801",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9802",
+            "id": "10401",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10402",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10403",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9803",
+            "id": "10404",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10405",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Davao Oriental": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9804",
-          "date": "2026-09",
+          "id": "10406",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9805",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9806",
+            "id": "10407",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9807",
-            "date": "2026-12",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "9808",
+            "id": "10408",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Dry spell"
+          },
+          {
+            "id": "10409",
             "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9809",
+            "id": "10410",
             "date": "2027-02",
             "type": "outlook",
-            "status": "Dry spell"
+            "status": "Drought"
           },
           {
-            "id": "9810",
+            "id": "10411",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10412",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Davao de Oro (Compostela Valley)": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9811",
-          "date": "2026-09",
+          "id": "10413",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9812",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9813",
+            "id": "10414",
             "date": "2026-11",
             "type": "outlook",
             "status": "Not affected"
           },
           {
-            "id": "9814",
+            "id": "10415",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "9815",
+            "id": "10416",
             "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9816",
+            "id": "10417",
             "date": "2027-02",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9817",
+            "id": "10418",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10419",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Davao del Norte": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9818",
-          "date": "2026-09",
+          "id": "10420",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9819",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9820",
+            "id": "10421",
             "date": "2026-11",
             "type": "outlook",
             "status": "Not affected"
           },
           {
-            "id": "9821",
+            "id": "10422",
             "date": "2026-12",
             "type": "outlook",
             "status": "Not affected"
           },
           {
-            "id": "9822",
+            "id": "10423",
             "date": "2027-01",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "9823",
+            "id": "10424",
             "date": "2027-02",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9824",
+            "id": "10425",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10426",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Davao del Sur": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9825",
-          "date": "2026-09",
+          "id": "10427",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "9826",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9827",
+            "id": "10428",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9828",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9829",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9830",
+            "id": "10429",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10430",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10431",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9831",
+            "id": "10432",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10433",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Dinagat Islands": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9832",
-          "date": "2026-09",
+          "id": "10434",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "9833",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry spell"
-          },
-          {
-            "id": "9834",
+            "id": "10435",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9835",
+            "id": "10436",
             "date": "2026-12",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9836",
+            "id": "10437",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9837",
+            "id": "10438",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9838",
+            "id": "10439",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10440",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Eastern Samar": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Visayas",
         "latestAssessment": {
-          "id": "9839",
-          "date": "2026-09",
+          "id": "10441",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9840",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9841",
+            "id": "10442",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "9842",
+            "id": "10443",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9843",
+            "id": "10444",
             "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9844",
+            "id": "10445",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9845",
+            "id": "10446",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10447",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Guimaras": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Visayas",
         "latestAssessment": {
-          "id": "9846",
-          "date": "2026-09",
+          "id": "10448",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Not affected"
+          "status": "Dry condition"
         },
         "outlook": [
           {
-            "id": "9847",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9848",
+            "id": "10449",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9849",
+            "id": "10450",
             "date": "2026-12",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9850",
+            "id": "10451",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9851",
+            "id": "10452",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9852",
+            "id": "10453",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10454",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Ifugao": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9853",
-          "date": "2026-09",
+          "id": "10455",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9854",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9855",
+            "id": "10456",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9856",
-            "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9857",
+            "id": "10457",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10458",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9858",
+            "id": "10459",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9859",
+            "id": "10460",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10461",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Ilocos Norte": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9860",
-          "date": "2026-09",
+          "id": "10462",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9861",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9862",
+            "id": "10463",
             "date": "2026-11",
             "type": "outlook",
-            "status": "Dry condition"
+            "status": "Dry spell"
           },
           {
-            "id": "9863",
+            "id": "10464",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9864",
+            "id": "10465",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9865",
+            "id": "10466",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9866",
+            "id": "10467",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10468",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Ilocos Sur": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9867",
-          "date": "2026-09",
+          "id": "10469",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9868",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9869",
+            "id": "10470",
             "date": "2026-11",
             "type": "outlook",
-            "status": "Dry condition"
+            "status": "Dry spell"
           },
           {
-            "id": "9870",
+            "id": "10471",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9871",
+            "id": "10472",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9872",
+            "id": "10473",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9873",
+            "id": "10474",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10475",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Iloilo": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Visayas",
         "latestAssessment": {
-          "id": "9874",
-          "date": "2026-09",
+          "id": "10476",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Not affected"
+          "status": "Dry condition"
         },
         "outlook": [
           {
-            "id": "9875",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9876",
+            "id": "10477",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9877",
+            "id": "10478",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9878",
+            "id": "10479",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9879",
+            "id": "10480",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9880",
+            "id": "10481",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10482",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Isabela": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9881",
-          "date": "2026-09",
+          "id": "10483",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Not affected"
+          "status": "Dry condition"
         },
         "outlook": [
           {
-            "id": "9882",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9883",
+            "id": "10484",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9884",
+            "id": "10485",
             "date": "2026-12",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9885",
+            "id": "10486",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9886",
+            "id": "10487",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9887",
+            "id": "10488",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10489",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Kalinga": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9888",
-          "date": "2026-09",
+          "id": "10497",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Not affected"
+          "status": "Dry condition"
         },
         "outlook": [
           {
-            "id": "9889",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9890",
+            "id": "10498",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9891",
+            "id": "10499",
             "date": "2026-12",
             "type": "outlook",
-            "status": "Dry spell"
+            "status": "Drought"
           },
           {
-            "id": "9892",
+            "id": "10500",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9893",
+            "id": "10501",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9894",
+            "id": "10502",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10503",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "La Union": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9895",
-          "date": "2026-09",
+          "id": "10504",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9896",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9897",
+            "id": "10505",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9898",
-            "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9899",
+            "id": "10506",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10507",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9900",
+            "id": "10508",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9901",
+            "id": "10509",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10510",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Laguna": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9902",
-          "date": "2026-09",
+          "id": "10511",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9903",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9904",
+            "id": "10512",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "9905",
+            "id": "10513",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9906",
+            "id": "10514",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9907",
+            "id": "10515",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9908",
+            "id": "10516",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10517",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Lanao del Norte": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9909",
-          "date": "2026-09",
+          "id": "10518",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9910",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9911",
+            "id": "10519",
             "date": "2026-11",
             "type": "outlook",
             "status": "Not affected"
           },
           {
-            "id": "9912",
+            "id": "10520",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "9913",
+            "id": "10521",
             "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9914",
+            "id": "10522",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9915",
+            "id": "10523",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10524",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Lanao del Sur": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9916",
-          "date": "2026-09",
+          "id": "10525",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9917",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9918",
+            "id": "10526",
             "date": "2026-11",
             "type": "outlook",
             "status": "Not affected"
           },
           {
-            "id": "9919",
+            "id": "10527",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "9920",
+            "id": "10528",
             "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9921",
+            "id": "10529",
             "date": "2027-02",
+            "type": "outlook",
+            "status": "Dry spell"
+          },
+          {
+            "id": "10530",
+            "date": "2027-03",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9922",
-            "date": "2027-03",
+            "id": "10531",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Leyte": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Visayas",
         "latestAssessment": {
-          "id": "9923",
-          "date": "2026-09",
+          "id": "10532",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry spell"
+          "status": "Drought"
         },
         "outlook": [
           {
-            "id": "9924",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Drought"
-          },
-          {
-            "id": "9925",
+            "id": "10533",
             "date": "2026-11",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9926",
+            "id": "10534",
             "date": "2026-12",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9927",
+            "id": "10535",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9928",
+            "id": "10536",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9929",
+            "id": "10537",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10538",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Maguindanao del Sur": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9937",
-          "date": "2026-09",
+          "id": "10546",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "9938",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9939",
+            "id": "10547",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9940",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9941",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9942",
+            "id": "10548",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10549",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10550",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9943",
+            "id": "10551",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10552",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Marinduque": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9944",
-          "date": "2026-09",
+          "id": "10553",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Not affected"
+          "status": "Dry condition"
         },
         "outlook": [
           {
-            "id": "9945",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9946",
+            "id": "10554",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9947",
+            "id": "10555",
             "date": "2026-12",
             "type": "outlook",
-            "status": "Drought"
+            "status": "Dry spell"
           },
           {
-            "id": "9948",
+            "id": "10556",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9949",
+            "id": "10557",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9950",
+            "id": "10558",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10559",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Masbate": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9951",
-          "date": "2026-09",
+          "id": "10560",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "9952",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry spell"
-          },
-          {
-            "id": "9953",
+            "id": "10561",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9954",
+            "id": "10562",
             "date": "2026-12",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9955",
+            "id": "10563",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9956",
+            "id": "10564",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9957",
+            "id": "10565",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10566",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Misamis Occidental": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9965",
-          "date": "2026-09",
+          "id": "10567",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "9966",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9967",
+            "id": "10568",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9968",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9969",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9970",
+            "id": "10569",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10570",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10571",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9971",
+            "id": "10572",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10573",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Misamis Oriental": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "9972",
-          "date": "2026-09",
+          "id": "10574",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry spell"
+          "status": "Drought"
         },
         "outlook": [
           {
-            "id": "9973",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9974",
+            "id": "10575",
             "date": "2026-11",
             "type": "outlook",
-            "status": "Not affected"
+            "status": "Drought"
           },
           {
-            "id": "9975",
+            "id": "10576",
             "date": "2026-12",
             "type": "outlook",
-            "status": "Dry condition"
+            "status": "Drought"
           },
           {
-            "id": "9976",
+            "id": "10577",
             "date": "2027-01",
             "type": "outlook",
-            "status": "Dry spell"
+            "status": "Drought"
           },
           {
-            "id": "9977",
+            "id": "10578",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9978",
+            "id": "10579",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10580",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Mountain Province": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "9979",
-          "date": "2026-09",
+          "id": "10581",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "9980",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9981",
+            "id": "10582",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9982",
-            "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9983",
+            "id": "10583",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10584",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9984",
+            "id": "10585",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9985",
+            "id": "10586",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10587",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Negros Occidental": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Visayas",
         "latestAssessment": {
-          "id": "9986",
-          "date": "2026-09",
+          "id": "10595",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "9987",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9988",
+            "id": "10596",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9989",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "9990",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "9991",
+            "id": "10597",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10598",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10599",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9992",
+            "id": "10600",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10601",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Negros Oriental": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Visayas",
         "latestAssessment": {
-          "id": "9993",
-          "date": "2026-09",
+          "id": "10602",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Drought"
         },
         "outlook": [
           {
-            "id": "9994",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "9995",
+            "id": "10603",
             "date": "2026-11",
             "type": "outlook",
-            "status": "Not affected"
+            "status": "Drought"
           },
           {
-            "id": "9996",
+            "id": "10604",
             "date": "2026-12",
             "type": "outlook",
-            "status": "Dry condition"
+            "status": "Drought"
           },
           {
-            "id": "9997",
+            "id": "10605",
             "date": "2027-01",
             "type": "outlook",
-            "status": "Dry spell"
+            "status": "Drought"
           },
           {
-            "id": "9998",
+            "id": "10606",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "9999",
+            "id": "10607",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10608",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Northern Samar": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Visayas",
         "latestAssessment": {
-          "id": "10000",
-          "date": "2026-09",
+          "id": "10609",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "10001",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry spell"
-          },
-          {
-            "id": "10002",
+            "id": "10610",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10003",
+            "id": "10611",
             "date": "2026-12",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10004",
+            "id": "10612",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10005",
+            "id": "10613",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10006",
+            "id": "10614",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10615",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Nueva Ecija": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "10007",
-          "date": "2026-09",
+          "id": "10616",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "10008",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10009",
+            "id": "10617",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "10010",
+            "id": "10618",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10011",
+            "id": "10619",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10012",
+            "id": "10620",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10013",
+            "id": "10621",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10622",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Nueva Vizcaya": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "10014",
-          "date": "2026-09",
+          "id": "10623",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "10015",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10016",
+            "id": "10624",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "10017",
-            "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10018",
+            "id": "10625",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10626",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10019",
+            "id": "10627",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10020",
+            "id": "10628",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10629",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Occidental Mindoro": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "10021",
-          "date": "2026-09",
+          "id": "10630",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "10022",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10023",
+            "id": "10631",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "10024",
-            "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10025",
+            "id": "10632",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10633",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10026",
+            "id": "10634",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10027",
+            "id": "10635",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10636",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Oriental Mindoro": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "10028",
-          "date": "2026-09",
+          "id": "10637",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Not affected"
+          "status": "Dry condition"
         },
         "outlook": [
           {
-            "id": "10029",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "10030",
+            "id": "10638",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10031",
+            "id": "10639",
             "date": "2026-12",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10032",
+            "id": "10640",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10033",
+            "id": "10641",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10034",
+            "id": "10642",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10643",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Palawan": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "10035",
-          "date": "2026-09",
+          "id": "10644",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Not affected"
+          "status": "Dry condition"
         },
         "outlook": [
           {
-            "id": "10036",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "10037",
+            "id": "10645",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10038",
+            "id": "10646",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10039",
+            "id": "10647",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10040",
+            "id": "10648",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10041",
+            "id": "10649",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10650",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Pampanga": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "10049",
-          "date": "2026-09",
+          "id": "10651",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "10050",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10051",
+            "id": "10652",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "10052",
+            "id": "10653",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10053",
+            "id": "10654",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10054",
+            "id": "10655",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10055",
+            "id": "10656",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10657",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Pangasinan": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "10056",
-          "date": "2026-09",
+          "id": "10658",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "10057",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10058",
+            "id": "10659",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "10059",
-            "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10060",
+            "id": "10660",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10661",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10061",
+            "id": "10662",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10062",
+            "id": "10663",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10664",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Quezon": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "10063",
-          "date": "2026-09",
+          "id": "10665",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Not affected"
+          "status": "Dry condition"
         },
         "outlook": [
           {
-            "id": "10064",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "10065",
+            "id": "10666",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10066",
+            "id": "10667",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10067",
+            "id": "10668",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10068",
+            "id": "10669",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10069",
+            "id": "10670",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10671",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Quirino": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "10070",
-          "date": "2026-09",
+          "id": "10672",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "10071",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10072",
+            "id": "10673",
             "date": "2026-11",
             "type": "outlook",
-            "status": "Dry condition"
+            "status": "Dry spell"
           },
           {
-            "id": "10073",
+            "id": "10674",
             "date": "2026-12",
             "type": "outlook",
-            "status": "Dry spell"
+            "status": "Drought"
           },
           {
-            "id": "10074",
+            "id": "10675",
             "date": "2027-01",
             "type": "outlook",
-            "status": "Dry spell"
+            "status": "Drought"
           },
           {
-            "id": "10075",
+            "id": "10676",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10076",
+            "id": "10677",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10678",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Rizal": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "10077",
-          "date": "2026-09",
+          "id": "10679",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "10078",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10079",
+            "id": "10680",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "10080",
+            "id": "10681",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10081",
+            "id": "10682",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10082",
+            "id": "10683",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10083",
+            "id": "10684",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10685",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Romblon": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "10084",
-          "date": "2026-09",
+          "id": "10686",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Not affected"
+          "status": "Dry condition"
         },
         "outlook": [
           {
-            "id": "10085",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "10086",
+            "id": "10687",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10087",
+            "id": "10688",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10088",
+            "id": "10689",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10089",
+            "id": "10690",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10090",
+            "id": "10691",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10692",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Samar": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Visayas",
         "latestAssessment": {
-          "id": "10091",
-          "date": "2026-09",
+          "id": "10693",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Drought"
         },
         "outlook": [
           {
-            "id": "10092",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Drought"
-          },
-          {
-            "id": "10093",
+            "id": "10694",
             "date": "2026-11",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10094",
+            "id": "10695",
             "date": "2026-12",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10095",
+            "id": "10696",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10096",
+            "id": "10697",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10097",
+            "id": "10698",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10699",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Sarangani": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "10098",
-          "date": "2026-09",
+          "id": "10700",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "10099",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10100",
+            "id": "10701",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10101",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "10102",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10103",
+            "id": "10702",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10703",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10704",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10104",
+            "id": "10705",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10706",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Siquijor": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Visayas",
         "latestAssessment": {
-          "id": "10105",
-          "date": "2026-09",
+          "id": "10707",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Drought"
         },
         "outlook": [
           {
-            "id": "10106",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10107",
+            "id": "10708",
             "date": "2026-11",
             "type": "outlook",
-            "status": "Not affected"
+            "status": "Drought"
           },
           {
-            "id": "10108",
+            "id": "10709",
             "date": "2026-12",
             "type": "outlook",
-            "status": "Dry condition"
+            "status": "Drought"
           },
           {
-            "id": "10109",
+            "id": "10710",
             "date": "2027-01",
             "type": "outlook",
-            "status": "Dry spell"
+            "status": "Drought"
           },
           {
-            "id": "10110",
+            "id": "10711",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10111",
+            "id": "10712",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10713",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Sorsogon": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "10112",
-          "date": "2026-09",
+          "id": "10714",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "10113",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry spell"
-          },
-          {
-            "id": "10114",
+            "id": "10715",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10115",
+            "id": "10716",
             "date": "2026-12",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10116",
+            "id": "10717",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10117",
+            "id": "10718",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10118",
+            "id": "10719",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10720",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "South Cotabato": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "10119",
-          "date": "2026-09",
+          "id": "10721",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "10120",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10121",
+            "id": "10722",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10122",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "10123",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10124",
+            "id": "10723",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10724",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10725",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10125",
+            "id": "10726",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10727",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Southern Leyte": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Visayas",
         "latestAssessment": {
-          "id": "10126",
-          "date": "2026-09",
+          "id": "10728",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "10127",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry spell"
-          },
-          {
-            "id": "10128",
+            "id": "10729",
             "date": "2026-11",
             "type": "outlook",
-            "status": "Dry spell"
+            "status": "Drought"
           },
           {
-            "id": "10129",
+            "id": "10730",
             "date": "2026-12",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10130",
+            "id": "10731",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10131",
+            "id": "10732",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10132",
+            "id": "10733",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10734",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Sultan Kudarat": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "10133",
-          "date": "2026-09",
+          "id": "10742",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "10134",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10135",
+            "id": "10743",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10136",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "10137",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10138",
+            "id": "10744",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10745",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10746",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10139",
+            "id": "10747",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10748",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Sulu": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "10140",
-          "date": "2026-09",
+          "id": "10749",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "10141",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10142",
+            "id": "10750",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10143",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "10144",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10145",
+            "id": "10751",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10752",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10753",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10146",
+            "id": "10754",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10755",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Surigao del Norte": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "10147",
-          "date": "2026-09",
+          "id": "10756",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "10148",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Dry spell"
-          },
-          {
-            "id": "10149",
+            "id": "10757",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10150",
+            "id": "10758",
             "date": "2026-12",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10151",
+            "id": "10759",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10152",
+            "id": "10760",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10153",
+            "id": "10761",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10762",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Surigao del Sur": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "10154",
-          "date": "2026-09",
+          "id": "10763",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "10155",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10156",
+            "id": "10764",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10157",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10158",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "10159",
-            "date": "2027-02",
+            "id": "10765",
+            "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10160",
+            "id": "10766",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Dry spell"
+          },
+          {
+            "id": "10767",
+            "date": "2027-02",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10768",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10769",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Tarlac": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "10161",
-          "date": "2026-09",
+          "id": "10770",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "10162",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10163",
+            "id": "10771",
             "date": "2026-11",
             "type": "outlook",
             "status": "Dry condition"
           },
           {
-            "id": "10164",
+            "id": "10772",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10165",
+            "id": "10773",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10166",
+            "id": "10774",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10167",
+            "id": "10775",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10776",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Tawi-tawi": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "10168",
-          "date": "2026-09",
+          "id": "10777",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "10169",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10170",
+            "id": "10778",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10171",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "10172",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10173",
+            "id": "10779",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10780",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10781",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10174",
+            "id": "10782",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10783",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Zambales": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Luzon",
         "latestAssessment": {
-          "id": "10175",
-          "date": "2026-09",
+          "id": "10784",
+          "date": "2026-10",
           "type": "assessment",
           "status": "Not affected"
         },
         "outlook": [
           {
-            "id": "10176",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10177",
+            "id": "10785",
             "date": "2026-11",
             "type": "outlook",
-            "status": "Dry condition"
+            "status": "Dry spell"
           },
           {
-            "id": "10178",
+            "id": "10786",
             "date": "2026-12",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10179",
+            "id": "10787",
             "date": "2027-01",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10180",
+            "id": "10788",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10181",
+            "id": "10789",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10790",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Zamboanga Sibugay": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "10182",
-          "date": "2026-09",
+          "id": "10791",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "10183",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10184",
+            "id": "10792",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10185",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "10186",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10187",
+            "id": "10793",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10794",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10795",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10188",
+            "id": "10796",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10797",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Zamboanga del Norte": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "10189",
-          "date": "2026-09",
+          "id": "10798",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "10190",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10191",
+            "id": "10799",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10192",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "10193",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10194",
+            "id": "10800",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10801",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10802",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10195",
+            "id": "10803",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10804",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }
         ]
       },
       "Zamboanga del Sur": {
-        "issuedAt": "2026-10-01T00:00:00+08:00",
+        "issuedAt": "2026-10-21T00:00:00+08:00",
         "islandGroup": "Mindanao",
         "latestAssessment": {
-          "id": "10196",
-          "date": "2026-09",
+          "id": "10805",
+          "date": "2026-10",
           "type": "assessment",
-          "status": "Dry condition"
+          "status": "Dry spell"
         },
         "outlook": [
           {
-            "id": "10197",
-            "date": "2026-10",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10198",
+            "id": "10806",
             "date": "2026-11",
-            "type": "outlook",
-            "status": "Not affected"
-          },
-          {
-            "id": "10199",
-            "date": "2026-12",
-            "type": "outlook",
-            "status": "Dry condition"
-          },
-          {
-            "id": "10200",
-            "date": "2027-01",
             "type": "outlook",
             "status": "Dry spell"
           },
           {
-            "id": "10201",
+            "id": "10807",
+            "date": "2026-12",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10808",
+            "date": "2027-01",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10809",
             "date": "2027-02",
             "type": "outlook",
             "status": "Drought"
           },
           {
-            "id": "10202",
+            "id": "10810",
             "date": "2027-03",
+            "type": "outlook",
+            "status": "Drought"
+          },
+          {
+            "id": "10811",
+            "date": "2027-04",
             "type": "outlook",
             "status": "Drought"
           }

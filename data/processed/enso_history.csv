@@ -1,0 +1,308 @@
+Year,Quarter,Season,RONI,Signal,Episode,Source,Source_URL
+1950,1,JFM,-1.1,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1950,2,AMJ,-1.0,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1950,3,JAS,-0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1950,4,OND,-0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1951,1,JFM,0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1951,2,AMJ,0.6,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1951,3,JAS,1.0,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1951,4,OND,0.9,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1952,1,JFM,0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1952,2,AMJ,0.0,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1952,3,JAS,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1952,4,OND,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1953,1,JFM,0.7,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1953,2,AMJ,0.9,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1953,3,JAS,0.7,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1953,4,OND,0.6,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1954,1,JFM,0.6,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1954,2,AMJ,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1954,3,JAS,-0.6,Cold,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1954,4,OND,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1955,1,JFM,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1955,2,AMJ,-0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1955,3,JAS,-0.7,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1955,4,OND,-1.4,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1956,1,JFM,-0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1956,2,AMJ,0.0,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1956,3,JAS,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1956,4,OND,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1957,1,JFM,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1957,2,AMJ,0.9,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1957,3,JAS,1.1,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1957,4,OND,1.5,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1958,1,JFM,1.8,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1958,2,AMJ,0.7,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1958,3,JAS,0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1958,4,OND,0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1959,1,JFM,0.8,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1959,2,AMJ,0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1959,3,JAS,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1959,4,OND,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1960,1,JFM,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1960,2,AMJ,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1960,3,JAS,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1960,4,OND,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1961,1,JFM,0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1961,2,AMJ,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1961,3,JAS,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1961,4,OND,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1962,1,JFM,0.0,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1962,2,AMJ,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1962,3,JAS,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1962,4,OND,-0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1963,1,JFM,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1963,2,AMJ,0.0,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1963,3,JAS,1.1,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1963,4,OND,1.1,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1964,1,JFM,0.6,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1964,2,AMJ,-0.7,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1964,3,JAS,-0.5,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1964,4,OND,-0.6,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1965,1,JFM,0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1965,2,AMJ,0.6,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1965,3,JAS,1.5,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1965,4,OND,2.0,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1966,1,JFM,1.3,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1966,2,AMJ,0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1966,3,JAS,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1966,4,OND,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1967,1,JFM,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1967,2,AMJ,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1967,3,JAS,0.0,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1967,4,OND,0.0,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1968,1,JFM,-0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1968,2,AMJ,0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1968,3,JAS,0.5,Warm,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1968,4,OND,0.7,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1969,1,JFM,1.0,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1969,2,AMJ,0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1969,3,JAS,0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1969,4,OND,0.8,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1970,1,JFM,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1970,2,AMJ,0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1970,3,JAS,-0.6,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1970,4,OND,-0.5,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1971,1,JFM,-1.0,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1971,2,AMJ,-0.5,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1971,3,JAS,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1971,4,OND,-0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1972,1,JFM,0.0,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1972,2,AMJ,0.7,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1972,3,JAS,1.4,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1972,4,OND,2.0,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1973,1,JFM,1.3,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1973,2,AMJ,-0.7,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1973,3,JAS,-1.2,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1973,4,OND,-1.9,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1974,1,JFM,-1.3,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1974,2,AMJ,-0.6,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1974,3,JAS,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1974,4,OND,-0.6,Cold,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1975,1,JFM,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1975,2,AMJ,-0.6,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1975,3,JAS,-0.9,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1975,4,OND,-1.0,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1976,1,JFM,-0.6,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1976,2,AMJ,0.0,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1976,3,JAS,0.7,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1976,4,OND,1.1,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1977,1,JFM,0.9,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1977,2,AMJ,0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1977,3,JAS,0.5,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1977,4,OND,1.1,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1978,1,JFM,0.7,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1978,2,AMJ,-0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1978,3,JAS,-0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1978,4,OND,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1979,1,JFM,0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1979,2,AMJ,0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1979,3,JAS,0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1979,4,OND,0.5,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1980,1,JFM,0.5,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1980,2,AMJ,0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1980,3,JAS,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1980,4,OND,0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1981,1,JFM,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1981,2,AMJ,-0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1981,3,JAS,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1981,4,OND,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1982,1,JFM,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1982,2,AMJ,0.7,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1982,3,JAS,1.1,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1982,4,OND,2.2,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1983,1,JFM,2.2,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1983,2,AMJ,0.9,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1983,3,JAS,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1983,4,OND,-1.1,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1984,1,JFM,-0.5,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1984,2,AMJ,-0.6,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1984,3,JAS,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1984,4,OND,-0.9,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1985,1,JFM,-0.7,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1985,2,AMJ,-0.8,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1985,3,JAS,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1985,4,OND,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1986,1,JFM,-0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1986,2,AMJ,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1986,3,JAS,0.6,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1986,4,OND,1.2,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1987,1,JFM,1.4,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1987,2,AMJ,0.8,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1987,3,JAS,1.3,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1987,4,OND,1.0,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1988,1,JFM,0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1988,2,AMJ,-1.5,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1988,3,JAS,-1.4,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1988,4,OND,-1.9,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1989,1,JFM,-1.4,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1989,2,AMJ,-0.6,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1989,3,JAS,-0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1989,4,OND,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1990,1,JFM,0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1990,2,AMJ,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1990,3,JAS,0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1990,4,OND,0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1991,1,JFM,0.5,Warm,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1991,2,AMJ,0.6,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1991,3,JAS,0.8,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1991,4,OND,1.7,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1992,1,JFM,2.1,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1992,2,AMJ,1.4,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1992,3,JAS,0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1992,4,OND,0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1993,1,JFM,0.7,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1993,2,AMJ,1.0,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1993,3,JAS,0.5,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1993,4,OND,0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1994,1,JFM,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1994,2,AMJ,0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1994,3,JAS,0.6,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1994,4,OND,1.2,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1995,1,JFM,0.9,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1995,2,AMJ,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1995,3,JAS,-0.6,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1995,4,OND,-1.0,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1996,1,JFM,-0.7,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1996,2,AMJ,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1996,3,JAS,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1996,4,OND,-0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1997,1,JFM,0.0,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1997,2,AMJ,0.8,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1997,3,JAS,1.8,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1997,4,OND,2.3,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1998,1,JFM,1.8,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1998,2,AMJ,0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1998,3,JAS,-1.1,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1998,4,OND,-1.5,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1999,1,JFM,-1.3,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1999,2,AMJ,-0.8,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1999,3,JAS,-0.9,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+1999,4,OND,-1.3,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2000,1,JFM,-1.3,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2000,2,AMJ,-0.7,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2000,3,JAS,-0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2000,4,OND,-0.8,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2001,1,JFM,-0.6,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2001,2,AMJ,-0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2001,3,JAS,0.0,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2001,4,OND,-0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2002,1,JFM,0.0,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2002,2,AMJ,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2002,3,JAS,0.8,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2002,4,OND,1.3,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2003,1,JFM,0.5,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2003,2,AMJ,-0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2003,3,JAS,0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2003,4,OND,0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2004,1,JFM,0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2004,2,AMJ,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2004,3,JAS,0.7,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2004,4,OND,0.7,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2005,1,JFM,0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2005,2,AMJ,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2005,3,JAS,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2005,4,OND,-0.5,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2006,1,JFM,-0.9,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2006,2,AMJ,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2006,3,JAS,0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2006,4,OND,0.9,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2007,1,JFM,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2007,2,AMJ,-0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2007,3,JAS,-0.8,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2007,4,OND,-1.5,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2008,1,JFM,-1.6,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2008,2,AMJ,-0.8,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2008,3,JAS,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2008,4,OND,-0.6,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2009,1,JFM,-0.9,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2009,2,AMJ,0.0,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2009,3,JAS,0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2009,4,OND,1.3,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2010,1,JFM,1.1,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2010,2,AMJ,-0.5,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2010,3,JAS,-1.4,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2010,4,OND,-1.6,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2011,1,JFM,-1.2,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2011,2,AMJ,-0.5,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2011,3,JAS,-0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2011,4,OND,-1.0,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2012,1,JFM,-0.6,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2012,2,AMJ,-0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2012,3,JAS,0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2012,4,OND,0.0,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2013,1,JFM,-0.6,Cold,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2013,2,AMJ,-0.5,Cold,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2013,3,JAS,-0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2013,4,OND,-0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2014,1,JFM,-0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2014,2,AMJ,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2014,3,JAS,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2014,4,OND,0.5,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2015,1,JFM,0.5,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2015,2,AMJ,0.9,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2015,3,JAS,1.5,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2015,4,OND,2.2,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2016,1,JFM,1.8,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2016,2,AMJ,0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2016,3,JAS,-0.8,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2016,4,OND,-1.0,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2017,1,JFM,-0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2017,2,AMJ,0.0,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2017,3,JAS,-0.5,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2017,4,OND,-1.0,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2018,1,JFM,-1.0,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2018,2,AMJ,-0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2018,3,JAS,0.2,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2018,4,OND,0.8,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2019,1,JFM,0.6,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2019,2,AMJ,0.4,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2019,3,JAS,-0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2019,4,OND,0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2020,1,JFM,0.1,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2020,2,AMJ,-0.5,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2020,3,JAS,-0.8,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2020,4,OND,-1.5,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2021,1,JFM,-1.2,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2021,2,AMJ,-0.7,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2021,3,JAS,-0.8,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2021,4,OND,-1.2,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2022,1,JFM,-1.1,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2022,2,AMJ,-1.2,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2022,3,JAS,-0.9,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2022,4,OND,-1.1,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2023,1,JFM,-0.7,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2023,2,AMJ,0.0,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2023,3,JAS,0.8,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2023,4,OND,1.4,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2024,1,JFM,0.8,Warm,El Nino,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2024,2,AMJ,-0.3,Neutral,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2024,3,JAS,-0.6,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2024,4,OND,-0.9,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2025,1,JFM,-0.8,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2025,2,AMJ,-0.5,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2025,3,JAS,-0.6,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2025,4,OND,-1.0,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2026,1,JFM,-0.8,Cold,La Nina,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2026,2,AMJ,0.5,Warm,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+2026,3,JAS,1.7,Warm,Neutral,NOAA CPC Relative Oceanic Nino Index (RONI) ERSSTv6,https://cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
