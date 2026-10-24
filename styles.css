@@ -1512,3 +1512,137 @@
   .projectionMarker span{font-size:10px}
   .projectionTicks{font-size:10px}
 }
+
+/* Professional dot-and-whisker style for Long-Term Projection. */
+.projectionResultChart{
+  height:auto!important;
+  min-height:0!important;
+}
+.projectionForestPlot{
+  display:grid;
+  gap:12px;
+  padding:6px 0 2px;
+}
+.projectionPlotHeader,
+.projectionPlotRow{
+  display:grid;
+  grid-template-columns:minmax(190px,240px) minmax(0,1fr) minmax(105px,135px);
+  gap:16px;
+  align-items:center;
+}
+.projectionAxisTicks{
+  display:flex;
+  justify-content:space-between;
+  color:#748179;
+  font-size:11px;
+}
+.projectionUnit{
+  color:#748179;
+  font-size:11px;
+  text-align:left;
+}
+.projectionPlotRow{
+  min-height:72px;
+  padding:8px 0;
+  border-top:1px solid #edf1ee;
+}
+.projectionPlotRow:last-child{
+  border-bottom:1px solid #edf1ee;
+}
+.projectionRowLabel{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  min-width:0;
+}
+.projectionRowLabel span{
+  color:#53655b;
+  font-size:12px;
+}
+.projectionRowLabel strong{
+  color:#173a2a;
+  font-size:17px;
+}
+.projectionTrack{
+  position:relative;
+  height:42px;
+}
+.projectionTrack::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:50%;
+  height:2px;
+  transform:translateY(-50%);
+  background:#dfe7e2;
+}
+.projectionGridLines{
+  position:absolute;
+  inset:0;
+}
+.projectionGridLines span{
+  position:absolute;
+  top:5px;
+  bottom:5px;
+  width:1px;
+  background:#eef2ef;
+}
+.projectionInterval{
+  position:absolute;
+  top:50%;
+  height:8px;
+  transform:translateY(-50%);
+  border-radius:999px;
+  background:#76a7de;
+}
+.projectionInterval::before,
+.projectionInterval::after{
+  content:"";
+  position:absolute;
+  top:50%;
+  width:2px;
+  height:20px;
+  background:#4f91d9;
+  transform:translateY(-50%);
+}
+.projectionInterval::before{left:0}
+.projectionInterval::after{right:0}
+.projectionPoint{
+  position:absolute;
+  top:50%;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  border:3px solid #fff;
+  box-shadow:0 0 0 2px currentColor;
+}
+.projectionPoint.baseline{
+  background:#d7a33c;
+  color:#a47619;
+}
+.projectionPoint.projected{
+  background:#19865a;
+  color:#12633f;
+}
+.projectionRowNote{
+  color:#66766e;
+  font-size:12px;
+}
+@media(max-width:900px){
+  .projectionPlotHeader,
+  .projectionPlotRow{
+    grid-template-columns:minmax(150px,190px) minmax(0,1fr) 100px;
+    gap:12px;
+  }
+}
+@media(max-width:700px){
+  .projectionPlotHeader{display:none}
+  .projectionPlotRow{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .projectionTrack{height:38px}
+  .projectionRowNote{font-size:11px}
+}

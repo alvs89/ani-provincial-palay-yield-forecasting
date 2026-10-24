@@ -230,23 +230,31 @@ function nearTermCropChart(stages,plant){
 function projectionComparisonChart(f){
   const base=Number(f?.recentHistoricalBaselineMtPerHa),mid=Number(f?.projectedYieldMtPerHa),low=Number(f?.projectedRangeLowMtPerHa),high=Number(f?.projectedRangeHighMtPerHa);
   if(![base,mid,low,high].every(Number.isFinite))return '<div class="empty">No chart data are available for this projection.</div>';
-  const rawMin=Math.min(low,base,mid),rawMax=Math.max(high,base,mid),pad=Math.max(.2,(rawMax-rawMin)*.2),min=Math.max(0,rawMin-pad),max=rawMax+pad,span=max-min||1;
-  const pct=v=>Math.max(0,Math.min(100,(v-min)/span*100));
-  const basePct=pct(base),midPct=pct(mid),lowPct=pct(low),highPct=pct(high),rangeWidth=Math.max(0,highPct-lowPct);
-  const ticks=Array.from({length:5},(_,i)=>min+i*span/4);
-  return `<div class="projectionViz" role="img" aria-label="Recent historical baseline ${base.toFixed(3)} metric tons per hectare. Projected yield ${mid.toFixed(3)} metric tons per hectare with scenario range ${low.toFixed(3)} to ${high.toFixed(3)}.">
-    <div class="projectionVizLegend">
-      <div class="projectionLegendItem"><span class="projectionLegendDot baseline"></span><span>Recent baseline</span><strong>${base.toFixed(3)} MT/ha</strong></div>
-      <div class="projectionLegendItem"><span class="projectionLegendDot projected"></span><span>Projected yield</span><strong>${mid.toFixed(3)} MT/ha</strong></div>
-      <div class="projectionLegendItem"><span class="projectionLegendRange"></span><span>Scenario range</span><strong>${low.toFixed(3)}–${high.toFixed(3)}</strong></div>
+  const rawMin=Math.min(low,base,mid),rawMax=Math.max(high,base,mid),pad=Math.max(.2,(rawMax-rawMin)*.16),min=Math.max(0,rawMin-pad),max=rawMax+pad,span=max-min||1,pct=v=>Math.max(0,Math.min(100,(v-min)/span*100));
+  const basePct=pct(base),midPct=pct(mid),lowPct=pct(low),highPct=pct(high),rangeWidth=Math.max(0,highPct-lowPct),ticks=Array.from({length:5},(_,i)=>min+i*span/4);
+  return `<div class="projectionForestPlot" role="img" aria-label="Recent historical baseline ${base.toFixed(3)} metric tons per hectare. Projected yield ${mid.toFixed(3)} metric tons per hectare with scenario spread from ${low.toFixed(3)} to ${high.toFixed(3)}.">
+    <div class="projectionPlotHeader">
+      <span></span>
+      <div class="projectionAxisTicks">${ticks.map(v=>`<span>${v.toFixed(2)}</span>`).join('')}</div>
+      <span class="projectionUnit">MT/ha</span>
     </div>
-    <div class="projectionScale">
-      <div class="projectionRangeBand" style="left:${lowPct.toFixed(3)}%;width:${rangeWidth.toFixed(3)}%"></div>
-      <div class="projectionMarker baseline" style="left:${basePct.toFixed(3)}%"><span>Baseline</span></div>
-      <div class="projectionMarker projected" style="left:${midPct.toFixed(3)}%"><span>Projection</span></div>
+    <div class="projectionPlotRow">
+      <div class="projectionRowLabel"><span>Recent historical baseline</span><strong>${base.toFixed(3)} MT/ha</strong></div>
+      <div class="projectionTrack">
+        <div class="projectionGridLines">${ticks.map((_,i)=>`<span style="left:${(i*25).toFixed(1)}%"></span>`).join('')}</div>
+        <div class="projectionPoint baseline" style="left:${basePct.toFixed(3)}%" title="Recent historical baseline: ${base.toFixed(3)} MT/ha"></div>
+      </div>
+      <div class="projectionRowNote">Historical median</div>
     </div>
-    <div class="projectionTicks">${ticks.map(v=>`<span>${v.toFixed(2)}</span>`).join('')}</div>
-    <div class="projectionAxisLabel">Yield (MT/ha)</div>
+    <div class="projectionPlotRow">
+      <div class="projectionRowLabel"><span>Projected yield</span><strong>${mid.toFixed(3)} MT/ha</strong></div>
+      <div class="projectionTrack">
+        <div class="projectionGridLines">${ticks.map((_,i)=>`<span style="left:${(i*25).toFixed(1)}%"></span>`).join('')}</div>
+        <div class="projectionInterval" style="left:${lowPct.toFixed(3)}%;width:${rangeWidth.toFixed(3)}%" title="Scenario spread: ${low.toFixed(3)}–${high.toFixed(3)} MT/ha"></div>
+        <div class="projectionPoint projected" style="left:${midPct.toFixed(3)}%" title="Projected yield: ${mid.toFixed(3)} MT/ha"></div>
+      </div>
+      <div class="projectionRowNote">${low.toFixed(3)}–${high.toFixed(3)}</div>
+    </div>
   </div>`;
 }
 function dashboard(){const recent=saved().slice(0,4),latestResult=recent[0]||null,trendSelection=latestResult&&data.some(r=>r.province===latestResult.province&&r.ecosystem===latestResult.ecosystem)?{province:latestResult.province,ecosystem:latestResult.ecosystem}:{province:'Nueva Ecija',ecosystem:'Irrigated'},rows=data.filter(r=>r.province===trendSelection.province&&r.ecosystem===trendSelection.ecosystem).sort((a,b)=>a.year-b.year||a.quarter-b.quarter),latestYear=data.reduce((m,r)=>Math.max(m,Number(r.year)),0),comp=Object.keys(provinceRegion).map(province=>{const v=data.filter(r=>r.province===province&&Number(r.year)===latestYear&&r.ecosystem==='Irrigated').map(r=>r.yield==null?NaN:Number(r.yield)).filter(Number.isFinite);return {province,yield:v.length?avg(v):NaN}}).filter(r=>Number.isFinite(r.yield)).sort((a,b)=>b.yield-a.yield).slice(0,8);return hero('DATA-DRIVEN INSIGHTS FOR A FOOD-SECURE PHILIPPINES','ANI — Provincial Palay Yield Forecasting System','Machine learning-based insights to support palay production planning and evidence-based agricultural decision-making.',true)+`<div class="grid4">${stat('','Provinces Represented',Object.keys(provinceRegion).length,'Philippine provinces represented')}${stat('','Historical Records',data.length,'Quarterly observations','gold')}${stat('','Data Coverage',historyCoverage(),apiMeta?.latest_agricultural_period?.status==='Preliminary'?'Latest integrated quarter is preliminary':'Processed ANI history','blue')}${stat('','Latest Model Result',recent[0]?recent[0].predictedYield+' MT/ha':'—',recent[0]?resultTypeFor(recent[0]):'No saved model results')}</div><div class="twoCol">${card(title('','Historical Yield Trend',`${trendSelection.province} · ${trendSelection.ecosystem}`)+`<div class="chart">${historicalYieldChart(rows)}</div>`)}${card(title('','Provincial Irrigated Yield Snapshot — '+(latestYear||'Unavailable'),apiMeta?.latest_agricultural_period?`Mean quarterly irrigated yield using integrated records through Q${apiMeta.latest_agricultural_period.quarter} ${apiMeta.latest_agricultural_period.year}.`:'Highest mean quarterly yields among provinces with integrated records for the year.')+`<div class="chart">${comp.length?bars(comp,'yield'):'<div class="empty">No irrigated yield records are available for the latest integrated year.</div>'}</div>`)}</div><div class="twoCol lower">${card(title('','Recent Model Results','Most recently generated model estimates.')+(recent.length?`<table class="compact"><thead><tr><th scope="col">Province</th><th scope="col">Ecosystem</th><th scope="col">Period</th><th scope="col">Yield</th><th scope="col">Result Type</th></tr></thead><tbody>${recent.map(f=>`<tr><td>${f.province}</td><td>${f.ecosystem}</td><td>Q${f.targetQuarter} ${f.targetYear}</td><td><b>${f.predictedYield} MT/ha</b></td><td>${resultTypeFor(f)}</td></tr>`).join('')}</tbody></table>`:'<div class="empty">No model results saved yet.</div>'))}${card(`<div class="cta"><h2>Generate Palay Yield Estimate</h2><p>Select a province and target period to generate a model-based yield estimate.</p><button data-page="forecast" class="primaryBtn">Generate Estimate</button></div>`,'field-cta')}</div>${card(title('','How ANI Works','From historical agricultural data to a provincial palay-yield estimate.')+`<div class="flow"><div class="flowBox"><strong>Historical Agricultural Data</strong><small>Palay yield, production and area.</small></div><b>+</b><div class="flowBox"><strong>Agroclimatic Data</strong><small>Rainfall, temperature, relative humidity and wind speed.</small></div><b>&rarr;</b><div class="flowBox"><strong>Machine Learning</strong><small>Preprocessing, features and regression.</small></div><b>&rarr;</b><div class="flowBox"><strong>Provincial Yield Estimate</strong><small>Quarterly output in MT/ha.</small></div></div>`)}`}
