@@ -1208,3 +1208,67 @@
   .projectionComparisonSvg .chartValueLabel,
   .projectionComparisonSvg .rangeLabel{font-size:11px}
 }
+
+/* Polished, light visualization surfaces for the new result charts. */
+.resultVisualizationCard,
+.resultVisualizationCard .chart,
+.resultVisualizationCard .chartSvg{
+  background:#fff!important;
+  color-scheme:light;
+}
+.resultVisualizationCard{
+  overflow:hidden;
+}
+.nearTermResultChart{
+  height:auto;
+  min-height:0;
+}
+.nearTermChartSvg{
+  max-height:360px;
+}
+.nearTermChartSvg .stageTrack,
+.nearTermChartSvg .progressTrack{
+  fill:#edf2ef;
+}
+.nearTermChartSvg .stageVeg{fill:#68a978}
+.nearTermChartSvg .stageRep{fill:#d6a447}
+.nearTermChartSvg .stageMat{fill:#9b7a4d}
+.nearTermChartSvg .progressFill{fill:#19865a}
+.nearTermChartSvg .chartSectionLabel{
+  fill:#173a2a!important;
+  font-size:14px;
+  font-weight:800;
+}
+.nearTermChartSvg .legendLabel{
+  fill:#40564a!important;
+  font-size:12px;
+  font-weight:700;
+}
+.nearTermChartSvg .legendValue{
+  fill:#173a2a!important;
+  font-size:14px;
+  font-weight:800;
+}
+.nearTermChartSvg .progressValue{
+  fill:#173a2a!important;
+  font-size:15px;
+  font-weight:800;
+}
+.nearTermChartSvg .axisTick{
+  stroke:#9fb0a7;
+  stroke-width:1;
+}
+.nearTermChartSvg .axisLabel{
+  fill:#66766e!important;
+  font-size:11px;
+}
+.projectionComparisonSvg{
+  background:#fff!important;
+}
+@media(max-width:760px){
+  .nearTermChartSvg{max-height:none}
+  .nearTermChartSvg .chartSectionLabel{font-size:13px}
+  .nearTermChartSvg .legendLabel{font-size:10px}
+  .nearTermChartSvg .legendValue{font-size:12px}
+  .nearTermChartSvg .progressValue{font-size:13px}
+}
