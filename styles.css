@@ -1039,3 +1039,37 @@
   .indeterminateProgress>div,.contextLoadingSteps .step.active .stepDot{animation:none}
   .indeterminateProgress>div{width:45%!important}
 }
+
+
+/* Near-Term + Long-Term result spacing: keep major card groups visually distinct. */
+.nearTermResult>.resultStats + .twoCol,
+.nearTermResult>.twoCol + .contextGrid,
+.nearTermResult>.contextGrid + .card,
+.projectionResult>.resultStats + .twoCol,
+.projectionResult>.twoCol + .card{
+  margin-top:24px;
+}
+.nearTermResult>.twoCol,
+.nearTermResult>.contextGrid,
+.projectionResult>.twoCol{
+  gap:20px;
+}
+.nearTermResult>.twoCol>.card,
+.nearTermResult>.contextGrid>.card,
+.projectionResult>.twoCol>.card{
+  margin-bottom:0;
+}
+@media(max-width:760px){
+  .nearTermResult>.resultStats + .twoCol,
+  .nearTermResult>.twoCol + .contextGrid,
+  .nearTermResult>.contextGrid + .card,
+  .projectionResult>.resultStats + .twoCol,
+  .projectionResult>.twoCol + .card{
+    margin-top:18px;
+  }
+  .nearTermResult>.twoCol,
+  .nearTermResult>.contextGrid,
+  .projectionResult>.twoCol{
+    gap:16px;
+  }
+}
