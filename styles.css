@@ -1159,3 +1159,52 @@
   max-width:none;
   width:100%;
 }
+
+
+/* Focused visual summaries for the two new result modes. */
+.resultVisualizationCard{
+  margin-top:24px;
+}
+.resultVisualizationCard .chart{
+  width:100%;
+  min-width:0;
+}
+.nearTermResultChart{
+  min-height:250px;
+}
+.projectionResultChart{
+  min-height:300px;
+}
+.nearTermChartSvg,
+.projectionComparisonSvg{
+  width:100%;
+  height:auto;
+  display:block;
+}
+.nearTermChartSvg .stageVeg{fill:#6cae75}
+.nearTermChartSvg .stageRep{fill:#d4a72c}
+.nearTermChartSvg .stageMat{fill:#8b6f47}
+.nearTermChartSvg .progressTrack{fill:#e4ece7}
+.nearTermChartSvg .progressFill{fill:#16754b}
+.nearTermChartSvg .insideBar{fill:#fff;font-size:13px;font-weight:700}
+.nearTermChartSvg .chartRowLabel{fill:#32463d;font-size:13px;font-weight:700}
+.nearTermChartSvg .chartFootLabel{fill:#66766e;font-size:12px}
+.projectionComparisonSvg .projectionRange,
+.projectionComparisonSvg .projectionRangeCap{stroke:#4f91d9;stroke-width:4}
+.projectionComparisonSvg .baselinePoint{fill:#f5bd35;stroke:#8a6411;stroke-width:2}
+.projectionComparisonSvg .projectionPoint{fill:#16754b;stroke:#0f5135;stroke-width:2}
+.projectionComparisonSvg .chartCategory,
+.projectionComparisonSvg .chartValueLabel,
+.projectionComparisonSvg .rangeLabel{fill:#32463d;font-size:13px}
+.projectionComparisonSvg .chartValueLabel{font-weight:700}
+.projectionComparisonSvg .yieldAxisTitle{fill:#42584e;font-size:14px;font-weight:700}
+@media(max-width:760px){
+  .resultVisualizationCard{margin-top:18px}
+  .nearTermResultChart{min-height:210px}
+  .projectionResultChart{min-height:250px}
+  .nearTermChartSvg .insideBar{font-size:11px}
+  .nearTermChartSvg .chartRowLabel,
+  .projectionComparisonSvg .chartCategory,
+  .projectionComparisonSvg .chartValueLabel,
+  .projectionComparisonSvg .rangeLabel{font-size:11px}
+}
