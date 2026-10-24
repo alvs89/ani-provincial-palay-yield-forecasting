@@ -1099,3 +1099,52 @@
     grid-template-columns:1fr;
   }
 }
+
+
+/* Interactive button states: clear hover/pressed feedback with readable contrast. */
+.estimateModeTabs button{
+  transition:background-color .16s ease,color .16s ease,box-shadow .16s ease,transform .08s ease;
+}
+.estimateModeTabs button:hover{
+  background:#dfeee4;
+  color:#123d2b;
+}
+.estimateModeTabs button:active{
+  background:#cfe4d6;
+  color:#0d3424;
+  transform:translateY(1px);
+}
+.estimateModeTabs button.active{
+  background:#dcecdf;
+  color:#123d2b;
+  box-shadow:inset 0 0 0 1px rgba(24,89,54,.28);
+}
+.estimateModeTabs button.active:hover{
+  background:#cfe4d6;
+  color:#0d3424;
+}
+.secondaryBtn{
+  transition:background-color .16s ease,color .16s ease,border-color .16s ease,box-shadow .16s ease,transform .08s ease;
+}
+.secondaryBtn:hover{
+  background:#e3f1e8;
+  border-color:#5c9475;
+  color:#123d2b;
+}
+.secondaryBtn:active{
+  background:#cfe4d6;
+  border-color:#3f7d5f;
+  color:#0d3424;
+  transform:translateY(1px);
+}
+.primaryBtn{
+  transition:background-color .16s ease,color .16s ease,box-shadow .16s ease,transform .08s ease;
+}
+.primaryBtn:active{
+  background:#074d30;
+  color:#fff;
+  transform:translateY(1px);
+}
+@media (prefers-reduced-motion:reduce){
+  .estimateModeTabs button,.primaryBtn,.secondaryBtn{transition:none}
+}
