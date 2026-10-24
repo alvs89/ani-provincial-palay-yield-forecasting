@@ -1148,3 +1148,14 @@
 @media (prefers-reduced-motion:reduce){
   .estimateModeTabs button,.primaryBtn,.secondaryBtn{transition:none}
 }
+
+
+/* Long-Term result descriptions should use the available card width. */
+.projectionResult .sectionTitle>div{
+  width:100%;
+  min-width:0;
+}
+.projectionResult .sectionTitle p{
+  max-width:none;
+  width:100%;
+}
