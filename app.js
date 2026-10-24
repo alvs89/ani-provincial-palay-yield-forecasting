@@ -132,6 +132,35 @@ const INFO_TIPS={
   'ENSO Issue Date':'The date PAGASA issued the displayed ENSO advisory.',
   'Latest Drought Assessment':'PAGASA’s latest published drought-related classification for the selected province.',
   'Drought Outlook':'PAGASA’s published month-by-month drought outlook for the upcoming period.',
+  'Estimated Palay Production':'PSA’s estimated palay output from the latest standing-crop update.',
+  'Estimated Harvest Area':'Area expected to be harvested based on the latest standing-crop update.',
+  'Estimated Yield':'Estimated palay production per hectare for the standing-crop period.',
+  'Planting Progress':'Share of intended planting area that has already been planted.',
+  'Standing-Crop As Of':'Date when the standing-crop situation was observed.',
+  'Production vs Same Period 2025':'Percent change from the same period one year earlier.',
+  'Harvest Area vs Same Period 2025':'Percent change in harvest area from the same period one year earlier.',
+  'Harvested Area':'Area already harvested as of the standing-crop reference date.',
+  'Harvested Share':'Percent of the expected harvest area already harvested.',
+  'Harvested Output':'Palay already produced from the area harvested so far.',
+  'Vegetative Stage':'Share of standing palay still in early leaf-and-stem growth.',
+  'Reproductive Stage':'Share of standing palay in panicle formation and flowering.',
+  'Maturing Stage':'Share of standing palay progressing toward harvest maturity.',
+  'Planting Intention':'Area farmers planned or expected to plant for the period.',
+  'Actually Planted':'Area already planted compared with the intended planting area.',
+  'Planting Completion':'Percent of planting intention already completed.',
+  'Province':'Province used to localize ANI results and official context.',
+  'Region':'Region automatically matched from the selected province.',
+  'Palay Ecosystem':'Whether the palay system is irrigated or rainfed.',
+  'Projection Horizon':'How many years ahead ANI explores the climate scenario.',
+  'Climate Scenario':'Selected CMIP6 future climate pathway used for the projection.',
+  'Target Quarter':'Quarter of the year the projection represents.',
+  'Target Period':'Future quarter and year represented by the projection.',
+  'Scenario':'Selected CMIP6 climate pathway used in the result.',
+  'Standing-Crop Period':'Quarter covered by the latest PSA standing-crop update.',
+  'Climate Models':'CMIP6 models combined to reduce reliance on a single climate model.',
+  'Method':'How ANI converts projected climate into a yield scenario.',
+  'Projected Relative Humidity':'Future average air-moisture level for the selected quarter.',
+  'Projected Wind Speed':'Future average wind speed for the selected quarter.',
   'Projected Yield':'The central long-term scenario estimate formed from the median of the available CMIP6 climate-model analog projections.',
   'Projected Range':'The spread across climate models and their closest historical climate analog yields. It is not a guaranteed prediction interval.',
   'Recent Historical Baseline':'The recent same-quarter historical median yield used as a simple reference for the long-term scenario.',
@@ -183,8 +212,8 @@ function nearTermPage(){
   const resultOnly=state.page==='nearterm-result';
   const r=state.nearTermRequest,f=state.nearTermResult,s=f?.standingCropContext||{},crop=s.standingCrop||{},stages=s.cropStages||{},plant=s.plantingProgress||{};
   const form=card('<div class="sectionTitle estimateConfigTitle"><div><h2>Near-Term Outlook Settings</h2><p>Select a province to pair the latest official PSA standing-crop release with current PAGASA planning context.</p></div></div>'+
-    `<label class="formRow"><span>Province *</span><select id="nearTermProvince">${sortedProvinceNames().map(p=>`<option ${p===r.province?'selected':''}>${p}</option>`).join('')}</select></label>
-    <label class="formRow"><span>Region</span><input value="${provinceRegion[r.province]||''}" readonly tabindex="-1" aria-readonly="true"></label>
+    `<label class="formRow"><span>${infoLabel('Province')} *</span><select id="nearTermProvince">${sortedProvinceNames().map(p=>`<option ${p===r.province?'selected':''}>${p}</option>`).join('')}</select></label>
+    <label class="formRow"><span>${infoLabel('Region')}</span><input value="${provinceRegion[r.province]||''}" readonly tabindex="-1" aria-readonly="true"></label>
     <div class="infoBox" role="note"><strong>Scope:</strong> PSA's latest integrated MPCSRS public release is a national standing-crop summary. ANI does not create province-level standing-crop values when they are not available in the integrated source. The province selection localizes the official PAGASA context.</div>
     ${state.nearTermError?`<div class="inlineError" role="alert">${state.nearTermError}</div>`:''}
     <div class="actions"><button id="loadNearTerm" class="primaryBtn" ${state.nearTermLoading?'disabled':''}>${state.nearTermLoading?'Loading Official Context…':'Load Latest Outlook'}</button><button id="resetNearTerm" class="secondaryBtn" ${state.nearTermLoading?'disabled':''}>Reset</button></div>`);
@@ -203,7 +232,7 @@ function nearTermPage(){
       </div>
       <div class="twoCol">
         ${card(title('🌾','Standing Crop & Harvest Progress',s.scope||'Official PSA published summary')+summary([
-          ['Reference Period',s.referencePeriod||'Unavailable'],
+          ['Standing-Crop Period',s.referencePeriod||'Unavailable'],
           ['Standing-Crop As Of',s.asOfDate||'Unavailable'],
           ['Production vs Same Period 2025',Number.isFinite(Number(crop.yearOverYearProductionChangePct))?`${Number(crop.yearOverYearProductionChangePct)>0?'+':''}${Number(crop.yearOverYearProductionChangePct).toFixed(1)}%`:'Unavailable'],
           ['Harvest Area vs Same Period 2025',Number.isFinite(Number(crop.yearOverYearHarvestAreaChangePct))?`${Number(crop.yearOverYearHarvestAreaChangePct)>0?'+':''}${Number(crop.yearOverYearHarvestAreaChangePct).toFixed(1)}%`:'Unavailable'],
@@ -232,11 +261,11 @@ function projectionPage(){
   const resultOnly=state.page==='projection-result';
   const r=state.projectionRequest,meta=projectionMeta||{},horizons=meta.horizons||[],scenarios=meta.scenarios||[],target=horizons.find(x=>Number(x.years)===Number(r.horizonYears)),targetYear=target?.targetYear||((meta.referenceYear||new Date().getFullYear())+Number(r.horizonYears)),f=state.projectionResult,ev=meta.evaluation?.validation||{},baseline=meta.evaluation?.seasonal_naive_comparison||{};
   const form=card('<div class="sectionTitle estimateConfigTitle"><div><h2>Long-Term Projection Settings</h2><p>Choose a future horizon and CMIP6 climate scenario. This does not use future Lag-1 agricultural values.</p></div></div>'+
-    `<label class="formRow"><span>Province *</span><select id="projectionProvince">${sortedProvinceNames().map(p=>`<option ${p===r.province?'selected':''}>${p}</option>`).join('')}</select></label>
-    <label class="formRow"><span>Region</span><input value="${provinceRegion[r.province]||''}" readonly tabindex="-1" aria-readonly="true"></label>
-    <label class="formRow"><span>Palay Ecosystem *</span><select id="projectionEcosystem"><option ${r.ecosystem==='Irrigated'?'selected':''}>Irrigated</option><option ${r.ecosystem==='Rainfed'?'selected':''}>Rainfed</option></select></label>
-    <div class="formPair"><label class="formRow"><span>Projection Horizon *</span><select id="projectionHorizon">${horizons.map(h=>`<option value="${h.years}" ${Number(h.years)===Number(r.horizonYears)?'selected':''}>${h.years} years — ${h.targetYear}</option>`).join('')}</select></label><label class="formRow"><span>Target Quarter *</span><select id="projectionQuarter">${[1,2,3,4].map(q=>`<option value="${q}" ${q===Number(r.targetQuarter)?'selected':''}>Quarter ${q}</option>`).join('')}</select></label></div>
-    <label class="formRow"><span>Climate Scenario *</span><select id="projectionScenario">${scenarios.map(s=>`<option value="${s.id}" ${s.id===r.scenario?'selected':''}>${s.label}</option>`).join('')}</select></label>
+    `<label class="formRow"><span>${infoLabel('Province')} *</span><select id="projectionProvince">${sortedProvinceNames().map(p=>`<option ${p===r.province?'selected':''}>${p}</option>`).join('')}</select></label>
+    <label class="formRow"><span>${infoLabel('Region')}</span><input value="${provinceRegion[r.province]||''}" readonly tabindex="-1" aria-readonly="true"></label>
+    <label class="formRow"><span>${infoLabel('Palay Ecosystem')} *</span><select id="projectionEcosystem"><option ${r.ecosystem==='Irrigated'?'selected':''}>Irrigated</option><option ${r.ecosystem==='Rainfed'?'selected':''}>Rainfed</option></select></label>
+    <div class="formPair"><label class="formRow"><span>${infoLabel('Projection Horizon')} *</span><select id="projectionHorizon">${horizons.map(h=>`<option value="${h.years}" ${Number(h.years)===Number(r.horizonYears)?'selected':''}>${h.years} years — ${h.targetYear}</option>`).join('')}</select></label><label class="formRow"><span>${infoLabel('Target Quarter')} *</span><select id="projectionQuarter">${[1,2,3,4].map(q=>`<option value="${q}" ${q===Number(r.targetQuarter)?'selected':''}>Quarter ${q}</option>`).join('')}</select></label></div>
+    <label class="formRow"><span>${infoLabel('Climate Scenario')} *</span><select id="projectionScenario">${scenarios.map(s=>`<option value="${s.id}" ${s.id===r.scenario?'selected':''}>${s.label}</option>`).join('')}</select></label>
     <div class="infoBox" role="note"><strong>Experimental long-term scenario:</strong> The projected year is ${targetYear}. ANI uses NASA NEX-GDDP-CMIP6 climate projections and historical climate analogs. This is separate from the validated quarterly XGBoost forecast.</div>
     ${state.projectionError?`<div class="inlineError" role="alert">${state.projectionError}</div>`:''}
     <div class="actions"><button id="generateProjection" class="primaryBtn" ${state.projectionLoading?'disabled':''}>${state.projectionLoading?'Retrieving CMIP6 Data…':'Generate Projection'}</button><button id="resetProjection" class="secondaryBtn" ${state.projectionLoading?'disabled':''}>Reset</button></div>`);
