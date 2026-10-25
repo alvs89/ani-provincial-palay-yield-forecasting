@@ -1955,3 +1955,14 @@
   .snapshotChart{height:330px}
   .snapshotChart .horizontalBars text{font-size:14px}
 }
+/* Result History category tabs */
+.historyTabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px;padding:6px;background:#eef4f0;border:1px solid #dce7e0;border-radius:12px}
+.historyTabs button{flex:1 1 210px;min-height:44px;border:1px solid transparent;border-radius:9px;background:transparent;color:#29453a;font-weight:700;cursor:pointer;padding:10px 14px}
+.historyTabs button span{display:inline-flex;min-width:24px;height:24px;align-items:center;justify-content:center;margin-left:6px;border-radius:999px;background:#dce7e0;font-size:12px}
+.historyTabs button:hover{background:#e4efe8}
+.historyTabs button.active{background:#fff;border-color:#a9c8b6;color:#0c6f46;box-shadow:0 1px 3px rgba(18,56,39,.08)}
+.historyTabs button.active span{background:#dff1e7;color:#0c6f46}
+.historyEmpty{text-align:center;padding:34px 18px;color:#65756d}
+.historyEmpty h3{margin:0 0 7px;color:#173a2a}
+.historyEmpty p{margin:0 auto 16px;max-width:620px}
+@media(max-width:700px){.historyTabs{display:grid;grid-template-columns:1fr}.historyTabs button{width:100%}}
