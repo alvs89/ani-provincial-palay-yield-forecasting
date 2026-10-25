@@ -1782,3 +1782,106 @@
   .projectionCssPlot{height:40px}
   .projectionCssMeta{font-size:11px}
 }
+
+
+/* Model & Data information architecture */
+.modelDataPage .freshnessGrid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+}
+.modelDataPage .freshnessGrid>div{
+  min-height:112px;
+  padding:14px;
+}
+.modelDataPage .twoCol:has(.activeFeatureGroupsCard){
+  grid-template-columns:1fr;
+  gap:16px;
+}
+.modelDataPage .twoCol:has(.activeFeatureGroupsCard)>.card{
+  width:100%;
+}
+.modelDataPage .twoCol:has(.activeFeatureGroupsCard) .sourceGrid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.modelDataPage .twoCol:has(.activeFeatureGroupsCard) .sourceGrid>div{
+  min-height:138px;
+}
+.modelDataPage .activeFeatureGroupsCard .featureList{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:28px;
+  row-gap:2px;
+  margin-top:2px;
+}
+.modelDataPage .activeFeatureGroupsCard .featureList li{
+  margin:5px 0;
+}
+.modelDataPage .sourceRole.experimental{
+  background:#fff5df;
+  color:#7d5a13;
+  border:1px solid #ead09a;
+}
+.modelDataPage .sourceRole.research{
+  background:#f3eefb;
+  color:#64428a;
+  border:1px solid #d9c8ef;
+}
+.modelDataPage .researchDecision{
+  margin-top:14px;
+  padding:15px 16px;
+  border:1px solid #d9c8ef;
+  border-radius:10px;
+  background:#faf8fd;
+}
+.modelDataPage .researchDecision>div{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-bottom:8px;
+}
+.modelDataPage .researchDecision span{
+  color:#5d4b6d;
+  font-size:12px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.25px;
+}
+.modelDataPage .researchDecision strong{
+  display:inline-flex;
+  align-items:center;
+  padding:4px 9px;
+  border-radius:999px;
+  background:#eee5f8;
+  color:#604082;
+  font-size:11px;
+}
+.modelDataPage .researchDecision p{
+  margin:0;
+  color:#53655b;
+  font-size:13px;
+  line-height:1.55;
+}
+@media(max-width:1200px){
+  .modelDataPage .freshnessGrid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  .modelDataPage .twoCol:has(.activeFeatureGroupsCard) .sourceGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media(max-width:760px){
+  .modelDataPage .freshnessGrid,
+  .modelDataPage .twoCol:has(.activeFeatureGroupsCard) .sourceGrid,
+  .modelDataPage .activeFeatureGroupsCard .featureList{
+    grid-template-columns:1fr;
+  }
+  .modelDataPage .freshnessGrid>div,
+  .modelDataPage .twoCol:has(.activeFeatureGroupsCard) .sourceGrid>div{
+    min-height:0;
+  }
+  .modelDataPage .researchDecision>div{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+}
