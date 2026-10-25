@@ -232,28 +232,28 @@ function projectionComparisonChart(f){
   if(![base,mid,low,high].every(Number.isFinite))return '<div class="empty">No chart data are available for this projection.</div>';
   const rawMin=Math.min(low,base,mid),rawMax=Math.max(high,base,mid),pad=Math.max(.2,(rawMax-rawMin)*.16),min=Math.max(0,rawMin-pad),max=rawMax+pad,span=max-min||1,pct=v=>Math.max(0,Math.min(100,(v-min)/span*100));
   const basePct=pct(base),midPct=pct(mid),lowPct=pct(low),highPct=pct(high),rangeWidth=Math.max(0,highPct-lowPct),ticks=Array.from({length:5},(_,i)=>min+i*span/4);
-  return `<div class="projectionForestPlot" role="img" aria-label="Recent historical baseline ${base.toFixed(3)} metric tons per hectare. Projected yield ${mid.toFixed(3)} metric tons per hectare with scenario spread from ${low.toFixed(3)} to ${high.toFixed(3)}.">
-    <div class="projectionPlotHeader">
-      <span></span>
-      <div class="projectionAxisTicks">${ticks.map(v=>`<span>${v.toFixed(2)}</span>`).join('')}</div>
-      <span class="projectionUnit">MT/ha</span>
+  return `<div class="projectionCssChart" style="--baseline:${basePct.toFixed(3)}%;--projected:${midPct.toFixed(3)}%;--range-start:${lowPct.toFixed(3)}%;--range-width:${rangeWidth.toFixed(3)}%;" role="img" aria-label="Recent historical baseline ${base.toFixed(3)} metric tons per hectare. Projected yield ${mid.toFixed(3)} metric tons per hectare with scenario spread from ${low.toFixed(3)} to ${high.toFixed(3)}.">
+    <div class="projectionCssAxis">
+      <span class="projectionCssSpacer"></span>
+      <div class="projectionCssTicks">${ticks.map(v=>`<span>${v.toFixed(2)}</span>`).join('')}</div>
+      <span class="projectionCssUnit">MT/ha</span>
     </div>
-    <div class="projectionPlotRow">
-      <div class="projectionRowLabel"><span>Recent historical baseline</span><strong>${base.toFixed(3)} MT/ha</strong></div>
-      <div class="projectionTrack">
-        <div class="projectionGridLines">${ticks.map((_,i)=>`<span style="left:${(i*25).toFixed(1)}%"></span>`).join('')}</div>
-        <div class="projectionPoint baseline" style="left:${basePct.toFixed(3)}%" title="Recent historical baseline: ${base.toFixed(3)} MT/ha"></div>
+    <div class="projectionCssRow baselineRow">
+      <div class="projectionCssLabel"><span>Recent historical baseline</span><strong>${base.toFixed(3)} MT/ha</strong></div>
+      <div class="projectionCssPlot">
+        <div class="projectionCssGrid"></div>
+        <div class="projectionCssDot baselineDot" title="Recent historical baseline: ${base.toFixed(3)} MT/ha"></div>
       </div>
-      <div class="projectionRowNote">Historical median</div>
+      <div class="projectionCssMeta">Historical median</div>
     </div>
-    <div class="projectionPlotRow">
-      <div class="projectionRowLabel"><span>Projected yield</span><strong>${mid.toFixed(3)} MT/ha</strong></div>
-      <div class="projectionTrack">
-        <div class="projectionGridLines">${ticks.map((_,i)=>`<span style="left:${(i*25).toFixed(1)}%"></span>`).join('')}</div>
-        <div class="projectionInterval" style="left:${lowPct.toFixed(3)}%;width:${rangeWidth.toFixed(3)}%" title="Scenario spread: ${low.toFixed(3)}–${high.toFixed(3)} MT/ha"></div>
-        <div class="projectionPoint projected" style="left:${midPct.toFixed(3)}%" title="Projected yield: ${mid.toFixed(3)} MT/ha"></div>
+    <div class="projectionCssRow projectedRow">
+      <div class="projectionCssLabel"><span>Projected yield</span><strong>${mid.toFixed(3)} MT/ha</strong></div>
+      <div class="projectionCssPlot">
+        <div class="projectionCssGrid"></div>
+        <div class="projectionCssRange" title="Scenario spread: ${low.toFixed(3)}–${high.toFixed(3)} MT/ha"></div>
+        <div class="projectionCssDot projectedDot" title="Projected yield: ${mid.toFixed(3)} MT/ha"></div>
       </div>
-      <div class="projectionRowNote">${low.toFixed(3)}–${high.toFixed(3)}</div>
+      <div class="projectionCssMeta">${low.toFixed(3)}–${high.toFixed(3)}</div>
     </div>
   </div>`;
 }
