@@ -1949,11 +1949,11 @@
 
 @media(max-width:1120px){.topnote{display:none}}
 /* Dashboard provincial yield snapshot readability */
-.snapshotChart{height:360px}
-.snapshotChart .horizontalBars text{font-size:15px;font-weight:600;fill:#43564c}
+.snapshotChart{height:430px}
+.snapshotChart .horizontalBars text{font-size:18px;font-weight:650;fill:#344b40}
 @media(max-width:900px){
-  .snapshotChart{height:330px}
-  .snapshotChart .horizontalBars text{font-size:14px}
+  .snapshotChart{height:390px}
+  .snapshotChart .horizontalBars text{font-size:16px}
 }
 /* Result History category tabs */
 .historyTabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px;padding:6px;background:#eef4f0;border:1px solid #dce7e0;border-radius:12px}
@@ -2017,10 +2017,10 @@
 @media(max-width:1050px){.dashboardModes,.dashboardFlow3{grid-template-columns:1fr}.dashboardModeCard{min-height:0}}
 @media(max-width:760px){.dashboardHistoryLink{justify-content:stretch}.dashboardHistoryLink .primaryBtn{width:100%}}
 /* Dashboard recent ANI result tabs */
-.dashboardRecentTabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px;padding:5px;background:#eef4f0;border:1px solid #dce7e0;border-radius:10px}
-.dashboardRecentTabs button{flex:1 1 120px;border:1px solid transparent;border-radius:8px;background:transparent;color:#345247;font-weight:700;padding:9px 10px;cursor:pointer}
+.dashboardRecentTabs{display:inline-flex;gap:6px;flex-wrap:wrap;margin:0 0 14px;padding:4px;background:#eef4f0;border:1px solid #dce7e0;border-radius:10px;max-width:100%}
+.dashboardRecentTabs button{flex:0 0 auto;min-width:132px;min-height:44px;border:1px solid transparent;border-radius:8px;background:transparent;color:#345247;font-weight:700;padding:8px 14px;cursor:pointer}
 .dashboardRecentTabs button span{display:inline-flex;min-width:22px;height:22px;align-items:center;justify-content:center;margin-left:5px;border-radius:999px;background:#dce7e0;font-size:11px}
 .dashboardRecentTabs button:hover{background:#e4efe8}
 .dashboardRecentTabs button.active{background:#fff;border-color:#a9c8b6;color:#0c6f46;box-shadow:0 1px 3px rgba(18,56,39,.08)}
 .dashboardRecentTabs button.active span{background:#dff1e7;color:#0c6f46}
-@media(max-width:700px){.dashboardRecentTabs{display:grid;grid-template-columns:1fr}.dashboardRecentTabs button{width:100%}}
+@media(max-width:700px){.dashboardRecentTabs{display:grid;grid-template-columns:1fr;width:100%}.dashboardRecentTabs button{width:100%;min-width:0}}
