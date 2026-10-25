@@ -1966,3 +1966,16 @@
 .historyEmpty h3{margin:0 0 7px;color:#173a2a}
 .historyEmpty p{margin:0 auto 16px;max-width:620px}
 @media(max-width:700px){.historyTabs{display:grid;grid-template-columns:1fr}.historyTabs button{width:100%}}
+/* About ANI — Sustainable Development Alignment */
+.sdgAlignGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sdgAlignItem{display:grid;grid-template-columns:110px 1fr;gap:16px;align-items:center;padding:10px;border:1px solid #dfe8e2;border-radius:10px;background:#f8fbf9;min-width:0}
+.sdgAlignCopy{min-width:0}
+.sdgAlignCopy b{font-size:15px;color:#182a22}
+.sdgAlignCopy p{margin:8px 0 0;line-height:1.45}
+.sdgVisual{position:relative;width:110px;height:110px;border-radius:10px;color:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.sdgVisual2{background:#DDA63A}
+.sdgVisual13{background:#3F7E44}
+.sdgVisual svg{width:66px;height:66px;margin-top:22px}
+.sdgNumber{position:absolute;left:12px;top:7px;font-size:32px;font-weight:800;line-height:1}
+@media(max-width:900px){.sdgAlignGrid{grid-template-columns:1fr}.sdgAlignItem{grid-template-columns:92px 1fr}.sdgVisual{width:92px;height:92px}.sdgVisual svg{width:54px;height:54px;margin-top:20px}.sdgNumber{font-size:27px}}
+@media(max-width:520px){.sdgAlignItem{grid-template-columns:1fr;text-align:center}.sdgVisual{margin:0 auto}}
