@@ -1885,3 +1885,51 @@
     flex-direction:column;
   }
 }
+
+
+/* Official source references inside Model & Data cards */
+.modelDataPage .sourceGrid>div{
+  display:flex;
+  flex-direction:column;
+}
+.modelDataPage .sourceGrid>div>p{
+  flex:1;
+}
+.sourceReferences{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px 12px;
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px solid #e6ece8;
+}
+.sourceReference{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  color:#146b49;
+  font-size:12px;
+  font-weight:700;
+  text-decoration:none;
+}
+.sourceReference:hover,
+.sourceReference:focus-visible{
+  color:#0c4f35;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+.sourceReference:focus-visible{
+  outline:2px solid #7ebda1;
+  outline-offset:3px;
+  border-radius:3px;
+}
+.sourceReference span{
+  font-size:11px;
+  line-height:1;
+}
+@media(max-width:760px){
+  .sourceReferences{
+    margin-top:8px;
+    padding-top:8px;
+  }
+}
