@@ -1948,3 +1948,10 @@
 @media(max-width:640px){.historySummary,.historicalScope{grid-template-columns:1fr}}
 
 @media(max-width:1120px){.topnote{display:none}}
+/* Dashboard provincial yield snapshot readability */
+.snapshotChart{height:360px}
+.snapshotChart .horizontalBars text{font-size:15px;font-weight:600;fill:#43564c}
+@media(max-width:900px){
+  .snapshotChart{height:330px}
+  .snapshotChart .horizontalBars text{font-size:14px}
+}
