@@ -2025,3 +2025,4 @@
 .dashboardRecentTabs button.active span{background:#dff1e7;color:#0c6f46}
 @media(max-width:700px){.dashboardRecentTabs{grid-template-columns:1fr}.dashboardRecentTabs button{width:100%}}
 .dashboardSnapshotPair{column-gap:22px}
+.nearTermScopeNotice{margin-bottom:18px!important}
