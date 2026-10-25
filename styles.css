@@ -2024,3 +2024,4 @@
 .dashboardRecentTabs button.active{background:#fff;border-color:#a9c8b6;color:#0c6f46;box-shadow:0 1px 3px rgba(18,56,39,.08)}
 .dashboardRecentTabs button.active span{background:#dff1e7;color:#0c6f46}
 @media(max-width:700px){.dashboardRecentTabs{grid-template-columns:1fr}.dashboardRecentTabs button{width:100%}}
+.dashboardSnapshotPair{column-gap:22px}
