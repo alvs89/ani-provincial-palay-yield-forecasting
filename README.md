@@ -1,6 +1,6 @@
-# ANI: Provincial Palay Yield Forecasting System
+# ANI: Provincial Palay Yield Decision Support System
 
-ANI is a provincial palay yield forecasting system for the Philippines. It combines processed agricultural history, lagged agroclimatic information, an XGBoost regression model, a FastAPI service, and a browser-based user interface.
+ANI is a provincial palay yield decision-support system for the Philippines. It combines a deployed quarterly XGBoost yield model, a PSA/PAGASA near-term crop outlook, an experimental NASA NEX-GDDP-CMIP6 long-term scenario module, historical and satellite context, a FastAPI service, and a browser-based user interface.
 
 ANI reports model results according to the target quarter: **Prospective Forecast**, **Current-Quarter Estimate**, or **Retrospective Estimate**. Model eligibility and temporal classification are separate. A target is offered only when the required historical and lagged inputs exist; its result type depends on whether the target quarter is future, in progress, or completed.
 
@@ -8,7 +8,7 @@ All model outputs are analytical estimates. They are not official PSA crop stati
 
 ## System components
 
-- Browser interface for estimates, historical records, model information, and Result History.
+- Browser interface for quarterly yield estimates, Near-Term Palay Outlooks, Long-Term Projections, historical records, model/data information, and Result History.
 - FastAPI service for model metadata, historical records, estimate availability, and XGBoost inference.
 - Processed agricultural, weather, and satellite vegetation datasets in `data/processed/`.
 - Bundled scikit-learn/XGBoost pipeline in `models/`.
