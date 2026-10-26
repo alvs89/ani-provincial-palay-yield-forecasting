@@ -260,3 +260,16 @@ setup_ani.bat            Environment setup and verification
 run_ani.bat              Local application launcher
 verify_installation.py   Deterministic integration verification
 ```
+
+## National rice supply outlook (Stage 1 and Stage 2)
+
+The Dashboard contains two separate national context panels. **Stage 1** shows dated official references (PSA/PhilRice historical national palay and rice statistics) and an assumption-only required-yield/production-coverage calculator. **Stage 2** adds a target-year national supply-balance scenario with inputs for yield change, harvested-area change, milling recovery, annual milled-rice requirement, opening and target ending stocks, other uses/losses, and exports.
+
+The Stage 2 calculation is explicitly **not a model-driven future rice-import forecast**: yield and area changes are entered manually relative to the 2025 national PSA baseline, and missing national demand and inventory assumptions are never silently supplied. The illustrative example is hypothetical. Both calculators operate independently of XGBoost; no changes were made to training, testing, model artifacts, or forecast eligibility. The national figures and time frames must not be confused with province/quarter ML estimates.
+
+For future national forecast validation, reconcile provincial and national production totals and coverage; the local 2025 provincial table sums to about 19.58 MMT whereas the cited national statistic is about 19.67 MMT. Develop full Q1–Q4 yield and area forecasts, forecast national rice requirement, and backtest against official supply/stock accounts **before** calling any future result a forecast of import requirements. The supply balance is not PSA SSR and should not be used as an import policy decision.
+
+Sources: PSA supply-utilization metadata https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__2B__AA__SU/0012B5ESUA0.px ; PSA technical note https://psa.gov.ph/statistics/technical-notes/167330 ; PhilRice https://ricelytics.philrice.gov.ph/rice_industry .
+
+## Rice Supply & Sufficiency navigation (October 2026)
+The Dashboard shows a compact four-indicator **National Rice Productivity** reference summary, with a navigational action to the dedicated **Rice Supply & Sufficiency** sidebar page (after Historical Data). The full page provides dated official benchmarks and rice-import history, a required-yield/production coverage calculator, and a separate conditional supply-balance calculator. All existing yield-forecasting views and ML workflows are retained. Form controls are labeled and keyboard accessible, invalid or missing demand/stock assumptions produce no misleading numbers, and mobile layout stacks cards and controls. The stage 1 and 2 modules remain separate from XGBoost.

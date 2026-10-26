@@ -2,6 +2,7 @@ const sidebarPaths={
  dashboard:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
  forecast:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
  historical:'<path d="M3 3v18h18M7 17v-5m5 5V8m5 9V5"/>',
+ rice:'<path d="M4 19h16M6 16V9m6 7V5m6 11v-5"/><path d="M3 3h18"/>',
  history:'<path d="M20 7v5h-5M20 12a8 8 0 1 0-2 5"/>',
  model:'<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 4 16 4 16 0V5M4 12v7c0 4 16 4 16 0v-7"/>',
  about:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v.1"/>'
