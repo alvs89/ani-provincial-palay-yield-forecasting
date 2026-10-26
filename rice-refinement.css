@@ -79,3 +79,40 @@
 .riceTabList button[aria-selected="true"]:hover {background:#cce7d5;border-color:#56996f;}
 .riceTabList button:active {background:#bfdfcb;}
 @media (prefers-reduced-motion:reduce){.riceTabList button{transition:none}}
+/* Same hover and active treatment as Generate Estimate tabs. */
+.riceTabList button {border:0;box-shadow:none;transition:background-color .16s ease,color .16s ease,box-shadow .16s ease,transform .08s ease;}
+.riceTabList button:not([aria-selected="true"]):hover,.riceTabList button:hover {background:#dfeee4;color:#123d2b;border-color:transparent;}
+.riceTabList button[aria-selected="true"],.riceTabList button[aria-selected="true"]:hover {background:#dcecdf;color:#123d2b;box-shadow:inset 0 0 0 1px rgba(24,89,54,.28);border-color:transparent;font-weight:700;}
+.riceTabList button:active {transform:translateY(1px)}
+@media (prefers-reduced-motion:reduce){.riceTabList button{transition:none}}
+/* Readable, compact methodology cards for national rice scenarios */
+.riceOutlookMethod .riceMethodContent{padding:14px 0 4px}
+.riceMethodIntro{max-width:76ch;margin:0 0 18px!important;color:var(--muted,#62746a);font-size:.86rem;line-height:1.65}
+.riceMethodGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.riceMethodItem{min-width:0;padding:17px 18px;background:var(--surface,#f7faf8);border:1px solid var(--border,#dce5dc);border-radius:12px}
+.riceMethodItem h4{font-size:.89rem;font-weight:750;margin:0 0 12px;line-height:1.4}
+.riceMethodFormula{padding:12px 14px;background:var(--card,#fff);border-left:3px solid #488e64;border-radius:0 8px 8px 0;font-size:.89rem;font-weight:650;line-height:1.75;overflow-wrap:anywhere;color:var(--text,#173b29)}
+.riceMethodItem p{font-size:.8rem;line-height:1.6;color:var(--muted,#607266);margin:11px 0 0!important}
+.riceMethodNote{font-size:.8rem;line-height:1.7;padding:15px 17px;margin:18px 0;background:var(--surface,#f8faf7);border:1px solid var(--border,#dde5df);border-radius:10px}
+.riceMethodSources{display:flex;gap:8px 18px;align-items:center;flex-wrap:wrap;font-size:.8rem;border-top:1px solid var(--border,#e0e8e1);padding-top:15px}
+.riceMethodSources a{color:#287950;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:800px){.riceMethodGrid{grid-template-columns:1fr}}
+@media(max-width:480px){.riceMethodItem{padding:13px}.riceMethodFormula{font-size:.82rem;padding:10px 11px}}
+/* Mathematical fraction styling and full-width methodology introduction */
+.riceOutlookMethod .riceMethodIntro{max-width:none;width:100%;box-sizing:border-box}
+.riceMethodFormula{display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-height:58px}
+.riceMethodFormula .riceFraction{display:inline-flex;flex-direction:column;align-items:center;max-width:100%;text-align:center;line-height:1.45;vertical-align:middle}
+.riceFraction>span:first-child{display:block;padding:0 12px 5px;border-bottom:2px solid currentColor;width:100%;box-sizing:border-box}
+.riceFraction>span:last-child{display:block;padding:5px 10px 0}
+@media(max-width:480px){.riceMethodFormula{font-size:.82rem}.riceMethodFormula .riceFraction{font-size:.79rem}}
+
+/* Balanced multiline equation for stage-two supply calculation. */
+.riceMethodFormula:has(.riceBalanceEquation){display:block}
+.riceBalanceEquation{display:grid;gap:5px;font-variant-numeric:tabular-nums;font-size:.88rem;line-height:1.5}
+.riceBalanceEquation>span{display:grid;grid-template-columns:20px minmax(0,1fr);gap:7px;align-items:start}
+.riceBalanceOp{font-size:1rem;font-weight:750;text-align:center;color:#327651}
+@media(max-width:480px){.riceBalanceEquation{font-size:.81rem}}
+
+/* Single-line supply balance, horizontal access on narrow screens. */
+.riceMethodItem:has(.riceMethodFormula[aria-label^="Milled rice plus opening stocks"]) .riceMethodFormula{display:block;white-space:nowrap;overflow-x:auto;overflow-y:hidden;max-width:100%;font-size:.80rem;line-height:1.7}
+.riceInterpretation{margin:15px 0;padding:15px 18px;border-left:3px solid #34805a;background:var(--surface,#f4f8f5);border-radius:0 10px 10px 0;font-size:.85rem;line-height:1.65;color:var(--text,#20382b)}

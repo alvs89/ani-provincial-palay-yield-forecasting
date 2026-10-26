@@ -1,6 +1,6 @@
 /* ANI Stage 1: sourced national rice reference and assumption-based scenario; independent of ML. */
 const ANI_RICE_REFERENCES = Object.freeze({
-  palayYear:2025, yield:4.14, palay:19.67, area:4.75, ssr:78,
+  palayYear:2025, yield:4.14, palay:19.67, area:4.75, ssr:78.1,
   supplyYear:2022, supply:18.65, utilization:16.80,
   sources:[
     ['PSA — 2025 Palay Situation Report','https://psa.gov.ph/statistics/crops/palay-situation-report/node/1684082355'],
@@ -18,7 +18,7 @@ function riceSupplyPanel(){
    <article class="riceSupplyStat"><span>2025 national palay yield</span><strong>4.14 <small>MT/ha</small></strong><em>PSA actual • 2025</em></article>
    <article class="riceSupplyStat"><span>2025 palay production</span><strong>19.67 <small>MMT</small></strong><em>PSA actual • 2025</em></article>
    <article class="riceSupplyStat"><span>2025 harvested area</span><strong>4.75 <small>million ha</small></strong><em>PSA actual • 2025</em></article>
-   <article class="riceSupplyStat"><span>2025 rice self-sufficiency</span><strong>78<small>%</small></strong><em>PhilRice / PSA • 2025</em></article>
+   <article class="riceSupplyStat"><span>2025 rice self-sufficiency</span><strong>78.1<small>%</small></strong><em>PhilRice / PSA • 2025</em></article>
   </div>
   <details class="riceDisclosure"><summary><span><strong>Government goals & historical supply</strong><small>View program targets and older national statistics</small></span></summary><div class="riceDisclosureBody"><div class="riceSupplyGrid riceSupplyPolicy">
    <article class="riceSupplyStat"><span>Government yield aspiration</span><strong>5–6 <small>MT/ha</small></strong><em>Historical RCEF-era program direction, not a universal 2026 threshold</em></article>
@@ -62,6 +62,6 @@ function updateRiceScenario(){
  if(!valid){ids.forEach(id=>document.getElementById(id).textContent='—');document.getElementById('riceCalcNote').textContent='Enter positive, in-range values for all four inputs (including rice requirement).';return;}
  const p=y*a,m=p*r/100,coverage=m/d*100,gap=Math.max(0,d-m),required=d/(a*r/100);
  [p.toFixed(2)+' MMT',m.toFixed(2)+' MMT',coverage.toFixed(1)+'%',gap.toFixed(2)+' MMT',required.toFixed(2)+' MT/ha'].forEach((v,i)=>document.getElementById(ids[i]).textContent=v);
- document.getElementById('riceCalcNote').textContent=coverage>=100?'Scenario domestic output covers the entered rice requirement before other supply-account adjustments.':'Scenario domestic output falls short of the entered rice requirement before other supply-account adjustments.';
+ document.getElementById('riceCalcNote').textContent=riceInterpretProductivity({yieldValue:y,required,coverage,gap});
 }
 document.addEventListener('input',event=>{if(event.target?.id?.startsWith('riceScenario'))updateRiceScenario()});
