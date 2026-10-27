@@ -39,3 +39,15 @@ Safe for a **provisional prototype demonstration** with honest labels: show vali
 - The 2025 model holdout, 2026 Q1 active training cutoff, and independent climate/context modules remain untouched.
 - UI appearance was excluded at user request; there is no claim that every page has been visually tested.
 - **Verdict:** technically suitable for a scoped prototype demonstration with clearly labeled scenarios and historic holdout. Not validated to forecast actual annual rice imports or to aggregate 2025 provincial totals as official national estimates.
+
+## Browser walkthrough completed (October 27, 2026)
+
+A subsequent browser-level quality-assurance run using Microsoft Edge covered dashboard, forecasting navigation, near-term and long-term sub-tabs, historical data, national rice tabs, result history, Model & Data, and About ANI. Tested viewports: 1440 x 900 (desktop), 900 x 900 (tablet), and 390 x 844 (mobile). The corrected mobile sidebar flow and visible tooltip test passed. No JavaScript page errors or document-level horizontal overflow appeared in the tested states. The advanced illustrative supply interpretation, guided target-year change, and numeric-input rejection and range feedback also passed.
+
+Supporting scripts and captured results: `tools/browser_audit_ani.py`, `tools/browser_audit_flows.py`, `outputs/ani_browser_audit.json`, and `outputs/ani_browser_flows.json`.
+
+**Evidence boundary:** These automated browser checks do not exhaustively validate all province/ecosystem cases, manually inspect every responsive element, or establish full keyboard, screen-reader, Firefox, or Safari compatibility. The resulting presentation verdict is readiness for a *scoped academic prototype demonstration*, not unqualified production certification.
+
+## Documentation consolidation
+
+The repository README now describes the final user-facing Rice Supply tabs rather than historic "Stage 1 / Stage 2" development terminology, distinguishes current and historical source periods, and documents the validated scope and remaining national-data reconciliation. Documentation-only changes do not alter XGBoost training, scenario math, or integrated datasets.

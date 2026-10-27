@@ -261,23 +261,56 @@ run_ani.bat              Local application launcher
 verify_installation.py   Deterministic integration verification
 ```
 
-## National rice supply outlook (Stage 1 and Stage 2)
+## Rice Supply & Sufficiency
 
-The Dashboard contains two separate national context panels. **Stage 1** shows dated official references (PSA/PhilRice historical national palay and rice statistics) and an assumption-only required-yield/production-coverage calculator. **Stage 2** adds a target-year national supply-balance scenario with inputs for yield change, harvested-area change, milling recovery, annual milled-rice requirement, opening and target ending stocks, other uses/losses, and exports.
+The **Rice Supply & Sufficiency** page is a separate, national decision-support module. It connects provincial productivity with published Philippine rice statistics and explicitly labeled user-assumption scenarios. It does **not** retrain or modify the quarterly XGBoost model, and it does **not** predict government rice-import volumes.
 
-The Stage 2 calculation is explicitly **not a model-driven future rice-import forecast**: yield and area changes are entered manually relative to the 2025 national PSA baseline, and missing national demand and inventory assumptions are never silently supplied. The illustrative example is hypothetical. Both calculators operate independently of XGBoost; no changes were made to training, testing, model artifacts, or forecast eligibility. The national figures and time frames must not be confused with province/quarter ML estimates.
+The Dashboard provides a concise national productivity reference and navigation to the dedicated page. The page has two user-facing tabs:
 
-For future national forecast validation, reconcile provincial and national production totals and coverage; the local 2025 provincial table sums to about 19.58 MMT whereas the cited national statistic is about 19.67 MMT. Develop full Q1–Q4 yield and area forecasts, forecast national rice requirement, and backtest against official supply/stock accounts **before** calling any future result a forecast of import requirements. The supply balance is not PSA SSR and should not be used as an import policy decision.
+### Productivity & Benchmarks
 
-Sources: PSA supply-utilization metadata https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__2B__AA__SU/0012B5ESUA0.px ; PSA technical note https://psa.gov.ph/statistics/technical-notes/167330 ; PhilRice https://ricelytics.philrice.gov.ph/rice_industry .
+This tab displays historical national palay production, yield, harvested area, the official rice self-sufficiency ratio (SSR), historical government productivity aspirations, and rice-supply records. Its required-yield calculator accepts **assumed yield (MT/ha)**, **annual harvested area (million hectares)**, **annual milled-rice requirement (MMT)**, and **milling recovery (%)**. It calculates:
 
-## Rice Supply & Sufficiency navigation (October 2026)
-The Dashboard shows a compact four-indicator **National Rice Productivity** reference summary, with a navigational action to the dedicated **Rice Supply & Sufficiency** sidebar page (after Historical Data). The full page provides dated official benchmarks and rice-import history, a required-yield/production coverage calculator, and a separate conditional supply-balance calculator. All existing yield-forecasting views and ML workflows are retained. Form controls are labeled and keyboard accessible, invalid or missing demand/stock assumptions produce no misleading numbers, and mobile layout stacks cards and controls. The stage 1 and 2 modules remain separate from XGBoost.
+- Palay production (MMT) = yield (MT/ha) x harvested area (million ha).
+- Milled rice (MMT) = palay production x milling recovery / 100.
+- Domestic production coverage (%) = milled rice / entered annual requirement x 100.
+- Production-only gap (MMT) = maximum of zero and requirement minus milled rice.
+- Required average yield (MT/ha) = requirement / (harvested area x milling recovery / 100).
 
-## Guided rice import-dependency explanation and future food-needs scenarios (October 2026)
+Coverage is a calculated scenario metric, **not** the official PSA SSR. Historical policy aspirations are not universally applicable yield thresholds for all provinces.
 
-The Rice Supply & Sufficiency page contains an official-data interpretation explaining historical import reliance: the PSA 2022 rice Supply Utilization Account reports domestic milled rice production of 12.921 MMT, total net food disposable of 15.200 MMT, and imports of 3.863 MMT. These figures refer to distinct supply-account quantities, and the food-versus-production difference is **not** an import requirement.
+### National Supply Outlook
 
-The National Supply Outlook tab now starts with an optional guided annual **food-needs coverage scenario**: the 2022 PSA net-food-disposable baseline grows using a clearly labeled user-supplied annual rate; the 2025 PSA national palay production baseline changes under user assumptions for yield, harvested area, and milling recovery. The scenario explicitly reports domestic food-needs coverage and a food-only production gap. This is **not** a year-specific validated rice demand model, a validated all-quarter national yield forecast, or an official import volume forecast. The existing advanced stocks/use supply-balance calculator remains available below it; users enter stock and utilization assumptions there. No model training, holdout datasets or saved forecast behaviors changed.
+This tab includes a guided food-needs scenario and an advanced rice supply-balance scenario.
 
-PSA sources: https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__2B__AA__SU/0012B5ESUA0.px/table/tableViewLayout2/ and https://psa.gov.ph/statistics/crops/palay-situation-report/node/1684082355 . Explanatory DA context: https://www.da.gov.ph/da-keeps-rice-imports-open-as-el-nino-risks-mount/ .
+The **guided scenario** allows selection of 2027-2030 and assumptions for annual food-needs growth, yield change relative to 2025, harvested-area change relative to 2025, and milling recovery. It compounds the PSA **2022 net food disposable** baseline of 15.20 MMT using the entered annual growth assumption. Estimated domestic milled rice is computed from the official 2025 national palay baseline of 19.67 MMT, adjusted by the entered yield and harvested-area changes and milling recovery. It reports food-needs coverage and a food-only production gap. Choosing a later year changes assumed food needs if the growth rate is nonzero; domestic production does not automatically forecast year-by-year growth.
+
+The **advanced scenario** adds an entered annual rice requirement, beginning rice stocks, desired ending stocks, other uses/losses, and exports. Its indicative balance (MMT) is domestic milled rice + opening stocks - requirement - other uses/losses - exports - desired ending stocks. Additional supply needed is maximum of zero and the negative balance. Entered requirements and other uses must not double-count the same rice utilization. Stock, utilization, and import decisions are not forecast by this tool.
+
+Both calculators distinguish historical statistics, computed outputs, and hypothetical assumptions. Missing or invalid inputs must not produce apparently valid results; scenario interpretations explain their meaning and limits. **A production gap or indicative supply deficit is not an official import requirement, nor an independently validated national forecast.**
+
+### Historical sources and reporting periods
+
+- **2025 full year:** PSA national palay production **19.67 MMT**, area harvested **4.75 million hectares**, average yield **4.14 MT/ha**; published rice SSR **78.1%**. These national benchmarks are separate from the provincial processed table.
+- **2026 first half / September:** more recent partial-year production, September import flows, and stocks are each identified with their own periods. These must not be combined as though they were all full-year totals.
+- **2022 supply account:** domestic milled-rice production **12.921 MMT**, net food disposable **15.200 MMT**, and imports **3.863 MMT** provide a historical illustration. This is not the latest full-year national situation; the 2023-2024 complete supply accounts remained under PSA review in the May 2026 release.
+- **Near-Term crop context:** the integrated PSA MPCSRS release is dated **October 13, 2026**, for July-September 2026 standing crops as of **September 1, 2026**. Its **3.10 MMT** production is an estimate, not a final quarterly actual or province-level forecast.
+
+### Important dataset and forecasting limitations
+
+The 2025 locally integrated provincial history sums to approximately **19.5793 MMT palay** and **4.7214 million harvested hectares**, compared with PSA national published figures of **19.67 MMT** and **4.75 million hectares**. The difference must be reconciled at source level; the application does not fill missing provincial records or present that aggregation as an official national total. A validated annual rice-import forecast would require complete four-quarter production and area forecasts, future requirement and inventory modeling, and chronological backtesting against official national accounts.
+
+### Primary official references
+
+- PSA, *Palay Situation Report, October-December and January-December 2025*: https://psa.gov.ph/content/palay-situation-report-october-december-2025-and-january-december-2025
+- PSA OpenSTAT, *Self-Sufficiency Ratio (SSR) of Selected Agriculture and Fishery Commodities*: https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__2B__AA__AFIS/0022E5ESSR0.px/table/tableViewLayout2/
+- PSA OpenSTAT, *Supply Utilization Accounts (rice)*: https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__2B__AA__SU/0012B5ESUA0.px/table/tableViewLayout2/
+- PSA, *July-September 2026 Palay Estimates Based on Standing Crop, as of September 1*: https://psa.gov.ph/statistics/crops/palay-and-corn-estimates
+- PSA, *Rice and Corn Stocks Inventory, September 2026*: https://psa.gov.ph/content/rice-and-corn-stocks-inventory-september-2026
+- PhilRice, *Rice Industry Statistics*: https://ricelytics.philrice.gov.ph/rice_industry
+
+## Verification and presentation scope
+
+Run `.venv\Scripts\python.exe verify_installation.py`, `node tools/audit_rice_supply.cjs .`, and `.venv\Scripts\python.exe tools/browser_audit_ani.py` for existing integration, national scenario, and supported-browser checks. The separate `tools/browser_audit_flows.py` covers selected sub-tab and input-validation interactions. Saved results reside in `outputs/ani_browser_audit.json` and `outputs/ani_browser_flows.json`.
+
+ANI is suitable for a scoped **academic prototype demonstration** when statistical reference periods and model/scenario limitations are stated accurately. Browser test coverage does not constitute universal accessibility or cross-browser certification, and the system must not claim to predict the amount of rice the government will import.
