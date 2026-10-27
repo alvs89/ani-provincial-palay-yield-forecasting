@@ -62,7 +62,7 @@ function updateRiceOutlook(){
  if(!valid){ids.forEach(id=>document.getElementById(id).textContent='—');document.getElementById('riceOutlookInterpretation').textContent='Complete all inputs with valid numbers. Requirement and beginning/ending stocks are required. All volumes must refer to the same target year and use milled rice MMT.';return;}
  const r=calculateRiceOutlook(v),mm=x=>x.toFixed(2)+' MMT';
  [mm(r.palay),mm(r.milled),r.coverage.toFixed(1)+'%',(r.balance>=0?'+':'')+mm(r.balance),mm(r.need),r.required.toFixed(2)+' MT/ha'].forEach((value,i)=>document.getElementById(ids[i]).textContent=value);
- const year=document.getElementById('riceOutlookYear').value;
+ const year=Number(document.getElementById('riceOutlookYear').value);
  document.getElementById('riceOutlookInterpretation').textContent=riceInterpretSupply({year,coverage:r.coverage,balance:r.balance,need:r.need,openingStocks:v.openingStocks,reserve:v.reserve});
 }
 function initializeRiceOutlook(){
