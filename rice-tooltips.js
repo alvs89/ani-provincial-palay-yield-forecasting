@@ -67,3 +67,42 @@ function riceAttachTooltips(){
   });
  }
 }
+
+/* Numeric restrictions apply to the rice scenarios only; preserve ordinary ANI forms. */
+function riceInitializeNumericValidation(){
+ const root=document.querySelector('.ricePage');if(!root)return;
+ const fields=root.querySelectorAll('input[type="number"]');
+ fields.forEach(el=>{
+  if(el.dataset.riceNumericReady)return;
+  el.dataset.riceNumericReady='true';
+  el.setAttribute('inputmode','decimal');
+  const min=Number(el.getAttribute('min'));
+  const max=Number(el.getAttribute('max'));
+  const negatives=min<0;
+  const message=document.createElement('small');message.className='riceFieldError';message.setAttribute('role','status');message.hidden=true;
+  el.after(message);
+  const check=()=>{
+    const raw=el.value.trim();const num=Number(raw);
+    const bad=Boolean(el.validity?.badInput)||Boolean(raw&&!Number.isFinite(num));
+    const bounds=raw&&!bad&&(num<min||num>max);
+    const step=Boolean(raw&&!bad&&el.validity?.stepMismatch);
+    const invalid=bad||bounds||step;
+    el.setAttribute('aria-invalid',String(Boolean(invalid)));
+    message.hidden=!invalid;
+    message.textContent=bad?'Enter a valid number.':bounds?`Enter a number between ${min} and ${max}.`:step?'Use the allowed decimal increment.':'';
+  };
+  el.addEventListener('keydown',event=>{
+    if(event.ctrlKey||event.metaKey||event.altKey)return;
+    if(['e','E','+'].includes(event.key)||event.key==='-'&&!negatives){event.preventDefault();message.hidden=false;message.textContent=negatives?'Enter a decimal number, without letters or exponent notation.':'Enter a positive decimal number, without letters or exponent notation.';el.setAttribute('aria-invalid','true')}
+  });
+  el.addEventListener('paste',event=>{
+    const pasted=event.clipboardData?.getData('text')||'';
+    const candidate=el.value.slice(0,el.selectionStart??el.value.length)+pasted+el.value.slice(el.selectionEnd??el.value.length);
+    const regex=negatives?/^-?\d*(?:\.\d*)?$/:/^\d*(?:\.\d*)?$/;
+    if(!regex.test(candidate)){event.preventDefault();message.hidden=false;message.textContent='Only numeric values are accepted.';el.setAttribute('aria-invalid','true')}
+  });
+  el.addEventListener('input',check);
+  el.addEventListener('blur',check);
+  check();
+ });
+}
