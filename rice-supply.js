@@ -47,10 +47,20 @@ function riceSupplyPanel(){
     <div><span>Required national average yield</span><strong id="riceCalcRequired">—</strong></div>
    </div>
    <p id="riceCalcNote" class="riceSupplyNotice">Enter a valid annual rice requirement to calculate a scenario.</p>
-   <p class="riceSupplyNotice"><strong>Interpretation:</strong> A production gap is not an import requirement. This scenario excludes rice stocks, reserves, losses, nonfood uses, exports and official import policy. Coverage here is not PSA's official self-sufficiency ratio.</p>
+   <details class="riceDisclosure riceCalcLimits"><summary><span><strong>Scope and limitations</strong><small>What this comparison does and does not include</small></span></summary><div class="riceDisclosureBody"><p>This comparison excludes rice stocks, reserves, losses, nonfood uses, exports, and import policy. Production coverage is not PSA's official self-sufficiency ratio, and a production gap is not an official import requirement.</p></div></details>
   </div>
-  <details class="riceDisclosure riceSourcesDisclosure"><summary><span><strong>Sources & data notes</strong><small>Review the official references behind these indicators</small></span></summary><div class="riceSupplySources"><strong>Official data references</strong><div>${s.sources.map(([name,url])=>`<a href="${url}" target="_blank" rel="noopener noreferrer">${name} ↗</a>`).join('')}</div></div>
- </details></section>`;
+  <details class="riceDisclosure riceSourcesDisclosure"><summary><span><strong>Sources & data notes</strong><small>Official Philippine statistics and program references</small></span></summary>
+  <div class="riceSourcesBody"><p>These references support the historical indicators shown above. Select a source to view its published data or program information.</p>
+  <nav class="riceSourceGrid" aria-label="Official rice data references">
+  ${s.sources.map(([name,url],i)=>{const info=[
+   ['2025 national figures','Palay production, harvested area and average yield','PSA'],
+   ['Rice industry indicators','Production and self-sufficiency statistics','PhilRice'],
+   ['Supply & utilization','Historical domestic supply and rice imports','PSA'],
+   ['Rice program objectives','Masagana Rice Program, 2023-2028','DA'],
+   ['Productivity aspirations','Historical rice yield targets, 2019','DA']][i]||['Official reference','Supporting rice sector information','Official'];
+   return `<a class="riceSourceItem" href="${url}" target="_blank" rel="noopener noreferrer" aria-label="${info[0]} - ${name} (opens in new tab)"><span class="riceSourceIcon" aria-hidden="true">${i+1}</span><span class="riceSourceText"><strong>${info[0]}</strong><small>${info[1]}</small><em>${info[2]} &middot; Source document</em></span><span class="riceSourceArrow" aria-hidden="true">&nearr;</span></a>`;}).join('')}
+  </nav><p class="riceSourceFootnote">Reference years differ. Historical government aspirations are not universal current production targets.</p></div>
+  </details></section>`;
 }
 function updateRiceScenario(){
  const read=id=>Number(document.getElementById(id)?.value);

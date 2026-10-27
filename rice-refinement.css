@@ -116,3 +116,46 @@
 /* Single-line supply balance, horizontal access on narrow screens. */
 .riceMethodItem:has(.riceMethodFormula[aria-label^="Milled rice plus opening stocks"]) .riceMethodFormula{display:block;white-space:nowrap;overflow-x:auto;overflow-y:hidden;max-width:100%;font-size:.80rem;line-height:1.7}
 .riceInterpretation{margin:15px 0;padding:15px 18px;border-left:3px solid #34805a;background:var(--surface,#f4f8f5);border-radius:0 10px 10px 0;font-size:.85rem;line-height:1.65;color:var(--text,#20382b)}
+.ricePage .riceScenario>.riceSupplyNotice,.ricePage .riceScenario>.riceInterpretation,.ricePage .riceScenario>.riceCalcLimits,.ricePage .riceOutlookInfo,.ricePage .riceGuidanceInsight{width:100%;max-width:none;box-sizing:border-box}.ricePage .riceScenarioResults>div:last-child:nth-child(3n + 2){grid-column:span 2}@media(max-width:1030px){.ricePage .riceScenarioResults>div:last-child{grid-column:auto}}
+/* Use available panel width consistently for all Rice Supply descriptions. */
+.ricePage .riceGuidanceHeading p,
+.ricePage .riceGuided .riceToolHeading p,
+.ricePage .riceOutlook .riceSupplyHeading p,
+.ricePage .riceSupplyPanel .riceSupplyHeading p,
+.ricePage .riceToolHeading p,
+.ricePage .riceSectionLead p {
+  max-width: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+.ricePage .riceGuidanceHeading,
+.ricePage .riceGuided .riceToolHeading > div,
+.ricePage .riceOutlook .riceSupplyHeading > div,
+.ricePage .riceSupplyPanel .riceSupplyHeading > div {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.ricePage .riceNoBreak{white-space:nowrap}
+/* National outlook header: content uses full row; badge does not constrain description. */
+.ricePage .riceOutlook .riceSupplyHeading{display:block;position:relative;width:100%;min-width:0;padding:0 0 2px}
+.ricePage .riceOutlook .riceSupplyHeading>div{display:block;width:100%;min-width:0}
+.ricePage .riceOutlook .riceSupplyHeading h2{padding-right:175px}
+.ricePage .riceOutlook .riceSupplyHeading>.riceSupplyTag{position:absolute;right:0;top:0}
+.ricePage .riceOutlook .riceSupplyHeading p{display:block;max-width:none;width:100%;white-space:normal;overflow-wrap:normal;color:var(--text,#293e32);opacity:.88;line-height:1.6}
+@media(max-width:600px){.ricePage .riceOutlook .riceSupplyHeading h2{padding-right:0}.ricePage .riceOutlook .riceSupplyHeading>.riceSupplyTag{position:static;display:inline-flex;margin-top:12px}}
+/* Sources: compact accessible source directory, replacing crowded inline links. */
+.ricePage .riceSourcesBody{border-top:1px solid var(--border,#dce6df);padding:16px 18px 18px}
+.riceSourcesBody>p{font-size:.83rem;line-height:1.6;color:var(--muted,#607167);margin:0 0 14px}
+.riceSourceGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.riceSourceItem{display:flex;align-items:center;gap:12px;min-width:0;padding:13px 14px;border:1px solid var(--border,#d9e4dc);border-radius:11px;background:var(--surface,#f7faf8);text-decoration:none;color:var(--text,#183b29);transition:background-color .16s ease,border-color .16s ease}
+.riceSourceItem:hover{background:#e9f3eb;border-color:#91b49b}
+.riceSourceItem:focus-visible{outline:2px solid #b78223;outline-offset:2px}
+.riceSourceIcon{display:grid;place-items:center;flex:0 0 31px;width:31px;height:31px;background:#e1eee4;border-radius:9px;font-size:.78rem;font-weight:750;color:#24593a}
+.riceSourceText{min-width:0;display:flex;flex-direction:column;gap:3px}
+.riceSourceText strong{font-size:.86rem;line-height:1.35;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.riceSourceText small{font-size:.76rem;line-height:1.45;color:var(--muted,#68796e)}
+.riceSourceText em{font-style:normal;font-size:.69rem;color:#407459}
+.riceSourceArrow{margin-left:auto;align-self:flex-start;color:#357b54;font-size:1.15rem}
+.riceSourcesBody .riceSourceFootnote{margin:15px 0 0;font-size:.74rem}
+@media(max-width:760px){.riceSourceGrid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.riceSourceItem{transition:none}}
