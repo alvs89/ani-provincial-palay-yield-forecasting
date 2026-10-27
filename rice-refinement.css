@@ -180,3 +180,11 @@
 .ricePage .riceScenarioResults>div:hover:not(:focus-within){background:var(--surface,#f7faf8)}
 .ricePage .riceIconTip .infoTipPopup:not(.isPositioned){visibility:hidden!important;opacity:0!important}
 .ricePage .riceScenarioResults .infoTipPopup,.ricePage .riceGuidedResults .infoTipPopup{color:#f5fbf7!important;background:#12382a!important;font-size:12px!important;font-weight:500!important;line-height:1.5!important;margin:0!important;white-space:normal!important}
+
+/* Consistent in-line info icons: last word and icon stay together; input stays below heading. */
+.ricePage .riceTipHeading{display:block!important;flex:0 0 auto!important;margin:0!important;white-space:normal!important;line-height:1.45!important;font:inherit!important;color:inherit!important}
+.ricePage .riceTipTail{display:inline!important;white-space:nowrap!important;margin:0!important;font:inherit!important;color:inherit!important}
+.ricePage .riceTipTail>.riceIconTip{display:inline-flex!important;vertical-align:middle!important;margin-inline-start:5px!important;line-height:1!important}
+.ricePage .riceTipHeading .infoTipPopup{font-weight:500!important}
+.ricePage .riceScenarioInputs label,.ricePage .riceGuidedGrid label,.ricePage .riceOutlookInputs label{align-items:stretch}
+.ricePage .riceSupplyStat>span,.ricePage .riceScenarioResults>div>span,.ricePage .riceGuidedResults>div>span{display:block!important;white-space:normal!important;line-height:1.45!important}
