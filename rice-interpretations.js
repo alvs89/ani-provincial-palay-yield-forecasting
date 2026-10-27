@@ -34,3 +34,17 @@ function riceInterpretSupply({year,coverage,balance,need,openingStocks,reserve})
  const supply=balance<0 ? `After the entered stock, export, loss and reserve assumptions, the balance would be a deficit of ${riceN(need)} MMT, indicating possible additional supply needs.` : balance>0 ? `After the entered assumptions, the balance would be a surplus of ${riceN(balance)} MMT.` : 'After the entered assumptions, the supply balance would be zero.';
  return `For ${year}, ${production} ${supply} This is not an import recommendation or validated annual prediction. Stock figures are user assumptions, and year selection alone does not forecast production.`;
 }
+
+/* Emphasize calculated values, not surrounding explanatory language. */
+function riceRenderInterpretation(element, message){
+ if(!element)return;
+ element.replaceChildren();
+ const pattern=/\b\d{4}\b|(?<![\w.])-?\d+(?:\.\d+)?(?:%|\sMMT|\sMT\/ha)?/g;
+ let cursor=0;
+ for(const match of message.matchAll(pattern)){
+  if(match.index>cursor)element.appendChild(document.createTextNode(message.slice(cursor,match.index)));
+  const bold=document.createElement('strong');bold.textContent=match[0];element.appendChild(bold);
+  cursor=match.index+match[0].length;
+ }
+ if(cursor<message.length)element.appendChild(document.createTextNode(message.slice(cursor)));
+}

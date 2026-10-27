@@ -72,6 +72,6 @@ function updateRiceScenario(){
  if(!valid){ids.forEach(id=>document.getElementById(id).textContent='—');document.getElementById('riceCalcNote').textContent='Enter positive, in-range values for all four inputs (including rice requirement).';return;}
  const p=y*a,m=p*r/100,coverage=m/d*100,gap=Math.max(0,d-m),required=d/(a*r/100);
  [p.toFixed(2)+' MMT',m.toFixed(2)+' MMT',coverage.toFixed(1)+'%',gap.toFixed(2)+' MMT',required.toFixed(2)+' MT/ha'].forEach((v,i)=>document.getElementById(ids[i]).textContent=v);
- document.getElementById('riceCalcNote').textContent=riceInterpretProductivity({yieldValue:y,required,coverage,gap});
+ riceRenderInterpretation(document.getElementById('riceCalcNote'),riceInterpretProductivity({yieldValue:y,required,coverage,gap}));
 }
 document.addEventListener('input',event=>{if(event.target?.id?.startsWith('riceScenario'))updateRiceScenario()});
