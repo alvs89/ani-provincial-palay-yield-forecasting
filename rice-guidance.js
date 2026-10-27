@@ -62,7 +62,7 @@ function updateRiceGuide(){
  if(!valid){fields.forEach(id=>document.getElementById(id).textContent='—');document.getElementById('riceGuideInterpretation').textContent='Enter valid numbers within the indicated input ranges.';return;}
  const r=riceGuidedMath(v);
  [r.food.toFixed(2)+' MMT',r.production.toFixed(2)+' MMT',r.coverage.toFixed(1)+'%',r.gap.toFixed(2)+' MMT'].forEach((value,i)=>document.getElementById(fields[i]).textContent=value);
- document.getElementById('riceGuideInterpretation').textContent=riceInterpretFood({year:v.year,coverage:r.coverage,gap:r.gap,food:r.food,production:r.production});
+ riceRenderFoodInterpretation(document.getElementById('riceGuideInterpretation'),{year:v.year,coverage:r.coverage,gap:r.gap,food:r.food,production:r.production});
 }
 function initializeRiceGuide(){
  const ids=['riceGuideYear','riceGuideDemandGrowth','riceGuideYieldChange','riceGuideAreaChange','riceGuideRecovery'];

@@ -11,6 +11,23 @@ function riceInterpretFood({year,coverage,gap,food,production}){
  const status=production<food ? `For ${year}, the assumed domestic output would cover ${riceN(coverage,1)}% of estimated food needs, leaving a food-only production gap of ${riceN(gap)} MMT.` : production>food ? `For ${year}, the assumed domestic output would cover ${riceN(coverage,1)}% of estimated food needs, exceeding them by ${riceN(production-food)} MMT.` : `For ${year}, assumed domestic output would exactly cover estimated food needs.`;
  return status+' Future demand and production use assumptions, not validated forecasts. This does not determine imports because stocks, other uses, seasonality and policy are excluded.';
 }
+/* Render the variable values as emphasized text without parsing user input as HTML. */
+function riceRenderFoodInterpretation(element,{year,coverage,gap,food,production}){
+ if(!element)return;
+ const numbers=[year,coverage,gap,food,production];
+ if(!numbers.every(Number.isFinite)){
+  element.textContent='Enter valid assumptions to display an interpretation.';
+  return;
+ }
+ element.replaceChildren();
+ const write=text=>element.appendChild(document.createTextNode(text));
+ const bold=value=>{const node=document.createElement('strong');node.textContent=String(value);element.appendChild(node)};
+ write('For ');bold(year);write(', the assumed domestic output would cover ');bold(riceN(coverage,1)+'%');write(' of estimated food needs');
+ if(production<food){write(', leaving a food-only production gap of ');bold(riceN(gap)+' MMT');write('.')}
+ else if(production>food){write(', exceeding them by ');bold(riceN(production-food)+' MMT');write('.')}
+ else {write(' exactly.')}
+ write(' Future demand and production use assumptions, not validated forecasts. This does not determine imports because stocks, other uses, seasonality and policy are excluded.');
+}
 function riceInterpretSupply({year,coverage,balance,need,openingStocks,reserve}){
  if(![year,coverage,balance,need,openingStocks,reserve].every(Number.isFinite))return 'Enter valid assumptions to display an interpretation.';
  const production=`domestic production would cover ${riceN(coverage,1)}% of the entered annual requirement.`;
