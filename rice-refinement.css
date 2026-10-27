@@ -188,3 +188,28 @@
 .ricePage .riceTipHeading .infoTipPopup{font-weight:500!important}
 .ricePage .riceScenarioInputs label,.ricePage .riceGuidedGrid label,.ricePage .riceOutlookInputs label{align-items:stretch}
 .ricePage .riceSupplyStat>span,.ricePage .riceScenarioResults>div>span,.ricePage .riceGuidedResults>div>span{display:block!important;white-space:normal!important;line-height:1.45!important}
+/* Final tooltip inline alignment: neutralize inherited metric span spacing. */
+.ricePage .riceScenarioResults>div>span .riceTipHeading,
+.ricePage .riceScenarioResults>div>span .riceTipTail,
+.ricePage .riceScenarioResults>div>span .riceIconTip,
+.ricePage .riceSupplyStat>span .riceTipHeading,
+.ricePage .riceSupplyStat>span .riceTipTail,
+.ricePage .riceSupplyStat>span .riceIconTip,
+.ricePage .riceGuidedResults>div>span .riceTipHeading,
+.ricePage .riceGuidedResults>div>span .riceTipTail,
+.ricePage .riceGuidedResults>div>span .riceIconTip{
+  margin:0!important;
+  padding:0!important;
+  font-size:inherit!important;
+  line-height:inherit!important;
+}
+.ricePage .riceTipHeading{display:inline!important;white-space:normal!important}
+.ricePage .riceTipTail{display:inline!important;white-space:nowrap!important}
+.ricePage .riceTipTail>.riceIconTip{
+  display:inline-flex!important;
+  align-items:center!important;
+  margin-left:4px!important;
+  vertical-align:-0.08em!important;
+  line-height:1!important;
+}
+.ricePage .riceTipTail>.riceIconTip>.infoTipTrigger{vertical-align:middle;margin:0}
