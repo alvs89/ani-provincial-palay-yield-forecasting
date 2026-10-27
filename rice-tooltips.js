@@ -4,7 +4,7 @@ const RICE_FIELD_TIPS={
 'Assumed annual harvested area (million ha)':'Total area harvested during the year, including land harvested more than once. One million ha equals one million hectares.',
 'Assumed annual rice requirement (million MT)':'Amount of milled rice assumed to be needed during the year. This is entered by the user, not an official future estimate.',
 'Assumed milling recovery (%)':'Percentage of harvested palay expected to become milled rice after processing.',
-'Target year':'Future year of this food-needs scenario. Demand changes with the year when its growth assumption is not zero.',
+'Target year':'Choose 2027-2030 for near-term planning. This range is an ANI design choice, not a government restriction. Assumed food needs change by year; domestic output changes only when you adjust production inputs. Results are scenarios, not official forecasts.',
 'Annual growth in rice food needs (%)':'Assumed annual percentage increase or decrease in rice available for human food, starting from the 2022 PSA baseline.',
 'Change in palay yield versus 2025 (%)':'Assumed percentage difference in palay harvested per hectare compared with the 2025 national level.',
 'Change in harvested area versus 2025 (%)':'Assumed percentage change in total annual area harvested compared with 2025.',
