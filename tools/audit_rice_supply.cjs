@@ -3,7 +3,7 @@ const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path');
 const dir=path.resolve(process.argv[2]||'.');
 const context={document:{addEventListener(){}}};
 vm.createContext(context);
-for(const file of ['rice-tooltips.js','rice-supply.js','rice-guidance.js','rice-outlook.js']){
+for(const file of ['rice-tooltips.js','rice-interpretations.js','rice-supply.js','rice-guidance.js','rice-outlook.js']){
  vm.runInContext(fs.readFileSync(path.join(dir,file),'utf8'),context,{filename:file});
 }
 const expect=(condition,label)=>{if(!condition)throw Error('FAILED '+label);};
@@ -26,6 +26,9 @@ approx(r.coverage,13.011705/17*100,'production coverage');
 approx(r.balance,-4.488295,'supply balance');
 approx(r.need,4.488295,'additional supply');
 approx(r.required,17/(4.75*.63),'demand-equivalent yield');count+=6;
+const interpretation=context.riceInterpretSupply({year:2027,coverage:r.coverage,balance:r.balance,need:r.need,openingStocks:2,reserve:2});
+ok(interpretation.includes('For 2027')&&interpretation.includes('76.5%')&&interpretation.includes('4.49 MMT'),'scenario interpretation uses numeric year and calculated figures');
+ok(fs.readFileSync(path.join(dir,'rice-outlook.js'),'utf8').includes('const year=Number('),'selected year converted before interpretation');
 const sufficient=context.calculateRiceOutlook({yieldChange:100,areaChange:0,milling:63,demand:10,openingStocks:1,reserve:0,otherUses:0,exports:0});
 ok(sufficient.need===0,'nonnegative balance yields no shortage');
 const food=context.riceGuidedMath({year:2027,demandGrowth:1,yieldChange:0,areaChange:0,recovery:63});

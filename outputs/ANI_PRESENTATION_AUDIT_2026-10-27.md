@@ -5,7 +5,7 @@ This audit reviewed the local integration verification, frontend/backend health,
 
 ## Verified checks
 - `python verify_installation.py`: PASS (backend health/metadata, model availability, agricultural/weather record consistency, 2025 holdout, lag availability, 2026 Q3 eligibility, satellite/near-term/long-term context, province normalization).
-- `node tools/audit_rice_supply.cjs .`: PASS (27 assertions covering three rice calculators, shortage/surplus scenarios, reference markup, and numeric entry patterns).
+- `node tools/audit_rice_supply.cjs .`: PASS (29 assertions covering three rice calculators, shortage/surplus scenarios, reference markup, and numeric entry patterns).
 - JavaScript syntax for affected pages and Git diff whitespace checks: PASS.
 - Browser headless DOM: dashboard loads and Rice Supply navigation text appears; API `/health` and static assets serve HTTP 200.
 - Official PSA 2025 national palay production 19.67 MMT, harvested area 4.75 million hectares, and yield 4.14 MT/ha match displayed reference values. PSA 2025 rice SSR 78.1% also matches.
@@ -31,3 +31,11 @@ Safe for a **provisional prototype demonstration** with honest labels: show vali
 - https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__2B__AA__SU/0012B5ESUA0.px/table/tableViewLayout2/
 - https://ricelytics.philrice.gov.ph/rice_industry
 - https://psa.gov.ph/content/rice-and-corn-stocks-inventory-september-2026
+## Follow-up technical re-audit (2026-10-27)
+- Reran full integration verifier: all documented checks passed.
+- Extended Rice Supply regression suite to **29 assertions**, including numeric year conversion and correct scenario interpretation wording. All pass.
+- Direct source reconciliation: 588 provincial records spanning 82 provinces sum to 19.579261 MMT palay and 4.721420 million hectares for 2025, against PSA national 19.67 MMT and 4.75 million hectares (differences: about 90,739 MT and 28,580 ha). These discrepancies are not silently adjusted or filled.
+- Verified national 2025 rice SSR of 78.1% against PSA OpenSTAT and its definition. PSA adopted 63% palay milling recovery beginning in 2023 according to the same metadata.
+- The 2025 model holdout, 2026 Q1 active training cutoff, and independent climate/context modules remain untouched.
+- UI appearance was excluded at user request; there is no claim that every page has been visually tested.
+- **Verdict:** technically suitable for a scoped prototype demonstration with clearly labeled scenarios and historic holdout. Not validated to forecast actual annual rice imports or to aggregate 2025 provincial totals as official national estimates.
