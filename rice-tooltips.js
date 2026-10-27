@@ -62,47 +62,58 @@ function riceAttachTooltips(){
    const label=node.textContent.trim();
    if(!RICE_FIELD_TIPS[label])return;
    node.textContent='';
-   el.insertAdjacentHTML('afterbegin',infoLabel(label));
+   const id=`ani-rice-tip-${++infoTipCounter}`;
+   const safeLabel=label.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+   const safeTip=RICE_FIELD_TIPS[label].replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+   el.insertAdjacentHTML('afterbegin',`<span class="riceTipLabel">${safeLabel}</span><span class="infoTip riceIconTip"><button type="button" class="infoTipTrigger" aria-label="Explain ${safeLabel}" aria-describedby="${id}" aria-expanded="false">i</button><span class="infoTipPopup" id="${id}" role="tooltip">${safeTip}</span></span>`);
    el.dataset.riceExplained='true';
   });
  }
 }
 
 /* Numeric restrictions apply to the rice scenarios only; preserve ordinary ANI forms. */
+function riceNumericCandidate(value,allowNegative){
+ const pattern=allowNegative?/^-?\d*(?:\.\d*)?$/:/^\d*(?:\.\d*)?$/;
+ return pattern.test(value);
+}
 function riceInitializeNumericValidation(){
  const root=document.querySelector('.ricePage');if(!root)return;
- const fields=root.querySelectorAll('input[type="number"]');
- fields.forEach(el=>{
+ root.querySelectorAll('input[type="number"],input[data-rice-number="true"]').forEach(el=>{
   if(el.dataset.riceNumericReady)return;
-  el.dataset.riceNumericReady='true';
-  el.setAttribute('inputmode','decimal');
-  const min=Number(el.getAttribute('min'));
-  const max=Number(el.getAttribute('max'));
-  const negatives=min<0;
-  const message=document.createElement('small');message.className='riceFieldError';message.setAttribute('role','status');message.hidden=true;
-  el.after(message);
-  const check=()=>{
-    const raw=el.value.trim();const num=Number(raw);
-    const bad=Boolean(el.validity?.badInput)||Boolean(raw&&!Number.isFinite(num));
-    const bounds=raw&&!bad&&(num<min||num>max);
-    const step=Boolean(raw&&!bad&&el.validity?.stepMismatch);
-    const invalid=bad||bounds||step;
-    el.setAttribute('aria-invalid',String(Boolean(invalid)));
-    message.hidden=!invalid;
-    message.textContent=bad?'Enter a valid number.':bounds?`Enter a number between ${min} and ${max}.`:step?'Use the allowed decimal increment.':'';
+  el.dataset.riceNumericReady='true';el.dataset.riceNumber='true';
+  const min=Number(el.getAttribute('min')),max=Number(el.getAttribute('max'));
+  const allowNegative=min<0;
+  // text + decimal keypad avoids browser-specific acceptance of e/E and plus signs.
+  el.type='text';el.setAttribute('inputmode','decimal');el.setAttribute('autocomplete','off');
+  const message=document.createElement('small');message.className='riceFieldError';message.setAttribute('role','status');message.hidden=true;el.after(message);
+  let lastValid=el.value;
+  const feedback=text=>{message.hidden=!text;message.textContent=text;el.setAttribute('aria-invalid',String(Boolean(text)))};
+  const validate=()=>{
+   const raw=el.value.trim();const num=Number(raw);
+   if(!riceNumericCandidate(raw,allowNegative)){feedback('Only numeric values are accepted.');return}
+   if(raw!==''&&raw!=='-'&&raw!=='.'&&raw!=='-.'){
+    if(num<min||num>max){feedback(`Enter a number between ${min} and ${max}.`);return}
+   }
+   feedback('');
   };
+  const proposed=(insertion)=>el.value.slice(0,el.selectionStart??el.value.length)+insertion+el.value.slice(el.selectionEnd??el.value.length);
+  el.addEventListener('beforeinput',event=>{
+   if(event.isComposing||!event.inputType?.startsWith('insert')||event.data==null)return;
+   if(!riceNumericCandidate(proposed(event.data),allowNegative)){event.preventDefault();feedback(allowNegative?'Enter digits, a decimal point, or a leading minus sign.':'Enter digits and an optional decimal point only.')}
+  });
   el.addEventListener('keydown',event=>{
-    if(event.ctrlKey||event.metaKey||event.altKey)return;
-    if(['e','E','+'].includes(event.key)||event.key==='-'&&!negatives){event.preventDefault();message.hidden=false;message.textContent=negatives?'Enter a decimal number, without letters or exponent notation.':'Enter a positive decimal number, without letters or exponent notation.';el.setAttribute('aria-invalid','true')}
+   if(event.ctrlKey||event.metaKey||event.altKey||event.key.length!==1)return;
+   if(!riceNumericCandidate(proposed(event.key),allowNegative)){event.preventDefault();feedback(allowNegative?'Enter digits, a decimal point, or a leading minus sign.':'Enter digits and an optional decimal point only.')}
   });
   el.addEventListener('paste',event=>{
-    const pasted=event.clipboardData?.getData('text')||'';
-    const candidate=el.value.slice(0,el.selectionStart??el.value.length)+pasted+el.value.slice(el.selectionEnd??el.value.length);
-    const regex=negatives?/^-?\d*(?:\.\d*)?$/:/^\d*(?:\.\d*)?$/;
-    if(!regex.test(candidate)){event.preventDefault();message.hidden=false;message.textContent='Only numeric values are accepted.';el.setAttribute('aria-invalid','true')}
+   const pasted=event.clipboardData?.getData('text')??'';
+   if(!riceNumericCandidate(proposed(pasted),allowNegative)){event.preventDefault();feedback('Only numeric values are accepted.')}
   });
-  el.addEventListener('input',check);
-  el.addEventListener('blur',check);
-  check();
+  el.addEventListener('input',()=>{
+   if(!riceNumericCandidate(el.value,allowNegative)){el.value=lastValid;feedback('Only numeric values are accepted.');return}
+   lastValid=el.value;validate();
+  });
+  el.addEventListener('blur',validate);
+  validate();
  });
 }
