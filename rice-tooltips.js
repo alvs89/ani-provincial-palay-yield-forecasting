@@ -62,11 +62,7 @@ function riceAttachTooltips(){
    const label=node.textContent.trim();
    if(!RICE_FIELD_TIPS[label])return;
    node.textContent='';
-   const id=`ani-rice-tip-${++infoTipCounter}`;
-   const safeLabel=label.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-   const safeTip=RICE_FIELD_TIPS[label].replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-   const words=safeLabel.split(/\s+/);const lastWord=words.pop();const prefix=words.join(' ');
-   el.insertAdjacentHTML('afterbegin',`<span class="riceTipHeading">${prefix?`${prefix} `:''}<span class="riceTipTail">${lastWord}<span class="infoTip riceIconTip"><button type="button" class="infoTipTrigger" aria-label="Explain ${safeLabel}" aria-describedby="${id}" aria-expanded="false">i</button><span class="infoTipPopup" id="${id}" role="tooltip">${safeTip}</span></span></span></span>`);
+   el.insertAdjacentHTML('afterbegin',infoLabel(label));
    el.dataset.riceExplained='true';
   });
  }
