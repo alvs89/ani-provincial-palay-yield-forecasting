@@ -1,0 +1,434 @@
+[
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "page": "dashboard",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "ANI \u2014 Provincial Palay Yield Decision Support System"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "page": "Generate Estimate",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Next Eligible Quarter Yield Estimate"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "page": "Historical Data",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Historical Agricultural Data"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "page": "Rice Supply & Sufficiency",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Rice Supply & Sufficiency"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "page": "National Supply Outlook",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Rice Supply & Sufficiency"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "page": "Productivity & Benchmarks",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Rice Supply & Sufficiency"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "page": "rice-example",
+    "interpretation": "For 2027, domestic production would cover 76.5% of the entered annual requirement. After the entered stock, export, loss and reserve assumptions, the balance would be a deficit of 4.49 MMT, indicating possible additional supply needs. This is not an import recommendation or validated annual prediction. Stock figures are user assumptions, and year selection alone does not forecast production.",
+    "results": [
+      "\n Scenario palay productioniEstimated unmilled palay output based on assumed 2025-relative changes in yield and harvested area.20.65 MMT\n Milled-rice equivalentiExpected milled rice produced from scenario palay after applying the recovery rate.13.01 MMT\n Production coverageiPercent of the entered annual rice requirement that scenario domestic output could meet.76.5%\n Indicative supply balanceiMilled rice plus opening stocks, less demand, other uses, exports and desired ending stocks.-4.49 MMT\n Additional supply needediPositive shortage when the scenario supply balance is negative; not an official import recommendation.4.49 MMT\n Demand-equivalent required yieldiPalay yield needed to cover the specified rice requirement through domestic production alone.5.68 MT/ha\n "
+    ]
+  },
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "page": "rice-guided",
+    "interpretation": "For 2029, the assumed domestic output would cover 76.0% of estimated food needs, leaving a food-only production gap of 3.90 MMT. Future demand and production use assumptions, not validated forecasts. This does not determine imports because stocks, other uses, seasonality and policy are excluded."
+  },
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "page": "tooltip",
+    "visible": 1
+  },
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "page": "Result History",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Result History"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "page": "Model & Data",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Model & Data"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      1440,
+      900
+    ],
+    "page": "About ANI",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Provincial Palay Yield Decision Support Across Multiple Time Horizons"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      900,
+      900
+    ],
+    "page": "dashboard",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "ANI \u2014 Provincial Palay Yield Decision Support System"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      900,
+      900
+    ],
+    "page": "Generate Estimate",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Next Eligible Quarter Yield Estimate"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      900,
+      900
+    ],
+    "page": "Historical Data",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Historical Agricultural Data"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      900,
+      900
+    ],
+    "page": "Rice Supply & Sufficiency",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Rice Supply & Sufficiency"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      900,
+      900
+    ],
+    "page": "National Supply Outlook",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Rice Supply & Sufficiency"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      900,
+      900
+    ],
+    "page": "Productivity & Benchmarks",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Rice Supply & Sufficiency"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      900,
+      900
+    ],
+    "page": "rice-example",
+    "interpretation": "For 2027, domestic production would cover 76.5% of the entered annual requirement. After the entered stock, export, loss and reserve assumptions, the balance would be a deficit of 4.49 MMT, indicating possible additional supply needs. This is not an import recommendation or validated annual prediction. Stock figures are user assumptions, and year selection alone does not forecast production.",
+    "results": [
+      "\n Scenario palay productioniEstimated unmilled palay output based on assumed 2025-relative changes in yield and harvested area.20.65 MMT\n Milled-rice equivalentiExpected milled rice produced from scenario palay after applying the recovery rate.13.01 MMT\n Production coverageiPercent of the entered annual rice requirement that scenario domestic output could meet.76.5%\n Indicative supply balanceiMilled rice plus opening stocks, less demand, other uses, exports and desired ending stocks.-4.49 MMT\n Additional supply needediPositive shortage when the scenario supply balance is negative; not an official import recommendation.4.49 MMT\n Demand-equivalent required yieldiPalay yield needed to cover the specified rice requirement through domestic production alone.5.68 MT/ha\n "
+    ]
+  },
+  {
+    "viewport": [
+      900,
+      900
+    ],
+    "page": "rice-guided",
+    "interpretation": "For 2029, the assumed domestic output would cover 76.0% of estimated food needs, leaving a food-only production gap of 3.90 MMT. Future demand and production use assumptions, not validated forecasts. This does not determine imports because stocks, other uses, seasonality and policy are excluded."
+  },
+  {
+    "viewport": [
+      900,
+      900
+    ],
+    "page": "tooltip",
+    "visible": 1
+  },
+  {
+    "viewport": [
+      900,
+      900
+    ],
+    "page": "Result History",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Result History"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      900,
+      900
+    ],
+    "page": "Model & Data",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Model & Data"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      900,
+      900
+    ],
+    "page": "About ANI",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Provincial Palay Yield Decision Support Across Multiple Time Horizons"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "page": "dashboard",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "ANI \u2014 Provincial Palay Yield Decision Support System"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "page": "Generate Estimate",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Next Eligible Quarter Yield Estimate"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "page": "Historical Data",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Historical Agricultural Data"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "page": "Rice Supply & Sufficiency",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Rice Supply & Sufficiency"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "page": "National Supply Outlook",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Rice Supply & Sufficiency"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "page": "Productivity & Benchmarks",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Rice Supply & Sufficiency"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "page": "rice-example",
+    "interpretation": "For 2027, domestic production would cover 76.5% of the entered annual requirement. After the entered stock, export, loss and reserve assumptions, the balance would be a deficit of 4.49 MMT, indicating possible additional supply needs. This is not an import recommendation or validated annual prediction. Stock figures are user assumptions, and year selection alone does not forecast production.",
+    "results": [
+      "\n Scenario palay productioniEstimated unmilled palay output based on assumed 2025-relative changes in yield and harvested area.20.65 MMT\n Milled-rice equivalentiExpected milled rice produced from scenario palay after applying the recovery rate.13.01 MMT\n Production coverageiPercent of the entered annual rice requirement that scenario domestic output could meet.76.5%\n Indicative supply balanceiMilled rice plus opening stocks, less demand, other uses, exports and desired ending stocks.-4.49 MMT\n Additional supply needediPositive shortage when the scenario supply balance is negative; not an official import recommendation.4.49 MMT\n Demand-equivalent required yieldiPalay yield needed to cover the specified rice requirement through domestic production alone.5.68 MT/ha\n "
+    ]
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "page": "rice-guided",
+    "interpretation": "For 2029, the assumed domestic output would cover 76.0% of estimated food needs, leaving a food-only production gap of 3.90 MMT. Future demand and production use assumptions, not validated forecasts. This does not determine imports because stocks, other uses, seasonality and policy are excluded."
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "page": "tooltip",
+    "visible": 1
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "page": "Result History",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Result History"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "page": "Model & Data",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Model & Data"
+    ],
+    "overflow": false,
+    "errors": []
+  },
+  {
+    "viewport": [
+      390,
+      844
+    ],
+    "page": "About ANI",
+    "title": "ANI \u2014 Provincial Palay Yield Decision Support System",
+    "h1": [
+      "Provincial Palay Yield Decision Support Across Multiple Time Horizons"
+    ],
+    "overflow": false,
+    "errors": []
+  }
+]

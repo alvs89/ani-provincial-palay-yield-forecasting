@@ -1,0 +1,30 @@
+[
+  {
+    "flow": "Near-Term Palay Outlook",
+    "body": "Next Eligible Quarter Yield Estimate\nNear-Term Palay Outlook\nLong-Term Projection\nCURRENT CROP & WEATHER CONTEXT\nNear-Term Palay Outlook\n\nCombine the latest official PSA standing-crop situation with current PAGASA planni",
+    "errors": [],
+    "overflow": false
+  },
+  {
+    "flow": "Long-Term Projection",
+    "body": "Next Eligible Quarter Yield Estimate\nNear-Term Palay Outlook\nLong-Term Projection\nLONG-TERM CLIMATE SCENARIOS\nLong-Term Palay Yield Projection\n\nExplore 3-, 5-, or 10-year provincial palay-yield scenarios using NASA CMIP6",
+    "errors": [],
+    "overflow": false
+  },
+  {
+    "flow": "numeric-letters",
+    "value": "1",
+    "rejected": true
+  },
+  {
+    "flow": "numeric-range",
+    "aria_invalid": "true",
+    "feedback": [
+      "Enter a number between -5 and 10."
+    ]
+  },
+  {
+    "flow": "guided-year",
+    "text": "For 2030, the assumed domestic output would cover 75.3% of estimated food needs, leaving a food-only production gap of 4.07 MMT. Future demand and production use assumptions, not validated forecasts. This does not determine imports because stocks, ot"
+  }
+]
