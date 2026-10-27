@@ -17,3 +17,16 @@
 .riceGuided .riceOutlookMethod{margin-top:20px}
 @media(max-width:1000px){.riceGuidedGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.riceGuidedResults{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:620px){.riceGuidance,.riceGuided{padding:16px}.riceGuidanceFacts{grid-template-columns:1fr}.riceGuidedGrid{grid-template-columns:1fr}.riceGuidedResults{gap:8px}.riceGuidedResults>div{padding:12px}.riceGuidedResults strong{font-size:1.14rem}}
+/* National import context: dated indicators and optional historical methodology. */
+.riceGuidanceCurrent{margin:21px 0 16px}
+.riceGuidanceCurrentTitle{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:6px 16px;margin-bottom:12px}
+.riceGuidanceCurrentTitle strong{font-size:.96rem}
+.riceGuidanceCurrentTitle span{font-size:.76rem;color:var(--muted,#64756a)}
+.riceGuidanceLatestFacts{grid-template-columns:repeat(3,minmax(0,1fr))}
+.riceGuidanceLatestFacts>div{padding:17px;min-height:102px;justify-content:space-between}
+.riceGuidanceLinks{display:flex;flex-wrap:wrap;gap:8px 17px;margin:15px 0;font-size:.78rem}
+.riceGuidanceLinks a{color:#297a52;text-decoration:underline;text-underline-offset:3px}
+.riceGuidanceHistory{margin-top:20px}
+.riceGuidanceNote{color:var(--muted,#63746a);font-size:.8rem;line-height:1.6}
+@media(max-width:1000px){.riceGuidanceLatestFacts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.riceGuidanceLatestFacts{grid-template-columns:1fr}.riceGuidanceLatestFacts>div{min-height:0}}
