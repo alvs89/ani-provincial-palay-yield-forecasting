@@ -73,6 +73,11 @@ function riceNumericCandidate(value,allowNegative){
  const pattern=allowNegative?/^-?\d*(?:\.\d*)?$/:/^\d*(?:\.\d*)?$/;
  return pattern.test(value);
 }
+function riceValueConforms(raw,element){
+ if(raw==null||String(raw).trim()==='')return false;
+ const n=Number(raw),min=Number(element?.getAttribute('min')??'-Infinity'),max=Number(element?.getAttribute('max')??'Infinity'),step=Number(element?.getAttribute('step')||1);
+ return Number.isFinite(n)&&n>=min&&n<=max&&riceNumericCandidate(String(raw).trim(),min<0)&&(!(step>0)||Math.abs(n/step-Math.round(n/step))<=1e-7);
+}
 function riceInitializeNumericValidation(){
  const root=document.querySelector('.ricePage');if(!root)return;
  root.querySelectorAll('input[type="number"],input[data-rice-number="true"]').forEach(el=>{
@@ -80,6 +85,7 @@ function riceInitializeNumericValidation(){
   el.dataset.riceNumericReady='true';el.dataset.riceNumber='true';
   const min=Number(el.getAttribute('min')),max=Number(el.getAttribute('max'));
   const allowNegative=min<0;
+  const step=Number(el.getAttribute('step')||1);
   // text + decimal keypad avoids browser-specific acceptance of e/E and plus signs.
   el.type='text';el.setAttribute('inputmode','decimal');el.setAttribute('autocomplete','off');
   const message=document.createElement('small');message.className='riceFieldError';message.setAttribute('role','status');message.hidden=true;el.after(message);
@@ -90,6 +96,7 @@ function riceInitializeNumericValidation(){
    if(!riceNumericCandidate(raw,allowNegative)){feedback('Only numeric values are accepted.');return}
    if(raw!==''&&raw!=='-'&&raw!=='.'&&raw!=='-.'){
     if(num<min||num>max){feedback(`Enter a number between ${min} and ${max}.`);return}
+    if(step>0 && Math.abs(num/step-Math.round(num/step))>1e-7){feedback(`Use increments of ${step}.`);return}
    }
    feedback('');
   };

@@ -58,7 +58,7 @@ function readRiceOutlook(){
 function updateRiceOutlook(){
  const ids=['riceOutlookPalay','riceOutlookMilled','riceOutlookCoverage','riceOutlookBalance','riceOutlookNeed','riceOutlookRequired'];if(!document.getElementById(ids[0]))return;
  const v=readRiceOutlook(),finite=Object.values(v).every(Number.isFinite);
- const valid=finite&&v.yieldChange>=-90&&v.yieldChange<=150&&v.areaChange>=-90&&v.areaChange<=150&&v.milling>0&&v.milling<=100&&v.demand>0&&v.demand<=60&&[v.openingStocks,v.reserve,v.otherUses,v.exports].every(x=>x>=0&&x<=30);
+ const valid=finite&&['riceOutlookYieldChange','riceOutlookAreaChange','riceOutlookMilling','riceOutlookDemand','riceOutlookOpeningStocks','riceOutlookReserve','riceOutlookOtherUses','riceOutlookExports'].every(id=>{const el=document.getElementById(id);return riceValueConforms(el.value,el)})&&v.yieldChange>=-90&&v.yieldChange<=150&&v.areaChange>=-90&&v.areaChange<=150&&v.milling>0&&v.milling<=100&&v.demand>0&&v.demand<=60&&[v.openingStocks,v.reserve,v.otherUses,v.exports].every(x=>x>=0&&x<=30);
  if(!valid){ids.forEach(id=>document.getElementById(id).textContent='—');document.getElementById('riceOutlookInterpretation').textContent='Complete all inputs with valid numbers. Requirement and beginning/ending stocks are required. All volumes must refer to the same target year and use milled rice MMT.';return;}
  const r=calculateRiceOutlook(v),mm=x=>x.toFixed(2)+' MMT';
  [mm(r.palay),mm(r.milled),r.coverage.toFixed(1)+'%',(r.balance>=0?'+':'')+mm(r.balance),mm(r.need),r.required.toFixed(2)+' MT/ha'].forEach((value,i)=>document.getElementById(ids[i]).textContent=value);

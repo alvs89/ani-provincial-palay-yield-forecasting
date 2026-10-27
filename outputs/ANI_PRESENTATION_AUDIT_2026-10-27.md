@@ -1,0 +1,33 @@
+# ANI presentation-readiness audit — 27 October 2026
+
+## Scope and result
+This audit reviewed the local integration verification, frontend/backend health, national rice source references, data coverage, scenario mathematics, input validation, and representative browser rendering. It is **not** a claim of exhaustive visual, cross-browser, security, or predictive validity testing.
+
+## Verified checks
+- `python verify_installation.py`: PASS (backend health/metadata, model availability, agricultural/weather record consistency, 2025 holdout, lag availability, 2026 Q3 eligibility, satellite/near-term/long-term context, province normalization).
+- `node tools/audit_rice_supply.cjs .`: PASS (27 assertions covering three rice calculators, shortage/surplus scenarios, reference markup, and numeric entry patterns).
+- JavaScript syntax for affected pages and Git diff whitespace checks: PASS.
+- Browser headless DOM: dashboard loads and Rice Supply navigation text appears; API `/health` and static assets serve HTTP 200.
+- Official PSA 2025 national palay production 19.67 MMT, harvested area 4.75 million hectares, and yield 4.14 MT/ha match displayed reference values. PSA 2025 rice SSR 78.1% also matches.
+- Official PSA 2022 rice Supply Utilization Accounts match domestic milled-rice production 12.921 MMT and imports 3.863 MMT. PSA notes that later complete supply accounts for 2023–2024 are under review (May 2026 release).
+- Current PhilRice/PSA context: 2026 semester-one palay production 9.02 MMT, September 2026 rice imports 0.418 MMT, September 1 rice stocks 1.91 MMT. These values must not be combined as if the same reporting period.
+
+## Issue corrected in this audit
+- Numeric-only text inputs had incremental-value feedback but output calculators could still calculate from a value violating the configured step. Added a shared `riceValueConforms` check and enforced it inside all three rice calculators. A regression audit now covers representative valid/invalid input formats and scenario formulas.
+
+## Known limits and open presentation risks
+1. Provincial records vs national statistics: 2025 local palay history aggregates to 19.579261 MMT and 4.721420 million hectares; official PSA national values are 19.67 MMT and 4.75 million hectares. The difference remains unreconciled. The national rice panels correctly retain the separate official national baseline; do not aggregate provincial rows as an official national forecast without source-level reconciliation.
+2. There is no validated four-quarter future national production or import-requirement forecast. Future National Supply Outlook values are assumptions, not official import decisions or independently validated future results. The 2022 net-food-disposable baseline is historical, not observed future demand.
+3. Scenario results use rounding for display; calculations retain unrounded intermediate values. Coverage is not the PSA official SSR. Supply gap is not automatically import volume.
+4. No complete browser interaction/responsive visual audit at multiple screen sizes was completed in this run, and a formal external-user usability test has not been performed.
+5. The model evaluation provides historical evidence on the fixed holdout; it does not guarantee future predictions. The long-term CMIP6 module is a climate-analog scenario, not a validated yield forecast.
+
+## Recommended presentation scope
+Safe for a **provisional prototype demonstration** with honest labels: show validated 2025 holdout results, historical/current national indicators with reference dates, and assumption-driven calculators. **Not certified as fully presentation-ready for claims about future national rice import volumes** until source reconciliation, national forecast backtesting, and full UI interaction/visual checks are complete.
+
+## Primary sources
+- https://psa.gov.ph/statistics/crops/palay-situation-report/node/1684082355
+- https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__2B__AA__AFIS/0022E5ESSR0.px/table/tableViewLayout2/
+- https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__2B__AA__SU/0012B5ESUA0.px/table/tableViewLayout2/
+- https://ricelytics.philrice.gov.ph/rice_industry
+- https://psa.gov.ph/content/rice-and-corn-stocks-inventory-september-2026

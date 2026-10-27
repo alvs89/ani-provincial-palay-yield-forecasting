@@ -58,7 +58,7 @@ function updateRiceGuide(){
  const read=id=>{const s=String(document.getElementById(id).value??'').trim();return s===''?NaN:Number(s)};
  const v={year:read('riceGuideYear'),demandGrowth:read('riceGuideDemandGrowth'),yieldChange:read('riceGuideYieldChange'),areaChange:read('riceGuideAreaChange'),recovery:read('riceGuideRecovery')};
  const fields=['riceGuideDemandResult','riceGuideProductionResult','riceGuideCoverageResult','riceGuideGapResult'];
- const valid=Object.values(v).every(Number.isFinite)&&v.year>=2027&&v.year<=2030&&v.demandGrowth>=-5&&v.demandGrowth<=10&&v.yieldChange>=-50&&v.yieldChange<=100&&v.areaChange>=-50&&v.areaChange<=100&&v.recovery>0&&v.recovery<=100;
+ const valid=['riceGuideDemandGrowth','riceGuideYieldChange','riceGuideAreaChange','riceGuideRecovery'].every(id=>{const el=document.getElementById(id);return riceValueConforms(el.value,el)})&&Object.values(v).every(Number.isFinite)&&v.year>=2027&&v.year<=2030&&v.demandGrowth>=-5&&v.demandGrowth<=10&&v.yieldChange>=-50&&v.yieldChange<=100&&v.areaChange>=-50&&v.areaChange<=100&&v.recovery>0&&v.recovery<=100;
  if(!valid){fields.forEach(id=>document.getElementById(id).textContent='—');document.getElementById('riceGuideInterpretation').textContent='Enter valid numbers within the indicated input ranges.';return;}
  const r=riceGuidedMath(v);
  [r.food.toFixed(2)+' MMT',r.production.toFixed(2)+' MMT',r.coverage.toFixed(1)+'%',r.gap.toFixed(2)+' MMT'].forEach((value,i)=>document.getElementById(fields[i]).textContent=value);

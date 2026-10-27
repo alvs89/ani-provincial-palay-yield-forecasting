@@ -67,7 +67,7 @@ function updateRiceScenario(){
  const yieldEl=document.getElementById('riceScenarioYield'),areaEl=document.getElementById('riceScenarioArea'),demandEl=document.getElementById('riceScenarioDemand'),recoveryEl=document.getElementById('riceScenarioRecovery');
  if(!yieldEl||!areaEl||!demandEl||!recoveryEl)return;
  const values=[yieldEl,areaEl,demandEl,recoveryEl].map(el=>el.value.trim()===''?NaN:Number(el.value));
- const [y,a,d,r]=values;const valid=values.every(Number.isFinite)&&y>0&&y<=20&&a>0&&a<=20&&d>0&&d<=60&&r>0&&r<=100;
+ const [y,a,d,r]=values;const valid=[yieldEl,areaEl,demandEl,recoveryEl].every(el=>riceValueConforms(el.value,el))&&values.every(Number.isFinite)&&y>0&&y<=20&&a>0&&a<=20&&d>0&&d<=60&&r>0&&r<=100;
  const ids=['riceCalcPalay','riceCalcMilled','riceCalcCoverage','riceCalcGap','riceCalcRequired'];
  if(!valid){ids.forEach(id=>document.getElementById(id).textContent='—');document.getElementById('riceCalcNote').textContent='Enter positive, in-range values for all four inputs (including rice requirement).';return;}
  const p=y*a,m=p*r/100,coverage=m/d*100,gap=Math.max(0,d-m),required=d/(a*r/100);
