@@ -2043,3 +2043,8 @@ def historical_all() -> dict[str, Any]:
 @app.get("/model-info")
 def model_info() -> dict[str, Any]:
     return metadata
+
+
+# Operational updates are separate from frozen model fitting.
+from backend.data_refresh import install as install_operational_refresh
+operational_refresh = install_operational_refresh(app, globals())

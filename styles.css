@@ -2026,3 +2026,41 @@
 @media(max-width:700px){.dashboardRecentTabs{grid-template-columns:1fr}.dashboardRecentTabs button{width:100%}}
 .dashboardSnapshotPair{column-gap:22px}
 .nearTermScopeNotice{margin-bottom:18px!important}
+
+
+/* Print layout for clear, compact estimate reports. */
+@page{size:A4 portrait;margin:12mm}
+@media print{
+  html,body{width:auto!important;min-width:0!important;background:#fff!important;color:#14251d!important;font-size:10pt;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .app,.content,main{display:block!important;width:auto!important;max-width:none!important;margin:0!important;padding:0!important;overflow:visible!important}
+  .sidebar,.topbar,.resultSectionNav,.actions,.toast,.menuBtn{display:none!important}
+  .hero{display:block!important;margin:0 0 8mm!important;padding:5mm!important;border:1px solid #d5e2da!important;border-radius:3mm!important;box-shadow:none!important;break-inside:avoid}
+  .hero:after{display:none!important}
+  .hero h1{font-size:20pt!important;line-height:1.15;margin:0 0 2mm!important}
+  .hero p{font-size:9pt!important;max-width:none!important}
+  .resultSection{margin:0 0 6mm!important;scroll-margin:0!important;break-before:auto!important;break-after:auto!important}
+  .resultSectionHeader{margin:0 0 3mm!important;break-after:avoid}
+  .resultSectionHeader h2{font-size:15pt!important}
+  .resultSectionHeader p{font-size:9pt!important;max-width:none!important}
+  .card,.infoBox,.resultStats>.card,.resultGrid>.card,.contextGrid>.card,.resultSection>.twoCol>.card{min-width:0!important;margin:0 0 3mm!important;padding:3.5mm!important;box-shadow:none!important;break-inside:avoid-page}
+  .resultStats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:3mm!important}
+  .resultGrid{display:grid!important;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)!important;gap:3mm!important}
+  .twoCol,.threeCol,.contextGrid,.conditionContextGrid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:3mm!important;align-items:start!important}
+  .sectionTitle{margin-bottom:2mm!important;break-after:avoid}
+  .sectionTitle h2{font-size:11pt!important}
+  .sectionTitle p,.card p,.muted,.summary,.summary span,.summary strong,.infoBox{font-size:8.5pt!important;line-height:1.35!important}
+  .summary>div{min-height:0!important;padding:2mm 0!important;break-inside:avoid}
+  .chart,.chart.large,.chart.small{height:55mm!important;max-height:55mm!important;overflow:hidden!important}
+  .chartSvg{max-width:100%!important;overflow:hidden!important}
+  table{width:100%!important;table-layout:fixed;font-size:7.5pt!important;overflow-wrap:anywhere}
+  th,td{padding:1.5mm!important}
+  .tableWrap{overflow:visible!important}
+  .resultTechnicalDetails{display:block!important;margin:4mm 0!important;border:1px solid #d5e2da!important;break-inside:auto!important}
+  .resultTechnicalDetails>summary{display:block!important;padding:3mm!important;background:#f4f8f5!important;font-size:11pt!important}
+  .resultTechnicalDetails>summary span:last-child{display:none!important}
+  .resultTechnicalBody,.resultTechnicalDetails:not([open])>.resultTechnicalBody{display:block!important;padding:3mm!important}
+  .resultTechnicalBody>.environmentPanel{break-inside:avoid-page}
+  a{color:#174c37!important;text-decoration:none!important;overflow-wrap:anywhere}
+  button{display:none!important}
+  h1,h2,h3{break-after:avoid-page}
+}

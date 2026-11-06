@@ -496,7 +496,8 @@ assert official_weather_context["regionLabel"] == (
 )
 assert official_weather_context["forecastRainfallMm"]
 assert official_weather_context["riceStages"]
-assert official_weather_context["soilMoistureStatus"] == "Wet"
+# The official condition changes with each bulletin; do not pin an old value.
+assert official_weather_context["soilMoistureStatus"] in {"Wet", "Moist", "Dry", "Unavailable"}
 assert official_weather_context["soilMoisturePeriod"]
 assert official_weather_context["weatherAdvisoryFlags"]
 

@@ -35,3 +35,8 @@ outputs/stage8_rainfall_sufficiency_bound.json
 outputs/stage8_fao_initial_kc_scenario.json
 outputs/environmental_decision_support.json
 data/pilot/nueva_ecija_stage6_openmeteo_raw.json
+
+# Local refresh audit cache and service logs
+data/processed/refresh_archive/
+data/processed/refresh_status.json
+ani-refresh-backend.*.log
